@@ -1,6 +1,6 @@
 #ifndef PERSON_H
 #define PERSON_H
-
+#pragma once
 #include <string>
 
 using namespace std;
@@ -8,23 +8,20 @@ using namespace std;
 class Person
 {
 private:
-    string name;
-    string gender;
-    int age;
-    int byear;
-    int dyear;
+    string _name;
+    string _gender;
+    int _byear;
+    int _dyear;
 public:
     Person();
-    Person(string name, string gender, int age, int byear);
-    Person(string name, string gender, int age, int byear, int dyear);
+    Person(string name, string gender, int byear, int dyear);
+    Person(string name, string gender, int byear);
     string getName();
     string getGender();
-    int getAge();
     int getByear();
     int getDyear();
     void setName(string name);
     void setGender(string gender);
-    void setAge(int age);
     void setByear(int byear);
     void setDyear(int dyear);
 };

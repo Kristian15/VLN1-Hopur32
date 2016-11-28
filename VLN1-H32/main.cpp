@@ -1,5 +1,10 @@
 #include "userinterface.h"
+
 int main()
 {
-//b
+    userInterface ui;
+
+    ui.run();
+
+    return 0;
 }
