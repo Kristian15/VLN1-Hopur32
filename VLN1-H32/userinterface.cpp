@@ -1,5 +1,6 @@
 #include "userinterface.h"
-int main()
+
+userInterface::userInterface()
 {
 
 }
