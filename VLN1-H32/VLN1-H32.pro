@@ -10,7 +10,11 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    userinterface.cpp
+    userinterface.cpp \
+    servicelayer.cpp \
+    datalayer.cpp
 
 HEADERS += \
-    userinterface.h
+    userinterface.h \
+    servicelayer.h \
+    datalayer.h

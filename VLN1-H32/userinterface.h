@@ -1,11 +1,9 @@
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
+#pragma once
 
+#include "servicelayer.h"
 
 class userInterface
 {
 public:
     userInterface();
 };
-
-#endif // USERINTERFACE_H
