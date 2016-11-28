@@ -11,28 +11,17 @@ using namespace std;
 class userInterface
 {
 private:
-    vector<Person> persons;
     //sort by name, birthyear, deathyear
     string sortOrder;
-
-    //þetta fall sorterar eftir strengnum sortOrder
-    // notar sort hjálparföll
-    void sortList();
-    void sortByName();
-    void sortByGender();
-    void sortByByear();
-    void sortByDyear();
-
-    void findByName(string name);
-    void findByGender(string gender);
-    void findByByear(int byear);
-    void findByDyear(int dyear);
+    // les lista af Person og setur í persons
+    void readList(string fileName);
 
 public:
     // setja í constructorinn að defaultið er by name
     userInterface();
+    userInterface(string fileName);
+
     Person readPerson();
-    void readList(string fileName);
     void displayPersons();
     // þetta fall breytir bara sortOrder
     // kallar svo á sortList()

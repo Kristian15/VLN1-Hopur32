@@ -121,12 +121,14 @@ compiler_clean:
 
 debug/main.o: ../VLN1-H32/main.cpp ../VLN1-H32/userinterface.h \
 		../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h
+		../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\VLN1-H32\main.cpp
 
 debug/userinterface.o: ../VLN1-H32/userinterface.cpp ../VLN1-H32/userinterface.h \
 		../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h
+		../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\userinterface.o ..\VLN1-H32\userinterface.cpp
 
 debug/servicelayer.o: ../VLN1-H32/servicelayer.cpp ../VLN1-H32/servicelayer.h \
