@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include "person.h"
+
 using namespace std;
 
 class dataLayer
@@ -14,6 +15,8 @@ private:
 
 public:
     dataLayer();
+    void loadData(); // hlaða inn gögnum inn í forritið við ræsingu
+    void saveData(); // vista gögn
 };
 
 #endif
