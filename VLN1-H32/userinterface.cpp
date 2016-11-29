@@ -15,7 +15,7 @@ void userInterface::run()
     cout << "bydeath - This will sort the scientists by who deceased first" << endl;
     cout << "search - This allows you to search for a scientist in our database" << endl;
 }
-Person userInterface::readPerson()
+void userInterface::readPerson()
 {
     string name;
     string gender;
@@ -30,7 +30,7 @@ Person userInterface::readPerson()
     cout << "Time of death: ";
     cin >> dyear;
 
-    Person newperson(name, gender, byear, dyear);
-    return newperson; //eftir að útfæra rétt, þarf að henda í add fall í servicelayer sem addar í vectorinn í datalayer....
+    //Person newperson(name, gender, byear, dyear);
+    //return newperson; //eftir að útfæra rétt, þarf að henda í add fall í servicelayer sem addar í vectorinn í datalayer....
 }
 

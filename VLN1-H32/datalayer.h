@@ -11,9 +11,10 @@ using namespace std;
 class dataLayer
 {
 private:
-    vector<Person> persons;
+
 
 public:
+    vector<Person> persons;
     dataLayer();
     void loadData(); // hlaða inn gögnum inn í forritið við ræsingu
     void saveData(); // vista gögn
