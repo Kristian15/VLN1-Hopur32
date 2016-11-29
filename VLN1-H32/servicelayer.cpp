@@ -1,6 +1,6 @@
 #pragma once
 #include "servicelayer.h"
-#include <algorithm>
+#include <string>
 
 using namespace std;
 serviceLayer::serviceLayer()
@@ -86,7 +86,7 @@ bool serviceLayer:: validateYear(string year)
 
     for (int i = 0; i < wordLength; i++)
     {
-        if (isdigit[year[i]])
+        if (isdigit(year[i]))
             tmp++;
     }
 
