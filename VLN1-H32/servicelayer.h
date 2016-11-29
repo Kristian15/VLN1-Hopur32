@@ -32,7 +32,7 @@ private:
     // creates a new person with the information in info
     // format: "name:gender:byear:dyear" or "name:gender:byear"
     // uses newPerson()
-    void createPerson(string info);
+    //void createPerson(string info);
 
 public:
     serviceLayer();
