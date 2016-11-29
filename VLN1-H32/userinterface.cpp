@@ -17,7 +17,10 @@ void userInterface::run()
             printListOptions();
             string sortby;
             cin >> sortby;
-            //service.sortList(sortby);
+            vector<Person> sortbyvector;
+            sortbyvector = service.sortList(sortby);
+            printList(sortbyvector);
+
         }
         if(input == "add")
         {
@@ -28,9 +31,12 @@ void userInterface::run()
             printSearchOptions();
             string searchby;
             cin >> searchby;
+            cout << "Enter what you want to search for: " << endl;
             string searchfor;
             cin >> searchfor;
-
+            vector<Person> searchvector;
+            searchvector = service.searchList(searchby, searchfor);
+            printList(searchvector);
         }
    }while(!quit);
 }
@@ -73,8 +79,16 @@ void userInterface::readPerson()
     cin >> byear;
     cout << "Time of death: ";
     cin >> dyear;
-
-    //Person newperson(name, gender, byear, dyear);
-    //return newperson; //eftir að útfæra rétt, þarf að henda í add fall í servicelayer sem addar í vectorinn í datalayer....
+    service.newPerson(name, gender, byear, dyear);
 }
-
+void userInterface::printList(vector<Person> printme)
+{
+    for(unsigned int i = 0; i < printme.size(); i++)
+    {
+        cout << printme[i].getName() << endl;
+        cout << printme[i].getGender() << endl;
+        cout << printme[i].getByear() << endl;
+        cout << printme[i].getDyear() << endl;
+    }
+    cout << endl;
+}

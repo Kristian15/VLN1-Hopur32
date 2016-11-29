@@ -1,15 +1,3 @@
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
-
-#pragma once
-#include <iostream>
-#include <vector>
-#include <string>
-#include "servicelayer.h"
-#include "person.h"
-
-using namespace std;
-
 class userInterface
 {
 private:
@@ -21,7 +9,7 @@ private:
     // asks in what order it should be in
     // uses printSortOptions()
     // uses sortList() from serviceLayer
-    void printList();
+    void printList(vector<Person> printme);
 
 // inputs:
     // gets a list of Persons(csv file) from user
@@ -34,7 +22,6 @@ private:
     // cout message
     // get input from user
     string getInput(string message);
-
     // uses printSearchOptions
     // get input from user with getInput()
     // uses searchList() from serviceLayer and printList to print it out

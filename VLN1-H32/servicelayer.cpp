@@ -162,7 +162,7 @@ bool serviceLayer:: validateYear(string year)
 
     if (tmp == wordLength)
     {
-        if ((stoi(year) < 2016) && (wordLength == 4))
+        if ((stoi(year) < currentYear) && (wordLength == 4))
             return true;
     }
 
@@ -193,8 +193,8 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
         findings = findByByear(stoi(findMe));
     else if (by == "death")
         findings = findByDyear(stoi(findMe));
-    else
-        cout << "Invalid input" << endl;
+    //else
+        //** VILLA **
 
     return findings;
 }
@@ -215,8 +215,8 @@ vector<Person> serviceLayer:: sortList(string order)
         sorted = sortByByear();
     else if (order == "bydeath")
         sorted = sortByDyear();
-    else
-        cout << "Invalid input" << endl;
+    //else
+        //**VILLA**
 
     return sorted;
 }
