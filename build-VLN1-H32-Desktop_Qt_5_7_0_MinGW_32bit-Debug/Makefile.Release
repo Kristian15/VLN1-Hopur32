@@ -132,10 +132,12 @@ release/userinterface.o: ../VLN1-H32/userinterface.cpp ../VLN1-H32/userinterface
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\userinterface.o ..\VLN1-H32\userinterface.cpp
 
 release/servicelayer.o: ../VLN1-H32/servicelayer.cpp ../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h
+		../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\servicelayer.o ..\VLN1-H32\servicelayer.cpp
 
-release/datalayer.o: ../VLN1-H32/datalayer.cpp ../VLN1-H32/datalayer.h
+release/datalayer.o: ../VLN1-H32/datalayer.cpp ../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\datalayer.o ..\VLN1-H32\datalayer.cpp
 
 release/person.o: ../VLN1-H32/person.cpp ../VLN1-H32/person.h

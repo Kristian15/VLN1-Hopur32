@@ -132,10 +132,12 @@ debug/userinterface.o: ../VLN1-H32/userinterface.cpp ../VLN1-H32/userinterface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\userinterface.o ..\VLN1-H32\userinterface.cpp
 
 debug/servicelayer.o: ../VLN1-H32/servicelayer.cpp ../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h
+		../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\servicelayer.o ..\VLN1-H32\servicelayer.cpp
 
-debug/datalayer.o: ../VLN1-H32/datalayer.cpp ../VLN1-H32/datalayer.h
+debug/datalayer.o: ../VLN1-H32/datalayer.cpp ../VLN1-H32/datalayer.h \
+		../VLN1-H32/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\datalayer.o ..\VLN1-H32\datalayer.cpp
 
 debug/person.o: ../VLN1-H32/person.cpp ../VLN1-H32/person.h

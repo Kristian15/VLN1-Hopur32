@@ -1,5 +1,7 @@
 #pragma once
 #include "servicelayer.h"
+#include <algorithm>
+
 using namespace std;
 serviceLayer::serviceLayer()
 {
@@ -53,7 +55,7 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
 bool serviceLayer:: validateName(string name)
 {
     int wordLength = name.length();
-    tmp = 0;
+    int tmp = 0;
 
     for (int i = 0; i < wordLength; i++)
     {
@@ -80,7 +82,7 @@ bool serviceLayer:: validateGender(string gender)
 bool serviceLayer:: validateYear(string year)
 {
     int wordLength = year.length();
-    tmp = 0;
+    int tmp = 0;
 
     for (int i = 0; i < wordLength; i++)
     {
@@ -99,7 +101,7 @@ bool serviceLayer:: validateYear(string year)
 
 string serviceLayer:: toLower(string s)
 {
-    string stringLower = s;
+   string stringLower = s;
 
    for (int i = 0; i < s.length(); i++)
        stringLower[i] = tolower(s[i]);
@@ -153,4 +155,3 @@ void serviceLayer:: newPerson(string name, string gender, int byear)
     // **TODO**
 }
 
-};
