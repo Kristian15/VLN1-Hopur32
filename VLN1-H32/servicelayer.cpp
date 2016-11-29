@@ -1,6 +1,7 @@
 #pragma once
 #include "servicelayer.h"
 #include <string>
+#include <algorithm>
 
 using namespace std;
 serviceLayer::serviceLayer()
@@ -108,7 +109,7 @@ string serviceLayer:: toLower(string s)
 
    return stringLower;
 }
-
+/*
 // creates a new person with the information in info
 // format: "name:gender:byear:dyear" or "name:gender:byear"
 // uses newPerson()
@@ -116,6 +117,7 @@ void serviceLayer:: createPerson(string info)
 {
     // **TODO**
 }
+*/
 
 //*****PUBLIC*****
 
@@ -138,10 +140,35 @@ myndi nota sort hjálparföllin
 */
 
 // break up the lines in fileName
-// uses createPerson()
+// format name:year:byear:dyear
+// calls newPerson
 void serviceLayer:: createList(string fileName)
 {
-    // **TODO**
+    vector<string> lines = data.loadData(fileName);
+
+    for (int i = 0; i < lines.size(); i++)
+    {
+      /*  vector<string> elems;
+        string Name, Gender, Byear;
+
+        split(elems, lines[i], is_any_of(";"));
+
+        Name = elems[0];
+        Gender = elems[1];
+        Byear = elems[2];
+
+        if ((validateName(Name)) && (validateGender(Gender)) && (validateYear(Byear)))
+        {
+            if ((elems.size() == 4))
+            {
+                if (validateYear(elems[3]))
+                    newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
+            }
+
+            else
+                newPerson(Name, Gender, stoi(Byear));
+        }*/
+    }
 }
 
 // create a new Person and add it to persons in the dataLayer
@@ -156,4 +183,3 @@ void serviceLayer:: newPerson(string name, string gender, int byear)
     Person newP = Person(name, gender, byear);
     data.persons.push_back(newP);
 }
-
