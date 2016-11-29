@@ -242,7 +242,7 @@ void serviceLayer:: createList(string fileName)
         unsigned int pos = 0;
         string token;
 
-        while ((pos == s.find(delimeter)) != s.size())
+        while ((pos = s.find(delimeter)) != s.size())
         {
             token = s.substr(0, pos);
             elems.push_back(token);
