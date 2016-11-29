@@ -23,16 +23,35 @@ vector<string> dataLayer::loadData(string fileName)
     return data;
 }
 
-void dataLayer::saveData(vector<string> personable, string fileName)
+void dataLayer::saveData(vector<Person> persons, string fileName)
 {
+
+    string line = "";
+    vector<string> dataStrings;
+
+    for (unsigned int i = 0; i < persons.size(); i++)
+    {
+        line = persons[i].getName();
+        line += ";";
+        line += persons[i].getGender();
+        line += ";";
+        line += persons[i].getByear();
+        line += ";";
+        line += persons[i].getDyear();
+
+        dataStrings.push_back(line);
+
+        line = "";
+    }
+
     ofstream dataStream;
     dataStream.open(fileName);
 
     if(dataStream)
     {
-        for(int i = 0; i < personable.size(); i++)
+        for(unsigned int i = 0; i < dataStrings.size(); i++)
         {
-            dataStream << personable[i] << endl;
+            dataStream << dataStrings[i] << endl;
         }
     }
     dataStream.close();

@@ -13,22 +13,7 @@ serviceLayer::serviceLayer()
 // ***** Save data fall *****
 void serviceLayer::saveData(string fileName)
 {
-    string line = "";
-
-    for (unsigned int i = 0; i < persons.size(); i++)
-    {
-        line = persons[i].getName();
-        line += ";";
-        line += persons[i].getGender();
-        line += ";";
-        line += persons[i].getByear();
-        line += ";";
-        line += persons[i].getDyear();
-
-        dataStrings.push_back(line);
-    }
-
-    data.saveData(dataStrings, fileName);
+    data.saveData(persons, fileName);
 }
 
 // *****Sort hjálparföll*****
