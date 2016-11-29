@@ -12,14 +12,17 @@ private:
     string _gender;
     int _byear;
     int _dyear;
+
 public:
     Person();
     Person(string name, string gender, int byear, int dyear);
     Person(string name, string gender, int byear);
+
     string getName();
     string getGender();
     int getByear();
     int getDyear();
+
     void setName(string name);
     void setGender(string gender);
     void setByear(int byear);
