@@ -23,9 +23,10 @@ private:
     // uses getInput()
     // uses newPerson() in the serviceLayer
     void readPerson();
+    bool doYouWantToQuit();
+    bool doYouWantToSave();
 
 public:
-    bool wantToReRun();
     userInterface();
     void run ();
 };

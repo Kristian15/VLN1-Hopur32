@@ -6,7 +6,7 @@ userInterface::userInterface()
 }
 void userInterface::run()
 {
-    bool quit = true;
+    bool quit = false;
     do{
         printMainMenu();
         string input;
@@ -43,9 +43,20 @@ void userInterface::run()
         }
         if(input == "quit")
         {
-            break;
+            if (doYouWantToQuit())
+            {
+                quit = true;
+
+                if (doYouWantToSave())
+                {
+                    cout << "Write the name of the file you want to save in" << endl;
+                    string fileName;
+                    cin >> fileName;
+
+                    service.saveData(fileName);
+                }
+            }
         }
-        quit = wantToReRun();
    }while(!quit);
 }
 void userInterface::printMainMenu()
@@ -108,20 +119,34 @@ void userInterface::readList()
     cin >> filename;
     service.createList(filename);
 }
-bool userInterface::wantToReRun()
+bool userInterface::doYouWantToQuit()
 {
     bool quit;
-    cout << "Do you want to run the progam again? Y/N:";
+    cout << "Are you sure you want to quit? Y/N:" << endl;
     char answer;
     cin >> answer;
-    if(answer == 'y' || answer == 'Y')
-    {
+
+    if (answer == 'y' || answer == 'Y')
         quit = false;
-        return quit;
-    }
+
     else
-    {
         quit = true;
-        return quit;
-    }
+
+    return quit;
+}
+
+bool userInterface::doYouWantToSave()
+{
+    cout << "Do you want to save the current list beforw quitting ? Y/N" << endl;
+    bool save;
+    char answer;
+    cin >> answer;
+
+    if (answer == 'y' || answer == 'Y')
+        save = false;
+
+    else
+        save = true;
+
+    return save;
 }
