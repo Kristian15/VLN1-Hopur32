@@ -239,7 +239,7 @@ void serviceLayer:: createList(string fileName)
         string s = lines[i];
         vector<string> elems;
         string delimeter = ";";
-        unsigned int pos = 0;
+        size_t pos = 0;
         string token;
 
         while ((pos = s.find(delimeter)) != s.size())
