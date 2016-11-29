@@ -38,31 +38,36 @@ void userInterface::run()
             searchvector = service.searchList(searchby, searchfor);
             printList(searchvector);
         }
+        if(input == "addlist")
+        {
+             readList();
+        }
    }while(!quit);
 }
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
-    cout << "list - This allows you to print onto you screen our scientists in 4 different orders" << endl;
-    cout << "add - This will add a new scientist to our database" << endl;
-    cout << "search - This allows you to search for a scientist in our database" << endl;
-    cout << "quit - This will quit the program" << endl;
+    cout << "list    - This allows you to print onto you screen our scientists in 4 different orders" << endl;
+    cout << "add     - This will add a new scientist to our database" << endl;
+    cout << "search  - This allows you to search for a scientist in our database" << endl;
+    cout << "addlist - This allows you to add scientists from a file" << endl;
+    cout << "quit    - This will quit the program" << endl;
 }
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 4 following options to sort by:" << endl;
-    cout << "byname - This will sort the scientists in alphabetic order" << endl;
+    cout << "byname   - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
-    cout << "bybirth - This will sort the scientists by date of birth" << endl;
-    cout << "bydeath - This will sort the scientists by who deceased first" << endl;
+    cout << "bybirth  - This will sort the scientists by date of birth" << endl;
+    cout << "bydeath  - This will sort the scientists by who deceased first" << endl;
 }
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
-    cout << "name - This will sort the scientists in alphabetic order" << endl;
+    cout << "name   - This will sort the scientists in alphabetic order" << endl;
     cout << "gender - This will sort the scientists, showing females first" << endl;
-    cout << "birth - This will sort the scientists by date of birth" << endl;
-    cout << "death - This will sort the scientists by who deceased first" << endl;
+    cout << "birth  - This will sort the scientists by date of birth" << endl;
+    cout << "death  - This will sort the scientists by who deceased first" << endl;
 }
 
 void userInterface::readPerson()
@@ -92,7 +97,10 @@ void userInterface::printList(vector<Person> printme)
     }
     cout << endl;
 }
-void readList()
+void userInterface::readList()
 {
-
+    cout << "Enter the name of your file" << endl;
+    string filename;
+    cin >> filename;
+    service.createList(filename);
 }
