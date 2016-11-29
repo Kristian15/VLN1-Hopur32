@@ -1,6 +1,3 @@
-#ifndef DATALAYER_H
-#define DATALAYER_H
-
 #pragma once
 #include <fstream>
 #include <vector>
@@ -19,5 +16,3 @@ public:
     vector<string> loadData(string fileName); // hlaða inn gögnum inn í forritið við ræsingu
     void saveData(vector<string> personable, string fileName); // vista gögn
 };
-
-#endif
