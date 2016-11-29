@@ -54,13 +54,6 @@ vector<Person> serviceLayer:: sortByDyear()
 // *****Find hjálparföll****
 vector<Person> serviceLayer:: findByName(string name)
 {
-    vector<Person> none;
-    if(order == "byname")
-    {
-        return sortByName();
-    }
-    if(order == "bygender")
-    // **TODO**
     vector<Person> theList = data.persons;
     vector<Person> findings;
 
@@ -172,7 +165,7 @@ bool serviceLayer:: validateYear(string year)
             return true;
     }
 
-    else return none;
+    else return false;
 }
 
 string serviceLayer:: toLower(string s)
