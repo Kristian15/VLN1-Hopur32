@@ -2,6 +2,7 @@
 #include "servicelayer.h"
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 serviceLayer::serviceLayer()
@@ -9,6 +10,23 @@ serviceLayer::serviceLayer()
 
 }
 // **** PRIVATE*****
+
+// ***** Save data fall *****
+void serviceLayer::saveData()
+{
+    string line = "";
+    for(int i; i < data.persons.size(); i++)
+    {
+        line = data.persons[i].getName();
+        line += ";";
+        line += data.persons[i].getGender();
+        line += ";";
+        line += data.persons[i].getByear();
+        line += ";";
+        line += data.persons[i].getDyear();
+
+    }
+}
 
 // *****Sort hjálparföll*****
 vector<Person> serviceLayer:: sortByName()
@@ -35,6 +53,7 @@ vector<Person> serviceLayer:: sortByDyear()
 vector<Person> serviceLayer:: findByName(string name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     vector<Person> none;
     if(order == "byname")
     {
@@ -43,21 +62,72 @@ vector<Person> serviceLayer:: findByName(string name)
     if(order == "bygender")
 =======
     // **TODO**
+=======
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (name == p.getName())
+            findings.push_back(p);
+    }
+
+    return findings;
+>>>>>>> a97b6cdc7e71f778dd11d01978f65d7d67e05301
 }
 
 vector<Person> serviceLayer:: findByGender(string gender)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (gender == p.getGender())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 vector<Person> serviceLayer:: findByByear(int byear)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (byear == p.getByear())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 vector<Person> serviceLayer:: findByDyear(int dyear)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (dyear == p.getDyear())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 // *** Validate föll*****
@@ -132,14 +202,42 @@ void serviceLayer:: createPerson(string info)
 
 vector<Person> serviceLayer:: searchList(string findMe, string by)
 {
-    // **TODO**
+    vector<Person> findings;
+
+    if (by == "name")
+        findings = findByName(findMe);
+    else if (by == "gender")
+        findings = findByGender(findMe);
+    else if (by == "birth")
+        findings = findByByear(stoi(findMe));
+    else if (by == "death")
+        findings = findByDyear(stoi(findMe));
+    else
+        cout << "Invalid input" << endl;
+
+    return findings;
 }
+
+
 
 // sort the list in dataLayer after order
 // return the vector in dataLayer sorted
 vector<Person> serviceLayer:: sortList(string order)
 {
-    // **TODO**
+    vector<Person> sorted;
+
+    if (order == "byname")
+        sorted = sortByName();
+    else if (order == "bygender")
+        sorted = sortByGender();
+    else if (order == "bybirth")
+        sorted = sortByByear();
+    else if (order == "bydeath")
+        sorted = sortByDyear();
+    else
+        cout << "Invalid input" << endl;
+
+    return sorted;
 }
 
 /* ef við viljum að notandi geti raðað listanum áður en hann er prentaður í search()
@@ -153,7 +251,7 @@ myndi nota sort hjálparföllin
 // calls newPerson
 void serviceLayer:: createList(string fileName)
 {
-    vector<string> lines = data.loadData(fileName);
+    /*vector<string> lines = data.loadData(fileName);
 
     for (int i = 0; i < lines.size(); i++)
     {
@@ -190,7 +288,7 @@ void serviceLayer:: createList(string fileName)
             else
                 newPerson(Name, Gender, stoi(Byear));
         }
-    }
+    }*/
 }
 
 // create a new Person and add it to persons in the dataLayer
