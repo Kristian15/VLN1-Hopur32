@@ -16,13 +16,23 @@ void userInterface::run()
         {
             printListOptions();
             string sortby;
+            cin >> sortby;
             //service.sortList(sortby);
         }
         if(input == "add")
         {
+            readPerson();
+        }
+        if(input == "search")
+        {
+            printSearchOptions();
+            string searchby;
+            cin >> searchby;
+            string searchfor;
+            cin >> searchfor;
 
         }
-    }while(!quit);
+   }while(!quit);
 }
 void userInterface::printMainMenu()
 {
@@ -34,10 +44,19 @@ void userInterface::printMainMenu()
 }
 void userInterface::printListOptions()
 {
+    cout << "Please enter one of the 4 following options to sort by:" << endl;
     cout << "byname - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
     cout << "bybirth - This will sort the scientists by date of birth" << endl;
     cout << "bydeath - This will sort the scientists by who deceased first" << endl;
+}
+void userInterface::printSearchOptions()
+{
+    cout << "Please enter one of the following options to search by:" << endl;
+    cout << "name - This will sort the scientists in alphabetic order" << endl;
+    cout << "gender - This will sort the scientists, showing females first" << endl;
+    cout << "birth - This will sort the scientists by date of birth" << endl;
+    cout << "death - This will sort the scientists by who deceased first" << endl;
 }
 
 void userInterface::readPerson()

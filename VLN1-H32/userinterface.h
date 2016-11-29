@@ -16,17 +16,6 @@ private:
     serviceLayer service;
     void printMainMenu();// Prints the main menu:
     void printListOptions();
-    // Prints the sorting options
-    // Name to sort by name
-    // Gender to sort by gender
-    // Birthyear to sort by birthyear
-    // Deathyear to sort by deathyear
-    void printSortOptions();
-    // Prints the search options
-    // Name to search by name
-    // Gender to search by gender
-    // Birthyear to search by birthyear
-    // Deathyear to search by deathyear
     void printSearchOptions();
     // Print the list to csv file
     // asks in what order it should be in
