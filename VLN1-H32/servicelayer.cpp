@@ -147,11 +147,13 @@ void serviceLayer:: createList(string fileName)
 // create a new Person and add it to persons in the dataLayer
 void serviceLayer:: newPerson(string name, string gender, int byear, int dyear)
 {
-    // **TODO**
+    Person newP = Person(name, gender, byear, dyear);
+    data.persons.push_back(newP);
 }
 
 void serviceLayer:: newPerson(string name, string gender, int byear)
 {
-    // **TODO**
+    Person newP = Person(name, gender, byear);
+    data.persons.push_back(newP);
 }
 
