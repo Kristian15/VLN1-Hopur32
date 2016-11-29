@@ -5,7 +5,24 @@ dataLayer::dataLayer()
 
 }
 
-vector<string> dataLayer::loadData(string fileName){ vector<string> todo; return todo; }
+vector<string> dataLayer::loadData(string fileName)
+{
+    string line;
+    ifstream iDataStream;
+    iDataStream.open(fileName);
+
+    if(iDataStream)
+    {
+        while(getline(iDataStream,line))
+        {
+            data.push_back(line);
+        }
+        iDataStream.close();
+    }
+
+    return data;
+}
+
 void dataLayer::saveData(vector<string> personable, string fileName)
 {
     ofstream dataStream;
