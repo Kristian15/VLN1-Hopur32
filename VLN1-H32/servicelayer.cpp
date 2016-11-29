@@ -11,6 +11,23 @@ serviceLayer::serviceLayer()
 }
 // **** PRIVATE*****
 
+// ***** Save data fall *****
+void serviceLayer::saveData()
+{
+    string line = "";
+    for(int i; i < data.persons.size(); i++)
+    {
+        line = data.persons[i].getName();
+        line += ";";
+        line += data.persons[i].getGender();
+        line += ";";
+        line += data.persons[i].getByear();
+        line += ";";
+        line += data.persons[i].getDyear();
+
+    }
+}
+
 // *****Sort hjálparföll*****
 vector<Person> serviceLayer:: sortByName()
 {

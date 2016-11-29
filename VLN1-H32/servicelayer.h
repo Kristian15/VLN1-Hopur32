@@ -11,6 +11,7 @@ class serviceLayer
 {
 private:
     dataLayer data;
+    vector<string> dataStrings;
     //þetta fall sorterar eftir strengnum sortOrder
     // notar sort hjálparföll
     vector<Person> sortByName();
@@ -33,6 +34,9 @@ private:
     // format: "name:gender:byear:dyear" or "name:gender:byear"
     // uses newPerson()
     //void createPerson(string info);
+
+    // function to format a string vector to save to file.
+    void saveData();
 
 public:
     serviceLayer();
