@@ -54,17 +54,13 @@ vector<Person> serviceLayer:: sortByDyear()
 // *****Find hjálparföll****
 vector<Person> serviceLayer:: findByName(string name)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
     vector<Person> none;
     if(order == "byname")
     {
         return sortByName();
     }
     if(order == "bygender")
-=======
     // **TODO**
-=======
     vector<Person> theList = data.persons;
     vector<Person> findings;
 
@@ -78,7 +74,6 @@ vector<Person> serviceLayer:: findByName(string name)
     }
 
     return findings;
->>>>>>> a97b6cdc7e71f778dd11d01978f65d7d67e05301
 }
 
 vector<Person> serviceLayer:: findByGender(string gender)
@@ -139,7 +134,6 @@ bool serviceLayer:: validateName(string name)
     int tmp = 0;
 
     for (int i = 0; i < wordLength; i++)
->>>>>>> 1b46f6273e93fa3e1bf63bd0b36454cfc5d07f1a
     {
         if ((isspace(name[i])) || (isalpha(name[i])))
             tmp ++;
@@ -304,8 +298,4 @@ void serviceLayer:: newPerson(string name, string gender, int byear)
 {
     Person newP = Person(name, gender, byear);
     data.persons.push_back(newP);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b46f6273e93fa3e1bf63bd0b36454cfc5d07f1a
 }
