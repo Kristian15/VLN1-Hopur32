@@ -11,7 +11,6 @@ void userInterface::run()
         printMainMenu();
         string input;
         cin >> input;
-
         if(input == "list")
         {
             printListOptions();
@@ -42,6 +41,11 @@ void userInterface::run()
         {
              readList();
         }
+        if(input == "quit")
+        {
+            break;
+        }
+        quit = wantToReRun();
    }while(!quit);
 }
 void userInterface::printMainMenu()
@@ -103,4 +107,21 @@ void userInterface::readList()
     string filename;
     cin >> filename;
     service.createList(filename);
+}
+bool userInterface::wantToReRun()
+{
+    bool quit;
+    cout << "Do you want to run the progam again? Y/N:";
+    char answer;
+    cin >> answer;
+    if(answer == 'y' || answer == 'Y')
+    {
+        quit = false;
+        return quit;
+    }
+    else
+    {
+        quit = true;
+        return quit;
+    }
 }
