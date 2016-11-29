@@ -14,14 +14,8 @@ class userInterface
 {
 private:
     serviceLayer service;
-
-    // Prints the main menu:
-        // list - this will take a whole list from a csv file
-        // add - this will add a new person
-        // search - to search the list
-        // print - to print the list
-        // quit - to quit the program
-    void printMenu();
+    void printMainMenu();// Prints the main menu:
+    void printsortbyMenu();
     // Prints the sorting options
     // Name to sort by name
     // Gender to sort by gender
