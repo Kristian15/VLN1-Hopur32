@@ -2,6 +2,7 @@
 #include "servicelayer.h"
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 serviceLayer::serviceLayer()
@@ -123,14 +124,42 @@ void serviceLayer:: createPerson(string info)
 
 vector<Person> serviceLayer:: searchList(string findMe, string by)
 {
-    // **TODO**
+    vector<Person> findings;
+
+    if (by == "name")
+        findings = findByName(findMe);
+    else if (by == "gender")
+        findings = findByGender(findMe);
+    else if (by == "birth")
+        findings = findByByear(stoi(findMe));
+    else if (by == "death")
+        findings = findByDyear(stoi(findMe));
+    else
+        cout << "Invalid input" << endl;
+
+    return findings;
 }
+
+
 
 // sort the list in dataLayer after order
 // return the vector in dataLayer sorted
 vector<Person> serviceLayer:: sortList(string order)
 {
-    // **TODO**
+    vector<Person> sorted;
+
+    if (order == "byname")
+        sorted = sortByName();
+    else if (order == "bygender")
+        sorted = sortByGender();
+    else if (order == "bybirth")
+        sorted = sortByByear();
+    else if (order == "bydeath")
+        sorted = sortByDyear();
+    else
+        cout << "Invalid input" << endl;
+
+    return sorted;
 }
 
 /* ef við viljum að notandi geti raðað listanum áður en hann er prentaður í search()
@@ -144,7 +173,7 @@ myndi nota sort hjálparföllin
 // calls newPerson
 void serviceLayer:: createList(string fileName)
 {
-    vector<string> lines = data.loadData(fileName);
+    /*vector<string> lines = data.loadData(fileName);
 
     for (int i = 0; i < lines.size(); i++)
     {
@@ -181,7 +210,7 @@ void serviceLayer:: createList(string fileName)
             else
                 newPerson(Name, Gender, stoi(Byear));
         }
-    }
+    }*/
 }
 
 // create a new Person and add it to persons in the dataLayer
