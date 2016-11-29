@@ -7,17 +7,17 @@ Person::Person()
 }
 Person::Person(string name, string gender, int byear, int dyear)
 {
-    name   = _name;
-    gender = _gender;
-    byear  = _byear;
-    dyear  = _dyear;
+    _name = name;
+    _gender = gender;
+    _byear= byear;
+    _dyear  = dyear;
 
 }
 Person::Person(string name, string gender, int byear)
 {
-    name   = _name;
-    gender = _gender;
-    byear  = _byear;
+    _name   = name;
+    _gender = gender;
+    _byear  = byear;
 }
 string Person:: getName()
 {
