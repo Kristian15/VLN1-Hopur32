@@ -2,33 +2,18 @@
 #include "servicelayer.h"
 #include <string>
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 serviceLayer::serviceLayer()
 {
-
 }
 // **** PRIVATE*****
 
 // ***** Save data fall *****
 void serviceLayer::saveData(string fileName)
 {
-    string line = "";
-
-    for (unsigned int i = 0; i < persons.size(); i++)
-    {
-        line = persons[i].getName();
-        line += ";";
-        line += persons[i].getGender();
-        line += ";";
-        line += persons[i].getByear();
-        line += ";";
-        line += persons[i].getDyear();
-
-        dataStrings.push_back(line);
-    }
-
-    data.saveData(dataStrings, fileName);
+    data.saveData(persons, fileName);
 }
 
 // *****Sort hjálparföll*****
@@ -160,12 +145,17 @@ bool serviceLayer:: validateYear(string year)
             tmp++;
     }
 
-    /*if (tmp == wordLength)
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    int currYear = 1900 + ltm->tm_year;
+
+    if (tmp == wordLength)
     {
-        if ((stoi(year) < currentYear) && (wordLength == 4))
+        if ((stoi(year) < currYear) && (wordLength == 4))
             return true;
     }
-*/
+
     return false;
 }
 

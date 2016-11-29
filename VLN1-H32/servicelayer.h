@@ -32,8 +32,6 @@ private:
 
     string toLower(string s);
 
-    // function to format a string vector to save to file.
-    void saveData(string fileName);
 
 public:
     serviceLayer();
@@ -65,6 +63,9 @@ public:
     // create a new Person and add it to persons in the dataLayer
     void newPerson(string name, string gender, int byear, int dyear);
     void newPerson(string name, string gender, int byear);
+
+    // function to format a string vector to save to file
+    void saveData(string fileName);
 };
 
 
