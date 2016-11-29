@@ -35,22 +35,70 @@ vector<Person> serviceLayer:: sortByDyear()
 // *****Find hjálparföll****
 vector<Person> serviceLayer:: findByName(string name)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (name == p.getName())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 vector<Person> serviceLayer:: findByGender(string gender)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (gender == p.getGender())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 vector<Person> serviceLayer:: findByByear(int byear)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (byear == p.getByear())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 vector<Person> serviceLayer:: findByDyear(int dyear)
 {
-    // **TODO**
+    vector<Person> theList = data.persons;
+    vector<Person> findings;
+
+
+    for (unsigned int i=0; i < theList.size(); i++)
+    {
+        Person p = theList[i];
+
+        if (dyear == p.getDyear())
+            findings.push_back(p);
+    }
+
+    return findings;
 }
 
 // *** Validate föll*****
