@@ -36,7 +36,7 @@ private:
     //void createPerson(string info);
 
     // function to format a string vector to save to file.
-    void saveData();
+    void saveData(string fileName);
 
 public:
     serviceLayer();

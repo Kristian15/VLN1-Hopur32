@@ -12,10 +12,10 @@ serviceLayer::serviceLayer()
 // **** PRIVATE*****
 
 // ***** Save data fall *****
-void serviceLayer::saveData()
+void serviceLayer::saveData(string fileName)
 {
     string line = "";
-    for(int i; i < data.persons.size(); i++)
+    for (int i = 0; i < data.persons.size(); i++)
     {
         line = data.persons[i].getName();
         line += ";";
@@ -25,7 +25,9 @@ void serviceLayer::saveData()
         line += ";";
         line += data.persons[i].getDyear();
 
+        dataStrings.push_back(line);
     }
+    data.saveData(dataStrings, fileName);
 }
 
 // *****Sort hjálparföll*****
@@ -121,7 +123,7 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
 // *** Validate föll*****
 bool serviceLayer:: validateName(string name)
 {
-    int wordLength = name.length();
+    size_t wordLength = name.length();
     int tmp = 0;
 
     for (int i = 0; i < wordLength; i++)
@@ -148,7 +150,7 @@ bool serviceLayer:: validateGender(string gender)
 
 bool serviceLayer:: validateYear(string year)
 {
-    int wordLength = year.length();
+    size_t wordLength = year.length();
     int tmp = 0;
 
     for (int i = 0; i < wordLength; i++)
