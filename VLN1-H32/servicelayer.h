@@ -24,8 +24,7 @@ private:
 
     bool validateName(string name);
     bool validateGender(string gender);
-    bool validateByear(string byear);
-    bool validateDyear(string dyear);
+    bool validateYear(string year);
 
     string toLower(string s);
 
