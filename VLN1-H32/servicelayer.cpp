@@ -34,6 +34,7 @@ vector<Person> sortByDyear()
 
 vector<Person> sortList(string order)
 {
+    vector<Person> none;
     if(order == "byname")
     {
         return sortByName();
@@ -50,10 +51,8 @@ vector<Person> sortList(string order)
     {
         return sortByDyear();
     }
-<<<<<<< HEAD
-=======
 
-    return false;
+    else return none;
 }
 
 string serviceLayer:: toLower(string s)
@@ -138,5 +137,5 @@ void serviceLayer:: newPerson(string name, string gender, int byear)
 {
     Person newP = Person(name, gender, byear);
     data.persons.push_back(newP);
->>>>>>> 0bf21261d3d204538f0baf56ed87b7444273e544
+
 }
