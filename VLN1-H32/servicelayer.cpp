@@ -2,11 +2,11 @@
 #include "servicelayer.h"
 #include <string>
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 serviceLayer::serviceLayer()
 {
-
 }
 // **** PRIVATE*****
 
@@ -145,12 +145,17 @@ bool serviceLayer:: validateYear(string year)
             tmp++;
     }
 
-    /*if (tmp == wordLength)
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    int currYear = 1900 + ltm->tm_year;
+
+    if (tmp == wordLength)
     {
-        if ((stoi(year) < currentYear) && (wordLength == 4))
+        if ((stoi(year) < currYear) && (wordLength == 4))
             return true;
     }
-*/
+
     return false;
 }
 
