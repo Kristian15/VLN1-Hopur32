@@ -1,7 +1,6 @@
 #pragma once
 #include "servicelayer.h"
 #include <string>
-#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -15,18 +14,20 @@ serviceLayer::serviceLayer()
 void serviceLayer::saveData(string fileName)
 {
     string line = "";
-    for (int i = 0; i < data.persons.size(); i++)
+
+    for (unsigned int i = 0; i < data.persons.size(); i++)
     {
-        line = data.persons[i].getName();
+        line = persons[i].getName();
         line += ";";
-        line += data.persons[i].getGender();
+        line += persons[i].getGender();
         line += ";";
-        line += data.persons[i].getByear();
+        line += persons[i].getByear();
         line += ";";
-        line += data.persons[i].getDyear();
+        line += persons[i].getDyear();
 
         dataStrings.push_back(line);
     }
+
     data.saveData(dataStrings, fileName);
 }
 
@@ -34,33 +35,39 @@ void serviceLayer::saveData(string fileName)
 vector<Person> serviceLayer:: sortByName()
 {
     // **TODO**
+    vector<Person> returnv;
+    return returnv;
 }
 
 vector<Person> serviceLayer:: sortByGender()
 {
     // **TODO**
+    vector<Person> returnv;
+    return returnv;
 }
 
 vector<Person> serviceLayer:: sortByByear()
 {
     // **TODO***
+    vector<Person> returnv;
+    return returnv;
 }
 
 vector<Person> serviceLayer:: sortByDyear()
 {
     // **TODO**
+    vector<Person> returnv;
+    return returnv;
 }
 
 // *****Find hjálparföll****
 vector<Person> serviceLayer:: findByName(string name)
 {
-    vector<Person> theList = data.persons;
     vector<Person> findings;
 
-
-    for (unsigned int i=0; i < theList.size(); i++)
+    for (unsigned int i=0; i < persons.size(); i++)
     {
-        Person p = theList[i];
+        Person p = persons[i];
 
         if (name == p.getName())
             findings.push_back(p);
@@ -71,13 +78,11 @@ vector<Person> serviceLayer:: findByName(string name)
 
 vector<Person> serviceLayer:: findByGender(string gender)
 {
-    vector<Person> theList = data.persons;
     vector<Person> findings;
 
-
-    for (unsigned int i=0; i < theList.size(); i++)
+    for (unsigned int i=0; i < persons.size(); i++)
     {
-        Person p = theList[i];
+        Person p = persons[i];
 
         if (gender == p.getGender())
             findings.push_back(p);
@@ -88,13 +93,11 @@ vector<Person> serviceLayer:: findByGender(string gender)
 
 vector<Person> serviceLayer:: findByByear(int byear)
 {
-    vector<Person> theList = data.persons;
     vector<Person> findings;
 
-
-    for (unsigned int i=0; i < theList.size(); i++)
+    for (unsigned int i=0; i < persons.size(); i++)
     {
-        Person p = theList[i];
+        Person p = persons[i];
 
         if (byear == p.getByear())
             findings.push_back(p);
@@ -105,13 +108,11 @@ vector<Person> serviceLayer:: findByByear(int byear)
 
 vector<Person> serviceLayer:: findByDyear(int dyear)
 {
-    vector<Person> theList = data.persons;
     vector<Person> findings;
 
-
-    for (unsigned int i=0; i < theList.size(); i++)
+    for (unsigned int i=0; i < persons.size(); i++)
     {
-        Person p = theList[i];
+        Person p = persons[i];
 
         if (dyear == p.getDyear())
             findings.push_back(p);
@@ -124,9 +125,9 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
 bool serviceLayer:: validateName(string name)
 {
     size_t wordLength = name.length();
-    int tmp = 0;
+    unsigned int tmp = 0;
 
-    for (int i = 0; i < wordLength; i++)
+    for (unsigned int i = 0; i < wordLength; i++)
     {
         if ((isspace(name[i])) || (isalpha(name[i])))
             tmp ++;
@@ -151,9 +152,9 @@ bool serviceLayer:: validateGender(string gender)
 bool serviceLayer:: validateYear(string year)
 {
     size_t wordLength = year.length();
-    int tmp = 0;
+    unsigned int tmp = 0;
 
-    for (int i = 0; i < wordLength; i++)
+    for (unsigned int i = 0; i < wordLength; i++)
     {
         if (isdigit(year[i]))
             tmp++;
@@ -165,27 +166,18 @@ bool serviceLayer:: validateYear(string year)
             return true;
     }
 
-    else return false;
+    return false;
 }
 
 string serviceLayer:: toLower(string s)
 {
    string stringLower = s;
 
-   for (int i = 0; i < s.length(); i++)
+   for (unsigned int i = 0; i < s.length(); i++)
        stringLower[i] = tolower(s[i]);
 
    return stringLower;
 }
-/*
-// creates a new person with the information in info
-// format: "name:gender:byear:dyear" or "name:gender:byear"
-// uses newPerson()
-void serviceLayer:: createPerson(string info)
-{
-    // **TODO**
-}
-*/
 
 //*****PUBLIC*****
 
@@ -240,14 +232,14 @@ myndi nota sort hjálparföllin
 // calls newPerson
 void serviceLayer:: createList(string fileName)
 {
-    /*vector<string> lines = data.loadData(fileName);
+    vector<string> lines = data.loadData(fileName);
 
-    for (int i = 0; i < lines.size(); i++)
+    for (unsigned int i = 0; i < lines.size(); i++)
     {
         string s = lines[i];
         vector<string> elems;
         string delimeter = ";";
-        int pos = 0;
+        unsigned int pos = 0;
         string token;
 
         while ((pos = s.find(delimeter)) != s.size())
@@ -277,18 +269,18 @@ void serviceLayer:: createList(string fileName)
             else
                 newPerson(Name, Gender, stoi(Byear));
         }
-    }*/
+    }
 }
 
 // create a new Person and add it to persons in the dataLayer
 void serviceLayer:: newPerson(string name, string gender, int byear, int dyear)
 {
     Person newP = Person(name, gender, byear, dyear);
-    data.persons.push_back(newP);
+    persons.push_back(newP);
 }
 
 void serviceLayer:: newPerson(string name, string gender, int byear)
 {
     Person newP = Person(name, gender, byear);
-    data.persons.push_back(newP);
+    persons.push_back(newP);
 }

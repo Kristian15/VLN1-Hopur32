@@ -11,6 +11,8 @@ class serviceLayer
 {
 private:
     dataLayer data;
+    vector<Person> persons;
+
     vector<string> dataStrings;
     //þetta fall sorterar eftir strengnum sortOrder
     // notar sort hjálparföll
@@ -29,11 +31,6 @@ private:
     bool validateYear(string year);
 
     string toLower(string s);
-
-    // creates a new person with the information in info
-    // format: "name:gender:byear:dyear" or "name:gender:byear"
-    // uses newPerson()
-    //void createPerson(string info);
 
     // function to format a string vector to save to file.
     void saveData(string fileName);
@@ -60,6 +57,8 @@ public:
     */
 
     // break up the lines in fileName
+    // uses loadData in dataLayer
+    // splits the string up in name, gender, ...
     // uses createPerson()
     void createList(string fileName);
 
