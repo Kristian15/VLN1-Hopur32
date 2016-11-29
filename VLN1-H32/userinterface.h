@@ -15,7 +15,7 @@ class userInterface
 private:
     serviceLayer service;
     void printMainMenu();// Prints the main menu:
-    void printsortbyMenu();
+    void printListOptions();
     // Prints the sorting options
     // Name to sort by name
     // Gender to sort by gender
@@ -32,7 +32,7 @@ private:
     // asks in what order it should be in
     // uses printSortOptions()
     // uses sortList() from serviceLayer
-    void printList(vector<Person> theList);
+    void printList();
 
 // inputs:
     // gets a list of Persons(csv file) from user
