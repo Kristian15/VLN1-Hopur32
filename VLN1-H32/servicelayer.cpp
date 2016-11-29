@@ -8,48 +8,102 @@ serviceLayer::serviceLayer()
 {
 
 }
-vector<Person> sortByName()
+// **** PRIVATE*****
+
+// *****Sort hjálparföll*****
+vector<Person> serviceLayer:: sortByName()
 {
-    vector<Person> todo;
-    return todo;
+    // **TODO**
 }
 
-vector<Person> sortByGender()
+vector<Person> serviceLayer:: sortByGender()
 {
-    vector<Person> todo;
-    return todo;
+    // **TODO**
 }
 
-vector<Person> sortByByear()
+vector<Person> serviceLayer:: sortByByear()
 {
-    vector<Person> todo;
-    return todo;
+    // **TODO***
 }
 
-vector<Person> sortByDyear()
+vector<Person> serviceLayer:: sortByDyear()
 {
-    vector<Person> todo;
-    return todo;
+    // **TODO**
 }
 
-vector<Person> sortList(string order)
+// *****Find hjálparföll****
+vector<Person> serviceLayer:: findByName(string name)
 {
+<<<<<<< HEAD
     vector<Person> none;
     if(order == "byname")
     {
         return sortByName();
     }
     if(order == "bygender")
+=======
+    // **TODO**
+}
+
+vector<Person> serviceLayer:: findByGender(string gender)
+{
+    // **TODO**
+}
+
+vector<Person> serviceLayer:: findByByear(int byear)
+{
+    // **TODO**
+}
+
+vector<Person> serviceLayer:: findByDyear(int dyear)
+{
+    // **TODO**
+}
+
+// *** Validate föll*****
+bool serviceLayer:: validateName(string name)
+{
+    int wordLength = name.length();
+    int tmp = 0;
+
+    for (int i = 0; i < wordLength; i++)
+>>>>>>> 1b46f6273e93fa3e1bf63bd0b36454cfc5d07f1a
     {
-        return sortByGender();
+        if ((isspace(name[i])) || (isalpha(name[i])))
+            tmp ++;
     }
-    if(order == "bybirth")
+
+    if (tmp == wordLength)
+        return true;
+
+    return false;
+}
+
+bool serviceLayer:: validateGender(string gender)
+{
+    gender = toLower(gender);
+
+    if ((gender == "male") || (gender == "female"))
+        return true;
+
+    return false;
+}
+
+bool serviceLayer:: validateYear(string year)
+{
+    int wordLength = year.length();
+    int tmp = 0;
+
+    for (int i = 0; i < wordLength; i++)
     {
-        return sortByByear();
+        if (isdigit(year[i]))
+            tmp++;
     }
-    if(order == "bydeath")
+
+    if (tmp == wordLength)
     {
-        return sortByDyear();
+        if ((stoi(year) < 2016) && (wordLength == 4))
+            return true;
     }
 
     else return none;
@@ -103,26 +157,39 @@ void serviceLayer:: createList(string fileName)
 
     for (int i = 0; i < lines.size(); i++)
     {
-      /*  vector<string> elems;
-        string Name, Gender, Byear;
+        string s = lines[i];
+        vector<string> elems;
+        string delimeter = ";";
+        int pos = 0;
+        string token;
 
-        split(elems, lines[i], is_any_of(";"));
+        while ((pos = s.find(delimeter)) != s.size())
+        {
+            token = s.substr(0, pos);
+            elems.push_back(token);
+            s.erase(0, pos + delimeter.length());
+        }
+
+        string Name, Gender, Byear, Dyear;
 
         Name = elems[0];
         Gender = elems[1];
         Byear = elems[2];
 
+        //
         if ((validateName(Name)) && (validateGender(Gender)) && (validateYear(Byear)))
         {
             if ((elems.size() == 4))
             {
-                if (validateYear(elems[3]))
+                Dyear = elems[3];
+
+                if (validateYear(Dyear))
                     newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
             }
 
             else
                 newPerson(Name, Gender, stoi(Byear));
-        }*/
+        }
     }
 }
 
@@ -137,5 +204,8 @@ void serviceLayer:: newPerson(string name, string gender, int byear)
 {
     Person newP = Person(name, gender, byear);
     data.persons.push_back(newP);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b46f6273e93fa3e1bf63bd0b36454cfc5d07f1a
 }
