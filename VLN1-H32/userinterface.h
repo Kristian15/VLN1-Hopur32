@@ -1,3 +1,10 @@
+#pragma once
+#include <vector>
+#include <string>
+#include <iostream>
+#include "servicelayer.h"
+using namespace std;
+
 class userInterface
 {
 private:
@@ -5,10 +12,6 @@ private:
     void printMainMenu();// Prints the main menu:
     void printListOptions();
     void printSearchOptions();
-    // Print the list to csv file
-    // asks in what order it should be in
-    // uses printSortOptions()
-    // uses sortList() from serviceLayer
     void printList(vector<Person> printme);
 
 // inputs:
@@ -39,4 +42,4 @@ public:
     void run ();
 };
 
-#endif
+

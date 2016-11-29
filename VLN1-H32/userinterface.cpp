@@ -43,7 +43,7 @@ void userInterface::run()
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
-    cout << "list - This allows you to print our scientist in 4 different orders" << endl;
+    cout << "list - This allows you to print onto you screen our scientists in 4 different orders" << endl;
     cout << "add - This will add a new scientist to our database" << endl;
     cout << "search - This allows you to search for a scientist in our database" << endl;
     cout << "quit - This will quit the program" << endl;
@@ -91,4 +91,8 @@ void userInterface::printList(vector<Person> printme)
         cout << printme[i].getDyear() << endl;
     }
     cout << endl;
+}
+void readList()
+{
+
 }

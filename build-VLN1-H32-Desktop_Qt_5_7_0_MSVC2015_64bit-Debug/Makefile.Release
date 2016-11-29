@@ -166,15 +166,9 @@ compiler_clean:
 
 ####### Compile
 
-release\main.obj: ..\VLN1-H32\main.cpp ../VLN1-H32/userinterface.h \
-		../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h \
-		../VLN1-H32/person.h
+release\main.obj: ..\VLN1-H32\main.cpp ../VLN1-H32/userinterface.h
 
-release\userinterface.obj: ..\VLN1-H32\userinterface.cpp ../VLN1-H32/userinterface.h \
-		../VLN1-H32/servicelayer.h \
-		../VLN1-H32/datalayer.h \
-		../VLN1-H32/person.h
+release\userinterface.obj: ..\VLN1-H32\userinterface.cpp ../VLN1-H32/userinterface.h
 
 release\servicelayer.obj: ..\VLN1-H32\servicelayer.cpp ../VLN1-H32/servicelayer.h \
 		../VLN1-H32/datalayer.h \

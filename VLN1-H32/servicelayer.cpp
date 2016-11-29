@@ -160,12 +160,12 @@ bool serviceLayer:: validateYear(string year)
             tmp++;
     }
 
-    if (tmp == wordLength)
+    /*if (tmp == wordLength)
     {
         if ((stoi(year) < currentYear) && (wordLength == 4))
             return true;
     }
-
+*/
     return false;
 }
 
