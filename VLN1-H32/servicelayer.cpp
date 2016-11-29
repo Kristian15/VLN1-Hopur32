@@ -15,7 +15,7 @@ void serviceLayer::saveData(string fileName)
 {
     string line = "";
 
-    for (unsigned int i = 0; i < data.persons.size(); i++)
+    for (unsigned int i = 0; i < persons.size(); i++)
     {
         line = persons[i].getName();
         line += ";";
@@ -264,11 +264,15 @@ void serviceLayer:: createList(string fileName)
 
                 if (validateYear(Dyear))
                     newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
+                // else
+                    // GEFA VILLU
             }
 
             else
                 newPerson(Name, Gender, stoi(Byear));
         }
+        // else
+            // GEFA VILLU
     }
 }
 
