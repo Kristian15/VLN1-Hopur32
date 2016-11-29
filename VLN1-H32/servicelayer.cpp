@@ -144,31 +144,44 @@ myndi nota sort hjálparföllin
 // calls newPerson
 void serviceLayer:: createList(string fileName)
 {
-    vector<string> lines = data.loadData(fileName);
+   /* vector<string> lines = data.loadData(fileName);
 
     for (int i = 0; i < lines.size(); i++)
     {
-      /*  vector<string> elems;
-        string Name, Gender, Byear;
+        string s = lines[i];
+        vector<string> elems;
+        string delimeter = ";";
+        int pos = 0;
+        string token;
 
-        split(elems, lines[i], is_any_of(";"));
+        while ((pos = s.find(delimeter)) != s.size())
+        {
+            token = s.substr(0, pos);
+            elems.push_back(token);
+            s.erase(0, pos + delimeter.length());
+        }
+
+        string Name, Gender, Byear, Dyear;
 
         Name = elems[0];
         Gender = elems[1];
         Byear = elems[2];
 
+        //
         if ((validateName(Name)) && (validateGender(Gender)) && (validateYear(Byear)))
         {
             if ((elems.size() == 4))
             {
-                if (validateYear(elems[3]))
+                Dyear = elems[3];
+
+                if (validateYear(Dyear))
                     newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
             }
 
             else
                 newPerson(Name, Gender, stoi(Byear));
-        }*/
-    }
+        }
+    }*/
 }
 
 // create a new Person and add it to persons in the dataLayer
