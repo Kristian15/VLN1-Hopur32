@@ -304,8 +304,6 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
     {
         findings = findByDyear(stoi(findMe));
     }
-    //else
-        //** VILLA **
 
     return findings;
 }
@@ -335,8 +333,6 @@ vector<Person> serviceLayer:: sortList(string order)
     {
         sorted = sortByDyear();
     }
-    //else
-        //**VILLA**
 
     return sorted;
 }
@@ -375,40 +371,33 @@ void serviceLayer:: createList(string fileName)
         Gender = elems[1];
         Byear = elems[2];
 
-        //
-        if ((validateName(Name)) && (validateGender(Gender)) && (validateYear(Byear)))
+        if(elems.size() ==4)
         {
-            if ((elems.size() == 4))
-            {
-                Dyear = elems[3];
-
-                if (validateYear(Dyear))
-                {
-                   newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
-                }
-                // else
-                    // GEFA VILLU
-            }
-
-            else
-            {
-                newPerson(Name, Gender, stoi(Byear));
-            }
+            Dyear = elems[3];
+            newPerson(Name, Gender, Byear, Dyear);
         }
-        // else
-            // GEFA VILLU
+        else
+        {
+            newePerson(Name, Gender, Byear);
+        }
     }
 }
 
 // create a new Person and add it to persons in the dataLayer
-void serviceLayer:: newPerson(string name, string gender, int byear, int dyear)
+void serviceLayer:: newPerson(string name, string gender, string byear, string dyear)
 {
-    Person newP = Person(name, gender, byear, dyear);
-    persons.push_back(newP);
+    if(validateName(name) && validateGender(gender) && validateYear(byear) && validateYear(dyear))
+    {
+        Person newP = Person(name, gender, stoi(byear), stoi(dyear));
+        persons.push_back(newP);
+    }
 }
 
-void serviceLayer:: newPerson(string name, string gender, int byear)
+void serviceLayer:: newPerson(string name, string gender, string byear)
 {
-    Person newP = Person(name, gender, byear);
-    persons.push_back(newP);
+    if(validateName(name) && validateGender(gender) && validateYear(byear))
+    {
+        Person newP = Person(name, gender, stoi(byear));
+        persons.push_back(newP);
+    }
 }
