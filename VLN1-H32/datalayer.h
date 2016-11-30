@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <vector>
+#include <string>
 #include "person.h"
 
 using namespace std;

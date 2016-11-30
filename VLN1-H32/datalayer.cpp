@@ -1,6 +1,4 @@
 #include "datalayer.h"
-#include <iostream>
-#include <string>
 
 dataLayer::dataLayer()
 {
@@ -29,18 +27,19 @@ vector<string> dataLayer::loadData(string fileName)
 void dataLayer::saveData(vector<Person> persons, string fileName)
 {
 
-    string line = "";
+    string line = "", delimiter = ";";
     vector<string> dataStrings;
 
     for (unsigned int i = 0; i < persons.size(); i++)
     {
         line = persons[i].getName();
-        line += ";";
+        line += delimiter;
         line += persons[i].getGender();
-        line += ";";
-        line += persons[i].getByear();
-        line += ";";
-        line += persons[i].getDyear();
+        line += delimiter;
+        line += to_string(persons[i].getByear());
+        line += delimiter;
+        line += to_string(persons[i].getDyear());
+        line += delimiter;
 
         dataStrings.push_back(line);
 
