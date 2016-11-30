@@ -26,7 +26,9 @@ void userInterface::run()
         {           
             vector<Person> searchvector;
             makeVectorFromSearch(searchvector);
+            checkIfVectorIsEmptyFromSearch(searchvector);
             printList(searchvector);
+
         }
 
         if(input == "addlist")
@@ -44,6 +46,10 @@ void userInterface::run()
                 }
                 quit = true;
             } 
+        }
+        if(quit == false)
+        {
+            quit = DoYouWantToContinue();
         }
    }while(!quit);
 }
@@ -161,7 +167,7 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
             validinput = false;
             cout << endl;
         }
-        }while(!validinput);
+    }while(!validinput);
 
 }
 
@@ -241,4 +247,33 @@ void userInterface::savefile()
     string fileName;
     cin >> fileName;
     service.saveData(fileName);
+}
+bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
+{
+    bool empty;
+    if(amiemptyvector.empty())
+    {
+       cout << "No match!" << endl;
+       empty = true;
+    }
+    else empty = false;
+    return empty;
+}
+bool userInterface::DoYouWantToContinue()
+{
+    bool quit;
+    cout << "Do you want to continue? (Y/N) ";
+    char answer;
+    cin >> answer;
+
+    if(answer == 'N' || answer == 'n')
+    {
+        quit = true;
+    }
+    else
+    {
+        quit = false;
+    }
+    return quit;
+
 }

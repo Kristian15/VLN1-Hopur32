@@ -29,6 +29,8 @@ private:
     bool doYouWantToQuit();
     bool doYouWantToSave();
     void savefile();
+    bool checkIfVectorIsEmptyFromSearch(const vector<Person>);
+    bool DoYouWantToContinue();
 
 public:
     userInterface();
