@@ -61,7 +61,7 @@ void userInterface::printMainMenu()
 
 void userInterface::printListOptions()
 {
-    cout << "Please enter one of the 4 following options to sort by:" << endl;
+    cout << "Please enter one of the 5 following options to sort by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "byname   - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
@@ -94,6 +94,7 @@ void userInterface::makeVectorFromList(vector<Person>& inputvector)
            sortby == "bydeath" ||
            sortby == "bynationality")
         {
+            cout << "Here is your list sorted by " << sortby.erase(0,2) << endl;
             inputvector = service.sortList(sortby);
             validinput = true;
         }
