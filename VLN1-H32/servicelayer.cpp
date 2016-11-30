@@ -1,9 +1,4 @@
-#pragma once
 #include "servicelayer.h"
-#include <string>
-#include <iostream>
-#include <ctime>
-#include <algorithm>
 
 using namespace std;
 serviceLayer::serviceLayer(){}
@@ -17,7 +12,7 @@ void serviceLayer::saveData(string fileName)
 }
 
 // *****Sort hjálparföll*****
-vector<Person> serviceLayer:: sortByName()
+void serviceLayer:: sortByName()
 {
     Person swap;
 
@@ -44,11 +39,9 @@ vector<Person> serviceLayer:: sortByName()
         persons[i] = persons[tmp];
         persons[tmp] = swap;
     }
-
-    return persons;
 }
 
-vector<Person> serviceLayer:: sortByGender()
+void serviceLayer:: sortByGender()
 {
     Person swap;
 
@@ -74,11 +67,38 @@ vector<Person> serviceLayer:: sortByGender()
         persons[i] = persons[tmp];
         persons[tmp] = swap;
     }
-
-    return persons;
 }
 
-vector<Person> serviceLayer:: sortByByear()
+void serviceLayer:: sortByNationality()
+{
+    Person swap;
+
+    string min, theNationality;
+    size_t tmp;
+
+    for(size_t i = 0; i < (persons.size() - 1); i++)
+    {
+        min = persons[i].getNationality();
+        tmp = i;
+
+        for(size_t j = (i + 1); j < persons.size(); j++)
+        {
+            theNationality = toLower(persons[j].getNationality());
+
+            if(min > theNationality)
+            {
+                min = theNationality;
+                tmp = j;
+            }
+        }
+
+        swap = persons[i];
+        persons[i] = persons[tmp];
+        persons[tmp] = swap;
+    }
+}
+
+void serviceLayer:: sortByByear()
 {
    /* Person swap;
 
@@ -106,11 +126,9 @@ vector<Person> serviceLayer:: sortByByear()
     }*/
 
     stable_sort(persons.begin(), persons.end());
-
-    return persons;
 }
 
-vector<Person> serviceLayer:: sortByDyear()
+void serviceLayer:: sortByDyear()
 {
     Person swap;
 
@@ -136,8 +154,6 @@ vector<Person> serviceLayer:: sortByDyear()
         persons[i] = persons[tmp];
         persons[tmp] = swap;
     }
-
-    return persons;
 }
 
 // *****Find hjálparföll****
@@ -166,7 +182,24 @@ vector<Person> serviceLayer:: findByGender(string gender)
     {
         Person p = persons[i];
 
-        if (gender == toLower(p.getGender()))
+        if (gender == p.getGender())
+        {
+            findings.push_back(p);
+        }
+    }
+
+    return findings;
+}
+
+vector<Person> serviceLayer:: findByNationality(string nationality)
+{
+    vector<Person> findings;
+
+    for (unsigned int i = 0; i < persons.size(); i++)
+    {
+        Person p = persons[i];
+
+        if (toLower(nationality) == toLower(p.getNationality()))
         {
             findings.push_back(p);
         }
@@ -300,6 +333,10 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
     {
         findings = findByGender(findMe);
     }
+    else if (by == "nationality")
+    {
+        findings = findByNationality(findMe);
+    }
     else if (by == "birth")
     {
         findings = findByByear(stoi(findMe));
@@ -322,26 +359,26 @@ vector<Person> serviceLayer:: sortList(string order)
 
     if (order == "name")
     {
-        sorted = sortByName();
+        sortByName();
     }
     else if (order == "gender")
     {
-        sorted = sortByGender();
+        sortByGender();
     }
-   /* else if (order == "nationality")
+    else if (order == "nationality")
     {
-        sorted = sortByNationality;
-    }*/
+        sortByNationality();
+    }
     else if (order == "birth")
     {
-        sorted = sortByByear();
+        sortByByear();
     }
     else if (order == "death")
     {
-        sorted = sortByDyear();
+        sortByDyear();
     }
 
-    return sorted;
+    return persons;
 }
 
 /* ef við viljum að notandi geti raðað listanum áður en hann er prentaður í search()
@@ -399,7 +436,7 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
     {
         Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
         persons.push_back(newP);
-
+        sortByByear();
     }
 }
 
@@ -409,5 +446,6 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
     {
         Person newP = Person(name, gender, nationality, stoi(byear));
         persons.push_back(newP);
+        sortByByear();
     }
 }
