@@ -245,7 +245,9 @@ bool serviceLayer:: validateYear(string year)
     for (unsigned int i = 0; i < wordLength; i++)
     {
         if (isdigit(year[i]))
+        {
             tmp++;
+        }
     }
 
     time_t now = time(0);
@@ -256,7 +258,9 @@ bool serviceLayer:: validateYear(string year)
     if (tmp == wordLength)
     {
         if ((stoi(year) < currYear) && (wordLength == 4))
+        {
             return true;
+        }
     }
 
     return false;
@@ -267,7 +271,9 @@ string serviceLayer:: toLower(string s)
    string stringLower = s;
 
    for (unsigned int i = 0; i < s.length(); i++)
+   {
        stringLower[i] = tolower(s[i]);
+   }
 
    return stringLower;
 }
@@ -281,13 +287,21 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
     by = toLower(by);
 
     if (by == "name")
+    {
         findings = findByName(findMe);
+    }
     else if (by == "gender")
+    {
         findings = findByGender(findMe);
+    }
     else if (by == "birth")
+    {
         findings = findByByear(stoi(findMe));
+    }
     else if (by == "death")
+    {
         findings = findByDyear(stoi(findMe));
+    }
     //else
         //** VILLA **
 
@@ -304,13 +318,21 @@ vector<Person> serviceLayer:: sortList(string order)
     vector<Person> sorted;
 
     if (order == "byname")
+    {
         sorted = sortByName();
+    }
     else if (order == "bygender")
+    {
         sorted = sortByGender();
+    }
     else if (order == "bybirth")
+    {
         sorted = sortByByear();
+    }
     else if (order == "bydeath")
+    {
         sorted = sortByDyear();
+    }
     //else
         //**VILLA**
 
@@ -359,13 +381,17 @@ void serviceLayer:: createList(string fileName)
                 Dyear = elems[3];
 
                 if (validateYear(Dyear))
-                    newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
+                {
+                   newPerson(Name, Gender, stoi(Byear), stoi(Dyear));
+                }
                 // else
                     // GEFA VILLU
             }
 
             else
+            {
                 newPerson(Name, Gender, stoi(Byear));
+            }
         }
         // else
             // GEFA VILLU
