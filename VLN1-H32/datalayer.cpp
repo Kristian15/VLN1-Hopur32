@@ -8,7 +8,6 @@ dataLayer::dataLayer()
 vector<Person> dataLayer::loadDataP(string fileName)
 {
     string line;
-    vector<Person> persons;
 
     _fileName = fileName;
     data.clear();
@@ -51,7 +50,7 @@ vector<Person> dataLayer::loadDataP(string fileName)
         if(elems.size() == 5)
         {
             Dyear = elems[4];
-            Person newPerson= Person(Name, Gender, Nationality, stoi(Byear), stoi(Dyear));
+            Person newPerson = Person(Name, Gender, Nationality, stoi(Byear), stoi(Dyear));
             persons.push_back(newPerson);
         }
 
