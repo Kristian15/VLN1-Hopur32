@@ -89,21 +89,21 @@ vector<string> dataLayer::loadData(string fileName)
 
 void dataLayer::saveData(vector<Person> persons, string fileName)
 {
-    string name = "", gender = "", nationality = "", bYear = "", dYear = "", delimiter = ";";
+    string name = "", gender = "", nationality = "", bYear = "", dYear = "", d = ";";
 
     _fileName = fileName;
     data.clear();
 
     for (unsigned int i = 0; i < persons.size(); i++)
     {
-        name = persons[i].getName() + delimiter;
-        gender = persons[i].getGender() + delimiter;
-        nationality = persons[i].getNationality() + delimiter;
-        bYear = to_string(persons[i].getByear()) + delimiter;
+        name = persons[i].getName() + d;
+        gender = persons[i].getGender() + d;
+        nationality = persons[i].getNationality() + d;
+        bYear = to_string(persons[i].getByear()) + d;
 
         if(persons[i].getDyear() != 0)
         {
-            dYear = to_string(persons[i].getDyear()) + delimiter;
+            dYear = to_string(persons[i].getDyear()) + d;
         }
 
         data.push_back(name + gender + nationality + bYear + dYear);
@@ -124,9 +124,9 @@ void dataLayer::saveData(vector<Person> persons, string fileName)
         {
             dataStream << data[i] << endl;
         }
-    }
 
-    dataStream.close();
+        dataStream.close();
+    }
 }
 
 void dataLayer::updateFile(string name, string gender, string nationality, string byear, string dyear)
@@ -140,7 +140,6 @@ void dataLayer::updateFile(string name, string gender, string nationality, strin
     if(dataStream)
     {
         dataStream << data << endl;
+        dataStream.close();
     }
-
-    dataStream.close();
 }
