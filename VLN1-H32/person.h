@@ -12,7 +12,7 @@ private:
     string _gender;
     int _byear;
     int _dyear;
-    friend ostream& operator <<(ostream& lhs, const Person& rhs);
+    friend ostream& operator <<(ostream& lhs, Person& rhs);
 
 public:
     Person();

@@ -93,14 +93,11 @@ void userInterface::printSearchOptions()
     cout << "death  - This will list all scientists with a specific death year" << endl;
 }
 
-void userInterface::printList(vector<Person> printme)
+void userInterface::printList(vector<Person> printme ) const
 {
     for(unsigned int i = 0; i < printme.size(); i++)
     {
-        cout << printme[i].getName() << endl;
-        cout << printme[i].getGender() << endl;
-        cout << printme[i].getByear() << endl;
-        cout << printme[i].getDyear() << endl;
+        cout << printme[i] << endl;
     }
 
     cout << endl;

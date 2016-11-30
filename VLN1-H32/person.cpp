@@ -62,10 +62,13 @@ void Person:: setDyear(int dyear)
 }
 ostream& operator <<(ostream& lhs, Person& rhs)
 {
-    lhs << rhs.getName() << endl;
-    lhs << rhs.getGender() << endl;
-    lhs << rhs.getByear() << endl;
-    lhs << rhs.getDyear() << endl;
+    lhs << "Name:          " << rhs.getName() << endl;
+    lhs << "Gender:        " << rhs.getGender() << endl;
+    lhs << "Year of birth: " << rhs.getByear() << endl;
+    if(rhs.getDyear() != NULL)
+    {
+        lhs << "Year of death  " << rhs.getDyear() << endl;
+    }
 
     return lhs;
 }
