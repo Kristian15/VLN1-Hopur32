@@ -5,9 +5,8 @@
 #include <ctime>
 
 using namespace std;
-serviceLayer::serviceLayer()
-{
-}
+serviceLayer::serviceLayer(){}
+
 // **** PRIVATE*****
 
 // ***** Save data fall *****
@@ -21,16 +20,20 @@ vector<Person> serviceLayer:: sortByName()
 {
     Person swap;
 
+    string min, theName;
+    int tmp;
+
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        string min = persons[i].getName();
-        int tmp = i;
+        min = persons[i].getName();
+        tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j].getName())
+            theName = persons[j].getName();
+            if(min > theName)
             {
-                min = persons[j].getName();
+                min = theName;
                 tmp = j;
             }
         }
@@ -47,16 +50,20 @@ vector<Person> serviceLayer:: sortByGender()
 {
     Person swap;
 
+    string min, theGender;
+    int tmp;
+
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        string min = persons[i].getGender();
-        int tmp = i;
+        min = persons[i].getGender();
+        tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j].getGender())
+            theGender = persons[j].getGender();
+            if(min > theGender)
             {
-                min = persons[j].getGender();
+                min = theGender;
                 tmp = j;
             }
         }
@@ -73,16 +80,19 @@ vector<Person> serviceLayer:: sortByByear()
 {
     Person swap;
 
+    int theByear, min,tmp;
+
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        int min = persons[i].getByear();
-        int tmp = i;
+        min = persons[i].getByear();
+        tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j].getByear())
+            theByear = persons[j].getByear();
+            if(min > theByear)
             {
-                min = persons[j].getByear();
+                min = theByear;
                 tmp = j;
             }
         }
@@ -99,16 +109,19 @@ vector<Person> serviceLayer:: sortByDyear()
 {
     Person swap;
 
+    int theDyear, min,tmp;
+
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        int min = persons[i].getDyear();
-        int tmp = i;
+        min = persons[i].getDyear();
+        tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j].getDyear())
+            theDyear = persons[j].getDyear();
+            if(min > theDyear)
             {
-                min = persons[j].getDyear();
+                min = theDyear;
                 tmp = j;
             }
         }
@@ -126,12 +139,14 @@ vector<Person> serviceLayer:: findByName(string name)
 {
     vector<Person> findings;
 
-    for (unsigned int i=0; i < persons.size(); i++)
+    for (unsigned int i = 0; i < persons.size(); i++)
     {
         Person p = persons[i];
 
-        if (name == p.getName())
+        if (name == toLower(p.getName()))
+        {
             findings.push_back(p);
+        }
     }
 
     return findings;
@@ -141,12 +156,14 @@ vector<Person> serviceLayer:: findByGender(string gender)
 {
     vector<Person> findings;
 
-    for (unsigned int i=0; i < persons.size(); i++)
+    for (unsigned int i = 0; i < persons.size(); i++)
     {
         Person p = persons[i];
 
-        if (gender == p.getGender())
+        if (gender == toLower(p.getGender()))
+        {
             findings.push_back(p);
+        }
     }
 
     return findings;
@@ -156,12 +173,14 @@ vector<Person> serviceLayer:: findByByear(int byear)
 {
     vector<Person> findings;
 
-    for (unsigned int i=0; i < persons.size(); i++)
+    for (unsigned int i = 0; i < persons.size(); i++)
     {
         Person p = persons[i];
 
         if (byear == p.getByear())
+        {
             findings.push_back(p);
+        }
     }
 
     return findings;
@@ -171,12 +190,14 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
 {
     vector<Person> findings;
 
-    for (unsigned int i=0; i < persons.size(); i++)
+    for (unsigned int i = 0; i < persons.size(); i++)
     {
         Person p = persons[i];
 
         if (dyear == p.getDyear())
+        {
             findings.push_back(p);
+        }
     }
 
     return findings;
@@ -191,11 +212,15 @@ bool serviceLayer:: validateName(string name)
     for (unsigned int i = 0; i < wordLength; i++)
     {
         if ((isspace(name[i])) || (isalpha(name[i])))
+        {
             tmp ++;
+        }
     }
 
     if (tmp == wordLength)
+    {
         return true;
+    }
 
     return false;
 }
@@ -205,7 +230,9 @@ bool serviceLayer:: validateGender(string gender)
     gender = toLower(gender);
 
     if ((gender == "male") || (gender == "female"))
+    {
         return true;
+    }
 
     return false;
 }
@@ -273,6 +300,7 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
 // return the vector in dataLayer sorted
 vector<Person> serviceLayer:: sortList(string order)
 {
+    order = toLower(order);
     vector<Person> sorted;
 
     if (order == "byname")

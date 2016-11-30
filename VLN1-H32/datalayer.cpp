@@ -27,23 +27,26 @@ vector<string> dataLayer::loadData(string fileName)
 void dataLayer::saveData(vector<Person> persons, string fileName)
 {
 
-    string line = "", delimiter = ";";
+    string name = "", gender = "", bYear = "", dYear = "", delimiter = ";";
     vector<string> dataStrings;
 
     for (unsigned int i = 0; i < persons.size(); i++)
     {
-        line = persons[i].getName();
-        line += delimiter;
-        line += persons[i].getGender();
-        line += delimiter;
-        line += to_string(persons[i].getByear());
-        line += delimiter;
-        line += to_string(persons[i].getDyear());
-        line += delimiter;
+        name = persons[i].getName() + delimiter;
+        gender = persons[i].getGender() + delimiter;
+        bYear = to_string(persons[i].getByear()) + delimiter;
 
-        dataStrings.push_back(line);
+        if(persons[i].getDyear() != 0)
+        {
+            dYear = to_string(persons[i].getDyear()) + delimiter;
+        }
 
-        line = "";
+        dataStrings.push_back(name + gender + bYear + dYear);
+
+        name = "";
+        gender = "";
+        bYear = "";
+        dYear = "";
     }
 
     ofstream dataStream;

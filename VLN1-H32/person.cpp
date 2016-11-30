@@ -75,29 +75,3 @@ ostream& operator <<(ostream& lhs, Person& rhs)
 
     return lhs;
 }
-
-bool operator < (Person p1, Person p2)
-{
-    string name1 = p1.getName();
-    string name2 = p2.getName();
-
-    int lengtha = name1.length();
-    int lengthb = name2.length();
-
-    for(int i = 0; i < lengtha; i++)
-    {
-        name1[i] = tolower(name1[i]);
-    }
-
-    for(int i = 0; i < lengthb; i++)
-    {
-        name2[i] = tolower(name2[i]);
-    }
-
-    if(name1 < name2)
-    {
-        return true;
-    }
-
-    return false;
-}
