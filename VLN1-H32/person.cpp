@@ -37,3 +37,11 @@ ostream& operator <<(ostream& lhs, Person& rhs)
 
     return lhs;
 }
+
+bool operator > (Person leftp, Person rightp)
+{
+    if(leftp.getByear() > rightp.getDyear())
+        return true;
+     else
+        return false;
+}
