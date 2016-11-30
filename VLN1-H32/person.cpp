@@ -67,6 +67,7 @@ ostream& operator <<(ostream& lhs, Person& rhs)
     lhs << "Name:          " << rhs.getName() << endl;
     lhs << "Gender:        " << rhs.getGender() << endl;
     lhs << "Year of birth: " << rhs.getByear() << endl;
+
     if(rhs.getDyear() > 0)
     {
         lhs << "Year of death: " << rhs.getDyear() << endl;
@@ -84,14 +85,19 @@ bool operator < (Person p1, Person p2)
     int lengthb = name2.length();
 
     for(int i = 0; i < lengtha; i++)
+    {
         name1[i] = tolower(name1[i]);
+    }
 
     for(int i = 0; i < lengthb; i++)
+    {
         name2[i] = tolower(name2[i]);
-
+    }
 
     if(name1 < name2)
+    {
         return true;
-     else
-        return false;
+    }
+
+    return false;
 }
