@@ -16,6 +16,8 @@ private:
     void printListOptions();
     // Prints search options
     void printSearchOptions();
+    void makeVectorFromList(vector<Person>&);
+    void makeVectorFromSearch(vector<Person>&);
     void printList(vector<Person> printme) const;
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
@@ -26,6 +28,7 @@ private:
     void readPerson();
     bool doYouWantToQuit();
     bool doYouWantToSave();
+    void savefile();
 
 public:
     userInterface();

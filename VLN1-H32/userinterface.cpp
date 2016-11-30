@@ -14,10 +14,8 @@ void userInterface::run()
         if(input == "list")
         {
             printListOptions();
-            string sortby;
-            cin >> sortby;
             vector<Person> sortbyvector;
-            sortbyvector = service.sortList(sortby);
+            makeVectorFromList(sortbyvector);
             printList(sortbyvector);
         }
 
@@ -29,14 +27,8 @@ void userInterface::run()
         if(input == "search")
         {
             printSearchOptions();
-
-            string searchby, searchfor;
-            cin >> searchby;
-            cout << "Enter what you want to search for: " << endl;
-            cin >> searchfor;
-
             vector<Person> searchvector;
-            searchvector = service.searchList(searchfor, searchby);
+            makeVectorFromSearch(searchvector);
             printList(searchvector);
         }
 
@@ -51,10 +43,7 @@ void userInterface::run()
             {
                 if (doYouWantToSave())
                 {
-                    cout << "Write the name of the file you want to save in" << endl;
-                    string fileName;
-                    cin >> fileName;
-                    service.saveData(fileName);
+                    savefile();
                 }
                 quit = true;
             } 
@@ -91,6 +80,21 @@ void userInterface::printSearchOptions()
     cout << "gender - This will list all scientists with a specific gender (male / female)" << endl;
     cout << "birth  - This will list all scientists with a specific birth year" << endl;
     cout << "death  - This will list all scientists with a specific death year" << endl;
+}
+void userInterface::makeVectorFromList(vector<Person>& inputvector)
+{
+    string sortby;
+    cin >> sortby;
+    inputvector = service.sortList(sortby);
+}
+
+void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
+{
+    string searchby, searchfor;
+    cin >> searchby;
+    cout << "Enter what you want to search for: " << endl;
+    cin >> searchfor;
+    inputvector = service.searchList(searchfor, searchby);
 }
 
 void userInterface::printList(vector<Person> printme ) const
@@ -164,4 +168,11 @@ bool userInterface::doYouWantToSave()
     }
 
     return false;
+}
+void userInterface::savefile()
+{
+    cout << "Write the name of the file you want to save" << endl;
+    string fileName;
+    cin >> fileName;
+    service.saveData(fileName);
 }
