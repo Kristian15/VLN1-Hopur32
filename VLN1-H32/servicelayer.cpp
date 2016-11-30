@@ -17,103 +17,108 @@ void serviceLayer::saveData(string fileName)
 }
 
 // *****Sort hjálparföll*****
-vector<Person> serviceLayer:: sortByName(string)
+vector<Person> serviceLayer:: sortByName()
 {
-    vector<Person> persons;
+    Person swap;
 
-    string swap;
-
-    for(size_t i = 0; i < persons.size() - 1; i++)
+    for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        string min = persons[i];
+        string min = persons[i].getName();
         int tmp = i;
-        for(size_t j = i + 1; j < persons.size(); j++)
+
+        for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j])
+            if(min > persons[j].getName())
             {
-                min = persons[j];
+                min = persons[j].getName();
                 tmp = j;
             }
         }
+
         swap = persons[i];
         persons[i] = persons[tmp];
         persons[tmp] = swap;
     }
+
     return persons;
 }
 
-vector<Person> serviceLayer:: sortByGender(string)
+vector<Person> serviceLayer:: sortByGender()
 {
-    vector<Person> persons;
-    string swap;
+    Person swap;
 
-    for(size_t i = 0; i < persons.size() - 1; i++)
+    for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-       string min = persons[i];
-       int tmp = i;
-       for(size_t j = i + 1; j < persons.size(); j++)
-       {
-           if(min > persons[j])
-           {
-               min = persons[j];
-               tmp = j;
-           }
-       }
-       swap = persons[i];
-       persons[i] = persons[tmp];
-       persons[tmp] = swap;
-    }
-    return persons;
-}
-
-vector<Person> serviceLayer:: sortByByear(int)
-{
-    vector<Person> persons;
-
-    string swap;
-
-    for(size_t i = 0; i < persons.size() - 1; i++)
-    {
-        string min = persons[i];
+        string min = persons[i].getGender();
         int tmp = i;
-        for(size_t j = i + 1; j < persons.size(); j++)
+
+        for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j])
+            if(min > persons[j].getGender())
             {
-                min = persons[j];
+                min = persons[j].getGender();
                 tmp = j;
             }
         }
+
         swap = persons[i];
         persons[i] = persons[tmp];
         persons[tmp] = swap;
     }
+
     return persons;
 }
 
-vector<Person> serviceLayer:: sortByDyear(int)
+vector<Person> serviceLayer:: sortByByear()
 {
-    vector<Person> persons;
+    Person swap;
 
-    string swap;
-
-    for(size_t i = 0; i < persons.size() - 1; i++)
+    for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        string min = persons[i];
+        int min = persons[i].getByear();
         int tmp = i;
-        for(size_t j = i + 1; j < persons.size(); j++)
+
+        for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            if(min > persons[j])
+            if(min > persons[j].getByear())
             {
-                min = persons[j];
+                min = persons[j].getByear();
                 tmp = j;
             }
         }
+
         swap = persons[i];
         persons[i] = persons[tmp];
         persons[tmp] = swap;
+    }
+
+    return persons;
+}
+
+vector<Person> serviceLayer:: sortByDyear()
+{
+    Person swap;
+
+    for(size_t i = 0; i < (persons.size() - 1); i++)
+    {
+        int min = persons[i].getDyear();
+        int tmp = i;
+
+        for(size_t j = (i + 1); j < persons.size(); j++)
+        {
+            if(min > persons[j].getDyear())
+            {
+                min = persons[j].getDyear();
+                tmp = j;
+            }
         }
-        return persons;
+
+        swap = persons[i];
+        persons[i] = persons[tmp];
+        persons[tmp] = swap;
+    }
+
+    return persons;
 }
 
 // *****Find hjálparföll****

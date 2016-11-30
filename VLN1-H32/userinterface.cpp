@@ -1,16 +1,16 @@
 #include "userinterface.h"
 
-userInterface::userInterface()
-{
+userInterface::userInterface() {}
 
-}
 void userInterface::run()
 {
     bool quit = false;
+
     do{
         printMainMenu();
         string input;
         cin >> input;
+
         if(input == "list")
         {
             printListOptions();
@@ -19,28 +19,32 @@ void userInterface::run()
             vector<Person> sortbyvector;
             sortbyvector = service.sortList(sortby);
             printList(sortbyvector);
-
         }
+
         if(input == "add")
         {
             readPerson();
         }
+
         if(input == "search")
         {
             printSearchOptions();
-            string searchby;
+
+            string searchby, searchfor;
             cin >> searchby;
             cout << "Enter what you want to search for: " << endl;
-            string searchfor;
             cin >> searchfor;
+
             vector<Person> searchvector;
             searchvector = service.searchList(searchby, searchfor);
             printList(searchvector);
         }
+
         if(input == "addlist")
         {
              readList();
         }
+
         if(input == "quit")
         {
             if (doYouWantToQuit())
@@ -57,6 +61,7 @@ void userInterface::run()
         }
    }while(!quit);
 }
+
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
@@ -67,6 +72,7 @@ void userInterface::printMainMenu()
     cout << "addlist - This allows you to add scientists from a file" << endl;
     cout << "quit    - This will quit the program" << endl;
 }
+
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 4 following options to sort by:" << endl;
@@ -76,6 +82,7 @@ void userInterface::printListOptions()
     cout << "bybirth  - This will sort the scientists by date of birth" << endl;
     cout << "bydeath  - This will sort the scientists by who deceased first" << endl;
 }
+
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
@@ -86,22 +93,6 @@ void userInterface::printSearchOptions()
     cout << "death  - This will sort the scientists by who deceased first" << endl;
 }
 
-void userInterface::readPerson()
-{
-    string name;
-    string gender;
-    int byear;
-    int dyear;
-    cout << "Name: ";
-    cin >> name;
-    cout << "Gender: ";
-    cin >> gender;
-    cout << "Date of birth: ";
-    cin >> byear;
-    cout << "Time of death: ";
-    cin >> dyear;
-    service.newPerson(name, gender, byear, dyear);
-}
 void userInterface::printList(vector<Person> printme)
 {
     for(unsigned int i = 0; i < printme.size(); i++)
@@ -111,8 +102,10 @@ void userInterface::printList(vector<Person> printme)
         cout << printme[i].getByear() << endl;
         cout << printme[i].getDyear() << endl;
     }
+
     cout << endl;
 }
+
 void userInterface::readList()
 {
     cout << "Enter the name of your file: ";
@@ -120,36 +113,49 @@ void userInterface::readList()
     cin >> filename;
     service.createList(filename);
 }
+
+void userInterface::readPerson()
+{
+    string name, gender;
+    int byear, dyear;
+
+    cout << "Name: ";
+    cin >> name;
+    cout << "Gender: ";
+    cin >> gender;
+    cout << "Date of birth: ";
+    cin >> byear;
+    cout << "Time of death: ";
+    cin >> dyear;
+
+    service.newPerson(name, gender, byear, dyear);
+}
+
+
 bool userInterface::doYouWantToQuit()
 {
-    bool quit;
     cout << "Are you sure you want to quit? Y/N:" << endl;
     char answer;
     cin >> answer;
 
     if (answer == 'y' || answer == 'Y')
     {
-        quit = true;
+        return true;
     }
-    else
-    {
-        quit = false;
-    }
-    return quit;
+
+    return false;
 }
 
 bool userInterface::doYouWantToSave()
 {
     cout << "Do you want to save the current list before quitting ? Y/N" << endl;
-    bool save;
     char answer;
     cin >> answer;
 
     if (answer == 'y' || answer == 'Y')
-        save = true;
+    {
+        return true;
+    }
 
-    else
-        save = false;
-
-    return save;
+    return false;
 }
