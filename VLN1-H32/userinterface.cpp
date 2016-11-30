@@ -14,7 +14,10 @@ void userInterface::run()
         {
             vector<Person> sortbyvector;
             makeVectorFromList(sortbyvector);
-            printList(sortbyvector);
+            if(checkIfVectorIsEmpty(sortbyvector) == true)
+            {
+                printList(sortbyvector);
+            }
         }
 
         if(input == "add")
@@ -25,9 +28,11 @@ void userInterface::run()
         if(input == "search")
         {           
             vector<Person> searchvector;
-            makeVectorFromSearch(searchvector);
-            checkIfVectorIsEmptyFromSearch(searchvector);
-            printList(searchvector);
+            makeVectorFromSearch(searchvector);           
+            if(checkIfVectorIsEmpty(searchvector) == true)
+            {
+                printList(searchvector);
+            }
 
         }
 
@@ -47,7 +52,7 @@ void userInterface::run()
                 quit = true;
             } 
         }
-        if(quit == false)
+        if(input != "quit")
         {
             quit = DoYouWantToContinue();
         }
@@ -248,7 +253,7 @@ void userInterface::savefile()
     cin >> fileName;
     service.saveData(fileName);
 }
-bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
+bool userInterface::checkIfVectorIsEmpty(const vector<Person> amiemptyvector)
 {
     bool empty;
     if(amiemptyvector.empty())
@@ -259,6 +264,7 @@ bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiempty
     else empty = false;
     return empty;
 }
+
 bool userInterface::DoYouWantToContinue()
 {
     bool quit;
