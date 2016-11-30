@@ -14,7 +14,7 @@ void userInterface::run()
         {
             vector<Person> sortbyvector;
             makeVectorFromList(sortbyvector);
-            if(checkIfVectorIsEmpty(sortbyvector) == true)
+            if(checkIfVectorIsEmptyFromList(sortbyvector) == true)
             {
                 printList(sortbyvector);
             }
@@ -29,7 +29,7 @@ void userInterface::run()
         {           
             vector<Person> searchvector;
             makeVectorFromSearch(searchvector);           
-            if(checkIfVectorIsEmpty(searchvector) == true)
+            if(checkIfVectorIsEmptyFromSearch(searchvector) == true)
             {
                 printList(searchvector);
             }
@@ -253,7 +253,7 @@ void userInterface::savefile()
     cin >> fileName;
     service.saveData(fileName);
 }
-bool userInterface::checkIfVectorIsEmpty(const vector<Person> amiemptyvector)
+bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
 {
     bool empty;
     if(amiemptyvector.empty())
@@ -264,7 +264,17 @@ bool userInterface::checkIfVectorIsEmpty(const vector<Person> amiemptyvector)
     else empty = false;
     return empty;
 }
-
+bool userInterface::checkIfVectorIsEmptyFromList(const vector<Person> amiemptyvector)
+{
+    bool empty;
+    if(amiemptyvector.empty())
+    {
+       cout << "Your database is empty!" << endl;
+       empty = true;
+    }
+    else empty = false;
+    return empty;
+}
 bool userInterface::DoYouWantToContinue()
 {
     bool quit;

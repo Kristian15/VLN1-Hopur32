@@ -37,7 +37,7 @@ ostream& operator <<(ostream& lhs, Person& rhs)
     return lhs;
 }
 
-bool operator < (const Person& leftp, const Person& rightp)
+bool operator < (const Person& lhs, const Person& rhs)
 {
-    return(leftp._byear < rightp._byear);
+    return(lhs._byear < rhs._byear);
 }
