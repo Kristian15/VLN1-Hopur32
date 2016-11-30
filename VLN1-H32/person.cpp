@@ -75,23 +75,23 @@ ostream& operator <<(ostream& lhs, Person& rhs)
     return lhs;
 }
 
-/*bool operator < (const Person p1, const Person p2)
+bool operator < (Person p1, Person p2)
 {
-    int lengtha = p1._name.length();
-    int lengthb = p2._name.length();
+    string name1 = p1.getName();
+    string name2 = p2.getName();
 
-    string name1 = p1.name;
-    string name2 = p2.name;
+    int lengtha = name1.length();
+    int lengthb = name2.length();
 
-    for(int i = 0; i < lengthPerson1; i++)
-        p1[i] = tolower(p1[i]);
+    for(int i = 0; i < lengtha; i++)
+        name1[i] = tolower(name1[i]);
 
-    for(int i = 0; i < lengthPerson2; i++)
-        p2[i] = tolower(p2[i]);
+    for(int i = 0; i < lengthb; i++)
+        name2[i] = tolower(name2[i]);
 
 
-    if(p1 < p2)
+    if(name1 < name2)
         return true;
      else
         return false;
-}*/
+}
