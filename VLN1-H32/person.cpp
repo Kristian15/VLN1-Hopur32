@@ -60,3 +60,12 @@ void Person:: setDyear(int dyear)
 {
     _dyear = dyear;
 }
+ostream& operator <<(ostream& lhs, Person& rhs)
+{
+    lhs << rhs.getName() << endl;
+    lhs << rhs.getGender() << endl;
+    lhs << rhs.getByear() << endl;
+    lhs << rhs.getDyear() << endl;
+
+    return lhs;
+}

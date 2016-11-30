@@ -12,6 +12,7 @@ private:
     string _gender;
     int _byear;
     int _dyear;
+    friend ostream& operator <<(ostream& lhs, const Person& rhs);
 
 public:
     Person();
@@ -27,6 +28,7 @@ public:
     void setGender(string gender);
     void setByear(int byear);
     void setDyear(int dyear);
+
 };
 
 #endif // PERSON_H
