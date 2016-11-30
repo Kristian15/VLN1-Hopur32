@@ -116,7 +116,7 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
         }
         else if(searchby == "gender")
         {
-            cout << "Enter either males or females: " << endl;
+            cout << "Enter either \"males\" or \"females\": " << endl;
             cin >> searchfor;
             inputvector = service.searchList(searchfor, searchby);
         }
@@ -161,13 +161,16 @@ void userInterface::readList()
 
 void userInterface::readPerson()
 {
-    string name, gender, byear, dyear;
+    string name, gender, nationality, byear, dyear;
 
     cout << "Name: ";
     cin >> ws;
     getline(cin, name);
     cout << "Gender: ";
     cin >> gender;
+    cout << "Nationality: ";
+    cin >> ws;
+    getline(cin, nationality);
     cout << "Date of birth: ";
     cin >> byear;
     cout << "Time of death: " << endl;
