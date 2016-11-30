@@ -119,7 +119,8 @@ void userInterface::readPerson()
     int byear, dyear;
 
     cout << "Name: ";
-    cin >> name;
+    cin >> ws;
+    getline(cin, name);
     cout << "Gender: ";
     cin >> gender;
     cout << "Date of birth: ";
