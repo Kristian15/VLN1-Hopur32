@@ -17,32 +17,103 @@ void serviceLayer::saveData(string fileName)
 }
 
 // *****Sort hjálparföll*****
-vector<Person> serviceLayer:: sortByName()
+vector<Person> serviceLayer:: sortByName(string)
 {
-    // **TODO**
-    vector<Person> returnv;
-    return returnv;
+    vector<Person> persons;
+
+    string swap;
+
+    for(size_t i = 0; i < persons.size() - 1; i++)
+    {
+        string min = persons[i];
+        int tmp = i;
+        for(size_t j = i + 1; j < persons.size(); j++)
+        {
+            if(min > persons[j])
+            {
+                min = persons[j];
+                tmp = j;
+            }
+        }
+        swap = persons[i];
+        persons[i] = persons[tmp];
+        persons[tmp] = swap;
+    }
+    return persons;
 }
 
-vector<Person> serviceLayer:: sortByGender()
+vector<Person> serviceLayer:: sortByGender(string)
 {
-    // **TODO**
-    vector<Person> returnv;
-    return returnv;
+    vector<Person> persons;
+    string swap;
+
+    for(size_t i = 0; i < persons.size() - 1; i++)
+    {
+       string min = persons[i];
+       int tmp = i;
+       for(size_t j = i + 1; j < persons.size(); j++)
+       {
+           if(min > persons[j])
+           {
+               min = persons[j];
+               tmp = j;
+           }
+       }
+       swap = persons[i];
+       persons[i] = persons[tmp];
+       persons[tmp] = swap;
+    }
+    return persons;
 }
 
-vector<Person> serviceLayer:: sortByByear()
+vector<Person> serviceLayer:: sortByByear(int)
 {
-    // **TODO***
-    vector<Person> returnv;
-    return returnv;
+    vector<Person> persons;
+
+    string swap;
+
+    for(size_t i = 0; i < persons.size() - 1; i++)
+    {
+        string min = persons[i];
+        int tmp = i;
+        for(size_t j = i + 1; j < persons.size(); j++)
+        {
+            if(min > persons[j])
+            {
+                min = persons[j];
+                tmp = j;
+            }
+        }
+        swap = persons[i];
+        persons[i] = persons[tmp];
+        persons[tmp] = swap;
+    }
+    return persons;
 }
 
-vector<Person> serviceLayer:: sortByDyear()
+vector<Person> serviceLayer:: sortByDyear(int)
 {
-    // **TODO**
-    vector<Person> returnv;
-    return returnv;
+    vector<Person> persons;
+
+    string swap;
+
+    for(size_t i = 0; i < persons.size() - 1; i++)
+    {
+        string min = persons[i];
+        int tmp = i;
+        for(size_t j = i + 1; j < persons.size(); j++)
+        {
+            if(min > persons[j])
+            {
+                min = persons[j];
+                tmp = j;
+            }
+        }
+        swap = persons[i];
+        persons[i] = persons[tmp];
+        persons[tmp] = swap;
+        }
+        return persons;
 }
 
 // *****Find hjálparföll****

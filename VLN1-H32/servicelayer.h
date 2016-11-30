@@ -16,10 +16,10 @@ private:
     vector<string> dataStrings;
     //þetta fall sorterar eftir strengnum sortOrder
     // notar sort hjálparföll
-    vector<Person> sortByName();
-    vector<Person> sortByGender();
-    vector<Person> sortByByear();
-    vector<Person> sortByDyear();
+    vector<Person> sortByName(string);
+    vector<Person> sortByGender(string);
+    vector<Person> sortByByear(int);
+    vector<Person> sortByDyear(int);
 
     vector<Person> findByName(string name);
     vector<Person> findByGender(string gender);
