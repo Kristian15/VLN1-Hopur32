@@ -50,10 +50,9 @@ void userInterface::run()
                     cout << "Write the name of the file you want to save in" << endl;
                     string fileName;
                     cin >> fileName;
-
                     service.saveData(fileName);
                 }
-                quit = false;
+                quit = true;
             } 
         }
    }while(!quit);
@@ -61,6 +60,7 @@ void userInterface::run()
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
+    cout << "===========================================" << endl;
     cout << "list    - This allows you to print onto you screen our scientists in 4 different orders" << endl;
     cout << "add     - This will add a new scientist to our database" << endl;
     cout << "search  - This allows you to search for a scientist in our database" << endl;
@@ -70,6 +70,7 @@ void userInterface::printMainMenu()
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 4 following options to sort by:" << endl;
+    cout << "=======================================================" << endl;
     cout << "byname   - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
     cout << "bybirth  - This will sort the scientists by date of birth" << endl;
@@ -78,6 +79,7 @@ void userInterface::printListOptions()
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
+    cout << "=======================================================" << endl;
     cout << "name   - This will sort the scientists in alphabetic order" << endl;
     cout << "gender - This will sort the scientists, showing females first" << endl;
     cout << "birth  - This will sort the scientists by date of birth" << endl;
@@ -113,7 +115,7 @@ void userInterface::printList(vector<Person> printme)
 }
 void userInterface::readList()
 {
-    cout << "Enter the name of your file" << endl;
+    cout << "Enter the name of your file: ";
     string filename;
     cin >> filename;
     service.createList(filename);
@@ -144,10 +146,10 @@ bool userInterface::doYouWantToSave()
     cin >> answer;
 
     if (answer == 'y' || answer == 'Y')
-        save = false;
+        save = true;
 
     else
-        save = true;
+        save = false;
 
     return save;
 }
