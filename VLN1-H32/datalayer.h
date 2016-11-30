@@ -18,6 +18,7 @@ public:
 
     vector<Person> getPersons(){ return _persons; }
     void setPersons(vector<Person> persons){ _persons = persons; }
+    void addPerson(Person person){ _persons.push_back(person); }
 
     // skilar línunum í fileName sem vektor af strengjum
     vector<Person> loadDataP(string fileName);

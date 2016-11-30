@@ -13,27 +13,29 @@ class serviceLayer
 {
 private:
     dataLayer data;
-    vector<Person> persons;
+   // vector<Person> persons;
+    //vector<string> dataStrings;
 
-    vector<string> dataStrings;
-    //þetta fall sorterar eftir strengnum sortOrder
-    // notar sort hjálparföll
+    // sort functions:
     void sortByName();
     void sortByGender();
     void sortByNationality();
     void sortByByear();
     void sortByDyear();
 
+    // find functions:
     vector<Person> findByName(string name);
     vector<Person> findByGender(string gender);
     vector<Person> findByNationality(string nationality);
     vector<Person> findByByear(int byear);
     vector<Person> findByDyear(int dyear);
 
+    // validate functions:
     bool validateName(string name);
     bool validateGender(string gender);
     bool validateYear(string year);
 
+    // toLower()
     string toLower(string s);
 
 
@@ -51,12 +53,6 @@ public:
     // sort the list in dataLayer after order
     // return the vector in dataLayer sorted
     vector<Person> sortList(string order);
-
-    /* ef við viljum að notandi geti raðað listanum áður en hann er prentaður í search()
-    þetta fall myndi þá raða sortMe eftir order
-    myndi nota sort hjálparföllin
-     vector<Person> sortList(vector<Person> sortMe, string order)
-    */
 
     // break up the lines in fileName
     // uses loadData in dataLayer
