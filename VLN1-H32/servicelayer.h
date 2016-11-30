@@ -1,7 +1,9 @@
-#ifndef SERVICELAYER_H
-#define SERVICELAYER_H
 #pragma once
+
 #include <string>
+#include <iostream>
+#include <ctime>
+#include <algorithm>
 #include "datalayer.h"
 #include "person.h"
 
@@ -16,13 +18,15 @@ private:
     vector<string> dataStrings;
     //þetta fall sorterar eftir strengnum sortOrder
     // notar sort hjálparföll
-    vector<Person> sortByName();
-    vector<Person> sortByGender();
-    vector<Person> sortByByear();
-    vector<Person> sortByDyear();
+    void sortByName();
+    void sortByGender();
+    void sortByNationality();
+    void sortByByear();
+    void sortByDyear();
 
     vector<Person> findByName(string name);
     vector<Person> findByGender(string gender);
+    vector<Person> findByNationality(string nationality);
     vector<Person> findByByear(int byear);
     vector<Person> findByDyear(int dyear);
 
@@ -67,6 +71,3 @@ public:
     // function to format a string vector to save to file
     void saveData(string fileName);
 };
-
-
-#endif
