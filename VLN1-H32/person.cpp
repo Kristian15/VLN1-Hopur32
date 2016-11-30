@@ -19,6 +19,7 @@ Person::Person(string name, string gender, int byear)
     _name   = name;
     _gender = gender;
     _byear  = byear;
+    _dyear  = 0;
 }
 
 string Person:: getName()
@@ -66,9 +67,9 @@ ostream& operator <<(ostream& lhs, Person& rhs)
     lhs << "Name:          " << rhs.getName() << endl;
     lhs << "Gender:        " << rhs.getGender() << endl;
     lhs << "Year of birth: " << rhs.getByear() << endl;
-    if(rhs.getDyear() != NULL)
+    if(rhs.getDyear() > 0)
     {
-        lhs << "Year of death  " << rhs.getDyear() << endl;
+        lhs << "Year of death: " << rhs.getDyear() << endl;
     }
 
     return lhs;

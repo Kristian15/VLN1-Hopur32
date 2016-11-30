@@ -65,7 +65,7 @@ void userInterface::run()
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
-    cout << "===========================================" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
     cout << "list    - This allows you to print onto you screen our scientists in 4 different orders" << endl;
     cout << "add     - This will add a new scientist to our database" << endl;
     cout << "search  - This allows you to search for a scientist in our database" << endl;
@@ -76,7 +76,7 @@ void userInterface::printMainMenu()
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 4 following options to sort by:" << endl;
-    cout << "=======================================================" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
     cout << "byname   - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
     cout << "bybirth  - This will sort the scientists by date of birth" << endl;
@@ -86,7 +86,7 @@ void userInterface::printListOptions()
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
-    cout << "=======================================================" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
     cout << "name   - This will list all scientists with a specific name" << endl;
     cout << "gender - This will list all scientists with a specific gender (male / female)" << endl;
     cout << "birth  - This will list all scientists with a specific birth year" << endl;
