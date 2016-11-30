@@ -1,5 +1,3 @@
-#ifndef PERSON_H
-#define PERSON_H
 #pragma once
 #include <string>
 #include <iostream>
@@ -11,25 +9,26 @@ class Person
 private:
     string _name;
     string _gender;
+    string _nationality;
     int _byear;
     int _dyear;
     friend ostream& operator << (ostream& lhs, Person& rhs);
 
 public:
     Person();
-    Person(string name, string gender, int byear, int dyear);
-    Person(string name, string gender, int byear);
+    Person(string name, string gender, string nationality, int byear, int dyear);
+    Person(string name, string gender, string nationality, int byear);
 
-    string getName();
-    string getGender();
-    int getByear();
-    int getDyear();
+    string getName(){ return _name; }
+    string getGender() { return _gender; }
+    string getNationality(){ return _nationality; }
+    int getByear(){ return _byear; }
+    int getDyear(){ return _dyear; }
 
-    void setName(string name);
-    void setGender(string gender);
-    void setByear(int byear);
-    void setDyear(int dyear);
+    void setName(string name){ _name = name; }
+    void setGender(string gender){ _gender = gender; }
+    void setNationality(string nationality){ _nationality = nationality; }
+    void setByear(int byear){ _byear = byear; }
+    void setDyear(int dyear){ _dyear = dyear; }
 
 };
-
-#endif // PERSON_H
