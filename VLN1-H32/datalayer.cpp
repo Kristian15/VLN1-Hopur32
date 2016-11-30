@@ -1,4 +1,6 @@
 #include "datalayer.h"
+#include <iostream>
+#include <string>
 
 dataLayer::dataLayer()
 {
@@ -17,6 +19,7 @@ vector<string> dataLayer::loadData(string fileName)
         {
             data.push_back(line);
         }
+
         iDataStream.close();
     }
 

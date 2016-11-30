@@ -60,6 +60,7 @@ void Person:: setDyear(int dyear)
 {
     _dyear = dyear;
 }
+
 ostream& operator <<(ostream& lhs, Person& rhs)
 {
     lhs << "Name:          " << rhs.getName() << endl;
@@ -72,3 +73,24 @@ ostream& operator <<(ostream& lhs, Person& rhs)
 
     return lhs;
 }
+
+/*bool operator < (const Person p1, const Person p2)
+{
+    int lengtha = p1._name.length();
+    int lengthb = p2._name.length();
+
+    string name1 = p1.name;
+    string name2 = p2.name;
+
+    for(int i = 0; i < lengthPerson1; i++)
+        p1[i] = tolower(p1[i]);
+
+    for(int i = 0; i < lengthPerson2; i++)
+        p2[i] = tolower(p2[i]);
+
+
+    if(p1 < p2)
+        return true;
+     else
+        return false;
+}*/

@@ -315,6 +315,7 @@ void serviceLayer:: createList(string fileName)
             token = s.substr(0, pos);
             elems.push_back(token);
             s.erase(0, pos + delimeter.length());
+            cout << "her" << endl;
         }
 
         string Name, Gender, Byear, Dyear;
