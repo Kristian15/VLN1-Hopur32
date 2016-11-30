@@ -24,6 +24,7 @@ vector<Person> serviceLayer:: sortByName()
     string min, theName;
     size_t tmp;
 
+
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
         min = persons[i].getName();
@@ -317,22 +318,24 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
 // return the vector in dataLayer sorted
 vector<Person> serviceLayer:: sortList(string order)
 {
+    //cout << order << "taka1" <<endl;
     order = toLower(order);
+    //cout << order << "taka2" << endl;
     vector<Person> sorted;
 
-    if (order == "byname")
+    if (order == "name")
     {
         sorted = sortByName();
     }
-    else if (order == "bygender")
+    else if (order == "gender")
     {
         sorted = sortByGender();
     }
-    else if (order == "bybirth")
+    else if (order == "birth")
     {
         sorted = sortByByear();
     }
-    else if (order == "bydeath")
+    else if (order == "death")
     {
         sorted = sortByDyear();
     }
@@ -393,7 +396,6 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear) && validateYear(dyear))
     {
-        cout << "her1" << endl;
         Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
         persons.push_back(newP);
     }
@@ -403,7 +405,6 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear))
     {
-        cout << name << endl;
         Person newP = Person(name, gender, nationality, stoi(byear));
         persons.push_back(newP);
     }
