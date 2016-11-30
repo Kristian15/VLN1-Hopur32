@@ -63,11 +63,11 @@ void userInterface::printListOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "byname   - This will sort the scientists in alphabetic order" << endl;
-    cout << "bygender - This will sort the scientists, showing females first" << endl;
-    cout << "bynationality - This will sort the scientists by their nationality" << endl;
-    cout << "bybirth  - This will sort the scientists by date of birth" << endl;
-    cout << "bydeath  - This will sort the scientists by who deceased first" << endl;
+    cout << "name   - This will sort the scientists in alphabetic order" << endl;
+    cout << "gender - This will sort the scientists, showing females first" << endl;
+    cout << "nationality - This will sort the scientists by their nationality" << endl;
+    cout << "birth  - This will sort the scientists by date of birth" << endl;
+    cout << "death  - This will sort the scientists by who deceased first" << endl;
 }
 
 void userInterface::printSearchOptions()
@@ -88,13 +88,13 @@ void userInterface::makeVectorFromList(vector<Person>& inputvector)
         printListOptions();
         string sortby;
         cin >> sortby;
-        if(sortby == "byname" ||
-           sortby == "bygender" ||
-           sortby == "bybirth" ||
-           sortby == "bydeath" ||
-           sortby == "bynationality")
+        if(sortby == "name" ||
+           sortby == "gender" ||
+           sortby == "birth" ||
+           sortby == "death" ||
+           sortby == "nationality")
         {
-            cout << "Here is your list sorted by " << sortby.erase(0,2) << endl;
+            cout << "Here is your list sorted by " << sortby << ":" << endl;
             inputvector = service.sortList(sortby);
             validinput = true;
         }
