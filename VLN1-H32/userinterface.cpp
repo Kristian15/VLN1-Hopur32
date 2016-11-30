@@ -10,7 +10,6 @@ void userInterface::run()
         printMainMenu();
         string input;
         cin >> input;
-
         if(input == "list")
         {
             printListOptions();
@@ -103,7 +102,6 @@ void userInterface::printList(vector<Person> printme ) const
     {
         cout << printme[i] << endl;
     }
-
     cout << endl;
 }
 
@@ -141,7 +139,6 @@ void userInterface::readPerson()
     }
 }
 
-
 bool userInterface::doYouWantToQuit()
 {
     cout << "Are you sure you want to quit? Y/N:" << endl;
@@ -152,7 +149,6 @@ bool userInterface::doYouWantToQuit()
     {
         return true;
     }
-
     return false;
 }
 
@@ -166,7 +162,6 @@ bool userInterface::doYouWantToSave()
     {
         return true;
     }
-
     return false;
 }
 void userInterface::savefile()
