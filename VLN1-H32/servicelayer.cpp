@@ -22,12 +22,13 @@ void serviceLayer:: sortByName()
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        min = persons[i].getName();
+        min = toLower(persons[i].getName());
         tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
             theName = toLower(persons[j].getName());
+
             if(min > theName)
             {
                 min = theName;
@@ -50,12 +51,13 @@ void serviceLayer:: sortByGender()
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        min = persons[i].getGender();
+        min = toLower(persons[i].getGender());
         tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
             theGender = toLower(persons[j].getGender());
+
             if(min > theGender)
             {
                 min = theGender;
@@ -78,7 +80,7 @@ void serviceLayer:: sortByNationality()
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
-        min = persons[i].getNationality();
+        min = toLower(persons[i].getNationality());
         tmp = i;
 
         for(size_t j = (i + 1); j < persons.size(); j++)
@@ -143,6 +145,7 @@ void serviceLayer:: sortByDyear()
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
             theDyear = persons[j].getDyear();
+
             if(min > theDyear)
             {
                 min = theDyear;
