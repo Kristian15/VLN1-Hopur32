@@ -163,12 +163,17 @@ void serviceLayer:: sortByDyear()
 vector<Person> serviceLayer:: findByName(string name)
 {
     vector<Person> findings;
+    Person p;
+    string searchMe;
+    size_t found;
 
     for (unsigned int i = 0; i < persons.size(); i++)
     {
-        Person p = persons[i];
+        p = persons[i];
+        searchMe = toLower(p.getName());
+        found = searchMe.find(toLower(name));
 
-        if (toLower(name) == toLower(p.getName()))
+        if (found != string::npos)
         {
             findings.push_back(p);
         }
@@ -197,12 +202,17 @@ vector<Person> serviceLayer:: findByGender(string gender)
 vector<Person> serviceLayer:: findByNationality(string nationality)
 {
     vector<Person> findings;
+    Person p;
+    string searchMe;
+    size_t found;
 
     for (unsigned int i = 0; i < persons.size(); i++)
     {
-        Person p = persons[i];
+        p = persons[i];
+        searchMe = toLower(p.getNationality());
+        found = searchMe.find(toLower(nationality));
 
-        if (toLower(nationality) == toLower(p.getNationality()))
+        if (found != string::npos)
         {
             findings.push_back(p);
         }
