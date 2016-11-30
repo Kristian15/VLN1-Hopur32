@@ -21,7 +21,7 @@ vector<Person> serviceLayer:: sortByName()
     Person swap;
 
     string min, theName;
-    int tmp;
+    size_t tmp;
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
@@ -51,7 +51,7 @@ vector<Person> serviceLayer:: sortByGender()
     Person swap;
 
     string min, theGender;
-    int tmp;
+    size_t tmp;
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
@@ -80,7 +80,8 @@ vector<Person> serviceLayer:: sortByByear()
 {
     Person swap;
 
-    int theByear, min,tmp;
+    int theByear, min;
+    size_t tmp;
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
@@ -109,7 +110,8 @@ vector<Person> serviceLayer:: sortByDyear()
 {
     Person swap;
 
-    int theDyear, min,tmp;
+    int theDyear, min;
+    size_t tmp;
 
     for(size_t i = 0; i < (persons.size() - 1); i++)
     {
