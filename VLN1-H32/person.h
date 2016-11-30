@@ -13,8 +13,7 @@ private:
     string _gender;
     int _byear;
     int _dyear;
-    friend ostream& operator <<(ostream& lhs, Person& rhs);
-    friend bool operator < (Person p1, Person p2);
+    friend ostream& operator << (ostream& lhs, Person& rhs);
 
 public:
     Person();
