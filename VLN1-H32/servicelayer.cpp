@@ -365,39 +365,40 @@ void serviceLayer:: createList(string fileName)
             s.erase(0, pos + delimeter.length());
         }
 
-        string Name, Gender, Byear, Dyear;
+        string Name, Gender, Nationality, Byear, Dyear;
 
         Name = elems[0];
         Gender = elems[1];
-        Byear = elems[2];
+        Nationality = elems[2];
+        Byear = elems[3];
 
-        if(elems.size() ==4)
+        if(elems.size() ==5)
         {
-            Dyear = elems[3];
-            newPerson(Name, Gender, Byear, Dyear);
+            Dyear = elems[4];
+            newPerson(Name, Gender, Nationality, Byear, Dyear);
         }
         else
         {
-            newePerson(Name, Gender, Byear);
+            newPerson(Name, Gender, Nationality, Byear);
         }
     }
 }
 
 // create a new Person and add it to persons in the dataLayer
-void serviceLayer:: newPerson(string name, string gender, string byear, string dyear)
+void serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear) && validateYear(dyear))
     {
-        Person newP = Person(name, gender, stoi(byear), stoi(dyear));
+        Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
         persons.push_back(newP);
     }
 }
 
-void serviceLayer:: newPerson(string name, string gender, string byear)
+void serviceLayer:: newPerson(string name, string gender, string nationality, string byear)
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear))
     {
-        Person newP = Person(name, gender, stoi(byear));
+        Person newP = Person(name, gender, nationality, stoi(byear));
         persons.push_back(newP);
     }
 }
