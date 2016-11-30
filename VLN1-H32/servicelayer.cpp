@@ -310,12 +310,11 @@ void serviceLayer:: createList(string fileName)
         size_t pos = 0;
         string token;
 
-        while ((pos = s.find(delimeter)) != s.size())
+        while ((pos = s.find(delimeter)) != string::npos)
         {
             token = s.substr(0, pos);
             elems.push_back(token);
             s.erase(0, pos + delimeter.length());
-            cout << "her" << endl;
         }
 
         string Name, Gender, Byear, Dyear;
