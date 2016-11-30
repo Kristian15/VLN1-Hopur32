@@ -149,7 +149,7 @@ vector<Person> serviceLayer:: findByName(string name)
     {
         Person p = persons[i];
 
-        if (name == toLower(p.getName()))
+        if (toLower(name) == toLower(p.getName()))
         {
             findings.push_back(p);
         }
@@ -318,9 +318,6 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
 // return the vector in dataLayer sorted
 vector<Person> serviceLayer:: sortList(string order)
 {
-    //cout << order << "taka1" <<endl;
-    order = toLower(order);
-    //cout << order << "taka2" << endl;
     vector<Person> sorted;
 
     if (order == "name")
@@ -331,6 +328,10 @@ vector<Person> serviceLayer:: sortList(string order)
     {
         sorted = sortByGender();
     }
+   /* else if (order == "nationality")
+    {
+        sorted = sortByNationality;
+    }*/
     else if (order == "birth")
     {
         sorted = sortByByear();
@@ -398,6 +399,7 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
     {
         Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
         persons.push_back(newP);
+
     }
 }
 
