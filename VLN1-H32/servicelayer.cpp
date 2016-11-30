@@ -372,7 +372,7 @@ void serviceLayer:: createList(string fileName)
         Nationality = elems[2];
         Byear = elems[3];
 
-        if(elems.size() ==5)
+        if(elems.size() == 5)
         {
             Dyear = elems[4];
             newPerson(Name, Gender, Nationality, Byear, Dyear);
@@ -390,6 +390,7 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear) && validateYear(dyear))
     {
+        cout << "her1" << endl;
         Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
         persons.push_back(newP);
     }
@@ -399,6 +400,7 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
 {
     if(validateName(name) && validateGender(gender) && validateYear(byear))
     {
+        cout << name << endl;
         Person newP = Person(name, gender, nationality, stoi(byear));
         persons.push_back(newP);
     }

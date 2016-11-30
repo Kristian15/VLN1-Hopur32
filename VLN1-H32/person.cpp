@@ -11,7 +11,6 @@ Person::Person(string name, string gender, string nationality, int byear, int dy
     _nationality = nationality;
     _byear= byear;
     _dyear  = dyear;
-
 }
 
 Person::Person(string name, string gender, string nationality, int byear)
