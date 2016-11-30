@@ -45,8 +45,6 @@ void userInterface::run()
         {
             if (doYouWantToQuit())
             {
-                quit = true;
-
                 if (doYouWantToSave())
                 {
                     cout << "Write the name of the file you want to save in" << endl;
@@ -55,7 +53,8 @@ void userInterface::run()
 
                     service.saveData(fileName);
                 }
-            }
+                quit = false;
+            } 
         }
    }while(!quit);
 }
@@ -127,17 +126,19 @@ bool userInterface::doYouWantToQuit()
     cin >> answer;
 
     if (answer == 'y' || answer == 'Y')
-        quit = false;
-
-    else
+    {
         quit = true;
-
+    }
+    else
+    {
+        quit = false;
+    }
     return quit;
 }
 
 bool userInterface::doYouWantToSave()
 {
-    cout << "Do you want to save the current list beforw quitting ? Y/N" << endl;
+    cout << "Do you want to save the current list before quitting ? Y/N" << endl;
     bool save;
     char answer;
     cin >> answer;
