@@ -251,6 +251,8 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
 {
     vector<Person> findings;
 
+    by = toLower(by);
+
     if (by == "name")
         findings = findByName(findMe);
     else if (by == "gender")

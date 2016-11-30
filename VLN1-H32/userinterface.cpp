@@ -36,7 +36,7 @@ void userInterface::run()
             cin >> searchfor;
 
             vector<Person> searchvector;
-            searchvector = service.searchList(searchby, searchfor);
+            searchvector = service.searchList(searchfor, searchby);
             printList(searchvector);
         }
 
@@ -87,10 +87,10 @@ void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
     cout << "=======================================================" << endl;
-    cout << "name   - This will sort the scientists in alphabetic order" << endl;
-    cout << "gender - This will sort the scientists, showing females first" << endl;
-    cout << "birth  - This will sort the scientists by date of birth" << endl;
-    cout << "death  - This will sort the scientists by who deceased first" << endl;
+    cout << "name   - This will list all scientists with a specific name" << endl;
+    cout << "gender - This will list all scientists with a specific gender (male / female)" << endl;
+    cout << "birth  - This will list all scientists with a specific birth year" << endl;
+    cout << "death  - This will list all scientists with a specific death year" << endl;
 }
 
 void userInterface::printList(vector<Person> printme)
@@ -125,10 +125,19 @@ void userInterface::readPerson()
     cin >> gender;
     cout << "Date of birth: ";
     cin >> byear;
-    cout << "Time of death: ";
+    cout << "Time of death: " << endl;
+    cout << "Note: If the person is still alive, please press 0" << endl;
     cin >> dyear;
 
-    service.newPerson(name, gender, byear, dyear);
+    if (dyear == 0)
+    {
+        service.newPerson(name, gender, byear);
+    }
+
+    else
+    {
+        service.newPerson(name, gender, byear, dyear);
+    }
 }
 
 
