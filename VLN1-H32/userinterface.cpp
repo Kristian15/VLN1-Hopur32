@@ -65,6 +65,7 @@ void userInterface::printListOptions()
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "byname   - This will sort the scientists in alphabetic order" << endl;
     cout << "bygender - This will sort the scientists, showing females first" << endl;
+    cout << "bynationality - This will sort the scientists by their nationality" << endl;
     cout << "bybirth  - This will sort the scientists by date of birth" << endl;
     cout << "bydeath  - This will sort the scientists by who deceased first" << endl;
 }
@@ -75,6 +76,7 @@ void userInterface::printSearchOptions()
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "name   - This will list all scientists with a specific name" << endl;
     cout << "gender - This will list all scientists with a specific gender (male / female)" << endl;
+    cout << "nationality - This will list all scientists by their nationality" << endl;
     cout << "birth  - This will list all scientists with a specific birth year" << endl;
     cout << "death  - This will list all scientists with a specific death year" << endl;
 }
@@ -86,7 +88,11 @@ void userInterface::makeVectorFromList(vector<Person>& inputvector)
         printListOptions();
         string sortby;
         cin >> sortby;
-        if(sortby == "byname" || sortby == "bygender" || sortby == "bybirth" || sortby == "bydeath")
+        if(sortby == "byname" ||
+           sortby == "bygender" ||
+           sortby == "bybirth" ||
+           sortby == "bydeath" ||
+           sortby == "bynationality")
         {
             inputvector = service.sortList(sortby);
             validinput = true;
@@ -102,7 +108,7 @@ void userInterface::makeVectorFromList(vector<Person>& inputvector)
 
 void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
 {
-    bool validinput = true;
+    bool validinput;
     do
     {
         printSearchOptions();
@@ -113,24 +119,35 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
             cout << "Enter the name you want to search for: " << endl;
             cin >> searchfor;
             inputvector = service.searchList(searchfor, searchby);
+            validinput = true;
         }
         else if(searchby == "gender")
         {
             cout << "Enter either \"males\" or \"females\": " << endl;
             cin >> searchfor;
             inputvector = service.searchList(searchfor, searchby);
+            validinput = true;
+        }
+        else if(searchby == "nationality")
+        {
+            cout << "Enter nationality: " << endl;
+            cin >> searchfor;
+            inputvector = service.searchList(searchfor, searchby);
+            validinput = true;
         }
         else if(searchby == "birth")
         {
             cout << "Enter the year of birth you want to search for: " << endl;
             cin >> searchfor;
             inputvector = service.searchList(searchfor, searchby);
+            validinput = true;
         }
         else if(searchby == "death")
         {
             cout << "Enter the year of death you want to search for: " << endl;
             cin >> searchfor;
             inputvector = service.searchList(searchfor, searchby);
+            validinput = true;
         }
         else
         {
@@ -181,7 +198,6 @@ void userInterface::readPerson()
     {
         service.newPerson(name, gender, nationality, byear);
     }
-
     else
     {
         service.newPerson(name, gender, nationality, byear, dyear);
