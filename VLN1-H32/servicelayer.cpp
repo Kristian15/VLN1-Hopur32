@@ -377,6 +377,7 @@ void serviceLayer:: createList(string fileName)
             Dyear = elems[4];
             newPerson(Name, Gender, Nationality, Byear, Dyear);
         }
+
         else
         {
             newPerson(Name, Gender, Nationality, Byear);
