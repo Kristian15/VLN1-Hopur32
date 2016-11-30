@@ -179,12 +179,12 @@ void userInterface::readPerson()
 
     if (dyear == "0")
     {
-        service.newPerson(name, gender, byear);
+        service.newPerson(name, gender, nationality, byear);
     }
 
     else
     {
-        service.newPerson(name, gender, byear, dyear);
+        service.newPerson(name, gender, nationality, byear, dyear);
     }
 }
 
