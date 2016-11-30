@@ -118,35 +118,40 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
         if(searchby == "name")
         {
             cout << "Enter the name you want to search for: " << endl;
-            cin >> searchfor;
+            cin >> ws;
+            getline(cin, searchfor);
             inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "gender")
         {
-            cout << "Enter either \"males\" or \"females\": " << endl;
-            cin >> searchfor;
+            cout << "Enter either \"male\" or \"female\": " << endl;
+            cin >> ws;
+            getline(cin, searchfor);
             inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "nationality")
         {
             cout << "Enter nationality: " << endl;
-            cin >> searchfor;
+            cin >> ws;
+            getline(cin, searchfor);
             inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "birth")
         {
             cout << "Enter the year of birth you want to search for: " << endl;
-            cin >> searchfor;
+            cin >> ws;
+            getline(cin, searchfor);
             inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "death")
         {
             cout << "Enter the year of death you want to search for: " << endl;
-            cin >> searchfor;
+            cin >> ws;
+            getline(cin, searchfor);
             inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
