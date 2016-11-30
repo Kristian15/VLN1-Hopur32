@@ -13,7 +13,7 @@ private:
     int _byear;
     int _dyear;
     friend ostream& operator << (ostream& lhs, Person& rhs);
-    friend bool operator > (Person leftp, Person rightp);
+    friend bool operator < (const Person& leftp, const Person& rightp);
 
 public:
     Person();

@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <ctime>
+#include <algorithm>
 
 using namespace std;
 serviceLayer::serviceLayer(){}
@@ -30,7 +31,7 @@ vector<Person> serviceLayer:: sortByName()
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            theName = persons[j].getName();
+            theName = toLower(persons[j].getName());
             if(min > theName)
             {
                 min = theName;
@@ -60,7 +61,7 @@ vector<Person> serviceLayer:: sortByGender()
 
         for(size_t j = (i + 1); j < persons.size(); j++)
         {
-            theGender = persons[j].getGender();
+            theGender = toLower(persons[j].getGender());
             if(min > theGender)
             {
                 min = theGender;
@@ -78,7 +79,7 @@ vector<Person> serviceLayer:: sortByGender()
 
 vector<Person> serviceLayer:: sortByByear()
 {
-    Person swap;
+   /* Person swap;
 
     int theByear, min;
     size_t tmp;
@@ -101,7 +102,9 @@ vector<Person> serviceLayer:: sortByByear()
         swap = persons[i];
         persons[i] = persons[tmp];
         persons[tmp] = swap;
-    }
+    }*/
+
+    stable_sort(persons.begin(), persons.end());
 
     return persons;
 }

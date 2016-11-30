@@ -24,23 +24,20 @@ Person::Person(string name, string gender, string nationality, int byear)
 
 ostream& operator <<(ostream& lhs, Person& rhs)
 {
-    lhs << "Name:          " << rhs.getName() << endl;
-    lhs << "Gender:        " << rhs.getGender() << endl;
-    lhs << "Nationality:   " << rhs.getNationality();
-    lhs << "Year of birth: " << rhs.getByear() << endl;
+    lhs << "Name:          " << rhs._name << endl;
+    lhs << "Gender:        " << rhs._gender << endl;
+    lhs << "Nationality:   " << rhs._nationality << endl;;
+    lhs << "Year of birth: " << rhs._byear << endl;
 
     if(rhs.getDyear() > 0)
     {
-        lhs << "Year of death: " << rhs.getDyear() << endl;
+        lhs << "Year of death: " << rhs._dyear << endl;
     }
 
     return lhs;
 }
 
-bool operator > (Person leftp, Person rightp)
+bool operator < (const Person& leftp, const Person& rightp)
 {
-    if(leftp.getByear() > rightp.getDyear())
-        return true;
-     else
-        return false;
+    return(leftp._byear < rightp._byear);
 }
