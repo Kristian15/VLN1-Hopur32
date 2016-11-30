@@ -51,17 +51,17 @@ vector<Person> dataLayer::loadDataP(string fileName)
         {
             Dyear = elems[4];
             Person newPerson = Person(Name, Gender, Nationality, stoi(Byear), stoi(Dyear));
-            persons.push_back(newPerson);
+            _persons.push_back(newPerson);
         }
 
         else
         {
             Person newPerson = Person(Name, Gender, Nationality, stoi(Byear));
-            persons.push_back(newPerson);
+            _persons.push_back(newPerson);
         }
     }
 
-    return persons;
+    return _persons;
 }
 
 vector<string> dataLayer::loadData(string fileName)

@@ -9,14 +9,15 @@ using namespace std;
 class dataLayer
 {
 private:
-    vector<Person> persons;
+    vector<Person> _persons;
     vector<string> data;
     string _fileName;
 
 public:
     dataLayer();
 
-    vector<Person> getPersons(){ return persons; }
+    vector<Person> getPersons(){ return _persons; }
+    void setPersons(vector<Person> persons){ _persons = persons; }
 
     // skilar línunum í fileName sem vektor af strengjum
     vector<Person> loadDataP(string fileName);
