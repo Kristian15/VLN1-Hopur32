@@ -467,31 +467,31 @@ vector<Person> serviceLayer:: searchList(string findMe, string by)
 
 // sort the list in dataLayer after order
 // return the vector in dataLayer sorted
-vector<Person> serviceLayer:: sortList(string order)
+vector<Person> serviceLayer:: sortList(int order)
 {
     vector<Person> sortMe = data.getPersons();
 
     if (!sortMe.empty())
     {
-        if (order == "name")
-        {
+        switch (order) {
+        case '1':
             sortByName();
-        }
-        else if (order == "gender")
-        {
+            break;
+        case '2':
             sortByGender();
-        }
-        else if (order == "nationality")
-        {
+            break;
+        case '3':
             sortByNationality();
-        }
-        else if (order == "birth")
-        {
+            break;
+        case '4':
             sortByByear();
-        }
-        else if (order == "death")
-        {
+            break;
+        case '5':
+            break;
             sortByDyear();
+        default:
+
+            break;
         }
 
         sortMe = data.getPersons();

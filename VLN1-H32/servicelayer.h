@@ -54,7 +54,7 @@ public:
     // sort the list in dataLayer after order
     // return the vector in dataLayer sorted
     // ***LAGA***
-    vector<Person> sortList(string order);
+    vector<Person> sortList(int order);
     // break up the lines in fileName
     // uses loadData in dataLayer
     // splits the string up in name, gender, ...
