@@ -13,14 +13,16 @@ private:
     // Prints the main menu:
     void printMainMenu();
     // Prints options to sort by
+    bool validateInputInRun(string& input);
     void printListOptions();
     // Prints search options
     void printSearchOptions();
     void makeVectorFromList(vector<Person>&);
     void makeVectorFromSearch(vector<Person>&);
-    void printList(vector<Person> printme) const;
+    void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
+    void printSearch(vector<Person> printme);
     void readList();
     // gets information to create a new Person
     // uses getInput()

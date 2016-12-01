@@ -10,32 +10,13 @@ void userInterface::run()
         printMainMenu();
         string input;
         cin >> input;
+        validateInputInRun(input);
         if(input == "list")
         {
-<<<<<<< HEAD
-            vector<Person> sortbyvector;
-            makeVectorFromList(sortbyvector);
-            if(checkIfVectorIsEmptyFromList(sortbyvector) == false)
-=======
             vector<Person> sortByVector;
             makeVectorFromList(sortByVector);
-
-           /* if(!checkIfVectorIsEmptyFromList(sortByVector))
-            {
-                printList(sortByVector);
-            }*/
-
-            if(!checkIfVectorIsEmpty(sortByVector))
-            {
-                printList(sortByVector);
-            }
-            else
->>>>>>> dfed6d2da110a4128b35314b0042a5b4a66cb153
-            {
-                cout << "Your database is empty!" << endl;
-            }
+            printList(sortByVector);
         }
-
         if(input == "add")
         {
             readPerson();
@@ -43,27 +24,10 @@ void userInterface::run()
 
         if(input == "search")
         {           
-<<<<<<< HEAD
-            vector<Person> searchvector;
-            makeVectorFromSearch(searchvector);           
-            if(checkIfVectorIsEmptyFromSearch(searchvector) == false)
-=======
-            vector<Person> searchVector;
-            makeVectorFromSearch(searchVector);
-            /*if(checkIfVectorIsEmptyFromSearch(searchVector) == true)
->>>>>>> dfed6d2da110a4128b35314b0042a5b4a66cb153
-            {
-                printList(searchVector);
-            }*/
-            if(!checkIfVectorIsEmpty(searchVector))
-            {
-                printList(searchVector);
-            }
-            else
-            {
-                cout << "No match!" << endl;
-            }
 
+            vector<Person> searchVector;
+            makeVectorFromSearch(searchVector);            
+            printSearch(searchVector);
         }
 
         if(input == "addlist")
@@ -82,11 +46,23 @@ void userInterface::run()
                 quit = true;
             } 
         }
-        if(input != "quit")
+        if(input != "quit" || input == "search" || input == "list")
         {
             quit = DoYouWantToContinue();
         }
    }while(!quit);
+}
+bool userInterface::validateInputInRun(string &input)
+{
+    if(input != "list" || input != "add" || input != "search" || input != "addlist" || input != "quit")
+    {
+        return true;
+    }
+    else
+    {
+        cout << "Invalid input!";
+        return false;
+    }
 }
 
 void userInterface::printMainMenu()
@@ -135,7 +111,10 @@ void userInterface::makeVectorFromList(vector<Person>& inputvector)
            sortby == "death" ||
            sortby == "nationality")
         {
-            cout << "Here is your list sorted by " << sortby << ":" << endl;
+            if(!checkIfVectorIsEmpty(inputvector))
+            {
+                cout << "Here is your list sorted by " << sortby << ":" << endl;
+            }
             inputvector = service.sortList(sortby);
             validinput = true;
         }
@@ -158,6 +137,7 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
         cin >> searchby;
         if(searchby == "name")
         {
+            if(!checkIfVectorIsEmpty(inputvector))
             cout << "Enter the name you want to search for: " << endl;
             cin >> ws;
             getline(cin, searchfor);
@@ -206,13 +186,35 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
 
 }
 
-void userInterface::printList(vector<Person> printme ) const
+void userInterface::printList(vector<Person> printme )
 {
-    for(unsigned int i = 0; i < printme.size(); i++)
+    if(!checkIfVectorIsEmpty(printme))
     {
-        cout << printme[i] << endl;
+        for(unsigned int i = 0; i < printme.size(); i++)
+        {
+            cout << printme[i] << endl;
+        }
+        cout << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << "Your database is empty!" << endl;
+    }
+}
+void userInterface::printSearch(vector<Person> printme )
+{
+    if(!checkIfVectorIsEmpty(printme))
+    {
+        for(unsigned int i = 0; i < printme.size(); i++)
+        {
+            cout << printme[i] << endl;
+        }
+        cout << endl;
+    }
+    else
+    {
+        cout << "No match!" << endl;
+    }
 }
 
 void userInterface::readList()
@@ -283,27 +285,7 @@ void userInterface::savefile()
     cin >> fileName;
     service.saveData(fileName);
 }
-/*bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
-{
-    bool empty;
-    if(amiemptyvector.empty())
-    {
-       cout << "No match!" << endl;
-       empty = true;
-    }
-    else empty = false;
-    return empty;
-}
-bool userInterface::checkIfVectorIsEmptyFromList(const vector<Person> amIEmptyVector)
-{
-    if(amIEmptyVector.empty())
-    {
-       cout << "Your database is empty!" << endl;
-       return true;
-    }
 
-    return false;
-}*/
 bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
 {
     if(amIEmpty.empty())
