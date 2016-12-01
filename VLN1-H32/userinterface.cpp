@@ -12,11 +12,21 @@ void userInterface::run()
         cin >> input;
         if(input == "list")
         {
-            vector<Person> sortbyvector;
-            makeVectorFromList(sortbyvector);
-            if(checkIfVectorIsEmptyFromList(sortbyvector) == true)
+            vector<Person> sortByVector;
+            makeVectorFromList(sortByVector);
+
+           /* if(!checkIfVectorIsEmptyFromList(sortByVector))
             {
-                printList(sortbyvector);
+                printList(sortByVector);
+            }*/
+
+            if(!checkIfVectorIsEmpty(sortByVector))
+            {
+                printList(sortByVector);
+            }
+            else
+            {
+                cout << "Your database is empty!" << endl;
             }
         }
 
@@ -27,11 +37,19 @@ void userInterface::run()
 
         if(input == "search")
         {           
-            vector<Person> searchvector;
-            makeVectorFromSearch(searchvector);           
-            if(checkIfVectorIsEmptyFromSearch(searchvector) == true)
+            vector<Person> searchVector;
+            makeVectorFromSearch(searchVector);
+            /*if(checkIfVectorIsEmptyFromSearch(searchVector) == true)
             {
-                printList(searchvector);
+                printList(searchVector);
+            }*/
+            if(!checkIfVectorIsEmpty(searchVector))
+            {
+                printList(searchVector);
+            }
+            else
+            {
+                cout << "No match!" << endl;
             }
 
         }
@@ -253,7 +271,7 @@ void userInterface::savefile()
     cin >> fileName;
     service.saveData(fileName);
 }
-bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
+/*bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiemptyvector)
 {
     bool empty;
     if(amiemptyvector.empty())
@@ -264,16 +282,24 @@ bool userInterface::checkIfVectorIsEmptyFromSearch(const vector<Person> amiempty
     else empty = false;
     return empty;
 }
-bool userInterface::checkIfVectorIsEmptyFromList(const vector<Person> amiemptyvector)
+bool userInterface::checkIfVectorIsEmptyFromList(const vector<Person> amIEmptyVector)
 {
-    bool empty;
-    if(amiemptyvector.empty())
+    if(amIEmptyVector.empty())
     {
        cout << "Your database is empty!" << endl;
-       empty = true;
+       return true;
     }
-    else empty = false;
-    return empty;
+
+    return false;
+}*/
+bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
+{
+    if(amIEmpty.empty())
+    {
+       return true;
+    }
+
+    return false;
 }
 bool userInterface::DoYouWantToContinue()
 {
