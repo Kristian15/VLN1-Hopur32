@@ -9,7 +9,7 @@ void dataLayer::updateData(Person person)
     string data = "";
 
     _persons.push_back(person);
-    data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear());
+    /*data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear());
 
     if(person.getDyear() != 0)
     {
@@ -23,7 +23,7 @@ void dataLayer::updateData(Person person)
     {
         dataStream << data << endl;
         dataStream.close();
-    }
+    }*/
 }
 
 
