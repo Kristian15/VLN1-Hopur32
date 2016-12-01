@@ -87,23 +87,23 @@ vector<string> dataLayer::loadData(string fileName)
 
 // Function formats data and adds a delimiter,
 // then saves data to the provided filename.
-void dataLayer::saveData(vector<Person> persons, string fileName)
+void dataLayer::saveData(string fileName)
 {
     string name = "", gender = "", nationality = "", bYear = "", dYear = "", d = ";";
 
     _fileName = fileName;
     data.clear();
 
-    for (unsigned int i = 0; i < persons.size(); i++)
+    for (unsigned int i = 0; i < _persons.size(); i++)
     {
-        name = persons[i].getName() + d;
-        gender = persons[i].getGender() + d;
-        nationality = persons[i].getNationality() + d;
-        bYear = to_string(persons[i].getByear()) + d;
+        name = _persons[i].getName() + d;
+        gender = _persons[i].getGender() + d;
+        nationality = _persons[i].getNationality() + d;
+        bYear = to_string(_persons[i].getByear()) + d;
 
-        if(persons[i].getDyear() != 0)
+        if(_persons[i].getDyear() != 0)
         {
-            dYear = to_string(persons[i].getDyear()) + d;
+            dYear = to_string(_persons[i].getDyear()) + d;
         }
 
         data.push_back(name + gender + nationality + bYear + dYear);

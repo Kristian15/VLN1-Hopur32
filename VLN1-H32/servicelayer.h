@@ -31,11 +31,13 @@ private:
     // validate functions:
     bool validateName(string name);
     bool validateGender(string gender);
+    bool validateNationality(string nationality);
     bool validateYear(string year);
 
     // toLower changes all uppercase letters in string s to lowercase letters
     string toLower(string s);
-   // void splitLine(string s);
+
+    void splitLine(string s);
 
 public:
     serviceLayer();
