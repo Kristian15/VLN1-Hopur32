@@ -13,7 +13,7 @@ private:
     // Prints the main menu:
     void printMainMenu();
     // Prints options to sort by
-    bool validateInputInRun(string& input);
+    bool validateInputInRun(string input);
     void printListOptions();
     // Prints search options
     void printSearchOptions();

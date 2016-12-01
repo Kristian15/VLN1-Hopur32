@@ -10,7 +10,7 @@ void userInterface::run()
         printMainMenu();
         string input;
         cin >> input;
-        validateInputInRun(input);
+        bool validinput = validateInputInRun(input);
         if(input == "list")
         {
             vector<Person> sortByVector;
@@ -46,23 +46,14 @@ void userInterface::run()
                 quit = true;
             } 
         }
-        if(input != "quit" || input == "search" || input == "list")
+        if(validinput)
         {
-            quit = DoYouWantToContinue();
+            if(input == "search" || input == "list")
+            {
+                quit = DoYouWantToContinue();
+            }
         }
    }while(!quit);
-}
-bool userInterface::validateInputInRun(string &input)
-{
-    if(input != "list" || input != "add" || input != "search" || input != "addlist" || input != "quit")
-    {
-        return true;
-    }
-    else
-    {
-        cout << "Invalid input!";
-        return false;
-    }
 }
 
 void userInterface::printMainMenu()
@@ -75,7 +66,18 @@ void userInterface::printMainMenu()
     cout << "addlist - This allows you to add scientists from a file" << endl;
     cout << "quit    - This will quit the program" << endl;
 }
-
+bool userInterface::validateInputInRun(string input)
+{
+    if(input == "list" || input == "add" || input == "search" || input == "addlist" || input == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        cout << "Invalid input!" << endl;
+        return false;
+    }
+}
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
@@ -228,7 +230,6 @@ void userInterface::readList()
 void userInterface::readPerson()
 {
     string name, gender, nationality, byear, dyear;
-
     cout << "Name: ";
     cin >> ws;
     getline(cin, name);
@@ -239,10 +240,9 @@ void userInterface::readPerson()
     getline(cin, nationality);
     cout << "Date of birth: ";
     cin >> byear;
-    cout << "Time of death: " << endl;
     cout << "Note: If the person is still alive, please press 0" << endl;
+    cout << "Time of death: ";
     cin >> dyear;
-
     if (dyear == "0")
     {
         service.newPerson(name, gender, nationality, byear);
@@ -309,6 +309,7 @@ bool userInterface::DoYouWantToContinue()
     else
     {
         quit = false;
+
     }
     return quit;
 
