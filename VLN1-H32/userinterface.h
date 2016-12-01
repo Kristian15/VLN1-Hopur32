@@ -29,8 +29,9 @@ private:
     bool doYouWantToQuit();
     bool doYouWantToSave();
     void savefile();
-    bool checkIfVectorIsEmptyFromSearch(const vector<Person>);
-    bool checkIfVectorIsEmptyFromList(const vector<Person>);
+    //bool checkIfVectorIsEmptyFromSearch(const vector<Person>);
+    //bool checkIfVectorIsEmptyFromList(const vector<Person>);
+    bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
     bool DoYouWantToContinue();
 
 public:

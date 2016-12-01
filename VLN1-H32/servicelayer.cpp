@@ -437,6 +437,40 @@ vector<Person> serviceLayer:: sortList(string order)
     return sortMe;
 }
 
+/*void serviceLayer:: splitLine(string s)
+{
+   // string s = lines[i];
+    vector<string> elems;
+    string delimeter = ";";
+    size_t pos = 0;
+    string token;
+
+    while ((pos = s.find(delimeter)) != string::npos)
+    {
+        token = s.substr(0, pos);
+        elems.push_back(token);
+        s.erase(0, pos + delimeter.length());
+    }
+
+    string Name, Gender, Nationality, Byear, Dyear;
+
+    Name = elems[0];
+    Gender = elems[1];
+    Nationality = elems[2];
+    Byear = elems[3];
+
+    if(elems.size() == 5)
+    {
+        Dyear = elems[4];
+        newPerson(Name, Gender, Nationality, Byear, Dyear);
+    }
+
+    else
+    {
+        newPerson(Name, Gender, Nationality, Byear);
+    }
+}*/
+
 // break up the lines in fileName
 // format name:year:byear:dyear
 // calls newPerson
@@ -446,6 +480,7 @@ void serviceLayer:: createList(string fileName)
 
     for (unsigned int i = 0; i < lines.size(); i++)
     {
+      //  splitLine(lines[i]);
         string s = lines[i];
         vector<string> elems;
         string delimeter = ";";

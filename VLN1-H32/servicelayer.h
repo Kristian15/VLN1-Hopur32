@@ -13,8 +13,6 @@ class serviceLayer
 {
 private:
     dataLayer data;
-   // vector<Person> persons;
-    //vector<string> dataStrings;
 
     // sort functions:
     void sortByName();
@@ -35,16 +33,17 @@ private:
     bool validateGender(string gender);
     bool validateYear(string year);
 
-    // toLower()
+    // toLower changes all uppercase letters in string s to lowercase letters
     string toLower(string s);
-
+   // void splitLine(string s);
 
 public:
     serviceLayer();
 
     // findMe is what you are searching for
-    // by is Name, Gender, Birth year or Death year
-    // return vector with findings
+    // by is where you are searchin for it (Name, Gender, Nationality, Birth year or Death year)
+    // return vector with matches
+    // ***LAGA***
     // Name to sort by name
     // Gender to sort by gender
     // Birthyear to sort by birthyear
@@ -52,8 +51,8 @@ public:
     vector<Person> searchList(string findMe, string by);
     // sort the list in dataLayer after order
     // return the vector in dataLayer sorted
+    // ***LAGA***
     vector<Person> sortList(string order);
-
     // break up the lines in fileName
     // uses loadData in dataLayer
     // splits the string up in name, gender, ...
