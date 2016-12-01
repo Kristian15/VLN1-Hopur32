@@ -85,6 +85,8 @@ vector<string> dataLayer::loadData(string fileName)
     return data;
 }
 
+// Function formats data and adds a delimiter,
+// then saves data to the provided filename.
 void dataLayer::saveData(vector<Person> persons, string fileName)
 {
     string name = "", gender = "", nationality = "", bYear = "", dYear = "", d = ";";
