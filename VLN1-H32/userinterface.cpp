@@ -79,7 +79,8 @@ void userInterface::makeVectorFromSearch()
 {
     //printSearch(searchVector);
     bool validinput;
-    string searchby, searchfor;
+    int searchby;
+    string searchfor;
 
     // **** todo switch case ****
     do
@@ -87,27 +88,27 @@ void userInterface::makeVectorFromSearch()
         printSearchOptions();
         cin >> searchby;
 
-        if(searchby == "name")
+        if(searchby == 1)
         {
             cout << "Enter the name you want to search for: " << endl;
             validinput = true;
         }
-        else if(searchby == "gender")
+        else if(searchby == 2)
         {
             cout << "Enter either \"male\" or \"female\": " << endl;
             validinput = true;
         }
-        else if(searchby == "nationality")
+        else if(searchby == 3)
         {
             cout << "Enter nationality: " << endl;
             validinput = true;
         }
-        else if(searchby == "birth")
+        else if(searchby == 4)
         {
             cout << "Enter the year of birth you want to search for: " << endl;
             validinput = true;
         }
-        else if(searchby == "death")
+        else if(searchby == 5)
         {
             cout << "Enter the year of death you want to search for: " << endl;
             validinput = true;
@@ -118,6 +119,7 @@ void userInterface::makeVectorFromSearch()
             validinput = false;
             cout << endl;
         }
+
     }while(!validinput);
 
     cin >> ws;
