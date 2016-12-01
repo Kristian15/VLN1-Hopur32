@@ -14,7 +14,7 @@ void userInterface::run()
         {
             vector<Person> sortbyvector;
             makeVectorFromList(sortbyvector);
-            if(checkIfVectorIsEmptyFromList(sortbyvector) == true)
+            if(checkIfVectorIsEmptyFromList(sortbyvector) == false)
             {
                 printList(sortbyvector);
             }
@@ -29,7 +29,7 @@ void userInterface::run()
         {           
             vector<Person> searchvector;
             makeVectorFromSearch(searchvector);           
-            if(checkIfVectorIsEmptyFromSearch(searchvector) == true)
+            if(checkIfVectorIsEmptyFromSearch(searchvector) == false)
             {
                 printList(searchvector);
             }
