@@ -60,10 +60,13 @@ public:
     // splits the string up in name, gender, ...
     // uses createPerson()
     void createList(string fileName);
+
     // create a new Person and add it to persons in the dataLayer
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
-    void newPerson(string name, string gender, string nationality, string byear);
+    //void newPerson(string name, string gender, string nationality, string byear);
 
     // function to format a string vector to save to file
     void saveData(string fileName);
+
+    bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
 };

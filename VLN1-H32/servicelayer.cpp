@@ -391,7 +391,6 @@ string serviceLayer:: toLower(string s)
 
 void serviceLayer:: splitLine(string s)
 {
-   // string s = lines[i];
     vector<string> elems;
     string delimeter = ";";
     size_t pos = 0;
@@ -408,7 +407,7 @@ void serviceLayer:: splitLine(string s)
 
     if(elems.size() < 4)
     {
-        cout << "errrrorrrrrrr!" << endl;
+       cout << "eroror" << endl;
     }
     else
     {
@@ -417,15 +416,16 @@ void serviceLayer:: splitLine(string s)
         Nationality = elems[2];
         Byear = elems[3];
 
-        if(elems.size() == 5)
+        if(elems.size() < 5)
         {
-            Dyear = elems[4];
-            newPerson(Name, Gender, Nationality, Byear, Dyear);
+            elems.push_back("0");
         }
 
-        else
+        Dyear = elems[4];
+
+        if validateNewPerson(Name, Gender, Nationality, Byear, Dyear)
         {
-            newPerson(Name, Gender, Nationality, Byear);
+            newPerson(Name, Gender, Nationality, Byear, Dyear);
         }
     }
 }
@@ -513,22 +513,44 @@ void serviceLayer:: createList(string fileName)
 }
 
 // create a new Person and add it to persons in the dataLayer
-void serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
+bool serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear) && validateYear(dyear))
+    Person newP;
+
+    if(dyear != "0")
     {
-        Person newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
-        sortByByear();
-        data.addPerson(newP);
+        newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
     }
+
+    else
+    {
+        newP = Person(name, gender, nationality, stoi(byear))
+    }
+
+    data.addPerson(newP);
+    sortByByear();
 }
 
-void serviceLayer:: newPerson(string name, string gender, string nationality, string byear)
+/*bool serviceLayer:: newPerson(string name, string gender, string nationality, string byear)
 {
     if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
     {
         Person newP = Person(name, gender, nationality, stoi(byear));
         sortByByear();
         data.addPerson(newP);
+        return true;
     }
+
+    return false;
+}*/
+
+bool serviceLayer:: validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
+{
+    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear) && validateYear(dyear))
+    {
+        return true;
+    }
+
+    else return false;
 }
+
