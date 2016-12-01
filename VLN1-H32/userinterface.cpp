@@ -1,5 +1,7 @@
 #include "userinterface.h"
+//numeration for switch case in main menu
 enum inputcases { List = '1', Add, Search, Openfile, Quit = 'q'};
+
 void userInterface::run()
 {
     bool quit = false;

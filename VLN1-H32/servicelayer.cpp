@@ -16,14 +16,11 @@ void serviceLayer::saveData(string fileName)
 void serviceLayer:: sortByName()
 {
     Person swap;
-
     string min, theName;
     size_t tmp;
 
     vector<Person> sortMe = data.getPersons();
-
-    unsigned int theSize = sortMe.size();
-
+    size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
     {
@@ -33,33 +30,27 @@ void serviceLayer:: sortByName()
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theName = toLower(sortMe[j].getName());
-
             if(min > theName)
             {
                 min = theName;
                 tmp = j;
             }
         }
-
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
     data.setPersons(sortMe);
 }
 
 void serviceLayer:: sortByGender()
 {
     Person swap;
-
     string min, theGender;
     size_t tmp;
 
     vector<Person> sortMe = data.getPersons();
-
-    unsigned int theSize = sortMe.size();
-
+    size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
     {
@@ -69,33 +60,27 @@ void serviceLayer:: sortByGender()
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theGender = toLower(sortMe[j].getGender());
-
             if(min > theGender)
             {
                 min = theGender;
                 tmp = j;
             }
         }
-
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
     data.setPersons(sortMe);
 }
 
 void serviceLayer:: sortByNationality()
 {
     Person swap;
-
     string min, theNationality;
     size_t tmp;
 
     vector<Person> sortMe = data.getPersons();
-
-    unsigned int theSize = sortMe.size();
-
+    size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
     {
@@ -105,49 +90,21 @@ void serviceLayer:: sortByNationality()
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theNationality = toLower(sortMe[j].getNationality());
-
             if(min > theNationality)
             {
                 min = theNationality;
                 tmp = j;
             }
         }
-
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
     data.setPersons(sortMe);
 }
 
 void serviceLayer:: sortByByear()
 {
-   /* Person swap;
-
-    int theByear, min;
-    size_t tmp;
-
-    for(size_t i = 0; i < (persons.size() - 1); i++)
-    {
-        min = persons[i].getByear();
-        tmp = i;
-
-        for(size_t j = (i + 1); j < persons.size(); j++)
-        {
-            theByear = persons[j].getByear();
-            if(min > theByear)
-            {
-                min = theByear;
-                tmp = j;
-            }
-        }
-
-        swap = persons[i];
-        persons[i] = persons[tmp];
-        persons[tmp] = swap;
-    }*/
-
     vector<Person> sortMe = data.getPersons();
     stable_sort(sortMe.begin(), sortMe.end());
     data.setPersons(sortMe);
@@ -156,35 +113,28 @@ void serviceLayer:: sortByByear()
 void serviceLayer:: sortByDyear()
 {
     Person swap;
-
     int min, theDyear;
     size_t tmp;
-
     vector<Person> sortMe = data.getPersons();
-
-    unsigned int theSize = sortMe.size();
+    size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
     {
         min = sortMe[i].getDyear();
         tmp = i;
-
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theDyear = sortMe[j].getDyear();
-
             if(min > theDyear)
             {
                 min = theDyear;
                 tmp = j;
             }
         }
-
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
     data.setPersons(sortMe);
 }
 
@@ -195,7 +145,6 @@ vector<Person> serviceLayer:: findByName(string name)
     Person p;
     string searchMe;
     size_t found;
-
     theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
@@ -209,7 +158,6 @@ vector<Person> serviceLayer:: findByName(string name)
             findings.push_back(p);
         }
     }
-
     return findings;
 }
 
@@ -228,7 +176,6 @@ vector<Person> serviceLayer:: findByGender(string gender)
             findings.push_back(p);
         }
     }
-
     return findings;
 }
 
@@ -238,7 +185,6 @@ vector<Person> serviceLayer:: findByNationality(string nationality)
     Person p;
     string searchMe;
     size_t found;
-
     theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
@@ -252,7 +198,6 @@ vector<Person> serviceLayer:: findByNationality(string nationality)
             findings.push_back(p);
         }
     }
-
     return findings;
 }
 
@@ -271,7 +216,6 @@ vector<Person> serviceLayer:: findByByear(int byear)
             findings.push_back(p);
         }
     }
-
     return findings;
 }
 
@@ -290,7 +234,6 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
             findings.push_back(p);
         }
     }
-
     return findings;
 }
 
@@ -307,7 +250,6 @@ bool serviceLayer:: validateName(string name)
             tmp ++;
         }
     }
-
     if (tmp == wordLength)
     {
         return true;
@@ -324,7 +266,6 @@ bool serviceLayer:: validateGender(string gender)
     {
         return true;
     }
-
     return false;
 }
 
@@ -340,12 +281,10 @@ bool serviceLayer:: validateNationality(string nationality)
             tmp ++;
         }
     }
-
     if (tmp == wordLength)
     {
         return true;
     }
-
     return false;
 }
 
@@ -364,7 +303,6 @@ bool serviceLayer:: validateYear(string year)
 
     time_t now = time(0);
     tm *ltm = localtime(&now);
-
     int currYear = 1900 + ltm->tm_year;
 
     if (tmp == wordLength)
@@ -374,7 +312,6 @@ bool serviceLayer:: validateYear(string year)
             return true;
         }
     }
-
     return false;
 }
 
@@ -386,7 +323,6 @@ string serviceLayer:: toLower(string s)
    {
        stringLower[i] = tolower(s[i]);
    }
-
    return stringLower;
 }
 
@@ -454,14 +390,10 @@ vector<Person> serviceLayer:: searchList(string findMe, int by)
         break;
         findings = findByDyear(stoi(findMe));
     default:
-
         break;
     }
-
     return findings;
 }
-
-
 
 // sort the list in dataLayer after order
 // return the vector in dataLayer sorted
@@ -490,11 +422,9 @@ vector<Person> serviceLayer:: sortList(int order)
             break;
             sortByDyear();
         default:
-
             break;
         }
     }
-
     return sortMe;
 }
 
@@ -520,28 +450,13 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
     {
         newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
     }
-
     else
     {
         newP = Person(name, gender, nationality, stoi(byear));
     }
-
     data.addPerson(newP);
     sortByByear();
 }
-
-/*bool serviceLayer:: newPerson(string name, string gender, string nationality, string byear)
-{
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
-    {
-        Person newP = Person(name, gender, nationality, stoi(byear));
-        sortByByear();
-        data.addPerson(newP);
-        return true;
-    }
-
-    return false;
-}*/
 
 bool serviceLayer:: validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
@@ -556,7 +471,6 @@ bool serviceLayer:: validateNewPerson(string name, string gender, string nationa
                 b = true;
             }
         }
-
         else
         {
             b = true;
