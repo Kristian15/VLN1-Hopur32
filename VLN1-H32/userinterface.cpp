@@ -86,47 +86,56 @@ void userInterface::printMainMenu()
     cout << "q = quit      - This will quit the program" << endl;
 }
 
-bool userInterface::validateInputInRun(string input)
-{
-    if(input == "list" || input == "add" || input == "search" || input == "addlist" || input == "quit")
-    {
-        return true;
-    }
-    else
-    {
-        cout << "Invalid input!" << endl;
-        return false;
-    }
-}
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "name   - This will sort the scientists in alphabetic order" << endl;
-    cout << "gender - This will sort the scientists, showing females first" << endl;
-    cout << "nationality - This will sort the scientists by their nationality" << endl;
-    cout << "birth  - This will sort the scientists by date of birth" << endl;
-    cout << "death  - This will sort the scientists by who deceased first" << endl;
+    cout << "1 = Name         - This will sort the scientists in alphabetic order" << endl;
+    cout << "2 = Gender       - This will sort the scientists, showing females first" << endl;
+    cout << "3 = Nationality  - This will sort the scientists by their nationality" << endl;
+    cout << "4 = Birthyear    - This will sort the scientists by date of birth" << endl;
+    cout << "5 = Deathyear    - This will sort the scientists by who deceased first" << endl;
 }
 
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search for:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "name   - This will list all scientists with a specific name" << endl;
-    cout << "gender - This will list all scientists with a specific gender (male / female)" << endl;
-    cout << "nationality - This will list all scientists by their nationality" << endl;
-    cout << "birth  - This will list all scientists with a specific birth year" << endl;
-    cout << "death  - This will list all scientists with a specific death year" << endl;
+    cout << "1 = Name         - This will list all scientists with a specific name" << endl;
+    cout << "2 = Gender       - This will list all scientists with a specific gender (male / female)" << endl;
+    cout << "3 = Nationality  - This will list all scientists by their nationality" << endl;
+    cout << "4 = Birth        - This will list all scientists with a specific birth year" << endl;
+    cout << "5 = Death        - This will list all scientists with a specific death year" << endl;
 }
+
 void userInterface::makeVectorFromList()
 {
     printListOptions();
-    string sortby;
-    cin >> sortby;
+    int input;
+    cin >> input;
     // **** todo switch case ****
+    /*switch (input) {
+    case '1':
+        sortby = "name";
+        break;
+    case '2':
+        sortby = "gender";
+        break;
+    case '3':
+        sortby = "nationality";
+        break;
+    case '4':
+        sortby = "birth";
+        break;
+    case '5':
+        break;
+        sortby = "death";
+    default:
 
-    printList(service.sortList(sortby));
+        break;
+    }*/
+
+    printList(service.sortList(input));
 }
 
 void userInterface::makeVectorFromSearch()
@@ -197,6 +206,7 @@ void userInterface::printList(vector<Person> printme)
         cout << "Your database is empty!" << endl;
     }
 }
+
 void userInterface::printSearch(vector<Person> printme )
 {
     if(!checkIfVectorIsEmpty(printme))
@@ -274,6 +284,7 @@ void userInterface::doYouWantToSave()
         savefile();
     }
 }
+
 void userInterface::savefile()
 {
     cout << "Write the name of the file you want to save" << endl;
@@ -291,6 +302,7 @@ bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
 
     return false;
 }
+
 bool userInterface::DoYouWantToContinue()
 {
     bool quit;
