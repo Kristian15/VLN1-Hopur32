@@ -1,5 +1,5 @@
 #include "userinterface.h"
-
+enum inputcases { List = '1', Add, Search, Openfile, Quit = 'q'};
 void userInterface::run()
 {
     bool quit = false;
@@ -7,23 +7,24 @@ void userInterface::run()
     do{
         printMainMenu();
         char input;
+        cout << "Input: ";
         cin >> input;
-
+        cout << endl;
         switch (input)
         {
-        case '1': // list
-            makeVectorFromList();
+        case List:
+            VectorFromList();
             break;
-        case '2': // add
+        case Add:
             readPerson();
             break;
-        case '3': // search
-            makeVectorFromSearch();
+        case Search:
+            VectorFromSearch();
             break;
-        case '4': // open file
+        case Openfile:
             readList();
             break;
-        case 'q': // quit
+        case Quit:
             quit = doYouWantToQuit();
             break;
         default:
@@ -53,6 +54,7 @@ void userInterface::printListOptions()
     cout << "3 = Nationality  - This will sort the scientists by their nationality" << endl;
     cout << "4 = Birthyear    - This will sort the scientists by date of birth" << endl;
     cout << "5 = Deathyear    - This will sort the scientists by who deceased first" << endl;
+    cout << "Input: ";
 }
 
 void userInterface::printSearchOptions()
@@ -64,9 +66,10 @@ void userInterface::printSearchOptions()
     cout << "3 = Nationality  - This will list all scientists by their nationality" << endl;
     cout << "4 = Birth        - This will list all scientists with a specific birth year" << endl;
     cout << "5 = Death        - This will list all scientists with a specific death year" << endl;
+    cout << "Input: ";
 }
 
-void userInterface::makeVectorFromList()
+void userInterface::VectorFromList()
 {
     printListOptions();
     int input;
@@ -75,7 +78,7 @@ void userInterface::makeVectorFromList()
     printList(service.sortList(input));
 }
 
-void userInterface::makeVectorFromSearch()
+void userInterface::VectorFromSearch()
 {
     //printSearch(searchVector);
     bool validinput;
@@ -91,26 +94,31 @@ void userInterface::makeVectorFromSearch()
         if(searchby == 1)
         {
             cout << "Enter the name you want to search for: " << endl;
+            cout << "Name: ";
             validinput = true;
         }
         else if(searchby == 2)
         {
             cout << "Enter either \"male\" or \"female\": " << endl;
+            cout << "Gender: ";
             validinput = true;
         }
         else if(searchby == 3)
         {
             cout << "Enter nationality: " << endl;
+            cout << "Nationality: ";
             validinput = true;
         }
         else if(searchby == 4)
         {
             cout << "Enter the year of birth you want to search for: " << endl;
+            cout << "Year of birth: ";
             validinput = true;
         }
         else if(searchby == 5)
         {
             cout << "Enter the year of death you want to search for: " << endl;
+            cout << "Year of death: ";
             validinput = true;
         }
         else
@@ -124,6 +132,7 @@ void userInterface::makeVectorFromSearch()
 
     cin >> ws;
     getline(cin, searchfor);
+    cout << endl;
     printList(service.searchList(searchfor, searchby));
 }
 
@@ -141,7 +150,7 @@ void userInterface::printList(vector<Person> printme)
     }
     else
     {
-        cout << "Your database is empty!" << endl;
+        cout << "Your database is empty! Please add database from \"Open file\" in Main Menu" << endl << endl;
     }
 }
 
@@ -185,6 +194,7 @@ void userInterface::readPerson()
     cout << "Note: If the person is still alive, please press 0" << endl;
     cout << "Year of death: ";
     cin >> dyear;
+    cout << endl;
 
     if(service.validateNewPerson(name, gender, nationality, byear, dyear))
     {
@@ -199,7 +209,7 @@ void userInterface::readPerson()
 
 bool userInterface::doYouWantToQuit()
 {
-    cout << "Are you sure you want to quit? Y/N:" << endl;
+    cout << "Are you sure you want to quit? Y/N: ";
     char answer;
     cin >> answer;
 
@@ -213,7 +223,7 @@ bool userInterface::doYouWantToQuit()
 
 void userInterface::doYouWantToSave()
 {
-    cout << "Do you want to save the current list before quitting ? Y/N" << endl;
+    cout << "Do you want to save the current list before quitting ? Y/N: ";
     char answer;
     cin >> answer;
 

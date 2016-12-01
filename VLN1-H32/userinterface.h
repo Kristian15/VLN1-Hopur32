@@ -17,8 +17,8 @@ private:
     void printListOptions();
     // Prints search options
     void printSearchOptions();
-    void makeVectorFromList();
-    void makeVectorFromSearch();
+    void VectorFromList();
+    void VectorFromSearch();
     void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
