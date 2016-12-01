@@ -26,6 +26,6 @@ public:
     //
     void loadDataP(string fileName);
     vector<string> loadData(string fileName);
-    void saveData(vector<Person> persons, string fileName);
+    void saveData(string fileName);
     void updateData(string name, string gender, string nationality, string byear, string dyear);
 };
