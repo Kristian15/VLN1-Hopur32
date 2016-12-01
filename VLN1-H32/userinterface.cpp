@@ -11,35 +11,20 @@ void userInterface::run()
 
         switch (input)
         {
-        case '1':
-        {
-            vector<Person> sortByVector;
-            makeVectorFromList(sortByVector);
-            printList(sortByVector);
+        case '1': // list
+            makeVectorFromList();
             break;
-        }
-        case '2':
+        case '2': // add
             readPerson();
             break;
-        case '3':
-        {
-            vector<Person> searchVector;
-            makeVectorFromSearch(searchVector);
-            printSearch(searchVector);
+        case '3': // search
+            makeVectorFromSearch();
             break;
-        }
-        case '4':
+        case '4': // open file
             readList();
             break;
-        case 'q':
-            if (doYouWantToQuit())
-            {
-                if (doYouWantToSave())
-                {
-                    savefile();
-                }
-                quit = true;
-            }
+        case 'q': // quit
+            quit = doYouWantToQuit();
             break;
         default:
             cout << endl << "Invalid Input!" << endl << endl;
@@ -94,11 +79,11 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1. List      - This allows you to print onto you screen our scientists in 4 different orders" << endl;
-    cout << "2. Add       - This will add a new scientist to our database" << endl;
-    cout << "3. Search    - This allows you to search for a scientist in our database" << endl;
-    cout << "4. Open File - This allows you to add scientists from a file" << endl;
-    cout << "q. quit         - This will quit the program" << endl;
+    cout << "1 = List      - This allows you to print onto you screen our scientists in 4 different orders" << endl;
+    cout << "2 = Add       - This will add a new scientist to our database" << endl;
+    cout << "3 = Search    - This allows you to search for a scientist in our database" << endl;
+    cout << "4 = Open File - This allows you to add scientists from a file" << endl;
+    cout << "q = quit      - This will quit the program" << endl;
 }
 
 bool userInterface::validateInputInRun(string input)
@@ -134,83 +119,52 @@ void userInterface::printSearchOptions()
     cout << "birth  - This will list all scientists with a specific birth year" << endl;
     cout << "death  - This will list all scientists with a specific death year" << endl;
 }
-void userInterface::makeVectorFromList(vector<Person>& inputvector)
+void userInterface::makeVectorFromList()
 {
-    bool validinput = false;
-    do
-    {
-        printListOptions();
-        string sortby;
-        cin >> sortby;
-        if(sortby == "name" ||
-           sortby == "gender" ||
-           sortby == "birth" ||
-           sortby == "death" ||
-           sortby == "nationality")
-        {
-            if(!checkIfVectorIsEmpty(inputvector))
-            {
-                cout << "Here is your list sorted by " << sortby << ":" << endl;
-            }
-            inputvector = service.sortList(sortby);
-            validinput = true;
-        }
-        else
-        {
-            cout << "invalid input!";
-            validinput = false;
-            cout << endl;
-        }
-    }while(!validinput);
+    printListOptions();
+    string sortby;
+    cin >> sortby;
+    // **** todo switch case ****
+
+    printList(service.sortList(sortby));
 }
 
-void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
+void userInterface::makeVectorFromSearch()
 {
+
+    //printSearch(searchVector);
     bool validinput;
+    string searchby, searchfor;
+
+    // **** todo switch case ****
     do
     {
         printSearchOptions();
-        string searchby, searchfor;
         cin >> searchby;
+
         if(searchby == "name")
         {
-            if(!checkIfVectorIsEmpty(inputvector))
             cout << "Enter the name you want to search for: " << endl;
-            cin >> ws;
-            getline(cin, searchfor);
-            inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "gender")
         {
             cout << "Enter either \"male\" or \"female\": " << endl;
-            cin >> ws;
-            getline(cin, searchfor);
-            inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "nationality")
         {
             cout << "Enter nationality: " << endl;
-            cin >> ws;
-            getline(cin, searchfor);
-            inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "birth")
         {
             cout << "Enter the year of birth you want to search for: " << endl;
-            cin >> ws;
-            getline(cin, searchfor);
-            inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else if(searchby == "death")
         {
             cout << "Enter the year of death you want to search for: " << endl;
-            cin >> ws;
-            getline(cin, searchfor);
-            inputvector = service.searchList(searchfor, searchby);
             validinput = true;
         }
         else
@@ -221,12 +175,17 @@ void userInterface::makeVectorFromSearch(vector<Person>& inputvector)
         }
     }while(!validinput);
 
+    cin >> ws;
+    getline(cin, searchfor);
+    printList(service.searchList(searchfor, searchby));
 }
 
-void userInterface::printList(vector<Person> printme )
+void userInterface::printList(vector<Person> printme)
 {
     if(!checkIfVectorIsEmpty(printme))
     {
+        cout << "Here is your list sorted:" << endl;
+
         for(unsigned int i = 0; i < printme.size(); i++)
         {
             cout << printme[i] << endl;
@@ -278,6 +237,7 @@ void userInterface::readPerson()
     cout << "Note: If the person is still alive, please press 0" << endl;
     cout << "Year of death: ";
     cin >> dyear;
+
     if(service.validateNewPerson(name, gender, nationality, byear, dyear))
     {
         service.newPerson(name, gender, nationality, byear, dyear);
@@ -287,7 +247,6 @@ void userInterface::readPerson()
         cout << "Invalid input, try again!" << endl;
         readPerson();
     }
-
 }
 
 bool userInterface::doYouWantToQuit()
@@ -298,12 +257,13 @@ bool userInterface::doYouWantToQuit()
 
     if (answer == 'y' || answer == 'Y')
     {
+        doYouWantToSave();
         return true;
     }
     return false;
 }
 
-bool userInterface::doYouWantToSave()
+void userInterface::doYouWantToSave()
 {
     cout << "Do you want to save the current list before quitting ? Y/N" << endl;
     char answer;
@@ -311,9 +271,8 @@ bool userInterface::doYouWantToSave()
 
     if (answer == 'y' || answer == 'Y')
     {
-        return true;
+        savefile();
     }
-    return false;
 }
 void userInterface::savefile()
 {

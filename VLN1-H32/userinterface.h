@@ -18,8 +18,8 @@ private:
     void printListOptions();
     // Prints search options
     void printSearchOptions();
-    void makeVectorFromList(vector<Person>&);
-    void makeVectorFromSearch(vector<Person>&);
+    void makeVectorFromList();
+    void makeVectorFromSearch();
     void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
@@ -30,7 +30,7 @@ private:
     // uses newPerson() in the serviceLayer
     void readPerson();
     bool doYouWantToQuit();
-    bool doYouWantToSave();
+    void doYouWantToSave();
     void savefile();
     //bool checkIfVectorIsEmptyFromSearch(const vector<Person>);
     //bool checkIfVectorIsEmptyFromList(const vector<Person>);
