@@ -406,20 +406,27 @@ void serviceLayer:: splitLine(string s)
 
     string Name, Gender, Nationality, Byear, Dyear;
 
-    Name = elems[0];
-    Gender = elems[1];
-    Nationality = elems[2];
-    Byear = elems[3];
-
-    if(elems.size() == 5)
+    if(elems.size() < 4)
     {
-        Dyear = elems[4];
-        newPerson(Name, Gender, Nationality, Byear, Dyear);
+        cout << "errrrorrrrrrr!" << endl;
     }
-
     else
     {
-        newPerson(Name, Gender, Nationality, Byear);
+        Name = elems[0];
+        Gender = elems[1];
+        Nationality = elems[2];
+        Byear = elems[3];
+
+        if(elems.size() == 5)
+        {
+            Dyear = elems[4];
+            newPerson(Name, Gender, Nationality, Byear, Dyear);
+        }
+
+        else
+        {
+            newPerson(Name, Gender, Nationality, Byear);
+        }
     }
 }
 
