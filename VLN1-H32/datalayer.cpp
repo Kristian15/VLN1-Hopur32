@@ -5,7 +5,7 @@ dataLayer::dataLayer()
 
 }
 
-vector<Person> dataLayer::loadDataP(string fileName)
+void dataLayer::loadDataP(string fileName)
 {
     string line;
 
@@ -60,8 +60,6 @@ vector<Person> dataLayer::loadDataP(string fileName)
             _persons.push_back(newPerson);
         }
     }
-
-    return _persons;
 }
 
 vector<string> dataLayer::loadData(string fileName)
@@ -129,7 +127,7 @@ void dataLayer::saveData(vector<Person> persons, string fileName)
     }
 }
 
-void dataLayer::updateFile(string name, string gender, string nationality, string byear, string dyear)
+void dataLayer::updateData(string name, string gender, string nationality, string byear, string dyear)
 {
     string d = ";", data = "";
     data = name + d + gender + d + nationality + d + byear + d + dyear + d;
