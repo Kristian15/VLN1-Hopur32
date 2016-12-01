@@ -549,7 +549,7 @@ bool serviceLayer:: validateNewPerson(string name, string gender, string nationa
 {
     bool b = false;
 
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear) && validateYear(dyear))
+    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
     {
         if(dyear != "0")
         {
