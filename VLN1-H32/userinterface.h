@@ -37,7 +37,6 @@ private:
     bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
     bool DoYouWantToContinue();
 public:
-    userInterface();
     void run ();
 };
 

@@ -1,16 +1,51 @@
 #include "userinterface.h"
 
-userInterface::userInterface() {}
-
 void userInterface::run()
 {
     bool quit = false;
 
     do{
         printMainMenu();
-        string input;
+        char input;
         cin >> input;
-        bool validinput = validateInputInRun(input);
+
+        switch (input)
+        {
+        case '1':
+        {
+            vector<Person> sortByVector;
+            makeVectorFromList(sortByVector);
+            printList(sortByVector);
+            break;
+        }
+        case '2':
+            readPerson();
+            break;
+        case '3':
+        {
+            vector<Person> searchVector;
+            makeVectorFromSearch(searchVector);
+            printSearch(searchVector);
+            break;
+        }
+        case '4':
+            readList();
+            break;
+        case 'q':
+            if (doYouWantToQuit())
+            {
+                if (doYouWantToSave())
+                {
+                    savefile();
+                }
+                quit = true;
+            }
+            break;
+        default:
+            cout << endl << "Invalid Input!" << endl << endl;
+            break;
+        }
+        /*bool validinput = validateInputInRun(input);
         if(input == "list")
         {
             vector<Person> sortByVector;
@@ -51,7 +86,7 @@ void userInterface::run()
             {
                 quit = DoYouWantToContinue();
             }
-        }
+        }*/
    }while(!quit);
 }
 
@@ -59,12 +94,13 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "list    - This allows you to print onto you screen our scientists in 4 different orders" << endl;
-    cout << "add     - This will add a new scientist to our database" << endl;
-    cout << "search  - This allows you to search for a scientist in our database" << endl;
-    cout << "addlist - This allows you to add scientists from a file" << endl;
-    cout << "quit    - This will quit the program" << endl;
+    cout << "1. List      - This allows you to print onto you screen our scientists in 4 different orders" << endl;
+    cout << "2. Add       - This will add a new scientist to our database" << endl;
+    cout << "3. Search    - This allows you to search for a scientist in our database" << endl;
+    cout << "4. Open File - This allows you to add scientists from a file" << endl;
+    cout << "q. quit         - This will quit the program" << endl;
 }
+
 bool userInterface::validateInputInRun(string input)
 {
     if(input == "list" || input == "add" || input == "search" || input == "addlist" || input == "quit")
@@ -100,7 +136,7 @@ void userInterface::printSearchOptions()
 }
 void userInterface::makeVectorFromList(vector<Person>& inputvector)
 {
-    bool validinput;
+    bool validinput = false;
     do
     {
         printListOptions();

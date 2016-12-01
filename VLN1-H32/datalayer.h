@@ -9,12 +9,14 @@ using namespace std;
 class dataLayer
 {
 private:
-    //void updateData(string name, string gender, string nationality, string byear, string dyear);
     void updateData(Person person);
 
     vector<Person> _persons;
-    vector<string> data;
+    vector<string> _data;
     string _fileName;
+
+    // delimiter to format data to text file
+    const string _d = ";";
 
 public:
     // functions pertaining to changes in the database vector
@@ -24,7 +26,6 @@ public:
     void addPerson(Person person){ updateData(person); }
 
     // functions pertaining to file manipulation
-    void loadDataP(string fileName);
     vector<string> loadData(string fileName);
     void saveData(string fileName);
 };

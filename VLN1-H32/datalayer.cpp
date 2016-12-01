@@ -1,16 +1,19 @@
 #include "datalayer.h"
 
 // **** Private ****
+
+// appends provided data to the end of the last used filename
+// pushes that data into the person vector
 void dataLayer::updateData(Person person)
 {
-    string d = ";", data = "";
+    string data = "";
 
     _persons.push_back(person);
-    data = person.getName() + d + person.getGender() + d + person.getNationality() + d + to_string(person.getByear());
+    data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear());
 
     if(person.getDyear() != 0)
     {
-        data += to_string(person.getDyear()) + d;
+        data += to_string(person.getDyear()) + _d;
     }
 
     ofstream dataStream;
@@ -25,69 +28,12 @@ void dataLayer::updateData(Person person)
 
 
 // **** Public ****
-void dataLayer::loadDataP(string fileName)
-{
-    string line;
-
-    _fileName = fileName;
-    data.clear();
-
-    ifstream iDataStream;
-    iDataStream.open(fileName);
-
-    if(iDataStream)
-    {
-        while(getline(iDataStream,line))
-        {
-            data.push_back(line);
-        }
-
-        iDataStream.close();
-    }
-
-    for (unsigned int i = 0; i < data.size(); i++)
-    {
-        string s = data[i];
-        vector<string> elems;
-        string delimeter = ";";
-        size_t pos = 0;
-        string token;
-
-        while ((pos = s.find(delimeter)) != string::npos)
-        {
-            token = s.substr(0, pos);
-            elems.push_back(token);
-            s.erase(0, pos + delimeter.length());
-        }
-
-        string Name, Gender, Nationality, Byear, Dyear;
-
-        Name = elems[0];
-        Gender = elems[1];
-        Nationality = elems[2];
-        Byear = elems[3];
-
-        if(elems.size() == 5)
-        {
-            Dyear = elems[4];
-            Person newPerson = Person(Name, Gender, Nationality, stoi(Byear), stoi(Dyear));
-            _persons.push_back(newPerson);
-        }
-
-        else
-        {
-            Person newPerson = Person(Name, Gender, Nationality, stoi(Byear));
-            _persons.push_back(newPerson);
-        }
-    }
-}
-
 vector<string> dataLayer::loadData(string fileName)
 {
     string line;
 
     _fileName = fileName;
-    data.clear();
+    _data.clear();
     ifstream iDataStream;
     iDataStream.open(fileName);
 
@@ -95,37 +41,37 @@ vector<string> dataLayer::loadData(string fileName)
     {
         while(getline(iDataStream,line))
         {
-            data.push_back(line);
+            _data.push_back(line);
         }
 
         iDataStream.close();
     }
 
-    return data;
+    return _data;
 }
 
 // Function formats data and adds a delimiter,
 // then saves data to the provided filename.
 void dataLayer::saveData(string fileName)
 {
-    string name = "", gender = "", nationality = "", bYear = "", dYear = "", d = ";";
+    string name = "", gender = "", nationality = "", bYear = "", dYear = "";
 
     _fileName = fileName;
-    data.clear();
+    _data.clear();
 
     for (unsigned int i = 0; i < _persons.size(); i++)
     {
-        name = _persons[i].getName() + d;
-        gender = _persons[i].getGender() + d;
-        nationality = _persons[i].getNationality() + d;
-        bYear = to_string(_persons[i].getByear()) + d;
+        name = _persons[i].getName() + _d;
+        gender = _persons[i].getGender() + _d;
+        nationality = _persons[i].getNationality() + _d;
+        bYear = to_string(_persons[i].getByear()) + _d;
 
         if(_persons[i].getDyear() != 0)
         {
-            dYear = to_string(_persons[i].getDyear()) + d;
+            dYear = to_string(_persons[i].getDyear()) + _d;
         }
 
-        data.push_back(name + gender + nationality + bYear + dYear);
+        _data.push_back(name + gender + nationality + bYear + dYear);
 
         name = "";
         gender = "";
@@ -139,9 +85,9 @@ void dataLayer::saveData(string fileName)
 
     if(dataStream)
     {
-        for(unsigned int i = 0; i < data.size(); i++)
+        for(unsigned int i = 0; i < _data.size(); i++)
         {
-            dataStream << data[i] << endl;
+            dataStream << _data[i] << endl;
         }
 
         dataStream.close();
