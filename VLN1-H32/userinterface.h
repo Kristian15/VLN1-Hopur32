@@ -4,6 +4,7 @@
 #include <iostream>
 #include "servicelayer.h"
 #include <iomanip>
+#include <windows.h>
 using namespace std;
 
 class userInterface
@@ -35,7 +36,6 @@ private:
     //bool checkIfVectorIsEmptyFromList(const vector<Person>);
     bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
     bool DoYouWantToContinue();
-
 public:
     userInterface();
     void run ();

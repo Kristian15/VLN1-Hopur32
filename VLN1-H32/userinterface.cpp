@@ -34,7 +34,6 @@ void userInterface::run()
         {
              readList();
         }
-
         if(input == "quit")
         {
             if (doYouWantToQuit())
@@ -238,10 +237,10 @@ void userInterface::readPerson()
     cout << "Nationality: ";
     cin >> ws;
     getline(cin, nationality);
-    cout << "Date of birth: ";
+    cout << "Year of birth: ";
     cin >> byear;
     cout << "Note: If the person is still alive, please press 0" << endl;
-    cout << "Time of death: ";
+    cout << "Year of death: ";
     cin >> dyear;
     if(service.validateNewPerson(name, gender, nationality, byear, dyear))
     {
@@ -316,3 +315,4 @@ bool userInterface::DoYouWantToContinue()
     return quit;
 
 }
+
