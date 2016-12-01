@@ -8,6 +8,11 @@ void dataLayer::updateData(Person person)
 {
     string data = "";
 
+    if(_persons.empty())
+    {
+        _fileName = "backup.txt";
+    }
+
     _persons.push_back(person);
     data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear()) + _d;
 
