@@ -433,31 +433,31 @@ void serviceLayer:: splitLine(string s)
 
 //*****PUBLIC*****
 
-vector<Person> serviceLayer:: searchList(string findMe, string by)
+vector<Person> serviceLayer:: searchList(string findMe, int by)
 {
     vector<Person> findings;
 
-    by = toLower(by);
+    sortMe = data.getPersons();
 
-    if (by == "name")
-    {
+    switch (by) {
+    case '1':
         findings = findByName(findMe);
-    }
-    else if (by == "gender")
-    {
+        break;
+    case '2':
         findings = findByGender(findMe);
-    }
-    else if (by == "nationality")
-    {
+        break;
+    case '3':
         findings = findByNationality(findMe);
-    }
-    else if (by == "birth")
-    {
-        findings = findByByear(stoi(findMe));
-    }
-    else if (by == "death")
-    {
-        findings = findByDyear(stoi(findMe));
+        break;
+    case '4':
+        findings = findByByear(findMe);
+        break;
+    case '5':
+        break;
+        findings = findByDyear(findMe);
+    default:
+
+        break;
     }
 
     return findings;
@@ -473,6 +473,8 @@ vector<Person> serviceLayer:: sortList(int order)
 
     if (!sortMe.empty())
     {
+        sortMe = data.getPersons();
+
         switch (order) {
         case '1':
             sortByName();
@@ -493,8 +495,6 @@ vector<Person> serviceLayer:: sortList(int order)
 
             break;
         }
-
-        sortMe = data.getPersons();
     }
 
     return sortMe;
