@@ -68,7 +68,6 @@ vector<string> dataLayer::loadData(string fileName)
 
     _fileName = fileName;
     data.clear();
-
     ifstream iDataStream;
     iDataStream.open(fileName);
 
