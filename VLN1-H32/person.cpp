@@ -36,8 +36,3 @@ ostream& operator <<(ostream& lhs, Person& rhs)
 
     return lhs;
 }
-
-bool operator < (const Person& lhs, const Person& rhs)
-{
-    return(lhs._byear < rhs._byear);
-}
