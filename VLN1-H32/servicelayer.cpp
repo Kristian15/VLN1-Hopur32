@@ -423,7 +423,7 @@ void serviceLayer:: splitLine(string s)
 
         Dyear = elems[4];
 
-        if validateNewPerson(Name, Gender, Nationality, Byear, Dyear)
+        if (validateNewPerson(Name, Gender, Nationality, Byear, Dyear))
         {
             newPerson(Name, Gender, Nationality, Byear, Dyear);
         }
@@ -513,7 +513,7 @@ void serviceLayer:: createList(string fileName)
 }
 
 // create a new Person and add it to persons in the dataLayer
-bool serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
+void serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
 
@@ -524,7 +524,7 @@ bool serviceLayer:: newPerson(string name, string gender, string nationality, st
 
     else
     {
-        newP = Person(name, gender, nationality, stoi(byear))
+        newP = Person(name, gender, nationality, stoi(byear));
     }
 
     data.addPerson(newP);

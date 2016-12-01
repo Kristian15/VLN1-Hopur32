@@ -243,14 +243,16 @@ void userInterface::readPerson()
     cout << "Note: If the person is still alive, please press 0" << endl;
     cout << "Time of death: ";
     cin >> dyear;
-    if (dyear == "0")
-    {
-        service.newPerson(name, gender, nationality, byear);
-    }
-    else
+    if(service.validateNewPerson(name, gender, nationality, byear, dyear))
     {
         service.newPerson(name, gender, nationality, byear, dyear);
     }
+    else
+    {
+        cout << "Invalid input, try again!" << endl;
+        readPerson();
+    }
+
 }
 
 bool userInterface::doYouWantToQuit()
