@@ -1,10 +1,30 @@
 #include "datalayer.h"
 
-dataLayer::dataLayer()
+// **** Private ****
+void dataLayer::updateData(Person person)
 {
+    string d = ";", data = "";
 
+    _persons.push_back(person);
+    data = person.getName() + d + person.getGender() + d + person.getNationality() + d + to_string(person.getByear());
+
+    if(person.getDyear() != 0)
+    {
+        data += to_string(person.getDyear()) + d;
+    }
+
+    ofstream dataStream;
+    dataStream.open(_fileName);
+
+    if(dataStream)
+    {
+        dataStream << data << endl;
+        dataStream.close();
+    }
 }
 
+
+// **** Public ****
 void dataLayer::loadDataP(string fileName)
 {
     string line;
@@ -124,21 +144,6 @@ void dataLayer::saveData(string fileName)
             dataStream << data[i] << endl;
         }
 
-        dataStream.close();
-    }
-}
-
-void dataLayer::updateData(string name, string gender, string nationality, string byear, string dyear)
-{
-    string d = ";", data = "";
-    data = name + d + gender + d + nationality + d + byear + d + dyear + d;
-
-    ofstream dataStream;
-    dataStream.open(_fileName);
-
-    if(dataStream)
-    {
-        dataStream << data << endl;
         dataStream.close();
     }
 }

@@ -1,4 +1,5 @@
 #include "servicelayer.h"
+#include <iostream>
 
 using namespace std;
 serviceLayer::serviceLayer(){}
@@ -546,11 +547,24 @@ void serviceLayer:: newPerson(string name, string gender, string nationality, st
 
 bool serviceLayer:: validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear) && validateYear(dyear))
+    bool b = false;
+
+    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
     {
-        return true;
+        if(dyear != "0")
+        {
+            if(validateYear(dyear))
+            {
+                b = true;
+            }
+        }
+
+        else
+        {
+            b = true;
+        }
     }
 
-    else return false;
+    return b;
 }
 
