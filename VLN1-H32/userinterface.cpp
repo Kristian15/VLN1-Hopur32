@@ -30,48 +30,6 @@ void userInterface::run()
             cout << endl << "Invalid Input!" << endl << endl;
             break;
         }
-        /*bool validinput = validateInputInRun(input);
-        if(input == "list")
-        {
-            vector<Person> sortByVector;
-            makeVectorFromList(sortByVector);
-            printList(sortByVector);
-        }
-        if(input == "add")
-        {
-            readPerson();
-        }
-
-        if(input == "search")
-        {           
-
-            vector<Person> searchVector;
-            makeVectorFromSearch(searchVector);            
-            printSearch(searchVector);
-        }
-
-        if(input == "addlist")
-        {
-             readList();
-        }
-        if(input == "quit")
-        {
-            if (doYouWantToQuit())
-            {
-                if (doYouWantToSave())
-                {
-                    savefile();
-                }
-                quit = true;
-            } 
-        }
-        if(validinput)
-        {
-            if(input == "search" || input == "list")
-            {
-                quit = DoYouWantToContinue();
-            }
-        }*/
    }while(!quit);
 }
 
@@ -113,34 +71,12 @@ void userInterface::makeVectorFromList()
     printListOptions();
     int input;
     cin >> input;
-    // **** todo switch case ****
-    /*switch (input) {
-    case '1':
-        sortby = "name";
-        break;
-    case '2':
-        sortby = "gender";
-        break;
-    case '3':
-        sortby = "nationality";
-        break;
-    case '4':
-        sortby = "birth";
-        break;
-    case '5':
-        break;
-        sortby = "death";
-    default:
-
-        break;
-    }*/
 
     printList(service.sortList(input));
 }
 
 void userInterface::makeVectorFromSearch()
 {
-
     //printSearch(searchVector);
     bool validinput;
     string searchby, searchfor;
