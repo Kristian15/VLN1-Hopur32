@@ -50,7 +50,7 @@ public:
     // Gender to sort by gender
     // Birthyear to sort by birthyear
     // Deathyear to sort by deathyear
-    vector<Person> searchList(string findMe, string by);
+    vector<Person> searchList(string findMe, int by);
     // sort the list in dataLayer after order
     // return the vector in dataLayer sorted
     // ***LAGA***

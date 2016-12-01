@@ -437,8 +437,6 @@ vector<Person> serviceLayer:: searchList(string findMe, int by)
 {
     vector<Person> findings;
 
-    sortMe = data.getPersons();
-
     switch (by) {
     case '1':
         findings = findByName(findMe);
@@ -450,11 +448,11 @@ vector<Person> serviceLayer:: searchList(string findMe, int by)
         findings = findByNationality(findMe);
         break;
     case '4':
-        findings = findByByear(findMe);
+        findings = findByByear(stoi(findMe));
         break;
     case '5':
         break;
-        findings = findByDyear(findMe);
+        findings = findByDyear(stoi(findMe));
     default:
 
         break;
