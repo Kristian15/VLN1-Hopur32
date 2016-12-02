@@ -3,7 +3,7 @@
 // **** Private ****
 
 // appends provided data to the end of the last used filename
-// pushes that data into the person vector
+// also pushes that data into the person vector
 void dataLayer::updateData(Person person)
 {
     string data = "";
@@ -39,6 +39,9 @@ void dataLayer::updateData(Person person)
 
 
 // **** Public ****
+
+// load data from file and returns it in a string vector
+// throws error if datafile does not exist
 vector<string> dataLayer::loadData(string fileName)
 {
     string line;
