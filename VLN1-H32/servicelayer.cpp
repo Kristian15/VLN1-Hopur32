@@ -588,5 +588,5 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
 void serviceLayer::deletePerson(string name)
 {
     data.setPersons(findByNameReverse(name));
-    saveData("gaur.txt", data.getPersons());
+    saveData("current", data.getPersons());
 }
