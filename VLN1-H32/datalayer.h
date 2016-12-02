@@ -27,5 +27,5 @@ public:
 
     // functions pertaining to file manipulation
     vector<string> loadData(string fileName);
-    void saveData(string fileName);
+    void saveData(string fileName, vector<Person> persons);
 };
