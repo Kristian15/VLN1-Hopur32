@@ -102,7 +102,7 @@ void dataLayer::saveData(string fileName, vector<Person> persons)
     }
 
     ofstream dataStream;
-    dataStream.open(fileName);
+    dataStream.open(fileName, ios::out | ios::trunc);
 
     if(dataStream)
     {
