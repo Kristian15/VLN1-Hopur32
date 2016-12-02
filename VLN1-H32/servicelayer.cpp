@@ -349,7 +349,7 @@ bool serviceLayer::validateYear(string year)
 
     if (tmp == wordLength)
     {
-        if ((stoi(year) < currYear) && (wordLength == 4))
+        if ((stoi(year) <= currYear) && (wordLength == 4))
         {
             return true;
         }
@@ -409,7 +409,8 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons)
 
         if (validateNewPerson(Name, Gender, Nationality, Byear, Dyear))
         {
-            newPersons.push_back(getPerson(Name, Gender, Nationality, Byear, Dyear));
+            Person p = getNewPerson(Name, Gender, Nationality, Byear, Dyear);
+            newPersons.push_back(p);
         }
         else
         {
@@ -418,7 +419,7 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons)
     }
 }
 
-Person serviceLayer:: getPerson(string name, string gender, string nationality, string byear, string dyear)
+Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
     int Byear, Dyear;
@@ -516,7 +517,7 @@ void serviceLayer::createList(string fileName)
     {
         splitLine(lines[i], newPersons);
     }
-
+    cout << newPersons[0];
     data.setPersons(newPersons);
 }
 
@@ -524,7 +525,7 @@ void serviceLayer::createList(string fileName)
 // uses addPerson() in dataLayer
 void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
-    data.addPerson(getPerson(name, gender, nationality, byear, dyear));
+    data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
 }
 
 // validates inputs
