@@ -90,6 +90,32 @@ void userInterface::VectorFromList()
 
 void userInterface::VectorFromSearch()
 {
+    /*printSearchOptions();
+    int searchBy;
+    string searchFor;
+    cin >> searchBy;
+
+    while(cin.fail())
+    {
+        cout << "Invalid input, try again:" << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> searchBy;
+    }
+
+    if((searchBy > 0) && (searchBy < 6))
+    {
+        cout << "Enter what you are searching for: ";
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+        printSearch(service.searchList(searchFor, searchBy));
+    }
+    else
+    {
+        cout << "Invalid input, try again:" << endl;
+        vectorFromSearch();
+    }*/
     bool validinput;
     string searchby;
     string searchfor;
