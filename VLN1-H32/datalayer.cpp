@@ -51,6 +51,10 @@ vector<string> dataLayer::loadData(string fileName)
 
         iDataStream.close();
     }
+    else
+    {
+        throw new string("No data file found!");
+    }
 
     return _data;
 }

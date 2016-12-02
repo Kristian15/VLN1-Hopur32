@@ -183,9 +183,12 @@ void userInterface::printSearch(vector<Person> printme )
 void userInterface::readList()
 {
     cout << "Enter the name of your file: ";
-    string filename;
-    cin >> filename;
-    service.createList(filename);
+    string fileName;
+    cin >> fileName;
+    try
+    {
+        service.createList(fileName);
+    }catch(string fail) { cout << fail << endl; }
 }
 
 void userInterface::readPerson()
