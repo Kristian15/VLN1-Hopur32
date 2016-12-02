@@ -23,13 +23,13 @@ void userInterface::run()
         switch (input)
         {
         case List:
-            VectorFromList();
+            vectorFromList();
             break;
         case Add:
             readPerson();
             break;
         case Search:
-            VectorFromSearch();
+            vectorFromSearch();
             break;
         case Openfile:
             readList();
@@ -38,7 +38,7 @@ void userInterface::run()
             quit = doYouWantToQuit();
             break;
         default:
-            cout << endl << "Invalid Input!" << endl << endl;
+            cout << endl << "Invalid Input!" << endl;
             break;
         }
    }while(!quit);
@@ -79,23 +79,48 @@ void userInterface::printSearchOptions()
     cout << "Input: ";
 }
 
-void userInterface::VectorFromList()
+void userInterface::vectorFromList()
 {
     printListOptions();
     int input;
     cin >> input;
-    cout << endl;
+
+    while(cin.fail())
+    {
+        cout << "Invalid input, try again:" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cin >> input;
+    }
+
     printList(service.sortList(input));
 }
 
-void userInterface::VectorFromSearch()
+void userInterface::vectorFromSearch()
 {
-    bool validinput;
-    string searchby;
-    string searchfor;
+    //bool validinput;
+    printSearchOptions();
+    int searchBy;
+    string searchFor;
+    cin >> searchBy;
+
+    while(cin.fail())
+    {
+        cout << "Invalid input, try again:" << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> searchBy;
+    }
+
+    cout << "Enter what you are searching for: ";
+    cin >> ws;
+    getline(cin, searchFor);
+    cout << endl;
+    printSearch(service.searchList(searchFor, searchBy));
+
 
     // **** todo switch case ****
-    do
+    /*do
     {
 
         printSearchOptions();
@@ -143,7 +168,7 @@ void userInterface::VectorFromSearch()
     getline(cin, searchfor);
     cout << endl;
     int searchbyinput = stoi(searchby);
-    printList(service.searchList(searchfor, searchbyinput));
+    printList(service.searchList(searchfor, searchbyinput));*/
 }
 
 void userInterface::printList(vector<Person> printme)
@@ -264,7 +289,7 @@ bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
     return false;
 }
 
-bool userInterface::DoYouWantToContinue()
+bool userInterface::doYouWantToContinue()
 {
     bool quit;
     cout << "Do you want to continue? (Y/N) ";
