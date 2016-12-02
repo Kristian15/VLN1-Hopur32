@@ -2,8 +2,19 @@
 
 using namespace std;
 
+/**
+ * @brief Person::Person
+ */
 Person::Person(){}
 
+/**
+ * @brief Person::Person
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ */
 Person::Person(string name, string gender, string nationality, int byear, int dyear)
 {
     _name = name;
@@ -13,6 +24,13 @@ Person::Person(string name, string gender, string nationality, int byear, int dy
     _dyear  = dyear;
 }
 
+/**
+ * @brief Person::Person
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ */
 Person::Person(string name, string gender, string nationality, int byear)
 {
     _name   = name;
@@ -22,6 +40,12 @@ Person::Person(string name, string gender, string nationality, int byear)
     _dyear  = 0;
 }
 
+/**
+ * @brief operator <<
+ * @param lhs
+ * @param rhs
+ * @return ostream&
+ */
 ostream& operator <<(ostream& lhs, Person& rhs)
 {
     lhs << "Name:          " << rhs._name << endl;

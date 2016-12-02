@@ -12,7 +12,8 @@ class userInterface
 {
 private:
     serviceLayer service;
-    // Prints the main menu:
+
+    // Prints the main menu
     void printMainMenu();
     // Prints options to sort by
     void printListOptions();
@@ -20,26 +21,25 @@ private:
     void printSearchOptions();
     // Prints search command for the input
     void printSearchCommands(int input);
-    // calls printListOptions
-    void printFromList();
-
+    // calls printListOptions and calls sortList() from serviceLayer
+    // calls printList() with the sorted list and calls ifYouWantToSave()
+    void printFromDisplay();
+    // calls printSearchOptions() and printSearchCommands()
+    // calls searchList() from serviceLayer
+    // calls printList() with the search matches
     void printFromSearch();
-    //void printList(vector<Person> printme);
-    // gets a list of Persons(csv file) from user
-    // uses createList() from the serviceLayer
-    //void printSearch(vector<Person> printme);
+    // outputs inMessage, prints printMe and outputs outMessage
     void printList(vector<Person> printMe, string inMessage, string outMessage);
+    // gets a fileName from user and calls createList() in serviceLayer
     void readList();
     // gets information to create a new Person
-    // uses getInput()
-    // uses newPerson() in the serviceLayer
+    // validates input with validateNewPerson() from serviceLayer
+    // uses newPerson() from serviceLayer
     void readPerson();
     bool doYouWantToQuit();
-    void doYouWantToSave(vector<Person> saveMe);
-    void savefile(vector<Person> saveMe);
+    // called by printFromDisplay()
+    void ifYouWantToSave(vector<Person> saveMe);
     void deletePerson();
 public:
-    void run ();
+    void run();
 };
-
-

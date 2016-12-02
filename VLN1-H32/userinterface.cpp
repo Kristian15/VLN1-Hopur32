@@ -1,8 +1,11 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { List = '1', Add, Delete, Search, Openfile, Quit = 'q'};
+enum inputcases { Display = '1', Add, Delete, Search, Openfile, Quit = 'q'};
 
+/**
+ * @brief userInterface::run
+ */
 void userInterface::run()
 {
 
@@ -15,17 +18,18 @@ void userInterface::run()
     cout << endl;
 
     bool quit = false;
+    char input;
+
     do{
         printMainMenu();
-        char input;
         cout << "Input: ";
         cin >> input;
         cout << endl;
 
         switch (input)
         {
-        case List:
-            printFromList();
+        case Display:
+            printFromDisplay();
             break;
         case Add:
             readPerson();
@@ -49,6 +53,9 @@ void userInterface::run()
    }while(!quit);
 }
 
+/**
+ * @brief userInterface::printMainMenu
+ */
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
@@ -61,6 +68,9 @@ void userInterface::printMainMenu()
     cout << "q = quit         - Quit the program" << endl;
 }
 
+/**
+ * @brief userInterface::printListOptions
+ */
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
@@ -85,6 +95,10 @@ void userInterface::printSearchOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printSearchCommands
+ * @param input
+ */
 void userInterface::printSearchCommands(int input)
 {
     if(input == 1)
@@ -114,7 +128,10 @@ void userInterface::printSearchCommands(int input)
     }
 }
 
-void userInterface::printFromList()
+/**
+ * @brief userInterface::printFromDisplay
+ */
+void userInterface::printFromDisplay()
 {
     printListOptions();
     int input;
@@ -131,9 +148,12 @@ void userInterface::printFromList()
 
     vector<Person> sorted = service.sortList(input);
     printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
-    doYouWantToSave(sorted);
+    ifYouWantToSave(sorted);
 }
 
+/**
+ * @brief userInterface::printFromSearch
+ */
 void userInterface::printFromSearch()
 {
     printSearchOptions();
@@ -145,7 +165,7 @@ void userInterface::printFromSearch()
     {
         cout << "Invalid input, try again:" << endl;
         cin.clear();
-        cin.ignore('\n');
+        cin.ignore(256, '\n');
         cin >> searchBy;
     }
 
@@ -156,6 +176,12 @@ void userInterface::printFromSearch()
     printList(service.searchList(searchFor, searchBy), "Search results: ", "No match!");
 }
 
+/**
+ * @brief userInterface::printList
+ * @param printMe
+ * @param inMessage
+ * @param outMessage
+ */
 void userInterface::printList(vector<Person> printMe, string inMessage, string outMessage)
 {
     if(!printMe.empty())
@@ -175,6 +201,9 @@ void userInterface::printList(vector<Person> printMe, string inMessage, string o
     }
 }
 
+/**
+ * @brief userInterface::readList
+ */
 void userInterface::readList()
 {
     cout << "Enter the name of your file: ";
@@ -187,6 +216,9 @@ void userInterface::readList()
     }catch(string fail) { cout << fail << endl; }
 }
 
+/**
+ * @brief userInterface::readPerson
+ */
 void userInterface::readPerson()
 {
     string name, gender, nationality, byear, dyear, input;
@@ -221,13 +253,17 @@ void userInterface::readPerson()
     }
 }
 
+/**
+ * @brief userInterface::doYouWantToQuit
+ * @return bool
+ */
 bool userInterface::doYouWantToQuit()
 {
     cout << "Are you sure you want to quit? Y/N: ";
-    char answer;
-    cin >> answer;
+    char input;
+    cin >> input;
 
-    if (answer == 'y' || answer == 'Y')
+    if ((input == 'y') || (input == 'Y'))
     {
         cout << " _______    _____     _____    _____    ______   __    __  ______   _            " << endl;
         cout << "/  _____|  / ___ \\   / ___ \\  |  __ \\  |  __  \\  \\ \\  / / |  ____| | |     " << endl;
@@ -241,31 +277,34 @@ bool userInterface::doYouWantToQuit()
     return false;
 }
 
-void userInterface::doYouWantToSave(vector<Person> saveMe)
+/**
+ * @brief userInterface::ifYouWantToSave
+ * @param saveMe
+ */
+void userInterface::ifYouWantToSave(vector<Person> saveMe)
 {
     cout << "Do you want to save your sorted list? Y/N: ";
-    char answer;
-    cin >> answer;
+    char input;
+    cin >> input;
 
-    if (answer == 'y' || answer == 'Y')
+    if ((input == 'y') || (input == 'Y'))
     {
-        savefile(saveMe);
+        cout << "Write the name of the file you want to save" << endl;
+        string fileName;
+        cin >> fileName;
+        service.saveData(fileName, saveMe);
     }
 }
 
-void userInterface::savefile(vector<Person> saveMe)
-{
-    cout << "Write the name of the file you want to save" << endl;
-    string fileName;
-    cin >> fileName;
-    service.saveData(fileName, saveMe);
-}
+/**
+ * @brief userInterface::deletePerson
+ */
 void userInterface::deletePerson()
 {
     cout << "Delete all scientists by following name" << endl;
     cout << "Input: ";
-    string deletestring;
+    string deleteString;
     cin >> ws;
-    getline(cin, deletestring);
-    service.deletePerson(deletestring);
+    getline(cin, deleteString);
+    service.deletePerson(deleteString);
 }

@@ -9,26 +9,22 @@ using namespace std;
 class dataLayer
 {
 private:
-    // update function that appends new input to the last used document
-    void updateData(Person person);
-
-    vector<Person> _persons;
-    vector<string> _data;
-    string _fileName;
+    vector<Person> _persons; // the database
+    string _fileName; // current fileName
     const string _d = ";"; // database delimiter
-
+    // appends person to the last used document
+    void updateData(Person person);
 public:
-    // *** functions pertaining to file manipulation ***
-    // getPersons returns the persons vector
     vector<Person> getPersons(){ return _persons; }
-    // load from data file
+    string getDelimeter(){ return _d; }
+    // returns a vector with the lines in fileName
     vector<string> loadData(string fileName);
     // save data to supplied fileName, if fileName == "current" it saves to current filename
     void saveData(string fileName, vector<Person> persons);
-    // set persons overwrites the current persons vector
+    // overwrites the current persons vector
     void setPersons(vector<Person> persons){ _persons = persons; }
     // calls updateData function to save new person and save to vector
     void addPerson(Person person){ updateData(person); }
-    // delets person at the supplied index
+    // deletes person at the supplied index
     void delPerson(int index){  _persons.erase(_persons.begin() + index); }
 };

@@ -1,12 +1,13 @@
 #include "servicelayer.h"
-// *** TAKA IOSTREAM ÚT***
-#include <iostream>
 
 using namespace std;
 
 // **** PRIVATE*****
 
-// Sort help functions:
+/**
+ * @brief serviceLayer::sortByName
+ * @param sortMe
+ */
 void serviceLayer::sortByName(vector<Person>& sortMe)
 {
     Person swap;
@@ -37,6 +38,10 @@ void serviceLayer::sortByName(vector<Person>& sortMe)
     }
 }
 
+/**
+ * @brief serviceLayer::sortByGender
+ * @param sortMe
+ */
 void serviceLayer::sortByGender(vector<Person>& sortMe)
 {
     Person swap;
@@ -67,6 +72,10 @@ void serviceLayer::sortByGender(vector<Person>& sortMe)
     }
 }
 
+/**
+ * @brief serviceLayer::sortByNationality
+ * @param sortMe
+ */
 void serviceLayer::sortByNationality(vector<Person>& sortMe)
 {
     Person swap;
@@ -96,6 +105,10 @@ void serviceLayer::sortByNationality(vector<Person>& sortMe)
     }
 }
 
+/**
+ * @brief serviceLayer::sortByByear
+ * @param sortMe
+ */
 void serviceLayer::sortByByear(vector<Person>& sortMe)
 {
     Person swap;
@@ -126,12 +139,17 @@ void serviceLayer::sortByByear(vector<Person>& sortMe)
     }
 }
 
+/**
+ * @brief serviceLayer::sortByDyear
+ * @param sortMe
+ */
 void serviceLayer::sortByDyear(vector<Person>& sortMe)
 {
     Person swap;
     int min, theDyear;
     size_t tmp;
 
+    // if _dyear in Person is 0 it is put last
     int noDeathYear = 5000;
 
     size_t theSize = sortMe.size();
@@ -169,7 +187,11 @@ void serviceLayer::sortByDyear(vector<Person>& sortMe)
     }
 }
 
-// Find help functions:
+/**
+ * @brief serviceLayer::findByName
+ * @param name
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::findByName(string name)
 {
     vector<Person> findings, theList;
@@ -194,6 +216,11 @@ vector<Person> serviceLayer::findByName(string name)
     return findings;
 }
 
+/**
+ * @brief serviceLayer::findByGender
+ * @param gender
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::findByGender(string gender)
 {
     vector<Person> findings, theList;
@@ -214,6 +241,11 @@ vector<Person> serviceLayer::findByGender(string gender)
     return findings;
 }
 
+/**
+ * @brief serviceLayer::findByNationality
+ * @param nationality
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::findByNationality(string nationality)
 {
     vector<Person> findings, theList;
@@ -238,6 +270,11 @@ vector<Person> serviceLayer::findByNationality(string nationality)
     return findings;
 }
 
+/**
+ * @brief serviceLayer::findByByear
+ * @param byear
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::findByByear(int byear)
 {
     vector<Person> findings, theList;
@@ -258,6 +295,11 @@ vector<Person> serviceLayer::findByByear(int byear)
     return findings;
 }
 
+/**
+ * @brief serviceLayer::findByDyear
+ * @param dyear
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::findByDyear(int dyear)
 {
     vector<Person> findings;
@@ -278,16 +320,20 @@ vector<Person> serviceLayer::findByDyear(int dyear)
     return findings;
 }
 
-// Validate help functions:
+/**
+ * @brief serviceLayer::validateName
+ * @param name
+ * @return bool
+ */
 bool serviceLayer::validateName(string name)
 {
     size_t wordLength = name.length();
     unsigned int tmp = 0;
-    string s;
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        if ((isspace(name[i])) || (!isdigit(name[i])))
+        // if the name does not include a digit it is valid
+        if ((!isdigit(name[i])))
         {
             tmp ++;
         }
@@ -301,6 +347,11 @@ bool serviceLayer::validateName(string name)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateGender
+ * @param gender
+ * @return bool
+ */
 bool serviceLayer::validateGender(string gender)
 {
     gender = toLower(gender);
@@ -313,6 +364,11 @@ bool serviceLayer::validateGender(string gender)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateNationality
+ * @param nationality
+ * @return bool
+ */
 bool serviceLayer::validateNationality(string nationality)
 {
     size_t wordLength = nationality.length();
@@ -320,6 +376,7 @@ bool serviceLayer::validateNationality(string nationality)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
+        // spaces and alphas are alowed
         if ((isspace(nationality[i])) || (isalpha(nationality[i])))
         {
             tmp ++;
@@ -334,6 +391,11 @@ bool serviceLayer::validateNationality(string nationality)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateYear
+ * @param year
+ * @return bool
+ */
 bool serviceLayer::validateYear(string year)
 {
     size_t wordLength = year.length();
@@ -349,7 +411,7 @@ bool serviceLayer::validateYear(string year)
 
     time_t now = time(0);
     tm *ltm = localtime(&now);
-    int currYear = 1900 + ltm->tm_year;
+    int currYear = 1900 + ltm->tm_year; // find current year
 
     if (tmp == wordLength)
     {
@@ -361,7 +423,11 @@ bool serviceLayer::validateYear(string year)
     return false;
 }
 
-// Change uppercase letters in s to lowercase
+/**
+ * @brief serviceLayer::toLower
+ * @param s
+ * @return bool
+ */
 string serviceLayer::toLower(string s)
 {
    string stringLower = s;
@@ -374,12 +440,17 @@ string serviceLayer::toLower(string s)
    return stringLower;
 }
 
-// Splits string s on ";"
-// Calls newPerson() with the splitted string s as input
+/**
+ * @brief serviceLayer::splitLine
+ * @param s
+ * @param newPersons
+ * @param index
+ */
 void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
 {
+    // the function splits the string s and uses to create a new Person
     vector<string> elems;
-    string delimeter = ";";
+    string delimeter = data.getDelimeter();
     size_t pos = 0;
     string token;
     string error = "Database format error, invalid data in line " + to_string(index);
@@ -393,7 +464,8 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
 
     string Name, Gender, Nationality, Byear, Dyear;
 
-    if(elems.size() < 4 || elems.size() > 5)
+    // throw exception if the string did not have the right amount of ';'
+    if((elems.size() < 4) || (elems.size() > 5))
     {
        throw string(error);
     }
@@ -404,6 +476,7 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
         Nationality = elems[2];
         Byear = elems[3];
 
+        // if a death year was not included
         if(elems.size() < 5)
         {
             elems.push_back("0");
@@ -411,6 +484,7 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
 
         Dyear = elems[4];
 
+        // throws exception if the variables are not valid
         if (validateNewPerson(Name, Gender, Nationality, Byear, Dyear))
         {
             Person p = getNewPerson(Name, Gender, Nationality, Byear, Dyear);
@@ -423,15 +497,26 @@ void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
     }
 }
 
+/**
+ * @brief serviceLayer::getNewPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return Person
+ */
 Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
     int Byear, Dyear;
 
+    // if there is no death year
     if(dyear != "0")
     {
         Byear = stoi(byear);
         Dyear = stoi(dyear);
+
         if (Byear < Dyear)
         {
             newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
@@ -445,9 +530,13 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     return newP;
 }
 
-void serviceLayer::findToDelete(string name)
+/**
+ * @brief serviceLayer::findAndDelete
+ * @param name
+ */
+void serviceLayer::findAndDelete(string name)
 {
-    vector<Person> findings, theList;
+    vector<Person> theList;
     Person p;
 
     name = toLower(name);
@@ -467,8 +556,12 @@ void serviceLayer::findToDelete(string name)
 
 //*****PUBLIC*****
 
-// search the vector persons in dataLayer for findMe by by
-// returns a vector with the findings
+/**
+ * @brief serviceLayer::searchList
+ * @param findMe
+ * @param by
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::searchList(string findMe, int by)
 {
     vector<Person> findings;
@@ -495,8 +588,11 @@ vector<Person> serviceLayer::searchList(string findMe, int by)
     return findings;
 }
 
-// sort the list in dataLayer after order
-// return the vector in dataLayer sorted
+/**
+ * @brief serviceLayer::sortList
+ * @param order
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::sortList(int order)
 {
     vector<Person> sortMe = data.getPersons();
@@ -531,8 +627,10 @@ vector<Person> serviceLayer::sortList(int order)
     return sortMe;
 }
 
-// calls loadData() in dataLayer en gets a vector of strings from the file back
-// calls splitLine() for every line from the file
+/**
+ * @brief serviceLayer::createList
+ * @param fileName
+ */
 void serviceLayer::createList(string fileName)
 {
     vector<string> lines = data.loadData(fileName);
@@ -545,14 +643,28 @@ void serviceLayer::createList(string fileName)
     data.setPersons(newPersons);
 }
 
-// create a new Person and add it to persons in the dataLayer
-// uses addPerson() in dataLayer
+/**
+ * @brief serviceLayer::newPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ */
 void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
 }
 
-// validates inputs
+/**
+ * @brief serviceLayer::validateNewPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return bool
+ */
 bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     bool b = false;
@@ -575,15 +687,22 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     return b;
 }
 
-// saveData from fileName
-// uses saveData() in dataLayer
+/**
+ * @brief serviceLayer::saveData
+ * @param fileName
+ * @param saveMe
+ */
 void serviceLayer::saveData(string fileName, vector<Person> saveMe)
 {
     data.saveData(fileName, saveMe);
 }
 
+/**
+ * @brief serviceLayer::deletePerson
+ * @param name
+ */
 void serviceLayer::deletePerson(string name)
 {
-    findToDelete(name);
+    findAndDelete(name);
     saveData("current", data.getPersons());
 }

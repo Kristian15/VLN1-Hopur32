@@ -2,8 +2,10 @@
 
 // **** Private ****
 
-// appends provided data to the end of the last used filename
-// also pushes that data into the person vector
+/**
+ * @brief dataLayer::updateData
+ * @param person
+ */
 void dataLayer::updateData(Person person)
 {
     string data = "";
@@ -40,14 +42,17 @@ void dataLayer::updateData(Person person)
 
 // **** Public ****
 
-// load data from file and returns it in a string vector
-// throws error if datafile does not exist
+/**
+ * @brief dataLayer::loadData
+ * @param fileName
+ * @return vector<string>
+ */
 vector<string> dataLayer::loadData(string fileName)
 {
-    string line;
+   string line;
 
     _fileName = fileName;
-    _data.clear();
+    vector<string> data;
     ifstream iDataStream;
     iDataStream.open(fileName);
 
@@ -57,7 +62,7 @@ vector<string> dataLayer::loadData(string fileName)
         {
             if(!line.empty())
             {
-                _data.push_back(line);
+                data.push_back(line);
             }
         }
 
@@ -69,15 +74,18 @@ vector<string> dataLayer::loadData(string fileName)
         throw string("No data file found!");
     }
 
-    return _data;
+    return data;
 }
 
-// Function formats data and adds a delimiter,
-// then saves data to the provided filename.
+/**
+ * @brief dataLayer::saveData
+ * @param fileName
+ * @param persons
+ */
 void dataLayer::saveData(string fileName, vector<Person> persons)
 {
     string name = "", gender = "", nationality = "", bYear = "", dYear = "";
-    _data.clear();
+    vector<string> data;
 
     if (fileName != "current")
     {
@@ -96,7 +104,7 @@ void dataLayer::saveData(string fileName, vector<Person> persons)
             dYear = to_string(persons[i].getDyear()) + _d;
         }
 
-        _data.push_back(name + gender + nationality + bYear + dYear);
+        data.push_back(name + gender + nationality + bYear + dYear);
 
         name = "";
         gender = "";
@@ -110,9 +118,9 @@ void dataLayer::saveData(string fileName, vector<Person> persons)
 
     if(dataStream)
     {
-        for(unsigned int i = 0; i < _data.size(); i++)
+        for(unsigned int i = 0; i < data.size(); i++)
         {
-            dataStream << _data[i] << endl;
+            dataStream << data[i] << endl;
         }
 
         dataStream.close();
