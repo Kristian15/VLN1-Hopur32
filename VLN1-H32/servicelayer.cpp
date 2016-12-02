@@ -591,4 +591,5 @@ void serviceLayer::saveData(string fileName)
 void serviceLayer::deletePerson(string name)
 {
     data.setPersons(findByNameReverse(name));
+    data.saveData("current");
 }
