@@ -186,7 +186,7 @@ void userInterface::printSearch(vector<Person> printme )
 
 void userInterface::printList(vector<Person> printMe, string inMessage, string outMessage)
 {
-    if(!checkIfVectorIsEmpty(printMe))
+    if(!printMe.empty())
     {
         cout << inMessage << endl;
 
@@ -278,7 +278,7 @@ void userInterface::savefile()
     service.saveData(fileName);
 }
 
-bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
+/*bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
 {
     if(amIEmpty.empty())
     {
@@ -286,7 +286,7 @@ bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
     }
 
     return false;
-}
+}*/
 
 /*bool userInterface::doYouWantToContinue()
 {

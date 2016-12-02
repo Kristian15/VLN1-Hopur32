@@ -20,7 +20,7 @@ private:
     void printSearchOptions();
     // Prints search command for the input
     void printSearchCommands(int input);
-    //
+    // calls printListOptions
     void printFromList();
     void printFromSearch();
     //void printList(vector<Person> printme);
@@ -36,7 +36,7 @@ private:
     bool doYouWantToQuit();
     void doYouWantToSave();
     void savefile();
-    bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
+   // bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
    // bool doYouWantToContinue();
 public:
     void run ();
