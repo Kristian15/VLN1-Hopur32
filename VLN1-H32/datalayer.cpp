@@ -101,7 +101,7 @@ void dataLayer::saveData(string fileName)
     }
 
     ofstream dataStream;
-    dataStream.open(fileName, ios::trunc);
+    dataStream.open(fileName);
 
     if(dataStream)
     {
