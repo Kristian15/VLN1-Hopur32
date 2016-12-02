@@ -1,4 +1,5 @@
 #include "userinterface.h"
+
 //numeration for switch case in main menu
 enum inputcases { List = '1', Add, Search, Openfile, Quit = 'q'};
 
@@ -20,6 +21,7 @@ void userInterface::run()
         cout << "Input: ";
         cin >> input;
         cout << endl;
+
         switch (input)
         {
         case List:
@@ -114,11 +116,11 @@ void userInterface::vectorFromList()
     int input;
     cin >> input;
 
-    while(cin.fail())
+    while(cin.fail() || (input > 5) || (input < 1))
     {
         cout << "Invalid input, try again:" << endl;
         cin.clear();
-        cin.ignore(256,'\n');
+        cin.ignore('\n');
         cin >> input;
     }
 
@@ -132,7 +134,7 @@ void userInterface::vectorFromSearch()
     string searchFor;
     cin >> searchBy;
 
-    while(cin.fail())
+    while(cin.fail() || (searchBy > 5) || (searchBy < 1))
     {
         cout << "Invalid input, try again:" << endl;
         cin.clear();
@@ -140,19 +142,11 @@ void userInterface::vectorFromSearch()
         cin >> searchBy;
     }
 
-    if((searchBy > 0) && (searchBy < 6))
-    {
-        printSearchCommands(searchBy);
-        cin >> ws;
-        getline(cin, searchFor);
-        cout << endl;
-        printSearch(service.searchList(searchFor, searchBy));
-    }
-    else
-    {
-        cout << "Invalid input, try again:" << endl;
-        vectorFromSearch();
-    }
+    printSearchCommands(searchBy);
+    cin >> ws;
+    getline(cin, searchFor);
+    cout << endl;
+    printSearch(service.searchList(searchFor, searchBy));
 }
 
 void userInterface::printList(vector<Person> printme)
