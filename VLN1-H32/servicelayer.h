@@ -41,7 +41,7 @@ private:
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
     // splits the line where ";" is and calls newPerson() with the splitted string as inputs
     void splitLine(string s, vector<Person>& newPersons);
-    Person getPerson(string name, string gender, string nationality, string byear, string dyear);
+    Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
 
 public:
     // searchList() calls the correct find help function with findMe as input
