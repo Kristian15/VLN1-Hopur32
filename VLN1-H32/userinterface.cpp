@@ -261,7 +261,7 @@ void userInterface::savefile()
 }
 void userInterface::deletePerson()
 {
-    cout << "Delete all scientists from that include the following string" << endl;
+    cout << "Delete all scientists that include the following string" << endl;
     cout << "Input: ";
     string deletestring;
     cin >> deletestring;
