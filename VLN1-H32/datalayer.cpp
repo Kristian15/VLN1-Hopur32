@@ -7,10 +7,12 @@
 void dataLayer::updateData(Person person)
 {
     string data = "";
+    bool match = false;
 
     if(_persons.empty())
     {
         _fileName = "backup.txt";
+        match = true;
     }
 
     _persons.push_back(person);
@@ -26,6 +28,10 @@ void dataLayer::updateData(Person person)
 
     if(dataStream)
     {
+        if(match = false)
+        {
+            dataStream << endl;
+        }
         dataStream << data << endl;
         dataStream.close();
     }
@@ -46,7 +52,10 @@ vector<string> dataLayer::loadData(string fileName)
     {
         while(getline(iDataStream,line))
         {
-            _data.push_back(line);
+            if(!line.empty())
+            {
+                _data.push_back(line);
+            }
         }
 
         iDataStream.close();
