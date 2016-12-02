@@ -32,7 +32,7 @@ void dataLayer::updateData(Person person)
         {
             dataStream << endl;
         }
-        dataStream << data << endl;
+        dataStream << data;
         dataStream.close();
     }
 }
