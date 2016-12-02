@@ -383,6 +383,7 @@ void serviceLayer::splitLine(string s)
     string delimeter = ";";
     size_t pos = 0;
     string token;
+    string error;
 
     while ((pos = s.find(delimeter)) != string::npos)
     {
@@ -393,9 +394,10 @@ void serviceLayer::splitLine(string s)
 
     string Name, Gender, Nationality, Byear, Dyear;
 
-    if(elems.size() < 4)
+    if(elems.size() < 4 || elems.size() > 5)
     {
-       cout << "eroror" << endl;
+       error = "Database format error, valid data is loaded";
+       throw string(error);
     }
     else
     {

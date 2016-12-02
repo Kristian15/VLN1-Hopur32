@@ -53,7 +53,7 @@ vector<string> dataLayer::loadData(string fileName)
     }
     else
     {
-        throw new string("No data file found!");
+        throw string("No data file found!");
     }
 
     return _data;
