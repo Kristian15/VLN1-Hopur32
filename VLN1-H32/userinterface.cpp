@@ -112,11 +112,19 @@ void userInterface::vectorFromSearch()
         cin >> searchBy;
     }
 
-    cout << "Enter what you are searching for: ";
-    cin >> ws;
-    getline(cin, searchFor);
-    cout << endl;
-    printSearch(service.searchList(searchFor, searchBy));
+    if((searchBy > 0) && (searchBy < 6))
+    {
+        cout << "Enter what you are searching for: ";
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+        printSearch(service.searchList(searchFor, searchBy));
+    }
+    else
+    {
+        cout << "Invalid input, try again:" << endl;
+        vectorFromSearch();
+    }
 
 
     // **** todo switch case ****

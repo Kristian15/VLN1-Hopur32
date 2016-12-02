@@ -461,19 +461,19 @@ vector<Person> serviceLayer::sortList(int order)
         sortMe = data.getPersons();
 
         switch (order) {
-        case '1':
+        case 1:
             sortByName();
             break;
-        case '2':
+        case 2:
             sortByGender();
             break;
-        case '3':
+        case 3:
             sortByNationality();
             break;
-        case '4':
+        case 4:
             sortByByear();
             break;
-        case '5':
+        case 5:
             break;
             sortByDyear();
         default:
