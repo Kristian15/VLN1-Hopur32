@@ -8,15 +8,12 @@ void userInterface::run()
     cout << " ______    ____   __    ______   __    _   _______   __    ______   _______    ______           " << endl;
     cout << "/  ____|  /  __/ |  |  |  ____| |  \\  | | |__   __| |  |  /  ____| |__   __|  /  ____|         " << endl;
     cout << "\\  `--.  | |     |  |  | |_     |   \\ | |    | |    |  |  \\  `--.     | |     \\  `--.       " << endl;
-    cout << " `---. \\ | |     |  |  |  _|    | |\\ \\| |    | |    |  |   `---. \\    | |      `---. \\     "  << endl;
+    cout << " `---. \\ | |     |  |  |  _|    | |\\ \\| |    | |    |  |   `---. \\    | |      `---. \\     " << endl;
     cout << "/\\___/ / | \\___  |  |  | |____  | | \\   |    | |    |  |  /\\___/ /    | |     /\\___/ /     " << endl;
     cout << "\\_____/   \\____/ |__|  |______| |_|  \\__|    |_|    |__|  \\_____/     |_|     \\_____/      " << endl;
     cout << endl;
 
-
-
     bool quit = false;
-
     do{
         printMainMenu();
         char input;
@@ -51,9 +48,9 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = List      - This allows you to print onto you screen our scientists in 4 different orders" << endl;
-    cout << "2 = Add       - This will add a new scientist to our database" << endl;
-    cout << "3 = Search    - This allows you to search for a scientist in our database" << endl;
+    cout << "1 = List      - This allows you to print out scientists in 5 different orders" << endl;
+    cout << "2 = Add       - This will add a new scientist to your database" << endl;
+    cout << "3 = Search    - This allows you to search for a scientist in your database" << endl;
     cout << "4 = Open File - This allows you to add scientists from a file" << endl;
     cout << "q = quit      - This will quit the program" << endl;
 }
@@ -72,13 +69,13 @@ void userInterface::printListOptions()
 
 void userInterface::printSearchOptions()
 {
-    cout << "Please enter one of the following options to search for:" << endl;
+    cout << "Please enter one of the following options to search by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Name         - This will list all scientists with a specific name" << endl;
-    cout << "2 = Gender       - This will list all scientists with a specific gender (male / female)" << endl;
-    cout << "3 = Nationality  - This will list all scientists by their nationality" << endl;
-    cout << "4 = Birth        - This will list all scientists with a specific birth year" << endl;
-    cout << "5 = Death        - This will list all scientists with a specific death year" << endl;
+    cout << "1 = Name          - This will list all scientists with a specific name" << endl;
+    cout << "2 = Gender        - This will list all scientists with specific gender (male / female)" << endl;
+    cout << "3 = Nationality   - This will list all scientists with a specific nationality" << endl;
+    cout << "4 = Year of birth - This will list all scientists with a specific birth year" << endl;
+    cout << "5 = Year of death - This will list all scientists with a specific death year" << endl;
     cout << "Input: ";
 }
 
@@ -87,48 +84,47 @@ void userInterface::VectorFromList()
     printListOptions();
     int input;
     cin >> input;
-
+    cout << endl;
     printList(service.sortList(input));
 }
 
 void userInterface::VectorFromSearch()
 {
-    //printSearch(searchVector);
     bool validinput;
-    int searchby;
+    string searchby;
     string searchfor;
 
     // **** todo switch case ****
     do
     {
+
         printSearchOptions();
         cin >> searchby;
-
-        if(searchby == 1)
+        if(searchby == "1")
         {
             cout << "Enter the name you want to search for: " << endl;
             cout << "Name: ";
             validinput = true;
         }
-        else if(searchby == 2)
+        else if(searchby == "2")
         {
             cout << "Enter either \"male\" or \"female\": " << endl;
             cout << "Gender: ";
             validinput = true;
         }
-        else if(searchby == 3)
+        else if(searchby == "3")
         {
             cout << "Enter nationality: " << endl;
             cout << "Nationality: ";
             validinput = true;
         }
-        else if(searchby == 4)
+        else if(searchby == "4")
         {
             cout << "Enter the year of birth you want to search for: " << endl;
             cout << "Year of birth: ";
             validinput = true;
         }
-        else if(searchby == 5)
+        else if(searchby == "5")
         {
             cout << "Enter the year of death you want to search for: " << endl;
             cout << "Year of death: ";
@@ -146,7 +142,8 @@ void userInterface::VectorFromSearch()
     cin >> ws;
     getline(cin, searchfor);
     cout << endl;
-    printList(service.searchList(searchfor, searchby));
+    int searchbyinput = stoi(searchby);
+    printList(service.searchList(searchfor, searchbyinput));
 }
 
 void userInterface::printList(vector<Person> printme)
