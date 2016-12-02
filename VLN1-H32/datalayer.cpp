@@ -28,7 +28,7 @@ void dataLayer::updateData(Person person)
 
     if(dataStream)
     {
-        if(match = false)
+        if(match == false)
         {
             dataStream << endl;
         }
