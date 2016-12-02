@@ -25,13 +25,13 @@ void userInterface::run()
         switch (input)
         {
         case List:
-            vectorFromList();
+            printFromList();
             break;
         case Add:
             readPerson();
             break;
         case Search:
-            vectorFromSearch();
+            printFromSearch();
             break;
         case Openfile:
             readList();
@@ -110,7 +110,7 @@ void userInterface::printSearchCommands(int input)
     }
 }
 
-void userInterface::vectorFromList()
+void userInterface::printFromList()
 {
     printListOptions();
     int input;
@@ -120,14 +120,14 @@ void userInterface::vectorFromList()
     {
         cout << "Invalid input, try again:" << endl;
         cin.clear();
-        cin.ignore('\n');
+        cin.ignore(256, '\n');
         cin >> input;
     }
 
     printList(service.sortList(input));
 }
 
-void userInterface::vectorFromSearch()
+void userInterface::printFromSearch()
 {
     printSearchOptions();
     int searchBy;

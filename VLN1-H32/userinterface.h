@@ -4,7 +4,6 @@
 #include <iostream>
 #include "servicelayer.h"
 #include <iomanip>
-#include <windows.h>
 using namespace std;
 
 class userInterface
@@ -18,8 +17,8 @@ private:
     // Prints search options
     void printSearchOptions();
     void printSearchCommands(int input);
-    void vectorFromList();
-    void vectorFromSearch();
+    void printFromList();
+    void printFromSearch();
     void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
