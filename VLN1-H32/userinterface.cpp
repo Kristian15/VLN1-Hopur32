@@ -265,4 +265,5 @@ void userInterface::deletePerson()
     cout << "Input: ";
     string deletestring;
     cin >> deletestring;
+    service.deletePerson(deletestring);
 }

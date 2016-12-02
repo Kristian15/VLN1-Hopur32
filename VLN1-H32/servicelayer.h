@@ -20,6 +20,8 @@ private:
     void sortByByear(vector<Person>& sortMe);
     void sortByDyear(vector<Person>& sortMe);
 
+    vector<Person> findByNameReverse(string name);
+
     // find functions, called by searchList():
     // the functions find all matching elements to the input in
     // the vector persons in dataLayer
@@ -40,7 +42,7 @@ private:
     string toLower(string s);
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
     // splits the line where ";" is and calls newPerson() with the splitted string as inputs
-    void splitLine(string s, vector<Person>& newPersons);
+    void splitLine(string s, vector<Person>& newPersons, int index);
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
 
 public:
@@ -61,4 +63,5 @@ public:
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
     // calls saveData in dataLayer with fileName as input
     void saveData(string fileName);
+    void deletePerson(string name);
 };

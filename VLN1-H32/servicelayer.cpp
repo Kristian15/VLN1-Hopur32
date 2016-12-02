@@ -170,6 +170,31 @@ void serviceLayer::sortByDyear(vector<Person>& sortMe)
 }
 
 // Find help functions:
+vector<Person> serviceLayer::findByNameReverse(string name)
+{
+    vector<Person> findings, theList;
+    Person p;
+    string searchMe;
+    size_t found;
+
+    theList = data.getPersons();
+
+    for (unsigned int i = 0; i < theList.size(); i++)
+    {
+        p = theList[i];
+        searchMe = toLower(p.getName());
+        found = searchMe.find(toLower(name));
+
+        if (found == string::npos)
+        {
+           findings.push_back(p);
+        }
+    }
+
+    return findings;
+
+}
+
 vector<Person> serviceLayer::findByName(string name)
 {
     vector<Person> findings, theList;
@@ -376,13 +401,13 @@ string serviceLayer::toLower(string s)
 
 // Splits string s on ";"
 // Calls newPerson() with the splitted string s as input
-void serviceLayer::splitLine(string s, vector<Person>& newPersons)
+void serviceLayer::splitLine(string s, vector<Person>& newPersons, int index)
 {
     vector<string> elems;
     string delimeter = ";";
     size_t pos = 0;
     string token;
-    string error = "Database format error, valid data is loaded";
+    string error = "Database format error, invalid data in line " + to_string(index);
 
     while ((pos = s.find(delimeter)) != string::npos)
     {
@@ -520,7 +545,7 @@ void serviceLayer::createList(string fileName)
 
     for (unsigned int i = 0; i < lines.size(); i++)
     {
-        splitLine(lines[i], newPersons);
+        splitLine(lines[i], newPersons, (i + 1));
     }
     cout << newPersons[0];
     data.setPersons(newPersons);
@@ -561,4 +586,10 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
 void serviceLayer::saveData(string fileName)
 {
     data.saveData(fileName);
+}
+
+void serviceLayer::deletePerson(string name)
+{
+    data.setPersons(findByNameReverse(name));
+    data.saveData("current");
 }

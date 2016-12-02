@@ -74,7 +74,10 @@ void dataLayer::saveData(string fileName)
 {
     string name = "", gender = "", nationality = "", bYear = "", dYear = "";
 
-    _fileName = fileName;
+    if (fileName != "current")
+    {
+        _fileName = fileName;
+    }
     _data.clear();
 
     for (unsigned int i = 0; i < _persons.size(); i++)
