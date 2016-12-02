@@ -7,13 +7,12 @@ using namespace std;
 // **** PRIVATE*****
 
 // Sort help functions:
-void serviceLayer::sortByName()
+void serviceLayer::sortByName(vector<Person>& sortMe)
 {
     Person swap;
     string min, theName;
     size_t tmp;
 
-    vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
@@ -40,13 +39,12 @@ void serviceLayer::sortByName()
     data.setPersons(sortMe);
 }
 
-void serviceLayer::sortByGender()
+void serviceLayer::sortByGender(vector<Person>& sortMe)
 {
     Person swap;
     string min, theGender;
     size_t tmp;
 
-    vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
@@ -73,13 +71,12 @@ void serviceLayer::sortByGender()
     data.setPersons(sortMe);
 }
 
-void serviceLayer::sortByNationality()
+void serviceLayer::sortByNationality(vector<Person>& sortMe)
 {
     Person swap;
     string min, theNationality;
     size_t tmp;
 
-    vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
@@ -105,13 +102,12 @@ void serviceLayer::sortByNationality()
     data.setPersons(sortMe);
 }
 
-void serviceLayer::sortByByear()
+void serviceLayer::sortByByear(vector<Person>& sortMe)
 {
     Person swap;
     int min, theByear;
     size_t tmp;
 
-    vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
@@ -138,13 +134,12 @@ void serviceLayer::sortByByear()
     data.setPersons(sortMe);
 }
 
-void serviceLayer::sortByDyear()
+void serviceLayer::sortByDyear(vector<Person>& sortMe)
 {
     Person swap;
     int min, theDyear;
     size_t tmp;
 
-    vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
@@ -377,13 +372,13 @@ string serviceLayer::toLower(string s)
 
 // Splits string s on ";"
 // Calls newPerson() with the splitted string s as input
-void serviceLayer::splitLine(string s)
+void serviceLayer::splitLine(string s, vector<Person>& newPersons)
 {
     vector<string> elems;
     string delimeter = ";";
     size_t pos = 0;
     string token;
-    string error;
+    string error = "Database format error, valid data is loaded";
 
     while ((pos = s.find(delimeter)) != string::npos)
     {
@@ -396,7 +391,6 @@ void serviceLayer::splitLine(string s)
 
     if(elems.size() < 4 || elems.size() > 5)
     {
-       error = "Database format error, valid data is loaded";
        throw string(error);
     }
     else
@@ -415,89 +409,16 @@ void serviceLayer::splitLine(string s)
 
         if (validateNewPerson(Name, Gender, Nationality, Byear, Dyear))
         {
-            newPerson(Name, Gender, Nationality, Byear, Dyear);
+            newPersons.push_back(getPerson(Name, Gender, Nationality, Byear, Dyear));
+        }
+        else
+        {
+            throw string(error);
         }
     }
 }
 
-//*****PUBLIC*****
-
-// search the vector persons in dataLayer for findMe by by
-// returns a vector with the findings
-vector<Person> serviceLayer::searchList(string findMe, int by)
-{
-    vector<Person> findings;
-
-    switch (by) {
-    case '1':
-        findings = findByName(findMe);
-        break;
-    case '2':
-        findings = findByGender(findMe);
-        break;
-    case '3':
-        findings = findByNationality(findMe);
-        break;
-    case '4':
-        findings = findByByear(stoi(findMe));
-        break;
-    case '5':
-        break;
-        findings = findByDyear(stoi(findMe));
-    default:
-        break;
-    }
-    return findings;
-}
-
-// sort the list in dataLayer after order
-// return the vector in dataLayer sorted
-vector<Person> serviceLayer::sortList(int order)
-{
-    vector<Person> sortMe = data.getPersons();
-
-    if (!sortMe.empty())
-    {
-        sortMe = data.getPersons();
-
-        switch (order) {
-        case 1:
-            sortByName();
-            break;
-        case 2:
-            sortByGender();
-            break;
-        case 3:
-            sortByNationality();
-            break;
-        case 4:
-            sortByByear();
-            break;
-        case 5:
-            break;
-            sortByDyear();
-        default:
-            break;
-        }
-    }
-    return sortMe;
-}
-
-// calls loadData() in dataLayer en gets a vector of strings from the file back
-// calls splitLine() for every line from the file
-void serviceLayer::createList(string fileName)
-{
-    vector<string> lines = data.loadData(fileName);
-
-    for (unsigned int i = 0; i < lines.size(); i++)
-    {
-        splitLine(lines[i]);
-    }
-}
-
-// create a new Person and add it to persons in the dataLayer
-// uses addPerson() in dataLayer
-void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
+Person serviceLayer:: getPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
     int Byear, Dyear;
@@ -516,7 +437,94 @@ void serviceLayer::newPerson(string name, string gender, string nationality, str
         newP = Person(name, gender, nationality, stoi(byear));
     }
 
-    data.addPerson(newP);
+    return newP;
+}
+
+//*****PUBLIC*****
+
+// search the vector persons in dataLayer for findMe by by
+// returns a vector with the findings
+vector<Person> serviceLayer::searchList(string findMe, int by)
+{
+    vector<Person> findings;
+
+    switch (by) {
+    case 1:
+        findings = findByName(findMe);
+        break;
+    case 2:
+        findings = findByGender(findMe);
+        break;
+    case 3:
+        findings = findByNationality(findMe);
+        break;
+    case 4:
+        findings = findByByear(stoi(findMe));
+        break;
+    case 5:
+        break;
+        findings = findByDyear(stoi(findMe));
+    default:
+        break;
+    }
+    return findings;
+}
+
+// sort the list in dataLayer after order
+// return the vector in dataLayer sorted
+vector<Person> serviceLayer::sortList(int order)
+{
+    vector<Person> sortMe = data.getPersons();
+    cout << "her1" << endl;
+
+    if (!sortMe.empty())
+    {
+        sortMe = data.getPersons();
+
+        switch (order) {
+        case 1:
+            sortByName(sortMe);
+            break;
+        case 2:
+            sortByGender(sortMe);
+            break;
+        case 3:
+            sortByNationality(sortMe);
+            break;
+        case 4:
+            sortByByear(sortMe);
+            break;
+        case 5:
+            break;
+            sortByDyear(sortMe);
+        default:
+            break;
+        }
+    }
+
+    return sortMe;
+}
+
+// calls loadData() in dataLayer en gets a vector of strings from the file back
+// calls splitLine() for every line from the file
+void serviceLayer::createList(string fileName)
+{
+    vector<string> lines = data.loadData(fileName);
+    vector<Person> newPersons;
+
+    for (unsigned int i = 0; i < lines.size(); i++)
+    {
+        splitLine(lines[i], newPersons);
+    }
+
+    data.setPersons(newPersons);
+}
+
+// create a new Person and add it to persons in the dataLayer
+// uses addPerson() in dataLayer
+void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
+{
+    data.addPerson(getPerson(name, gender, nationality, byear, dyear));
 }
 
 // validates inputs

@@ -14,11 +14,11 @@ private:
 
     // sort functions, called by sortList():
     // the functions sort the vector persons from dataLayer
-    void sortByName();
-    void sortByGender();
-    void sortByNationality();
-    void sortByByear();
-    void sortByDyear();
+    void sortByName(vector<Person>& sortMe);
+    void sortByGender(vector<Person>& sortMe);
+    void sortByNationality(vector<Person>& sortMe);
+    void sortByByear(vector<Person>& sortMe);
+    void sortByDyear(vector<Person>& sortMe);
 
     // find functions, called by searchList():
     // the functions find all matching elements to the input in
@@ -40,7 +40,8 @@ private:
     string toLower(string s);
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
     // splits the line where ";" is and calls newPerson() with the splitted string as inputs
-    void splitLine(string s);
+    void splitLine(string s, vector<Person>& newPersons);
+    Person getPerson(string name, string gender, string nationality, string byear, string dyear);
 
 public:
     // searchList() calls the correct find help function with findMe as input
