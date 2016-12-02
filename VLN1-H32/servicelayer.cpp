@@ -132,16 +132,29 @@ void serviceLayer::sortByDyear(vector<Person>& sortMe)
     int min, theDyear;
     size_t tmp;
 
+    int noDeathYear = 5000;
+
     size_t theSize = sortMe.size();
 
     for(size_t i = 0; i < (theSize - 1); i++)
     {
         min = sortMe[i].getDyear();
+
+        if(min == 0)
+        {
+            min = noDeathYear;
+        }
+
         tmp = i;
 
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theDyear = sortMe[j].getDyear();
+
+            if(theDyear == 0)
+            {
+                theDyear = noDeathYear;
+            }
 
             if(min > theDyear)
             {
@@ -486,8 +499,10 @@ vector<Person> serviceLayer::sortList(int order)
             sortByByear(sortMe);
             break;
         case 5:
-            break;
+        {
             sortByDyear(sortMe);
+            break;
+        }
         default:
             break;
         }
