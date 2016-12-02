@@ -35,8 +35,8 @@ private:
     // uses newPerson() in the serviceLayer
     void readPerson();
     bool doYouWantToQuit();
-    void doYouWantToSave();
-    void savefile();
+    void doYouWantToSave(vector<Person> saveMe);
+    void savefile(vector<Person> saveMe);
     void deletePerson();
 public:
     void run ();

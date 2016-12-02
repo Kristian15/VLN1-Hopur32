@@ -62,6 +62,6 @@ public:
     // returns true if the input is valid and false otherwise
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
     // calls saveData in dataLayer with fileName as input
-    void saveData(string fileName);
+    void saveData(string fileName, vector<Person> saveMe);
     void deletePerson(string name);
 };

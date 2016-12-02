@@ -129,8 +129,9 @@ void userInterface::printFromList()
         cin >> input;
     }
 
-    printList(service.sortList(input), "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
-    doYouWantToSave();
+    vector<Person> sorted = service.sortList(input);
+    printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    doYouWantToSave(sorted);
 }
 
 void userInterface::printFromSearch()
@@ -240,7 +241,7 @@ bool userInterface::doYouWantToQuit()
     return false;
 }
 
-void userInterface::doYouWantToSave()
+void userInterface::doYouWantToSave(vector<Person> saveMe)
 {
     cout << "Do you want to save your sorted list? Y/N: ";
     char answer;
@@ -248,16 +249,16 @@ void userInterface::doYouWantToSave()
 
     if (answer == 'y' || answer == 'Y')
     {
-        savefile();
+        savefile(saveMe);
     }
 }
 
-void userInterface::savefile()
+void userInterface::savefile(vector<Person> saveMe)
 {
     cout << "Write the name of the file you want to save" << endl;
     string fileName;
     cin >> fileName;
-    service.saveData(fileName);
+    service.saveData(fileName, saveMe);
 }
 void userInterface::deletePerson()
 {

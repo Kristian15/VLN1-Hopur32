@@ -580,13 +580,13 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
 
 // saveData from fileName
 // uses saveData() in dataLayer
-void serviceLayer::saveData(string fileName)
+void serviceLayer::saveData(string fileName, vector<Person> saveMe)
 {
-    data.saveData(fileName);
+    data.saveData(fileName, saveMe);
 }
 
 void serviceLayer::deletePerson(string name)
 {
     data.setPersons(findByNameReverse(name));
-    data.saveData("current");
+    saveData("current", data.getPersons());
 }
