@@ -73,6 +73,7 @@ vector<string> dataLayer::loadData(string fileName)
 void dataLayer::saveData(string fileName, vector<Person> persons)
 {
     string name = "", gender = "", nationality = "", bYear = "", dYear = "";
+    _data.clear();
 
     if (fileName != "current")
     {
