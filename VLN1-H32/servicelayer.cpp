@@ -284,13 +284,9 @@ bool serviceLayer::validateName(string name)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        s = name[i];
-
-        if ((isspace(name[i])) || (isalpha(name[i])))
+        if ((isspace(name[i])) || (!isdigit(name[i])))
         {
             tmp ++;
-            if (s == ".")
-                tmp++;
         }
     }
 
