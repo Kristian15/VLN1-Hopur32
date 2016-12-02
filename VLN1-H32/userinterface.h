@@ -17,6 +17,7 @@ private:
     void printListOptions();
     // Prints search options
     void printSearchOptions();
+    void printSearchCommands(int input);
     void vectorFromList();
     void vectorFromSearch();
     void printList(vector<Person> printme);
@@ -31,8 +32,6 @@ private:
     bool doYouWantToQuit();
     void doYouWantToSave();
     void savefile();
-    //bool checkIfVectorIsEmptyFromSearch(const vector<Person>);
-    //bool checkIfVectorIsEmptyFromList(const vector<Person>);
     bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
     bool doYouWantToContinue();
 public:

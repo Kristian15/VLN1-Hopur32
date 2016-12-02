@@ -79,6 +79,35 @@ void userInterface::printSearchOptions()
     cout << "Input: ";
 }
 
+void userInterface::printSearchCommands(int input)
+{
+    if(input == 1)
+    {
+        cout << "Enter the name you want to search for: " << endl;
+        cout << "Name: ";
+    }
+    else if(input == 2)
+    {
+        cout << "Enter either \"male\" or \"female\": " << endl;
+        cout << "Gender: ";
+    }
+    else if(input == 3)
+    {
+        cout << "Enter nationality: " << endl;
+        cout << "Nationality: ";
+    }
+    else if(input == 4)
+    {
+        cout << "Enter the year of birth you want to search for: " << endl;
+        cout << "Year of birth: ";
+    }
+    else if(input == 5)
+    {
+        cout << "Enter the year of death you want to search for: " << endl;
+        cout << "Year of death: ";
+    }
+}
+
 void userInterface::vectorFromList()
 {
     printListOptions();
@@ -98,8 +127,6 @@ void userInterface::vectorFromList()
 
 void userInterface::vectorFromSearch()
 {
-    /*printSearchOptions();
-    //bool validinput;
     printSearchOptions();
     int searchBy;
     string searchFor;
@@ -115,7 +142,7 @@ void userInterface::vectorFromSearch()
 
     if((searchBy > 0) && (searchBy < 6))
     {
-        cout << "Enter what you are searching for: ";
+        printSearchCommands(searchBy);
         cin >> ws;
         getline(cin, searchFor);
         cout << endl;
@@ -125,59 +152,7 @@ void userInterface::vectorFromSearch()
     {
         cout << "Invalid input, try again:" << endl;
         vectorFromSearch();
-    }*/
-    bool validinput;
-    string searchby;
-    string searchfor;
-    do
-    {
-
-        printSearchOptions();
-        cin >> searchby;
-        if(searchby == "1")
-        {
-            cout << "Enter the name you want to search for: " << endl;
-            cout << "Name: ";
-            validinput = true;
-        }
-        else if(searchby == "2")
-        {
-            cout << "Enter either \"male\" or \"female\": " << endl;
-            cout << "Gender: ";
-            validinput = true;
-        }
-        else if(searchby == "3")
-        {
-            cout << "Enter nationality: " << endl;
-            cout << "Nationality: ";
-            validinput = true;
-        }
-        else if(searchby == "4")
-        {
-            cout << "Enter the year of birth you want to search for: " << endl;
-            cout << "Year of birth: ";
-            validinput = true;
-        }
-        else if(searchby == "5")
-        {
-            cout << "Enter the year of death you want to search for: " << endl;
-            cout << "Year of death: ";
-            validinput = true;
-        }
-        else
-        {
-            cout << "invalid input!";
-            validinput = false;
-            cout << endl;
-        }
-
-    }while(!validinput);
-
-    cin >> ws;
-    getline(cin, searchfor);
-    cout << endl;
-    int searchbyinput = stoi(searchby);
-    printList(service.searchList(searchfor, searchbyinput));
+    }
 }
 
 void userInterface::printList(vector<Person> printme)
