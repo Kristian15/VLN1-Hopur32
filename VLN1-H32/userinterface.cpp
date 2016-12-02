@@ -50,22 +50,22 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = List      - This allows you to print out scientists in 5 different orders" << endl;
-    cout << "2 = Add       - This will add a new scientist to your database" << endl;
-    cout << "3 = Search    - This allows you to search for a scientist in your database" << endl;
-    cout << "4 = Open File - This allows you to add scientists from a file" << endl;
-    cout << "q = quit      - This will quit the program" << endl;
+    cout << "1 = Display list - Displays data in the selected order" << endl;
+    cout << "2 = Add          - Adds scientist to your database" << endl;
+    cout << "3 = Search       - Search for a scientist in your database" << endl;
+    cout << "4 = Open File    - Adds scientists from a file" << endl;
+    cout << "q = quit         - Quit the program" << endl;
 }
 
 void userInterface::printListOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Name         - This will sort the scientists in alphabetic order" << endl;
-    cout << "2 = Gender       - This will sort the scientists, showing females first" << endl;
-    cout << "3 = Nationality  - This will sort the scientists by their nationality" << endl;
-    cout << "4 = Birthyear    - This will sort the scientists by date of birth" << endl;
-    cout << "5 = Deathyear    - This will sort the scientists by who deceased first" << endl;
+    cout << "1 = Name         - Sort the scientists in alphabetic order" << endl;
+    cout << "2 = Gender       - Sort the scientists, showing females first" << endl;
+    cout << "3 = Nationality  - Sort the scientists by their nationality" << endl;
+    cout << "4 = Birthyear    - Sort the scientists by date of birth" << endl;
+    cout << "5 = Deathyear    - Sort the scientists by who deceased first" << endl;
     cout << "Input: ";
 }
 
@@ -73,11 +73,11 @@ void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Name          - This will list all scientists with a specific name" << endl;
-    cout << "2 = Gender        - This will list all scientists with specific gender (male / female)" << endl;
-    cout << "3 = Nationality   - This will list all scientists with a specific nationality" << endl;
-    cout << "4 = Year of birth - This will list all scientists with a specific birth year" << endl;
-    cout << "5 = Year of death - This will list all scientists with a specific death year" << endl;
+    cout << "1 = Name          - Search for scientists with a specific name" << endl;
+    cout << "2 = Gender        - Search for scientists with specific gender (male / female)" << endl;
+    cout << "3 = Nationality   - Search for scientists with a specific nationality" << endl;
+    cout << "4 = Year of birth - Search for scientists with a specific birth year" << endl;
+    cout << "5 = Year of death - Search for scientists with a specific death year" << endl;
     cout << "Input: ";
 }
 
