@@ -280,10 +280,11 @@ bool serviceLayer::validateName(string name)
 {
     size_t wordLength = name.length();
     unsigned int tmp = 0;
+    string s;
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        if ((isspace(name[i])) || (isalpha(name[i])))
+        if ((isspace(name[i])) || (!isdigit(name[i])))
         {
             tmp ++;
         }
