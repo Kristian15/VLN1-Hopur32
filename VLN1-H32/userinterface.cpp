@@ -126,42 +126,10 @@ void userInterface::vectorFromSearch()
         cout << "Invalid input, try again:" << endl;
         vectorFromSearch();
     }*/
-    /*bool validinput;
-    string searchBy;
-    string searchFor;
-        if(searchBy == 1)
-        {
-            cout << "Enter the name you want to search for: " << endl;
-            cout << "Name: ";
-        }
-        if(searchBy == 2)
-        {
-            cout << "Enter either \"male\" or \"female\": " << endl;
-            cout << "Gender: ";
-        }
-        if(searchBy == 3)
-        {
-            cout << "Enter nationality: " << endl;
-            cout << "Nationality: ";
-        }
-        if(searchBy == 4)
-        {
-            cout << "Enter the year of birth you want to search for: " << endl;
-            cout << "Year of birth: ";
-        }
-        if(searchBy == 5)
-        {
-            cout << "Enter the year of death you want to search for: " << endl;
-            cout << "Year of death: ";
-        }
-    }
-    cin >> ws;
-    getline(cin, searchFor);
-    cout << endl;
-    printSearch(service.searchList(searchFor, searchBy));
-
-    // **** todo switch case ****
-    /*do
+    bool validinput;
+    string searchby;
+    string searchfor;
+    do
     {
 
         printSearchOptions();
@@ -209,7 +177,7 @@ void userInterface::vectorFromSearch()
     getline(cin, searchfor);
     cout << endl;
     int searchbyinput = stoi(searchby);
-    printList(service.searchList(searchfor, searchbyinput));*/
+    printList(service.searchList(searchfor, searchbyinput));
 }
 
 void userInterface::printList(vector<Person> printme)
