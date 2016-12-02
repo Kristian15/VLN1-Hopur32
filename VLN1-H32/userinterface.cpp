@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { List = '1', Add, Search, Openfile, Quit = 'q'};
+enum inputcases { List = '1', Add, Delete, Search, Openfile, Quit = 'q'};
 
 void userInterface::run()
 {
@@ -30,6 +30,9 @@ void userInterface::run()
         case Add:
             readPerson();
             break;
+        case Delete:
+            deletePerson();
+            break;
         case Search:
             printFromSearch();
             break;
@@ -52,8 +55,9 @@ void userInterface::printMainMenu()
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "1 = Display list - Displays data in the selected order" << endl;
     cout << "2 = Add          - Adds scientist to your database" << endl;
-    cout << "3 = Search       - Search for a scientist in your database" << endl;
-    cout << "4 = Open File    - Adds scientists from a file" << endl;
+    cout << "3 = Delete       - Deletes scientist from you databse" << endl;
+    cout << "4 = Search       - Search for a scientist in your database" << endl;
+    cout << "5 = Open File    - Adds scientists from a file" << endl;
     cout << "q = quit         - Quit the program" << endl;
 }
 
@@ -254,4 +258,11 @@ void userInterface::savefile()
     string fileName;
     cin >> fileName;
     service.saveData(fileName);
+}
+void userInterface::deletePerson()
+{
+    cout << "Delete all scientists from that include the following string" << endl;
+    cout << "Input: ";
+    string deletestring;
+    cin >> deletestring;
 }

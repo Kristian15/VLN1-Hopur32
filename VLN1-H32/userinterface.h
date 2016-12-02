@@ -22,6 +22,7 @@ private:
     void printSearchCommands(int input);
     // calls printListOptions
     void printFromList();
+
     void printFromSearch();
     //void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
@@ -36,6 +37,7 @@ private:
     bool doYouWantToQuit();
     void doYouWantToSave();
     void savefile();
+    void deletePerson();
 public:
     void run ();
 };
