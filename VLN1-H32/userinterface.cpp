@@ -138,7 +138,7 @@ void userInterface::vectorFromSearch()
     {
         cout << "Invalid input, try again:" << endl;
         cin.clear();
-        cin.ignore(256, '\n');
+        cin.ignore('\n');
         cin >> searchBy;
     }
 
