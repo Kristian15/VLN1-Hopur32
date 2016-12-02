@@ -78,7 +78,6 @@ void dataLayer::saveData(string fileName)
     {
         _fileName = fileName;
     }
-    _data.clear();
 
     for (unsigned int i = 0; i < _persons.size(); i++)
     {
@@ -106,8 +105,10 @@ void dataLayer::saveData(string fileName)
 
     if(dataStream)
     {
+        cout << "heeeer" << endl;
         for(unsigned int i = 0; i < _data.size(); i++)
         {
+            cout << "her" << endl;
             dataStream << _data[i] << endl;
         }
 
