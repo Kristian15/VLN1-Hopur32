@@ -1,9 +1,11 @@
 #pragma once
+
+#include "servicelayer.h"
 #include <vector>
 #include <string>
 #include <iostream>
-#include "servicelayer.h"
 #include <iomanip>
+
 using namespace std;
 
 class userInterface
@@ -16,13 +18,16 @@ private:
     void printListOptions();
     // Prints search options
     void printSearchOptions();
+    // Prints search command for the input
     void printSearchCommands(int input);
+    //
     void printFromList();
     void printFromSearch();
-    void printList(vector<Person> printme);
+    //void printList(vector<Person> printme);
     // gets a list of Persons(csv file) from user
     // uses createList() from the serviceLayer
-    void printSearch(vector<Person> printme);
+    //void printSearch(vector<Person> printme);
+    void printList(vector<Person> printMe, string inMessage, string outMessage);
     void readList();
     // gets information to create a new Person
     // uses getInput()
@@ -32,7 +37,7 @@ private:
     void doYouWantToSave();
     void savefile();
     bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
-    bool doYouWantToContinue();
+   // bool doYouWantToContinue();
 public:
     void run ();
 };

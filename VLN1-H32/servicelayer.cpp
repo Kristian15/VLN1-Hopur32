@@ -35,8 +35,6 @@ void serviceLayer::sortByName(vector<Person>& sortMe)
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
-    data.setPersons(sortMe);
 }
 
 void serviceLayer::sortByGender(vector<Person>& sortMe)
@@ -67,8 +65,6 @@ void serviceLayer::sortByGender(vector<Person>& sortMe)
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
-    data.setPersons(sortMe);
 }
 
 void serviceLayer::sortByNationality(vector<Person>& sortMe)
@@ -98,8 +94,6 @@ void serviceLayer::sortByNationality(vector<Person>& sortMe)
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
-    data.setPersons(sortMe);
 }
 
 void serviceLayer::sortByByear(vector<Person>& sortMe)
@@ -130,8 +124,6 @@ void serviceLayer::sortByByear(vector<Person>& sortMe)
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
-    data.setPersons(sortMe);
 }
 
 void serviceLayer::sortByDyear(vector<Person>& sortMe)
@@ -162,8 +154,6 @@ void serviceLayer::sortByDyear(vector<Person>& sortMe)
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
-
-    data.setPersons(sortMe);
 }
 
 // Find help functions:
@@ -477,7 +467,6 @@ vector<Person> serviceLayer::searchList(string findMe, int by)
 vector<Person> serviceLayer::sortList(int order)
 {
     vector<Person> sortMe = data.getPersons();
-    cout << "her1" << endl;
 
     if (!sortMe.empty())
     {

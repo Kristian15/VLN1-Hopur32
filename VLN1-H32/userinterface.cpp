@@ -124,7 +124,7 @@ void userInterface::printFromList()
         cin >> input;
     }
 
-    printList(service.sortList(input));
+    printList(service.sortList(input), "Here is your list sorted: ", "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
 void userInterface::printFromSearch()
@@ -146,9 +146,9 @@ void userInterface::printFromSearch()
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
-    printSearch(service.searchList(searchFor, searchBy));
+    printList(service.searchList(searchFor, searchBy), "Here are the matches: ", "No match!");
 }
-
+/*
 void userInterface::printList(vector<Person> printme)
 {
     if(!checkIfVectorIsEmpty(printme))
@@ -159,6 +159,7 @@ void userInterface::printList(vector<Person> printme)
         {
             cout << printme[i] << endl;
         }
+
         cout << endl;
     }
     else
@@ -181,6 +182,25 @@ void userInterface::printSearch(vector<Person> printme )
     {
         cout << "No match!" << endl;
     }
+}*/
+
+void userInterface::printList(vector<Person> printMe, string inMessage, string outMessage)
+{
+    if(!checkIfVectorIsEmpty(printMe))
+    {
+        cout << inMessage << endl;
+
+        for(unsigned int i = 0; i < printMe.size(); i++)
+        {
+            cout << printMe[i] << endl;
+        }
+
+        cout << endl;
+    }
+    else
+    {
+        cout << outMessage << endl << endl;
+    }
 }
 
 void userInterface::readList()
@@ -188,6 +208,7 @@ void userInterface::readList()
     cout << "Enter the name of your file: ";
     string fileName;
     cin >> fileName;
+
     try
     {
         service.createList(fileName);
@@ -267,7 +288,7 @@ bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
     return false;
 }
 
-bool userInterface::doYouWantToContinue()
+/*bool userInterface::doYouWantToContinue()
 {
     bool quit;
     cout << "Do you want to continue? (Y/N) ";
@@ -285,5 +306,4 @@ bool userInterface::doYouWantToContinue()
     }
     return quit;
 
-}
-
+}*/
