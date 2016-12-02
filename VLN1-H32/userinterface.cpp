@@ -148,41 +148,6 @@ void userInterface::printFromSearch()
     cout << endl;
     printList(service.searchList(searchFor, searchBy), "Here are the matches: ", "No match!");
 }
-/*
-void userInterface::printList(vector<Person> printme)
-{
-    if(!checkIfVectorIsEmpty(printme))
-    {
-        cout << "Here is your list sorted:" << endl;
-
-        for(unsigned int i = 0; i < printme.size(); i++)
-        {
-            cout << printme[i] << endl;
-        }
-
-        cout << endl;
-    }
-    else
-    {
-        cout << "Your database is empty! Please add database from \"Open file\" in Main Menu" << endl << endl;
-    }
-}
-
-void userInterface::printSearch(vector<Person> printme )
-{
-    if(!checkIfVectorIsEmpty(printme))
-    {
-        for(unsigned int i = 0; i < printme.size(); i++)
-        {
-            cout << printme[i] << endl;
-        }
-        cout << endl;
-    }
-    else
-    {
-        cout << "No match!" << endl;
-    }
-}*/
 
 void userInterface::printList(vector<Person> printMe, string inMessage, string outMessage)
 {
@@ -217,7 +182,7 @@ void userInterface::readList()
 
 void userInterface::readPerson()
 {
-    string name, gender, nationality, byear, dyear;
+    string name, gender, nationality, byear, dyear, input;
     cout << "Name: ";
     cin >> ws;
     getline(cin, name);
@@ -239,8 +204,13 @@ void userInterface::readPerson()
     }
     else
     {
-        cout << "Invalid input, try again!" << endl;
-        readPerson();
+        cout << "Invalid input!" << endl;
+        cout << "input 'c' to cancel: ";
+        cin >> input;
+        if(input == "y" || input == "Y")
+        {
+            readPerson();
+        }
     }
 }
 
@@ -277,33 +247,3 @@ void userInterface::savefile()
     cin >> fileName;
     service.saveData(fileName);
 }
-
-/*bool userInterface::checkIfVectorIsEmpty(const vector<Person> amIEmpty)
-{
-    if(amIEmpty.empty())
-    {
-       return true;
-    }
-
-    return false;
-}*/
-
-/*bool userInterface::doYouWantToContinue()
-{
-    bool quit;
-    cout << "Do you want to continue? (Y/N) ";
-    char answer;
-    cin >> answer;
-
-    if(answer == 'N' || answer == 'n')
-    {
-        quit = true;
-    }
-    else
-    {
-        quit = false;
-
-    }
-    return quit;
-
-}*/
