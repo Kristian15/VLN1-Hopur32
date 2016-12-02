@@ -65,6 +65,7 @@ vector<string> dataLayer::loadData(string fileName)
     }
     else
     {
+        // Throwing error that user interface catches
         throw string("No data file found!");
     }
 
