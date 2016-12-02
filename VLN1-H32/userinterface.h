@@ -36,8 +36,6 @@ private:
     bool doYouWantToQuit();
     void doYouWantToSave();
     void savefile();
-   // bool checkIfVectorIsEmpty(const vector<Person> amIEmpty);
-   // bool doYouWantToContinue();
 public:
     void run ();
 };

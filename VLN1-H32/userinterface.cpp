@@ -183,7 +183,7 @@ void userInterface::readList()
 
 void userInterface::readPerson()
 {
-    string name, gender, nationality, byear, dyear;
+    string name, gender, nationality, byear, dyear, input;
     cout << "Name: ";
     cin >> ws;
     getline(cin, name);
@@ -205,8 +205,13 @@ void userInterface::readPerson()
     }
     else
     {
-        cout << "Invalid input, try again!" << endl;
-        readPerson();
+        cout << "Invalid input!" << endl;
+        cout << "input 'c' to cancel: ";
+        cin >> input;
+        if(input == "y" || input == "Y")
+        {
+            readPerson();
+        }
     }
 }
 
