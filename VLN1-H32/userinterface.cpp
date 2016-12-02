@@ -246,7 +246,7 @@ void userInterface::readPerson()
         cout << "Invalid input!" << endl;
         cout << "input 'c' to cancel: ";
         cin >> input;
-        if(input == "c" || input == "C")
+        if((input != "c") && (input != "C"))
         {
             readPerson();
         }
