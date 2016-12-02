@@ -545,7 +545,6 @@ void serviceLayer::createList(string fileName)
     {
         splitLine(lines[i], newPersons, (i + 1));
     }
-    cout << newPersons[0];
     data.setPersons(newPersons);
 }
 
