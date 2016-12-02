@@ -170,29 +170,6 @@ void serviceLayer::sortByDyear(vector<Person>& sortMe)
 }
 
 // Find help functions:
-vector<Person> serviceLayer::findByNameReverse(string name)
-{
-    vector<Person> findings, theList;
-    Person p;
-
-    name = toLower(name);
-
-    theList = data.getPersons();
-
-    for (unsigned int i = 0; i < theList.size(); i++)
-    {
-        p = theList[i];
-
-        if (toLower(p.getName()) != name)
-        {
-           findings.push_back(p);
-        }
-    }
-
-    return findings;
-
-}
-
 vector<Person> serviceLayer::findByName(string name)
 {
     vector<Person> findings, theList;
@@ -468,6 +445,26 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     return newP;
 }
 
+void serviceLayer::findToDelete(string name)
+{
+    vector<Person> findings, theList;
+    Person p;
+
+    name = toLower(name);
+
+    theList = data.getPersons();
+
+    for (unsigned int i = 0; i < theList.size(); i++)
+    {
+        p = theList[i];
+
+        if (toLower(p.getName()) == name)
+        {
+           data.delPerson(i);
+        }
+    }
+}
+
 //*****PUBLIC*****
 
 // search the vector persons in dataLayer for findMe by by
@@ -587,6 +584,6 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
 
 void serviceLayer::deletePerson(string name)
 {
-    data.setPersons(findByNameReverse(name));
-    saveData("C:\\Users\\Berglind\\Desktop\\f.txt", data.getPersons());
+    findToDelete(name);
+    saveData("current", data.getPersons());
 }

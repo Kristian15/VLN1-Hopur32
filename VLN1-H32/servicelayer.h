@@ -20,8 +20,6 @@ private:
     void sortByByear(vector<Person>& sortMe);
     void sortByDyear(vector<Person>& sortMe);
 
-    vector<Person> findByNameReverse(string name);
-
     // find functions, called by searchList():
     // the functions find all matching elements to the input in
     // the vector persons in dataLayer
@@ -44,6 +42,7 @@ private:
     // splits the line where ";" is and calls newPerson() with the splitted string as inputs
     void splitLine(string s, vector<Person>& newPersons, int index);
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
+    void findToDelete(string name);
 
 public:
     // searchList() calls the correct find help function with findMe as input
