@@ -174,18 +174,16 @@ vector<Person> serviceLayer::findByNameReverse(string name)
 {
     vector<Person> findings, theList;
     Person p;
-    string searchMe;
-    size_t found;
+
+    name = toLower(name);
 
     theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
     {
         p = theList[i];
-        searchMe = toLower(p.getName());
-        found = searchMe.find(toLower(name));
 
-        if (found == string::npos)
+        if (toLower(p.getName()) != name)
         {
            findings.push_back(p);
         }
