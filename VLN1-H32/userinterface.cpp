@@ -125,7 +125,7 @@ void userInterface::printFromList()
         cin >> input;
     }
 
-    printList(service.sortList(input), "Here is your list sorted: ", "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    printList(service.sortList(input), "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
 void userInterface::printFromSearch()
