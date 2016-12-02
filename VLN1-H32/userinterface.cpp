@@ -126,6 +126,7 @@ void userInterface::printFromList()
     }
 
     printList(service.sortList(input), "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    doYouWantToSave();
 }
 
 void userInterface::printFromSearch()
@@ -223,7 +224,6 @@ bool userInterface::doYouWantToQuit()
 
     if (answer == 'y' || answer == 'Y')
     {
-        doYouWantToSave();
         cout << " _______    _____     _____    _____    ______   __    __  ______   _            " << endl;
         cout << "/  _____|  / ___ \\   / ___ \\  |  __ \\  |  __  \\  \\ \\  / / |  ____| | |     " << endl;
         cout << "| /   __  | /   \\ | | /   \\ | | |  \\ | | |__| /   \\ \\/ /  | |_     | |      " << endl;
@@ -238,7 +238,7 @@ bool userInterface::doYouWantToQuit()
 
 void userInterface::doYouWantToSave()
 {
-    cout << "Do you want to save the current list before quitting ? Y/N: ";
+    cout << "Do you want to save your sorted list? Y/N: ";
     char answer;
     cin >> answer;
 
