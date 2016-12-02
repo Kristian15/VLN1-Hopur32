@@ -1,19 +1,13 @@
 #include "servicelayer.h"
+// *** TAKA IOSTREAM ÚT***
 #include <iostream>
 
 using namespace std;
-serviceLayer::serviceLayer(){}
 
 // **** PRIVATE*****
 
-// ***** Save data fall *****
-void serviceLayer::saveData(string fileName)
-{
-    data.saveData(fileName);
-}
-
-// *****Sort hjálparföll*****
-void serviceLayer:: sortByName()
+// Sort help functions:
+void serviceLayer::sortByName()
 {
     Person swap;
     string min, theName;
@@ -30,20 +24,23 @@ void serviceLayer:: sortByName()
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theName = toLower(sortMe[j].getName());
+
             if(min > theName)
             {
                 min = theName;
                 tmp = j;
             }
         }
+
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
+
     data.setPersons(sortMe);
 }
 
-void serviceLayer:: sortByGender()
+void serviceLayer::sortByGender()
 {
     Person swap;
     string min, theGender;
@@ -60,20 +57,23 @@ void serviceLayer:: sortByGender()
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theGender = toLower(sortMe[j].getGender());
+
             if(min > theGender)
             {
                 min = theGender;
                 tmp = j;
             }
         }
+
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
+
     data.setPersons(sortMe);
 }
 
-void serviceLayer:: sortByNationality()
+void serviceLayer::sortByNationality()
 {
     Person swap;
     string min, theNationality;
@@ -96,25 +96,54 @@ void serviceLayer:: sortByNationality()
                 tmp = j;
             }
         }
+
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
+
     data.setPersons(sortMe);
 }
 
-void serviceLayer:: sortByByear()
+void serviceLayer::sortByByear()
 {
+    Person swap;
+    int min, theByear;
+    size_t tmp;
+
     vector<Person> sortMe = data.getPersons();
-    stable_sort(sortMe.begin(), sortMe.end());
+    size_t theSize = sortMe.size();
+
+    for(size_t i = 0; i < (theSize - 1); i++)
+    {
+        min = sortMe[i].getByear();
+        tmp = i;
+
+        for(size_t j = (i + 1); j < theSize; j++)
+        {
+            theByear = sortMe[j].getByear();
+
+            if(min > theByear)
+            {
+                min = theByear;
+                tmp = j;
+            }
+        }
+
+        swap = sortMe[i];
+        sortMe[i] = sortMe[tmp];
+        sortMe[tmp] = swap;
+    }
+
     data.setPersons(sortMe);
 }
 
-void serviceLayer:: sortByDyear()
+void serviceLayer::sortByDyear()
 {
     Person swap;
     int min, theDyear;
     size_t tmp;
+
     vector<Person> sortMe = data.getPersons();
     size_t theSize = sortMe.size();
 
@@ -122,29 +151,34 @@ void serviceLayer:: sortByDyear()
     {
         min = sortMe[i].getDyear();
         tmp = i;
+
         for(size_t j = (i + 1); j < theSize; j++)
         {
             theDyear = sortMe[j].getDyear();
+
             if(min > theDyear)
             {
                 min = theDyear;
                 tmp = j;
             }
         }
+
         swap = sortMe[i];
         sortMe[i] = sortMe[tmp];
         sortMe[tmp] = swap;
     }
+
     data.setPersons(sortMe);
 }
 
-// *****Find hjálparföll****
-vector<Person> serviceLayer:: findByName(string name)
+// Find help functions:
+vector<Person> serviceLayer::findByName(string name)
 {
     vector<Person> findings, theList;
     Person p;
     string searchMe;
     size_t found;
+
     theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
@@ -158,14 +192,16 @@ vector<Person> serviceLayer:: findByName(string name)
             findings.push_back(p);
         }
     }
+
     return findings;
 }
 
-vector<Person> serviceLayer:: findByGender(string gender)
+vector<Person> serviceLayer::findByGender(string gender)
 {
-    vector<Person> findings;
+    vector<Person> findings, theList;
     Person p;
-    vector<Person> theList = data.getPersons();
+
+    theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
     {
@@ -176,15 +212,17 @@ vector<Person> serviceLayer:: findByGender(string gender)
             findings.push_back(p);
         }
     }
+
     return findings;
 }
 
-vector<Person> serviceLayer:: findByNationality(string nationality)
+vector<Person> serviceLayer::findByNationality(string nationality)
 {
     vector<Person> findings, theList;
     Person p;
     string searchMe;
     size_t found;
+
     theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
@@ -198,14 +236,16 @@ vector<Person> serviceLayer:: findByNationality(string nationality)
             findings.push_back(p);
         }
     }
+
     return findings;
 }
 
-vector<Person> serviceLayer:: findByByear(int byear)
+vector<Person> serviceLayer::findByByear(int byear)
 {
-    vector<Person> findings;
+    vector<Person> findings, theList;
     Person p;
-    vector<Person> theList = data.getPersons();
+
+    theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
     {
@@ -216,13 +256,15 @@ vector<Person> serviceLayer:: findByByear(int byear)
             findings.push_back(p);
         }
     }
+
     return findings;
 }
 
-vector<Person> serviceLayer:: findByDyear(int dyear)
+vector<Person> serviceLayer::findByDyear(int dyear)
 {
     vector<Person> findings;
     Person p;
+
     vector<Person> theList = data.getPersons();
 
     for (unsigned int i = 0; i < theList.size(); i++)
@@ -234,11 +276,12 @@ vector<Person> serviceLayer:: findByDyear(int dyear)
             findings.push_back(p);
         }
     }
+
     return findings;
 }
 
-// *** Validate föll*****
-bool serviceLayer:: validateName(string name)
+// Validate help functions:
+bool serviceLayer::validateName(string name)
 {
     size_t wordLength = name.length();
     unsigned int tmp = 0;
@@ -250,6 +293,7 @@ bool serviceLayer:: validateName(string name)
             tmp ++;
         }
     }
+
     if (tmp == wordLength)
     {
         return true;
@@ -258,7 +302,7 @@ bool serviceLayer:: validateName(string name)
     return false;
 }
 
-bool serviceLayer:: validateGender(string gender)
+bool serviceLayer::validateGender(string gender)
 {
     gender = toLower(gender);
 
@@ -266,10 +310,11 @@ bool serviceLayer:: validateGender(string gender)
     {
         return true;
     }
+
     return false;
 }
 
-bool serviceLayer:: validateNationality(string nationality)
+bool serviceLayer::validateNationality(string nationality)
 {
     size_t wordLength = nationality.length();
     unsigned int tmp = 0;
@@ -281,14 +326,16 @@ bool serviceLayer:: validateNationality(string nationality)
             tmp ++;
         }
     }
+
     if (tmp == wordLength)
     {
         return true;
     }
+
     return false;
 }
 
-bool serviceLayer:: validateYear(string year)
+bool serviceLayer::validateYear(string year)
 {
     size_t wordLength = year.length();
     unsigned int tmp = 0;
@@ -315,7 +362,8 @@ bool serviceLayer:: validateYear(string year)
     return false;
 }
 
-string serviceLayer:: toLower(string s)
+// Change uppercase letters in s to lowercase
+string serviceLayer::toLower(string s)
 {
    string stringLower = s;
 
@@ -323,10 +371,13 @@ string serviceLayer:: toLower(string s)
    {
        stringLower[i] = tolower(s[i]);
    }
+
    return stringLower;
 }
 
-void serviceLayer:: splitLine(string s)
+// Splits string s on ";"
+// Calls newPerson() with the splitted string s as input
+void serviceLayer::splitLine(string s)
 {
     vector<string> elems;
     string delimeter = ";";
@@ -369,7 +420,9 @@ void serviceLayer:: splitLine(string s)
 
 //*****PUBLIC*****
 
-vector<Person> serviceLayer:: searchList(string findMe, int by)
+// search the vector persons in dataLayer for findMe by by
+// returns a vector with the findings
+vector<Person> serviceLayer::searchList(string findMe, int by)
 {
     vector<Person> findings;
 
@@ -397,7 +450,7 @@ vector<Person> serviceLayer:: searchList(string findMe, int by)
 
 // sort the list in dataLayer after order
 // return the vector in dataLayer sorted
-vector<Person> serviceLayer:: sortList(int order)
+vector<Person> serviceLayer::sortList(int order)
 {
     vector<Person> sortMe = data.getPersons();
 
@@ -428,10 +481,9 @@ vector<Person> serviceLayer:: sortList(int order)
     return sortMe;
 }
 
-// break up the lines in fileName
-// format name:year:byear:dyear
-// calls newPerson
-void serviceLayer:: createList(string fileName)
+// calls loadData() in dataLayer en gets a vector of strings from the file back
+// calls splitLine() for every line from the file
+void serviceLayer::createList(string fileName)
 {
     vector<string> lines = data.loadData(fileName);
 
@@ -442,23 +494,31 @@ void serviceLayer:: createList(string fileName)
 }
 
 // create a new Person and add it to persons in the dataLayer
-void serviceLayer:: newPerson(string name, string gender, string nationality, string byear, string dyear)
+// uses addPerson() in dataLayer
+void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
+    int Byear, Dyear;
 
     if(dyear != "0")
     {
-        newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
+        Byear = stoi(byear);
+        Dyear = stoi(dyear);
+        if (Byear < Dyear)
+        {
+            newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
+        }
     }
     else
     {
         newP = Person(name, gender, nationality, stoi(byear));
     }
+
     data.addPerson(newP);
-    sortByByear();
 }
 
-bool serviceLayer:: validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
+// validates inputs
+bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     bool b = false;
 
@@ -480,3 +540,9 @@ bool serviceLayer:: validateNewPerson(string name, string gender, string nationa
     return b;
 }
 
+// saveData from fileName
+// uses saveData() in dataLayer
+void serviceLayer::saveData(string fileName)
+{
+    data.saveData(fileName);
+}
