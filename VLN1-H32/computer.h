@@ -13,16 +13,16 @@ private:
     int _year;
     string _type;
     bool _built;
-  //  friend ostream& operator << (ostream& outs, const Computer computer);
+    friend ostream& operator << (ostream& outs, const Computer computer);
 
 public:
     Computer();
     Computer(int id, string name, int year, string type, bool built);
-    int getID() { return _id; }
-    string getName() { return _name; }
-    int getYear() { return _year; }
-    string getType() { return _type; }
-    bool getBuilt() { return _built; }
+    int getID() const { return _id; }
+    string getName() const { return _name; }
+    int getYear() const { return _year; }
+    string getType() const { return _type; }
+    bool getBuilt() const { return _built; }
 
     void setId(int id) { _id = id; }
     void setName(string name) { _name = name; }
