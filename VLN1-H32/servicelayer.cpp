@@ -38,8 +38,6 @@ bool serviceLayer::validateName(string name)
  */
 bool serviceLayer::validateGender(string gender)
 {
-    gender = toLower(gender);
-
     if ((gender == "male") || (gender == "female"))
     {
         return true;
@@ -221,39 +219,63 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
  * @param by
  * @return vector<Person>
  */
-vector<Person> serviceLayer::searchList(string findMe, int by)
+/*vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
     vector<Person> findings;
 
     switch (by) {
     case 1:
-        findings = data.findPersons(findMe, "Name");
+        findings = data.findPersons("Name", findMe);
         break;
     case 2:
-        findings = data.findPersons(findMe, "Gender");
+        findings = data.findPersons("Gender", findMe);
         break;
     case 3:
-        findings = data.findPersons(findMe, "Nationality");
+        findings = data.findPersons("Nationality", findMe);
         break;
     case 4:
-        findings = data.findPersons(findMe, "BirthYear");
+        findings = data.findPersons("BirthYear", findMe);
         break;
     case 5:
         break;
-        findings = data.findPersons(findMe, "DeathYear");
+        findings = data.findPersons("DeathYear", findMe);
     default:
         break;
     }
 
     return findings;
-}
+}*/
+
+/*vector<Computer> serviceLayer::searchComputers(string findMe, int by)
+{
+    vector<Person> findings;
+
+    switch (by) {
+    case 1:
+        findings = data.findComputer("Name", findMe);
+        break;
+    case 2:
+        findings = data.findComputer("Year", findMe);
+        break;
+    case 3:
+        findings = data.findComputer("Type", findMe);
+        break;
+  //  case 4:
+   //     findings = data.findComputer("BirthYear", findMe);
+      //  break;
+    default:
+        break;
+    }
+
+    return findings;
+}*/
 
 /**
  * @brief serviceLayer::sortList
  * @param order
  * @return vector<Person>
  */
-vector<Person> serviceLayer::sortList(int order)
+vector<Person> serviceLayer::sortPersons(int order)
 {
     vector<Person> sorted;
 
@@ -281,6 +303,30 @@ vector<Person> serviceLayer::sortList(int order)
 
     return sorted;
 }
+
+/*vector<Person> serviceLayer::sortComputers(int order)
+{
+    vector<Person> sorted;
+
+    switch (order) {
+    case 1:
+        sorted = data.getSortedComputers("Name");
+        break;
+    case 2:
+        sorted = data.getSortedComputers("Year");
+        break;
+    case 3:
+        sorted = data.getSortedComputers("Type");
+        break;
+   // case 4:
+   //     sorted = data.getSortedComputers("Built");
+    //    break;
+    default:
+        break;
+    }
+
+    return sorted;
+}*/
 
 /**
  * @brief serviceLayer::createList
@@ -354,7 +400,7 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
  * @brief serviceLayer::deletePerson
  * @param name
  */
-void serviceLayer::deletePerson(string name)
+/*void serviceLayer::deletePerson(string name)
 {
     data.findAndDelete(name);
-}
+}*/
