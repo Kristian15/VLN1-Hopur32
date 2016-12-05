@@ -2,6 +2,7 @@
 #define COMPUTER_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
