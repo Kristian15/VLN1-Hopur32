@@ -98,9 +98,9 @@ vector<Person> dataLayer::getSortedPersons(string order)
     return persons;
 }
 
-vector<Person> dataLayer::getSortedComputers(string order)
+vector<Computer> dataLayer::getSortedComputers(string order)
 {
-    vector<Person> persons;
+    vector<Computer> computers;
     QString queryString = "SELECT * FROM computers ORDER BY computers.";
     queryString.append(QString::fromStdString(order));
 
@@ -112,19 +112,19 @@ vector<Person> dataLayer::getSortedComputers(string order)
 
         while (query.next())
         {
-            Person person;
-            //person.setId(query.value("ID").toUInt());
-            person.setName(query.value("Name").toString().toStdString());
-            person.setGender(query.value("Gender").toString().toStdString());
-            person.setNationality(query.value("Nationality").toString().toStdString());
-            person.setByear(query.value("BirthYear").toInt());
-            person.setDyear(query.value("DeathYear").toInt());
+            Computer computer;
+            computer.setName(query.value("Id").toString().toStdString());
+            computer.setName(query.value("Name").toString().toStdString());
+            computer.setYear(query.value("Year").toInt());
+            computer.setType(query.value("Type").toString().toStdString());
+            computer.setBuilt(query.value("Built").toInt());
 
-            persons.push_back(person);
+
+            computers.push_back(computer);
         }
     }
 
-    return persons;
+    return computers;
 }
 
 vector<Person> dataLayer::findPersons(string column, string findMe)

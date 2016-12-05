@@ -4,6 +4,7 @@
 #include <string>
 #include <QtSql>
 #include "person.h"
+#include "computer.h"
 
 using namespace std;
 
@@ -25,9 +26,10 @@ public:
     ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
     vector<Person> getSortedPersons(string order);
-    vector<Person> findPersons(string findMe, string category);
+    vector<Person> findPersons(string column, string findMe);
 
-    vector<Person> getSortedComputers(string order);
+    vector<Computer> getSortedComputers(string order);
+    vector<Computer> findComputers(string column, string findMe);
 
     bool deletePerson(string deleteMe);
     bool deleteComputer(string deleteMe);
