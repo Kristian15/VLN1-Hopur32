@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <QtSql>
 #include "person.h"
 
 using namespace std;
@@ -9,12 +10,20 @@ using namespace std;
 class dataLayer
 {
 private:
+    const QString DB_DRIVER_TYPE = "QSQLITE";
+    const QString DB_NAME = "skil2.sqlite";
+    const QString DB_ADDRESS = "localhost";
+    QSqlDatabase db;
+
+
     vector<Person> _persons; // the database
     string _fileName; // current fileName
     const string _d = ";"; // database delimiter
     // appends person to the last used document
     void updateData(Person person);
 public:
+    dataLayer();
+    ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName

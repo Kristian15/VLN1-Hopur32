@@ -1,5 +1,19 @@
 #include "datalayer.h"
 
+// **** Constructor ****
+
+dataLayer::dataLayer()
+{
+    db.addDatabase(DB_DRIVER_TYPE);
+    db.setDatabaseName(DB_NAME);
+    db.open();
+}
+
+dataLayer::~dataLayer()
+{
+    db.close();
+}
+
 // **** Private ****
 
 /**
@@ -8,6 +22,19 @@
  */
 void dataLayer::updateData(Person person)
 {
+    if(db.isOpen())
+    {
+       QSqlQuery query;
+       query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
+                     "VALUES (:name, :gender, :nationality, :byear, :dyear)");
+       query.bindValue(":name", QString::fromStdString(person.getName()));
+       query.bindValue(":gender", QString::fromStdString(person.getGender()));
+       query.bindValue(":nationality", QString::fromStdString(person.getNationality()));
+       query.bindValue(":byear", person.getByear());
+       query.bindValue(":dyear", person.getDyear());
+       query.exec();
+    }
+
     string data = "";
     bool match = false;
 
