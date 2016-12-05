@@ -1,5 +1,14 @@
 #include "datalayer.h"
 
+// **** Constructor ****
+
+dataLayer::dataLayer()
+{
+    db.addDatabase(DB_DRIVER_TYPE);
+    db.setDatabaseName(DB_NAME);
+    db.open();
+}
+
 // **** Private ****
 
 /**
