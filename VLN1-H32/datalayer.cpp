@@ -1,9 +1,11 @@
 #include "datalayer.h"
+#include <iostream>
 
 // **** Constructor ****
 
 dataLayer::dataLayer()
 {
+    cout << "constructor" << endl;
     db.addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
     db.open();
@@ -24,6 +26,7 @@ void dataLayer::updateData(Person person)
 {
     if(db.isOpen())
     {
+       cout << "her" << endl;
        QSqlQuery query;
        query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");

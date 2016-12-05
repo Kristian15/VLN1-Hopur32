@@ -12,7 +12,6 @@ class dataLayer
 private:
     const QString DB_DRIVER_TYPE = "QSQLITE";
     const QString DB_NAME = "skil2.sqlite";
-    const QString DB_ADDRESS = "localhost";
     QSqlDatabase db;
 
 
