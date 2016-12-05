@@ -203,7 +203,7 @@ void userInterface::printScientistsFromDisplay()
         cin >> input;
     }
 
-    vector<Person> sorted = service.sortList(input);
+    vector<Person> sorted = service.sortPersons(input);
     printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
     ifYouWantToSave(sorted);
 }
@@ -245,7 +245,7 @@ void userInterface::printScientistFromSearch()
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
-    printList(service.searchList(searchFor, searchBy), "Search results: ", "No match!");
+    printList(service.searchPersons(searchFor, searchBy), "Search results: ", "No match!");
 }
 void userInterface::printComputerFromSearch()
 {
