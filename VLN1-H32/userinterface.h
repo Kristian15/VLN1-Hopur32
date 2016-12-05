@@ -16,18 +16,18 @@ private:
     // Prints the main menu
     void printMainMenu();
     // Prints options to sort by
-    void printListOptions();
+    void printDisplayscientistsOptions();
     // Prints search options
-    void printSearchOptions();
+    void printSearchscientistsOptions();
     // Prints search command for the input
-    void printSearchCommands(int input);
+    void printSearchscientistsCommands(int input);
     // calls printListOptions and calls sortList() from serviceLayer
     // calls printList() with the sorted list and calls ifYouWantToSave()
-    void printFromDisplay();
+    void printScientistsFromDisplay();
     // calls printSearchOptions() and printSearchCommands()
     // calls searchList() from serviceLayer
     // calls printList() with the search matches
-    void printFromSearch();
+    void printScientisFromSearch();
     // outputs inMessage, prints printMe and outputs outMessage
     void printList(vector<Person> printMe, string inMessage, string outMessage);
     // gets a fileName from user and calls createList() in serviceLayer
@@ -41,7 +41,15 @@ private:
     void ifYouWantToSave(vector<Person> saveMe);
     void deletePerson();
 
-    void printListComputerOptions();
+    void printDisplaycomputerOptions();
+    void readComputer();
+    void printComputersFromDisplay();
+    void deleteComputer();
+    void printSearchcomputersoptions();
+    void printSearchcomputersCommands(int input);
+    void printComputerFromSearch();
+
+
 
 public:
     void run();

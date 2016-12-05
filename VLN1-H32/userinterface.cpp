@@ -29,38 +29,28 @@ void userInterface::run()
         switch (input)
         {
         case Display_Scientis:
-            printFromDisplay();
+            printScientistsFromDisplay();
             break;
         case Display_Computer:
-            printListComputerOptions();
-            int computeroption;
-            cin >> computeroption;
-            while(cin.fail() || (computeroption > 4) || (computeroption < 1))
-            {
-                cout << "Invalid input, try again!" << endl;
-                cin.clear();
-                cin.ignore(256, '\n');
-                cin >> computeroption;
-            }
-
+            printComputersFromDisplay();
             break;
         case Add_Scientis:
             readPerson();
             break;
         case Add_Computer:
-            //TODO
+            readComputer();
             break;
         case Delete_Scientist:
             deletePerson();
             break;
         case Delete_Computer:
-            //TODO
+            deleteComputer();
             break;
         case Search_Scientist:
-            printFromSearch();
+            printScientisFromSearch();
             break;
         case Search_Computer:
-            //TODO
+            printComputerFromSearch();
             break;
         case Openfile:
             readList();
@@ -97,7 +87,7 @@ void userInterface::printMainMenu()
 /**
  * @brief userInterface::printListOptions
  */
-void userInterface::printListOptions()
+void userInterface::printDisplayscientistsOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
@@ -109,16 +99,16 @@ void userInterface::printListOptions()
     cout << "Input: ";
 }
 
-void userInterface::printListComputerOptions()
+void userInterface::printDisplaycomputerOptions()
 {
-    cout << "Please enter one of the following optins to sort by: " << endl;
+    cout << "Please enter one of the following options to sort by: " << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "1 = Name  - sort the computers by name" << endl;
     cout << "2 = Year  - sort the computer by year designed" << endl;
     cout << "3 = Type  - sort the computer by type" << endl;
     cout << "4 = Built - show computers that were built;" << endl;
 }
-void userInterface::printSearchOptions()
+void userInterface::printSearchscientistsOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
@@ -129,12 +119,21 @@ void userInterface::printSearchOptions()
     cout << "5 = Year of death - Search for scientists with a specific death year" << endl;
     cout << "Input: ";
 }
+void userInterface::printSearchcomputersoptions()
+{
+    cout << "Please enter one of the following optins to searh by" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "1 = Name    - Search for computers with a specific name" << endl;
+    cout << "2 = Year    - Search for computers from a specific year" << endl;
+    cout << "3 = Type    - Search for computers of a specific type" << endl;
+    cout << "4 = Built   - Search for computers that were built or not (Y / N)" << endl;
+}
 
 /**
  * @brief userInterface::printSearchCommands
  * @param input
  */
-void userInterface::printSearchCommands(int input)
+void userInterface::printSearchscientistsCommands(int input)
 {
     if(input == 1)
     {
@@ -162,13 +161,36 @@ void userInterface::printSearchCommands(int input)
         cout << "Year of death: ";
     }
 }
+void userInterface::printSearchcomputersCommands(int input)
+{
+    if(input == 1)
+    {
+        cout << "Enter the name you want to search for: " << endl;
+        cout << "Name: ";
+    }
+    else if(input == 2)
+    {
+        cout << "Enter from what year the computer is you want to search for: " << endl;
+        cout << "Year: ";
+    }
+    else if(input == 3)
+    {
+        cout << "Enter the type of computer you want to search for: " << endl;
+        cout << "Type: ";
+    }
+    else if(input == 4)
+    {
+        cout << "Enter if the computer was built or not " << endl;
+        cout << "Y/N: ";
+    }
+}
 
 /**
  * @brief userInterface::printFromDisplay
  */
-void userInterface::printFromDisplay()
+void userInterface::printScientistsFromDisplay()
 {
-    printListOptions();
+    printDisplayscientistsOptions();
     int input;
     cin >> input;
     cout << endl;
@@ -185,12 +207,28 @@ void userInterface::printFromDisplay()
     printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
     ifYouWantToSave(sorted);
 }
+
+void userInterface::printComputersFromDisplay()
+{
+    printDisplaycomputerOptions();
+    int computeroption;
+    cin >> computeroption;
+    while(cin.fail() || (computeroption > 4) || (computeroption < 1))
+    {
+        cout << "Invalid input, try again!" << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> computeroption;
+    }
+    cout << "gemmer fall í service til að kalla í";
+}
+
 /**
  * @brief userInterface::printFromSearch
  */
-void userInterface::printFromSearch()
+void userInterface::printScientisFromSearch()
 {
-    printSearchOptions();
+    printSearchscientistsOptions();
     int searchBy;
     string searchFor;
     cin >> searchBy;
@@ -203,11 +241,32 @@ void userInterface::printFromSearch()
         cin >> searchBy;
     }
 
-    printSearchCommands(searchBy);
+    printSearchscientistsCommands(searchBy);
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
     printList(service.searchList(searchFor, searchBy), "Search results: ", "No match!");
+}
+void userInterface::printComputerFromSearch()
+{
+    printSearchcomputersoptions();
+    int searchBy;
+    string searchFor;
+    cin >> searchBy;
+
+    while(cin.fail() || (searchBy > 4) || (searchBy < 1))
+    {
+        cout << "Invalid input, try again:" << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> searchBy;
+    }
+
+    printSearchcomputersCommands(searchBy);
+    cin >> ws;
+    getline(cin, searchFor);
+    cout << endl;
+    //printList(service.searchList(searchFor, searchBy), "Search results: ", "No match!");
 }
 
 /**
@@ -278,13 +337,40 @@ void userInterface::readPerson()
     else
     {
         cout << "Invalid input!" << endl;
-        cout << "input 'c' to cancel: ";
-        cin >> input;
+        cout << "input 'c' to cancel or any character to continue: ";
+
         if((input != "c") && (input != "C"))
         {
+            cin >> input;
             readPerson();
         }
     }
+}
+void userInterface::readComputer()
+{
+    string name, type, builtstring;
+    int year;
+    bool built;
+    cout << "Name: ";
+    cin >> ws;
+    getline(cin, name);
+    cout << "Year: ";
+    cin >> year;
+    cout << "Type: ";
+    cin >> ws;
+    getline(cin, type);
+    cout << "Built (Y/N): ";
+    cin >> builtstring;
+    if(builtstring == "y" || builtstring =="Y")
+    {
+        built = true;
+    }
+    else if(builtstring == "n" || builtstring =="N")
+    {
+        built = false;
+    }
+    cout << "gemmer service fall til að kalla í";
+
 }
 
 /**
@@ -341,4 +427,15 @@ void userInterface::deletePerson()
     cin >> ws;
     getline(cin, deleteString);
     service.deletePerson(deleteString);
+}
+
+void userInterface::deleteComputer()
+{
+    cout << "Delete all computers by following name" << endl;
+    cout << "Input: ";
+    string deletestring;
+    cin >> ws;
+    getline(cin, deletestring);
+    cout << "gemmer fall í service til að kalla í";
+
 }
