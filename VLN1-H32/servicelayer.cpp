@@ -219,7 +219,7 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
  * @param by
  * @return vector<Person>
  */
-/*vector<Person> serviceLayer::searchPersons(string findMe, int by)
+vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
     vector<Person> findings;
 
@@ -244,7 +244,7 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     }
 
     return findings;
-}*/
+}
 
 /*vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
@@ -400,10 +400,11 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
  * @brief serviceLayer::deletePerson
  * @param name
  */
-/*void serviceLayer::deletePerson(string name)
+void serviceLayer::deletePerson(string name)
 {
-    data.deletePerson(name);
-}*/
+    bool temp;
+    temp = data.deletePerson(name);
+}
 
 /*void serviceLayer::deleteComputer(string name)
 {

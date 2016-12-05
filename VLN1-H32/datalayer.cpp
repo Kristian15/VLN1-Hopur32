@@ -79,19 +79,19 @@ vector<Person> dataLayer::getSortedPersons(string order)
                       "VALUES (:order)");
         query.bindValue(":order", QString::fromStdString(order));
         query.exec();
-    }
 
-    while (query.next())
-    {
-        Person person;
-        //person.setId(query.value("ID").toUInt());
-        person.setName(query.value("Name").toString().toStdString());
-        person.setGender(query.value("Gender").toString().toStdString());
-        person.setNationality(query.value("Nationality").toString().toStdString());
-        person.setByear(query.value("BirthYear").toInt());
-        person.setDyear(query.value("DeathYear").toInt());
+        while (query.next())
+        {
+            Person person;
+            //person.setId(query.value("ID").toUInt());
+            person.setName(query.value("Name").toString().toStdString());
+            person.setGender(query.value("Gender").toString().toStdString());
+            person.setNationality(query.value("Nationality").toString().toStdString());
+            person.setByear(query.value("BirthYear").toInt());
+            person.setDyear(query.value("DeathYear").toInt());
 
-        persons.push_back(person);
+            persons.push_back(person);
+        }
     }
 
     return persons;
@@ -103,26 +103,41 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     if(db.isOpen())
     {
-        query.prepare("SELECT * FROM persons WHERE CONTIAINS(Column, findme) "
-                      "VALUES (:Column, :findme)");
+        query.prepare("SELECT * FROM persons WHERE CONTAINS(Column, findMe) "
+                      "VALUES (:Column, :findMe)");
         query.bindValue(":Column", QString::fromStdString(column));
-        query.bindValue(":findme", QString::fromStdString(findMe));
-    }
+        query.bindValue(":findMe", QString::fromStdString(findMe));
+        query.exec();
 
-    while(query.next())
-    {
-        Person person;
-        //person.setId(query.value("ID").toUInt());
-        person.setName(query.value("Name").toString().toStdString());
-        person.setGender(query.value("Gender").toString().toStdString());
-        person.setNationality(query.value("Nationality").toString().toStdString());
-        person.setByear(query.value("BirthYear").toInt());
-        person.setDyear(query.value("DeathYear").toInt());
+        while(query.next())
+        {
+            Person person;
+            //person.setId(query.value("ID").toUInt());
+            person.setName(query.value("Name").toString().toStdString());
+            person.setGender(query.value("Gender").toString().toStdString());
+            person.setNationality(query.value("Nationality").toString().toStdString());
+            person.setByear(query.value("BirthYear").toInt());
+            person.setDyear(query.value("DeathYear").toInt());
 
-        persons.push_back(person);
+            persons.push_back(person);
+        }
     }
 
     return persons;
+}
+
+bool dataLayer::deletePerson(string deleteMe)
+{
+    if(db.isOpen())
+    {
+        query.prepare("DELETE FROM persons WHERE name= deleteMe"
+                      "VALUES (:deleteMe)");
+        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.exec();
+        return true; // þarf að skila true ef eyðsla heppnaðist
+    }
+
+    return false;
 }
 
 /**

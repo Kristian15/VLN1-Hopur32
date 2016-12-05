@@ -28,6 +28,8 @@ public:
     vector<Person> getSortedPersons(string order);
     vector<Person> findPersons(string findMe, string category);
 
+    bool deletePerson(string deleteMe);
+
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName
     vector<string> loadData(string fileName);
