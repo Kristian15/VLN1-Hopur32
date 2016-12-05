@@ -26,7 +26,7 @@ public:
     ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
     vector<Person> getSortedPersons(string order);
-    vector<Person> dataLayer::findPerson(string findMe, string category);
+    vector<Person> findPersons(string findMe, string category);
 
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName

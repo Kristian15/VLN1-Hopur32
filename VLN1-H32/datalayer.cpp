@@ -34,6 +34,36 @@ void dataLayer::updateData(Person person)
        query.bindValue(":dyear", person.getDyear());
        query.exec();
     }
+
+    string data = "";
+    bool match = false;
+
+    if(_persons.empty())
+    {
+        _fileName = "backup.txt";
+        match = true;
+    }
+
+    _persons.push_back(person);
+    data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear()) + _d;
+
+    if(person.getDyear() != 0)
+    {
+        data += to_string(person.getDyear()) + _d;
+    }
+
+    ofstream dataStream;
+    dataStream.open(_fileName, ios::app);
+
+    if(dataStream)
+    {
+        if(match == false)
+        {
+            dataStream << endl;
+        }
+        dataStream << data;
+        dataStream.close();
+    }
 }
 
 
@@ -67,7 +97,7 @@ vector<Person> dataLayer::getSortedPersons(string order)
     return persons;
 }
 
-vector<Person> dataLayer::findPerson(string column, string findMe)
+vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
 
