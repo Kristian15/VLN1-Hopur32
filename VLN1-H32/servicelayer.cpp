@@ -402,5 +402,10 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
  */
 /*void serviceLayer::deletePerson(string name)
 {
-    data.findAndDelete(name);
+    data.deletePerson(name);
 }*/
+
+/*void serviceLayer::deleteComputer(string name)
+{
+    data.deleteComputer(name);
+}
