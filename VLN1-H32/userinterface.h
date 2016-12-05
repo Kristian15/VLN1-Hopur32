@@ -40,6 +40,9 @@ private:
     // called by printFromDisplay()
     void ifYouWantToSave(vector<Person> saveMe);
     void deletePerson();
+
+    void printListComputerOptions();
+
 public:
     void run();
 };

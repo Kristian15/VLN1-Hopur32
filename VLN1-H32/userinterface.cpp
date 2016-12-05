@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display = '1', Add, Delete, Search, Openfile, Quit = 'q'};
+enum inputcases { Display_Scientis = '1', Display_Computer, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Openfile, Quit = 'q'};
 
 /**
  * @brief userInterface::run
@@ -28,17 +28,39 @@ void userInterface::run()
 
         switch (input)
         {
-        case Display:
+        case Display_Scientis:
             printFromDisplay();
             break;
-        case Add:
+        case Display_Computer:
+            printListComputerOptions();
+            int computeroption;
+            cin >> computeroption;
+            while(cin.fail() || (computeroption > 4) || (computeroption < 1))
+            {
+                cout << "Invalid input, try again!" << endl;
+                cin.clear();
+                cin.ignore(256, '\n');
+                cin >> computeroption;
+            }
+
+            break;
+        case Add_Scientis:
             readPerson();
             break;
-        case Delete:
+        case Add_Computer:
+            //TODO
+            break;
+        case Delete_Scientist:
             deletePerson();
             break;
-        case Search:
+        case Delete_Computer:
+            //TODO
+            break;
+        case Search_Scientist:
             printFromSearch();
+            break;
+        case Search_Computer:
+            //TODO
             break;
         case Openfile:
             readList();
@@ -60,12 +82,16 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Display list - Displays data in the selected order" << endl;
-    cout << "2 = Add          - Adds scientist to your database" << endl;
-    cout << "3 = Delete       - Deletes scientist from you database" << endl;
-    cout << "4 = Search       - Search for a scientist in your database" << endl;
-    cout << "5 = Open File    - Adds scientists from a file" << endl;
-    cout << "q = quit         - Quit the program" << endl;
+    cout << "1 = Display Scientist - Displays Scientists data in the selected order" << endl;
+    cout << "2 = Display Computer  - Displays Computer data in the selected order" << endl;
+    cout << "3 = Add Scientist     - Adds scientist to your database" << endl;
+    cout << "4 = Add Computer      - Adds computer to your database" << endl;
+    cout << "5 = Delete Scientist  - Deletes scientist from you database" << endl;
+    cout << "6 = Delete Computer   - Deletes computer from you database" << endl;
+    cout << "7 = Search Scientist  - Search for a scientist in your database" << endl;
+    cout << "8 = Search Computer   - Search for a computer in your database" << endl;
+    cout << "9 = Open File         - Adds scientists from a file" << endl;
+    cout << "q = quit              - Quit the program" << endl;
 }
 
 /**
@@ -83,6 +109,15 @@ void userInterface::printListOptions()
     cout << "Input: ";
 }
 
+void userInterface::printListComputerOptions()
+{
+    cout << "Please enter one of the following optins to sort by: " << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "1 = Name  - sort the computers by name" << endl;
+    cout << "2 = Year  - sort the computer by year designed" << endl;
+    cout << "3 = Type  - sort the computer by type" << endl;
+    cout << "4 = Built - show computers that were built;" << endl;
+}
 void userInterface::printSearchOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
@@ -150,7 +185,6 @@ void userInterface::printFromDisplay()
     printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
     ifYouWantToSave(sorted);
 }
-
 /**
  * @brief userInterface::printFromSearch
  */
