@@ -14,6 +14,8 @@ private:
 
     // sort functions, called by sortList():
     // the functions sort the vector persons from dataLayer
+
+    //***** BREYTA SORT FÖLLUM ****
     void sortByName(vector<Person>& sortMe);
     void sortByGender(vector<Person>& sortMe);
     void sortByNationality(vector<Person>& sortMe);
@@ -22,6 +24,8 @@ private:
     // find functions, called by searchList():
     // the functions find all matching elements to the input in
     // the vector persons in dataLayer
+
+    //***** BREYTA FIND FÖLLUM****
     vector<Person> findByName(string name);
     vector<Person> findByGender(string gender);
     vector<Person> findByNationality(string nationality);
