@@ -26,15 +26,17 @@ public:
     dataLayer();
     ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
+
     vector<Person> getSortedPersons(string order);
     vector<Person> findPersons(string column, string findMe);
-
     vector<Computer> getSortedComputers(string order);
     vector<Computer> findComputers(string column, string findMe);
 
+    // delete person that matches provided string
     bool deletePerson(string deleteMe);
+    // delete computer that matches provided string
     bool deleteComputer(string deleteMe);
-
+    // creates a relation between a comptuer and a scientist
     bool makeRelation(int scientist, int computer);
 
     string getDelimeter(){ return _d; }
@@ -46,6 +48,7 @@ public:
     void setPersons(vector<Person> persons){ _persons = persons; }
     // calls updateData function to save new person and save to vector
     void addPerson(Person person){ addNewPerson(person); }
+    void addComputer(Computer computer) { addNewComputer(computer); }
     // deletes person at the supplied index
     void delPerson(int index){  _persons.erase(_persons.begin() + index); }
 };

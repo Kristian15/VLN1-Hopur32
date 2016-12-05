@@ -42,6 +42,7 @@ public:
     // calls the help function getPerson() that returns a Person
     // calls data.addPerson with that Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
+    void newComputer(string name, int year, string type, bool built);
     // validate input that are used to create a new Person
     // uses the validate help functions
     // returns true if the input is valid and false otherwise

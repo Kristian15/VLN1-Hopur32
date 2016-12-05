@@ -346,6 +346,7 @@ void userInterface::readPerson()
         }
     }
 }
+
 void userInterface::readComputer()
 {
     string name, type, builtstring;
@@ -369,8 +370,7 @@ void userInterface::readComputer()
     {
         built = false;
     }
-    cout << "gemmer service fall til að kalla í";
-
+    service.newComputer(name, year, type, built);
 }
 
 /**
@@ -421,28 +421,36 @@ void userInterface::ifYouWantToSave(vector<Person> saveMe)
  */
 void userInterface::deletePerson()
 {
-    cout << "Delete all scientists by following name" << endl;
+    cout << "Delete the scientist with the following name:" << endl;
     cout << "Input: ";
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
+
     if(service.deletePerson(deleteString))
     {
-        cout << "Delete successfull";
+        cout << "Delete successful!" << endl;
     }
     else
     {
-        cout << "Delete unsuccessfull";
+        cout << "Delete unsuccessful!" << endl;
     }
 }
 
 void userInterface::deleteComputer()
 {
-    cout << "Delete all computers by following name" << endl;
+    cout << "Delete the computer with the following name:" << endl;
     cout << "Input: ";
-    string deletestring;
+    string deleteString;
     cin >> ws;
-    getline(cin, deletestring);
-    cout << "gemmer fall í service til að kalla í";
+    getline(cin, deleteString);
 
+    if(service.deleteComputer(deleteString))
+    {
+        cout << "Delete successful!" << endl;
+    }
+    else
+    {
+        cout << "Delete unsuccessful!" << endl;
+    }
 }

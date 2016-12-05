@@ -355,6 +355,18 @@ void serviceLayer::newPerson(string name, string gender, string nationality, str
     data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
 }
 
+void serviceLayer::newComputer(string name, int year, string type, bool built)
+{
+    // ***** TODO: Validation *****
+    Computer computer;
+    computer.setName(name);
+    computer.setYear(year);
+    computer.setType(type);
+    computer.setBuilt(built);
+
+    data.addComputer(computer);
+}
+
 /**
  * @brief serviceLayer::validateNewPerson
  * @param name
@@ -407,6 +419,5 @@ bool serviceLayer::deletePerson(string name)
 
 bool serviceLayer::deleteComputer(string name)
 {
-   // return data.deleteComputer(name);
-    return true;
+   return data.deleteComputer(name);
 }

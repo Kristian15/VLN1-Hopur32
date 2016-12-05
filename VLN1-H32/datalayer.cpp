@@ -69,13 +69,6 @@ void dataLayer::addNewPerson(Person person)
 
 void dataLayer::addNewComputer(Computer computer)
 {
-    /*string prepQuery = "INSERT INTO computers ("
-            + computer.getName() + ", "
-            + to_string(computer.getYear()) + ", "
-            + computer.getType() + ", "
-            + to_string(computer.getBuilt()) + ")";
-    QString queryString = QString::fromStdString(prepQuery);*/
-
     if(db.isOpen())
     {
        QSqlQuery query;
@@ -205,14 +198,13 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 
 bool dataLayer::deletePerson(string deleteMe)
 {
-    QString localQuery = "DELETE FROM persons WHERE name=";
-    localQuery.append(QString::fromStdString(deleteMe));
-    //localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.exec(localQuery);
-        return true; // þarf að skila true ef eyðsla heppnaðist
+        query.prepare("DELETE FROM persons WHERE name = :deleteMe");
+        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.exec();
+        return true; // TODO: make check for this
     }
 
     return false;
@@ -220,14 +212,13 @@ bool dataLayer::deletePerson(string deleteMe)
 
 bool dataLayer::deleteComputer(string deleteMe)
 {
-    QString localQuery = "DELETE FROM computers WHERE name=";
-    localQuery.append(QString::fromStdString(deleteMe));
-    //localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.exec(localQuery);
-        return true; // þarf að skila true ef eyðsla heppnaðist
+        query.prepare("DELETE FROM Computers WHERE Name = :deleteMe");
+        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.exec();
+        return true; // TODO: make check for this
     }
 
     return false;
@@ -238,13 +229,12 @@ bool dataLayer::makeRelation(int personId, int computerId)
 
     if(db.isOpen())
     {
-        QString queryString = "INSERT INTO PersonAndComputer (PersonID, ComputerID) VALUES (";
-        queryString.append(QString::number(personId));
-        queryString.append(", ");
-        queryString.append(QString::number(computerId));
-        queryString.append(")");
         QSqlQuery query;
-        query.exec(queryString);
+        query.prepare("INSERT INTO PersonAndComputer (PersonID, ComputerID) "
+                      "VALUES (:personId, :computerId)");
+        query.bindValue(":personId", personId);
+        query.bindValue(":computerId", computerId);
+        query.exec();
         return true; // make check for it
     }
 
