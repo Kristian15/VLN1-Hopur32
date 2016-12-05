@@ -20,7 +20,8 @@ private:
     string _fileName; // current fileName
     const string _d = ";"; // database delimiter
     // appends person to the last used document
-    void updateData(Person person);
+    void addNewPerson(Person person);
+    void addNewComputer(Computer computer);
 public:
     dataLayer();
     ~dataLayer();
@@ -42,7 +43,7 @@ public:
     // overwrites the current persons vector
     void setPersons(vector<Person> persons){ _persons = persons; }
     // calls updateData function to save new person and save to vector
-    void addPerson(Person person){ updateData(person); }
+    void addPerson(Person person){ addNewPerson(person); }
     // deletes person at the supplied index
     void delPerson(int index){  _persons.erase(_persons.begin() + index); }
 };

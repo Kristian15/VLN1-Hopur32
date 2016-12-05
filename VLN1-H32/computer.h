@@ -1,5 +1,4 @@
-#ifndef COMPUTER_H
-#define COMPUTER_H
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -31,5 +30,3 @@ public:
     void setType(string type) { _type = type; }
     void setBuilt(bool built) { _built = built; }
 };
-
-#endif // COMPUTER_H

@@ -21,12 +21,12 @@ dataLayer::~dataLayer()
  * @brief dataLayer::updateData
  * @param person
  */
-void dataLayer::updateData(Person person)
+void dataLayer::addNewPerson(Person person)
 {
     if(db.isOpen())
     {
        QSqlQuery query;
-       query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
+       query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");
        query.bindValue(":name", QString::fromStdString(person.getName()));
        query.bindValue(":gender", QString::fromStdString(person.getGender()));
@@ -67,6 +67,20 @@ void dataLayer::updateData(Person person)
     }
 }
 
+void dataLayer::addNewComputer(Computer computer)
+{
+    if(db.isOpen())
+    {
+       QSqlQuery query;
+       query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
+                     "VALUES (:name, :year, :type, :built)");
+       query.bindValue(":name", QString::fromStdString(computer.getName()));
+       query.bindValue(":year", computer.getYear());
+       query.bindValue(":type", QString::fromStdString(computer.getType()));
+       query.bindValue(":built",computer.getBuilt());
+       query.exec();
+    }
+}
 
 // **** Public ****
 
@@ -84,7 +98,7 @@ vector<Person> dataLayer::getSortedPersons(string order)
         while (query.next())
         {
             Person person;
-            //person.setId(query.value("ID").toUInt());
+            //person.setId(query.value("ID").toInt());
             person.setName(query.value("Name").toString().toStdString());
             person.setGender(query.value("Gender").toString().toStdString());
             person.setNationality(query.value("Nationality").toString().toStdString());
@@ -113,7 +127,7 @@ vector<Computer> dataLayer::getSortedComputers(string order)
         while (query.next())
         {
             Computer computer;
-            computer.setName(query.value("Id").toString().toStdString());
+            computer.setId(query.value("Id").toInt());
             computer.setName(query.value("Name").toString().toStdString());
             computer.setYear(query.value("Year").toInt());
             computer.setType(query.value("Type").toString().toStdString());
@@ -130,15 +144,13 @@ vector<Computer> dataLayer::getSortedComputers(string order)
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
+    string prepareQuery = "SELECT * FROM persons WHERE " + column + " LIKE %" + findMe + "% COLLATE NOCASE";
+    QString queryString = QString::fromStdString(prepareQuery);
 
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("SELECT * FROM persons WHERE CONTAINS(Column, findMe) "
-                      "VALUES (:Column, :findMe)");
-        query.bindValue(":Column", QString::fromStdString(column));
-        query.bindValue(":findMe", QString::fromStdString(findMe));
-        query.exec();
+        query.exec(queryString);
 
         while(query.next())
         {
@@ -155,6 +167,33 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
     }
 
     return persons;
+}
+
+vector<Computer> dataLayer::findComputers(string column, string findMe)
+{
+    vector<Computer> computers;
+    string prepareQuery = "SELECT * FROM computers WHERE " + column + " LIKE %" + findMe + "% COLLATE NOCASE";
+    QString queryString = QString::fromStdString(prepareQuery);
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.exec(queryString);
+
+        while(query.next())
+        {
+            Computer computer;
+            computer.setId(query.value("Id").toInt());
+            computer.setName(query.value("Name").toString().toStdString());
+            computer.setYear(query.value("Year").toInt());
+            computer.setType(query.value("Type").toString().toStdString());
+            computer.setBuilt(query.value("Built").toBool());
+
+            computers.push_back(computer);
+        }
+    }
+
+    return computers;
 }
 
 bool dataLayer::deletePerson(string deleteMe)
