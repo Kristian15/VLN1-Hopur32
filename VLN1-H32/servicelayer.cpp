@@ -400,13 +400,13 @@ void serviceLayer::saveData(string fileName, vector<Person> saveMe)
  * @brief serviceLayer::deletePerson
  * @param name
  */
-void serviceLayer::deletePerson(string name)
+bool serviceLayer::deletePerson(string name)
 {
-    bool temp;
-    temp = data.deletePerson(name);
+    return data.deletePerson(name);
 }
 
-/*void serviceLayer::deleteComputer(string name)
+bool serviceLayer::deleteComputer(string name)
 {
-    data.deleteComputer(name);
-}*/
+   // return data.deleteComputer(name);
+    return true;
+}

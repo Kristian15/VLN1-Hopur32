@@ -50,5 +50,6 @@ public:
     void saveData(string fileName, vector<Person> saveMe);
     // calls findAndDelete()
     // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
-    void deletePerson(string name);
+    bool deletePerson(string name);
+    bool deleteComputer(string name);
 };
