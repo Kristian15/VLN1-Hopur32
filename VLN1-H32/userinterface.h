@@ -27,7 +27,7 @@ private:
     // calls printSearchOptions() and printSearchCommands()
     // calls searchList() from serviceLayer
     // calls printList() with the search matches
-    void printScientisFromSearch();
+    void printScientistFromSearch();
     // outputs inMessage, prints printMe and outputs outMessage
     void printList(vector<Person> printMe, string inMessage, string outMessage);
     // gets a fileName from user and calls createList() in serviceLayer

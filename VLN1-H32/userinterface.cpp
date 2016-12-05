@@ -47,7 +47,7 @@ void userInterface::run()
             deleteComputer();
             break;
         case Search_Scientist:
-            printScientisFromSearch();
+            printScientistFromSearch();
             break;
         case Search_Computer:
             printComputerFromSearch();
@@ -226,7 +226,7 @@ void userInterface::printComputersFromDisplay()
 /**
  * @brief userInterface::printFromSearch
  */
-void userInterface::printScientisFromSearch()
+void userInterface::printScientistFromSearch()
 {
     printSearchscientistsOptions();
     int searchBy;
