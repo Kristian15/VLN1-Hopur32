@@ -71,6 +71,8 @@ void dataLayer::updateData(Person person)
 
 vector<Person> dataLayer::getSortedPersons(string order)
 {
+    vector<Person> persons;
+
     if(db.isOpen())
     {
         query.prepare("SELECT * FROM persons ORDER BY "
@@ -78,6 +80,21 @@ vector<Person> dataLayer::getSortedPersons(string order)
         query.bindValue(":order", QString::fromStdString(order));
         query.exec();
     }
+
+    while (query.next())
+    {
+        Person person;
+        //person.setId(query.value("ID").toUInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+
+        persons.push_back(person);
+    }
+
+    return persons;
 }
 
 /**
