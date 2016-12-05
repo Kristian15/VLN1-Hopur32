@@ -408,4 +408,5 @@ bool serviceLayer::deletePerson(string name)
 bool serviceLayer::deleteComputer(string name)
 {
    // return data.deleteComputer(name);
+    return true;
 }
