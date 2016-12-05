@@ -25,17 +25,16 @@ private:
     void splitAndAdd(string s, int index);
     // creates a new person and returns it
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
-    // finds all Person in the vector persons in dataLayer with the name name
-    // calls delPerson() in dataLayer
-    void findAndDelete(string name);
 
 public:
     // searchList() calls the correct find help function with findMe as input
     // returns a vector with the findings
-    vector<Person> searchList(string findMe, int by);
+//    vector<Person> searchPersons(string findMe, int by);
+//    vector<Computer> searchComputers(string finMe, int by);
     // sortList() calls the correct sort help function
     // returns the vector in dataLayer
-    vector<Person> sortList(int order);
+    vector<Person> sortPersons(int order);
+//    vector<Computer> sortComputers(int order);
     // uses loadData in dataLayer and gets a vector of strings from the file back
     // calls splitLine() with a vector of Persons that is called by reference
     // calls setPersons() in dataLayer with the vector
