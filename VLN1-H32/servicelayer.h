@@ -30,11 +30,11 @@ public:
     // searchList() calls the correct find help function with findMe as input
     // returns a vector with the findings
     vector<Person> searchPersons(string findMe, int by);
-//    vector<Computer> searchComputers(string finMe, int by);
+    vector<Computer> searchComputers(string findMe, int by);
     // sortList() calls the correct sort help function
     // returns the vector in dataLayer
     vector<Person> sortPersons(int order);
-//    vector<Computer> sortComputers(int order);
+    vector<Computer> sortComputers(int order);
     // uses loadData in dataLayer and gets a vector of strings from the file back
     // calls splitLine() with a vector of Persons that is called by reference
     // calls setPersons() in dataLayer with the vector

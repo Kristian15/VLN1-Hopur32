@@ -69,6 +69,13 @@ void dataLayer::addNewPerson(Person person)
 
 void dataLayer::addNewComputer(Computer computer)
 {
+    /*string prepQuery = "INSERT INTO computers ("
+            + computer.getName() + ", "
+            + to_string(computer.getYear()) + ", "
+            + computer.getType() + ", "
+            + to_string(computer.getBuilt()) + ")";
+    QString queryString = QString::fromStdString(prepQuery);*/
+
     if(db.isOpen())
     {
        QSqlQuery query;
@@ -144,7 +151,7 @@ vector<Computer> dataLayer::getSortedComputers(string order)
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
-    string prepareQuery = "SELECT * FROM persons WHERE " + column + " LIKE %" + findMe + "% COLLATE NOCASE";
+    string prepareQuery = "SELECT * FROM persons WHERE " + column + " LIKE %" + findMe + "%"; // COLLATE NOCASE";
     QString queryString = QString::fromStdString(prepareQuery);
 
     if(db.isOpen())
@@ -172,7 +179,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
-    string prepareQuery = "SELECT * FROM computers WHERE " + column + " LIKE %" + findMe + "% COLLATE NOCASE";
+    string prepareQuery = "SELECT * FROM computers WHERE " + column + " LIKE %" + findMe + "%"; // COLLATE NOCASE";
     QString queryString = QString::fromStdString(prepareQuery);
 
     if(db.isOpen())
@@ -200,7 +207,7 @@ bool dataLayer::deletePerson(string deleteMe)
 {
     QString localQuery = "DELETE FROM persons WHERE name=";
     localQuery.append(QString::fromStdString(deleteMe));
-    localQuery.append("COLLATE NOCASE");
+    //localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
         QSqlQuery query;
@@ -215,12 +222,30 @@ bool dataLayer::deleteComputer(string deleteMe)
 {
     QString localQuery = "DELETE FROM computers WHERE name=";
     localQuery.append(QString::fromStdString(deleteMe));
-    localQuery.append("COLLATE NOCASE");
+    //localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
         QSqlQuery query;
         query.exec(localQuery);
         return true; // þarf að skila true ef eyðsla heppnaðist
+    }
+
+    return false;
+}
+
+bool dataLayer::makeRelation(int personId, int computerId)
+{
+
+    if(db.isOpen())
+    {
+        QString queryString = "INSERT INTO PersonAndComputer (PersonID, ComputerID) VALUES (";
+        queryString.append(QString::number(personId));
+        queryString.append(", ");
+        queryString.append(QString::number(computerId));
+        queryString.append(")");
+        QSqlQuery query;
+        query.exec(queryString);
+        return true; // make check for it
     }
 
     return false;

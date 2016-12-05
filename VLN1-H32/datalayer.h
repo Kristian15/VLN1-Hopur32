@@ -35,6 +35,8 @@ public:
     bool deletePerson(string deleteMe);
     bool deleteComputer(string deleteMe);
 
+    bool makeRelation(int scientist, int computer);
+
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName
     vector<string> loadData(string fileName);
