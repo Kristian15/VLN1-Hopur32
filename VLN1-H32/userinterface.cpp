@@ -266,7 +266,7 @@ void userInterface::printComputerFromSearch()
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
-    //printList(service.searchList(searchFor, searchBy), "Search results: ", "No match!");
+    cout << "gemmer fall til að kalla í";
 }
 
 /**
