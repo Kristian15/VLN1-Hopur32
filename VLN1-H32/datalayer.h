@@ -23,6 +23,7 @@ private:
     void updateData(Person person);
 public:
     dataLayer();
+    ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName
