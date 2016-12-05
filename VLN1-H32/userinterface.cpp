@@ -85,7 +85,7 @@ void userInterface::printMainMenu()
 }
 
 /**
- * @brief userInterface::printListOptions
+ * @brief userInterface::printDisplayscientistsOptions
  */
 void userInterface::printDisplayscientistsOptions()
 {
@@ -130,7 +130,7 @@ void userInterface::printSearchcomputersoptions()
 }
 
 /**
- * @brief userInterface::printSearchCommands
+ * @brief userInterface::printSearchscientistsCommands
  * @param input
  */
 void userInterface::printSearchscientistsCommands(int input)
@@ -186,7 +186,7 @@ void userInterface::printSearchcomputersCommands(int input)
 }
 
 /**
- * @brief userInterface::printFromDisplay
+ * @brief userInterface::printScientistsFromDisplay
  */
 void userInterface::printScientistsFromDisplay()
 {
@@ -224,7 +224,7 @@ void userInterface::printComputersFromDisplay()
 }
 
 /**
- * @brief userInterface::printFromSearch
+ * @brief userInterface::printScientistFromSearch
  */
 void userInterface::printScientistFromSearch()
 {
