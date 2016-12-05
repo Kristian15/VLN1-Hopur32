@@ -25,7 +25,6 @@ void dataLayer::updateData(Person person)
 {
     if(db.isOpen())
     {
-       QSqlQuery query;
        query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");
        query.bindValue(":name", QString::fromStdString(person.getName()));
@@ -69,6 +68,17 @@ void dataLayer::updateData(Person person)
 
 
 // **** Public ****
+
+vector<Person> dataLayer::getSortedPersons(string order)
+{
+    if(db.isOpen())
+    {
+        query.prepare("SELECT * FROM persons ORDER BY "
+                      "VALUES (:order)");
+        query.bindValue(":order", QString::fromStdString(order));
+        query.exec();
+    }
+}
 
 /**
  * @brief dataLayer::loadData
