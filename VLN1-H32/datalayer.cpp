@@ -5,7 +5,6 @@
 
 dataLayer::dataLayer()
 {
-    cout << "constructor" << endl;
     db.addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
     db.open();
