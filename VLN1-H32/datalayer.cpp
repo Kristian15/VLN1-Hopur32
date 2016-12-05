@@ -75,13 +75,41 @@ vector<Person> dataLayer::getSortedPersons(string order)
 
     if(db.isOpen())
     {
-        query.prepare("SELECT * FROM persons ORDER BY "
+        query.prepare("SELECT * FROM persons ORDER BY order"
                       "VALUES (:order)");
         query.bindValue(":order", QString::fromStdString(order));
         query.exec();
     }
 
     while (query.next())
+    {
+        Person person;
+        //person.setId(query.value("ID").toUInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+
+        persons.push_back(person);
+    }
+
+    return persons;
+}
+
+vector<Person> dataLayer::findPerson(string column, string findMe)
+{
+    vector<Person> persons;
+
+    if(db.isOpen())
+    {
+        query.prepare("SELECT * FROM persons WHERE CONTIAINS(Column, findme) "
+                      "VALUES (:Column, :findme)");
+        query.bindValue(":Column", QString::fromStdString(column));
+        query.bindValue(":findme", QString::fromStdString(findMe));
+    }
+
+    while(query.next())
     {
         Person person;
         //person.setId(query.value("ID").toUInt());
