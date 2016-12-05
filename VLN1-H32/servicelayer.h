@@ -12,25 +12,6 @@ class serviceLayer
 private:
     dataLayer data;
 
-    // sort functions, called by sortList():
-    // the functions sort the vector persons from dataLayer
-
-    //***** BREYTA SORT FÖLLUM ****
-    void sortByName(vector<Person>& sortMe);
-    void sortByGender(vector<Person>& sortMe);
-    void sortByNationality(vector<Person>& sortMe);
-    void sortByByear(vector<Person>& sortMe);
-    void sortByDyear(vector<Person>& sortMe);
-    // find functions, called by searchList():
-    // the functions find all matching elements to the input in
-    // the vector persons in dataLayer
-
-    //***** BREYTA FIND FÖLLUM****
-    vector<Person> findByName(string name);
-    vector<Person> findByGender(string gender);
-    vector<Person> findByNationality(string nationality);
-    vector<Person> findByByear(int byear);
-    vector<Person> findByDyear(int dyear);
     // validate functions, called by validateNewPerson():
     // return true if the inputs are valid and false otherwise
     bool validateName(string name);
@@ -38,10 +19,10 @@ private:
     bool validateNationality(string nationality);
     bool validateYear(string year);
     // toLower changes all uppercase letters in string s to lowercase letters
-    string toLower(string s);
+  //  string toLower(string s);
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
     // splits the line where ";" is and adds it to newPersons
-    void splitLine(string s, vector<Person>& newPersons, int index);
+    void splitAndAdd(string s, int index);
     // creates a new person and returns it
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
     // finds all Person in the vector persons in dataLayer with the name name

@@ -25,7 +25,6 @@ void dataLayer::updateData(Person person)
 {
     if(db.isOpen())
     {
-       QSqlQuery query;
        query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");
        query.bindValue(":name", QString::fromStdString(person.getName()));
@@ -35,40 +34,66 @@ void dataLayer::updateData(Person person)
        query.bindValue(":dyear", person.getDyear());
        query.exec();
     }
-
-    string data = "";
-    bool match = false;
-
-    if(_persons.empty())
-    {
-        _fileName = "backup.txt";
-        match = true;
-    }
-
-    _persons.push_back(person);
-    data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear()) + _d;
-
-    if(person.getDyear() != 0)
-    {
-        data += to_string(person.getDyear()) + _d;
-    }
-
-    ofstream dataStream;
-    dataStream.open(_fileName, ios::app);
-
-    if(dataStream)
-    {
-        if(match == false)
-        {
-            dataStream << endl;
-        }
-        dataStream << data;
-        dataStream.close();
-    }
 }
 
 
 // **** Public ****
+
+vector<Person> dataLayer::getSortedPersons(string order)
+{
+    vector<Person> persons;
+
+    if(db.isOpen())
+    {
+        query.prepare("SELECT * FROM persons ORDER BY order"
+                      "VALUES (:order)");
+        query.bindValue(":order", QString::fromStdString(order));
+        query.exec();
+    }
+
+    while (query.next())
+    {
+        Person person;
+        //person.setId(query.value("ID").toUInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+
+        persons.push_back(person);
+    }
+
+    return persons;
+}
+
+vector<Person> dataLayer::findPerson(string column, string findMe)
+{
+    vector<Person> persons;
+
+    if(db.isOpen())
+    {
+        query.prepare("SELECT * FROM persons WHERE CONTIAINS(Column, findme) "
+                      "VALUES (:Column, :findme)");
+        query.bindValue(":Column", QString::fromStdString(column));
+        query.bindValue(":findme", QString::fromStdString(findMe));
+    }
+
+    while(query.next())
+    {
+        Person person;
+        //person.setId(query.value("ID").toUInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+
+        persons.push_back(person);
+    }
+
+    return persons;
+}
 
 /**
  * @brief dataLayer::loadData

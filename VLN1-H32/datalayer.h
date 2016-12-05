@@ -13,6 +13,7 @@ private:
     const QString DB_DRIVER_TYPE = "QSQLITE";
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
+    QSqlQuery query;
 
 
     vector<Person> _persons; // the database
@@ -24,6 +25,9 @@ public:
     dataLayer();
     ~dataLayer();
     vector<Person> getPersons(){ return _persons; }
+    vector<Person> getSortedPersons(string order);
+    vector<Person> dataLayer::findPerson(string findMe, string category);
+
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName
     vector<string> loadData(string fileName);
