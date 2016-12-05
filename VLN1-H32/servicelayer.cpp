@@ -409,4 +409,4 @@ void serviceLayer::deletePerson(string name)
 /*void serviceLayer::deleteComputer(string name)
 {
     data.deleteComputer(name);
-}
+}*/
