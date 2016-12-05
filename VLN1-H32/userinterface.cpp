@@ -426,7 +426,14 @@ void userInterface::deletePerson()
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-    service.deletePerson(deleteString);
+    if(service.deletePerson(deleteString))
+    {
+        cout << "Delete successfull";
+    }
+    else
+    {
+        cout << "Delete unsuccessfull";
+    }
 }
 
 void userInterface::deleteComputer()
