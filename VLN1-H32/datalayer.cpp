@@ -25,6 +25,7 @@ void dataLayer::updateData(Person person)
 {
     if(db.isOpen())
     {
+       QSqlQuery query;
        query.prepare("INSERT INTO Persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");
        query.bindValue(":name", QString::fromStdString(person.getName()));
@@ -72,13 +73,42 @@ void dataLayer::updateData(Person person)
 vector<Person> dataLayer::getSortedPersons(string order)
 {
     vector<Person> persons;
+    QString queryString = "SELECT * FROM persons ORDER BY persons.";
+    queryString.append(QString::fromStdString(order));
 
     if(db.isOpen())
     {
-        query.prepare("SELECT * FROM persons ORDER BY order"
-                      "VALUES (:order)");
-        query.bindValue(":order", QString::fromStdString(order));
-        query.exec();
+        QSqlQuery query;
+        query.exec(queryString);
+
+        while (query.next())
+        {
+            Person person;
+            //person.setId(query.value("ID").toUInt());
+            person.setName(query.value("Name").toString().toStdString());
+            person.setGender(query.value("Gender").toString().toStdString());
+            person.setNationality(query.value("Nationality").toString().toStdString());
+            person.setByear(query.value("BirthYear").toInt());
+            person.setDyear(query.value("DeathYear").toInt());
+
+            persons.push_back(person);
+        }
+    }
+
+    return persons;
+}
+
+vector<Person> dataLayer::getSortedComputers(string order)
+{
+    vector<Person> persons;
+    QString queryString = "SELECT * FROM computers ORDER BY computers.";
+    queryString.append(QString::fromStdString(order));
+
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.exec(queryString);
 
         while (query.next())
         {
@@ -103,6 +133,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     if(db.isOpen())
     {
+        QSqlQuery query;
         query.prepare("SELECT * FROM persons WHERE CONTAINS(Column, findMe) "
                       "VALUES (:Column, :findMe)");
         query.bindValue(":Column", QString::fromStdString(column));
@@ -133,8 +164,8 @@ bool dataLayer::deletePerson(string deleteMe)
     localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
-        query.prepare(localQuery);
-        query.exec();
+        QSqlQuery query;
+        query.exec(localQuery);
         return true; // þarf að skila true ef eyðsla heppnaðist
     }
 
@@ -148,8 +179,8 @@ bool dataLayer::deleteComputer(string deleteMe)
     localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
-        query.prepare(localQuery);
-        query.exec();
+        QSqlQuery query;
+        query.exec(localQuery);
         return true; // þarf að skila true ef eyðsla heppnaðist
     }
 

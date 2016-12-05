@@ -13,7 +13,6 @@ private:
     const QString DB_DRIVER_TYPE = "QSQLITE";
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
-    QSqlQuery query;
 
 
     vector<Person> _persons; // the database
@@ -27,6 +26,8 @@ public:
     vector<Person> getPersons(){ return _persons; }
     vector<Person> getSortedPersons(string order);
     vector<Person> findPersons(string findMe, string category);
+
+    vector<Person> getSortedComputers(string order);
 
     bool deletePerson(string deleteMe);
     bool deleteComputer(string deleteMe);
