@@ -29,6 +29,7 @@ public:
     vector<Person> findPersons(string findMe, string category);
 
     bool deletePerson(string deleteMe);
+    bool deleteComputer(string deleteMe);
 
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName

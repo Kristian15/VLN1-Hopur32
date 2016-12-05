@@ -128,11 +128,27 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
 bool dataLayer::deletePerson(string deleteMe)
 {
+    QString localQuery = "DELETE FROM persons WHERE name=";
+    localQuery.append(QString::fromStdString(deleteMe));
+    localQuery.append("COLLATE NOCASE");
     if(db.isOpen())
     {
-        query.prepare("DELETE FROM persons WHERE name= deleteMe"
-                      "VALUES (:deleteMe)");
-        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.prepare(localQuery);
+        query.exec();
+        return true; // þarf að skila true ef eyðsla heppnaðist
+    }
+
+    return false;
+}
+
+bool dataLayer::deleteComputer(string deleteMe)
+{
+    QString localQuery = "DELETE FROM computers WHERE name=";
+    localQuery.append(QString::fromStdString(deleteMe));
+    localQuery.append("COLLATE NOCASE");
+    if(db.isOpen())
+    {
+        query.prepare(localQuery);
         query.exec();
         return true; // þarf að skila true ef eyðsla heppnaðist
     }
