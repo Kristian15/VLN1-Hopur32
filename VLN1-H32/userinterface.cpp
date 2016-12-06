@@ -328,7 +328,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
     const char seperator = ' ';
     const int nameWidth  = 30;
     const int yearWidth = 10;
-    const int typeWidth = 10;
+    const int typeWidth = 30;
     const int builtWidth = 10;
 
     if(!printMe.empty())
