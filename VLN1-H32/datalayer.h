@@ -22,8 +22,10 @@ public:
     ~dataLayer();
     vector<Person> getSortedPersons(string column);
     vector<Computer> getSortedComputers(string column);
-    vector<Person> findPersons(string column, string findMe);
-    vector<Computer> findComputers(string column, string findMe);
+    template <typename T>
+    vector<T> find(string table, string column, string findMe);
+   // vector<Person> findPersons(string column, string findMe);
+  //  vector<Computer> findComputers(string column, string findMe);
     void updateTable(int id, string table, string column, string updateMe);
     // delete person that matches provided string
     bool deletePerson(int id);
@@ -41,4 +43,6 @@ public:
     void addComputer(Computer computer) { addNewComputer(computer); }
     // deletes person at the supplied index
     //void delPerson(int index){  _persons.erase(_persons.begin() + index); }
+    template <typename T>
+    vector<T> setter(QString queryString, string table);
 };

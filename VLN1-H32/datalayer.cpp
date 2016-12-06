@@ -131,16 +131,20 @@ vector<Computer> dataLayer::getSortedComputers(string column)
  * @param findMe
  * @return
  */
-vector<Person> dataLayer::findPersons(string column, string findMe)
+template <typename T>
+vector<T> dataLayer::find(string table, string column, string findMe)
 {
-    vector<Person> persons;
-    QString queryString = "SELECT * FROM Persons WHERE ";
+    vector<T> persons;
+    // QString queryString = "SELECT * FROM Persons WHERE ";
+    QString queryString = "SELECT * FROM ";
+    queryString.append(table);
+    queryString.append(" WHERE ")
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
     queryString.append(QString::fromStdString(findMe));
     queryString.append("%' COLLATE NOCASE");
 
-    if(db.isOpen())
+   /* if(db.isOpen())
     {
         QSqlQuery query;
         query.exec(queryString);
@@ -156,17 +160,53 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
             person.setDyear(query.value("DeathYear").toInt());
             persons.push_back(person);
         }
-    }
+    }*/
 
+    //return persons;
+    return setter(queryString);
+}
+
+template <typename T>
+vector<T> dataLayer::setter(QString queryString, string table)
+{
+    vector<T> persons;
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.exec(queryString);
+
+        while(query.next())
+        {
+            T person;
+            person.setID(query.value("ID").toUInt());
+            person.setName(query.value("Name").toString().toStdString());
+            if(table == "Persons")
+            {
+                person.setGender(query.value("Gender").toString().toStdString());
+                person.setNationality(query.value("Nationality").toString().toStdString());
+                person.setByear(query.value("BirthYear").toInt());
+                person.setDyear(query.value("DeathYear").toInt());
+            }
+            else
+            {
+                computer.setYear(query.value("Year").toInt());
+                computer.setType(query.value("Type").toString().toStdString());
+                computer.setBuilt(query.value("Built").toBool());
+            }
+            persons.push_back(person);
+        }
+    }
     return persons;
 }
+
+
 /**
  * @brief dataLayer::findComputers
  * @param column
  * @param findMe
  * @return
  */
-vector<Computer> dataLayer::findComputers(string column, string findMe)
+/*vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
 
@@ -195,7 +235,7 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
     }
 
     return computers;
-}
+}*/
 /**
  * @brief dataLayer::updateTable
  * @param id

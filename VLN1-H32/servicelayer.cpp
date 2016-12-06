@@ -220,9 +220,10 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
  * @param by
  * @return vector<Person>
  */
+template <typename T>
 vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
-    const string fromTable = "Persons";
+    string fromTable = "Persons";
     vector<Person> findings;
 
     switch (by) {
