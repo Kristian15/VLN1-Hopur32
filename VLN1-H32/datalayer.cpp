@@ -195,7 +195,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
         while(query.next())
         {
             Person person;
-            //person.setId(query.value("ID").toUInt());
+            person.setID(query.value("ID").toUInt());
             person.setName(query.value("Name").toString().toStdString());
             person.setGender(query.value("Gender").toString().toStdString());
             person.setNationality(query.value("Nationality").toString().toStdString());
@@ -270,13 +270,13 @@ void dataLayer::updateTable(int id, string table, string column, string updateMe
  * @param deleteMe
  * @return
  */
-bool dataLayer::deletePerson(string deleteMe)
+bool dataLayer::deletePerson(int deleteMe)
 {
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("DELETE FROM persons WHERE name = :deleteMe");
-        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.prepare("DELETE FROM persons WHERE ID = :deleteMe");
+        query.bindValue(":deleteMe", deleteMe);
         query.exec();
         return true; // TODO: make check for this
     }
@@ -288,13 +288,13 @@ bool dataLayer::deletePerson(string deleteMe)
  * @param deleteMe
  * @return
  */
-bool dataLayer::deleteComputer(string deleteMe)
+bool dataLayer::deleteComputer(int deleteMe)
 {
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("DELETE FROM Computers WHERE Name = :deleteMe");
-        query.bindValue(":deleteMe", QString::fromStdString(deleteMe));
+        query.prepare("DELETE FROM Computers WHERE ID = :deleteMe");
+        query.bindValue(":deleteMe", deleteMe);
         query.exec();
         return true; // TODO: make check for this
     }

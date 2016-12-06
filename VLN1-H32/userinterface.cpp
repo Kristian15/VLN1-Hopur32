@@ -321,7 +321,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
 /**
  * @brief userInterface::readList
  */
-void userInterface::readList()
+/*void userInterface::readList()
 {
     cout << "Enter the name of your file: ";
     string fileName;
@@ -331,7 +331,7 @@ void userInterface::readList()
     {
         service.createList(fileName);
     }catch(string fail) { cout << fail << endl; }
-}
+}*/
 
 /**
  * @brief userInterface::readPerson
@@ -416,19 +416,54 @@ bool userInterface::doYouWantToQuit()
  */
 void userInterface::deletePerson()
 {
-    cout << "Delete the scientist with the following name:" << endl;
+    cout << "Delete the persoon with the following name:" << endl;
     cout << "Input: ";
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-
-    if(service.deletePerson(deleteString))
+    vector<Person> delperson = service.searchPersons(deleteString, 1);
+    if(delperson.size() == 0)
     {
-        cout << "Delete successful!" << endl;
+        cout << "No such Person!";
+    }
+    else if(delperson.size() == 1)
+    {
+
+        cout << "Do you want to delete the following person from database? (Y/N) ";
+        cout << delperson[0].getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
+        {
+            if(service.deletePerson(delperson[0].getID()))
+            {
+                cout << "Delete successful!" << endl;
+            }
+            else
+            {
+                cout << "Delete unsuccessful!" << endl;
+            }
+        }
     }
     else
     {
-        cout << "Delete unsuccessful!" << endl;
+        cout << "which of the following computers do you want to delete";
+        for(unsigned int i = 0; i < delperson.size(); i++)
+        {
+            cout << i+1 << delperson[i];
+        }
+        int input;
+        cin >> input;
+        input--;
+        if(service.deletePerson(delperson[input].getID()))
+        {
+            cout << "Delete successful!" << endl;
+        }
+        else
+        {
+            cout << "Delete unsuccessful!" << endl;
+        }
+
     }
 }
 
@@ -453,7 +488,8 @@ void userInterface::deleteComputer()
         cin >> answer;
         if(answer == "y" || answer == "Y")
         {
-            if(service.deleteComputer[0].getID)
+            Computer computer = delcomputer[0];
+            if(service.deleteComputer(computer.getID()))
             {
                 cout << "Delete successful!" << endl;
             }
@@ -473,7 +509,8 @@ void userInterface::deleteComputer()
         int input;
         cin >> input;
         input--;
-        if(service.deleteComputer(delcomputer[input]))
+        Computer computer = delcomputer[input];
+        if(service.deleteComputer(computer.getID()))
         {
             cout << "Delete successful!" << endl;
         }

@@ -22,7 +22,7 @@ private:
   //  string toLower(string s);
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
     // splits the line where ";" is and adds it to newPersons
-    void splitAndAdd(string s, int index);
+  //  void splitAndAdd(string s, int index);
     // creates a new person and returns it
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
 
@@ -38,7 +38,7 @@ public:
     // uses loadData in dataLayer and gets a vector of strings from the file back
     // calls splitLine() with a vector of Persons that is called by reference
     // calls setPersons() in dataLayer with the vector
-    void createList(string fileName);
+    //void createList(string fileName);
     // calls the help function getPerson() that returns a Person
     // calls data.addPerson with that Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
@@ -50,6 +50,6 @@ public:
     bool validateNewComputer(string name, string year, string type);
     // calls findAndDelete()
     // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
-    bool deletePerson(string name);
-    bool deleteComputer(string name);
+    bool deletePerson(int id);
+    bool deleteComputer(int id);
 };

@@ -128,7 +128,7 @@ bool serviceLayer::validateYear(string year)
  * @param newPersons
  * @param index
  */
-void serviceLayer::splitAndAdd(string s, int index)
+/*void serviceLayer::splitAndAdd(string s, int index)
 {
     // the function splits the string s and uses to create a new Person
     vector<string> elems;
@@ -144,27 +144,28 @@ void serviceLayer::splitAndAdd(string s, int index)
         s.erase(0, pos + delimeter.length());
     }
 
-    string Name, Gender, Nationality, Byear, Dyear;
+    string ID, Name, Gender, Nationality, Byear, Dyear;
 
     // throw exception if the string did not have the right amount of ';'
-    if((elems.size() < 4) || (elems.size() > 5))
+    if((elems.size() < 5) || (elems.size() > 6))
     {
        throw string(error);
     }
     else
     {
-        Name = elems[0];
-        Gender = elems[1];
-        Nationality = elems[2];
-        Byear = elems[3];
+        ID = elems[0];
+        Name = elems[1];
+        Gender = elems[2];
+        Nationality = elems[3];
+        Byear = elems[4];
 
         // if a death year was not included
-        if(elems.size() < 5)
+        if(elems.size() < 6)
         {
             elems.push_back("0");
         }
 
-        Dyear = elems[4];
+        Dyear = elems[5];
 
         // throws exception if the variables are not valid
         if (validateNewPerson(Name, Gender, Nationality, Byear, Dyear))
@@ -176,7 +177,7 @@ void serviceLayer::splitAndAdd(string s, int index)
             throw string(error);
         }
     }
-}
+}*/
 
 /**
  * @brief serviceLayer::getNewPerson
@@ -326,7 +327,7 @@ vector<Computer> serviceLayer::sortComputers(int order)
  * @brief serviceLayer::createList
  * @param fileName
  */
-void serviceLayer::createList(string fileName)
+/*void serviceLayer::createList(string fileName)
 {
     vector<string> lines = data.loadData(fileName);
 
@@ -334,7 +335,7 @@ void serviceLayer::createList(string fileName)
     {
         splitAndAdd(lines[i], (i + 1));
     }
-}
+}*/
 
 /**
  * @brief serviceLayer::newPerson
@@ -417,12 +418,12 @@ bool serviceLayer::validateNewComputer(string name, string year, string type)
  * @brief serviceLayer::deletePerson
  * @param name
  */
-bool serviceLayer::deletePerson(string name)
+bool serviceLayer::deletePerson(int id)
 {
-    return data.deletePerson(name);
+    return data.deletePerson(id);
 }
 
-bool serviceLayer::deleteComputer(string name)
+bool serviceLayer::deleteComputer(int id)
 {
-   return data.deleteComputer(name);
+   return data.deleteComputer(id);
 }

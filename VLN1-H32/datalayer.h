@@ -35,9 +35,9 @@ public:
     void updateTable(int id, string table, string column, string updateMe);
 
     // delete person that matches provided string
-    bool deletePerson(string deleteMe);
+    bool deletePerson(int deleteMe);
     // delete computer that matches provided string
-    bool deleteComputer(string deleteMe);
+    bool deleteComputer(int deleteMe);
     // creates a relation between a comptuer and a scientist
     bool makeRelation(int scientist, int computer);
 
