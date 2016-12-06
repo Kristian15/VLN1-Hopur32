@@ -245,6 +245,27 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
     return computers;
 }
 /**
+ * @brief dataLayer::updateTable
+ * @param id
+ * @param table
+ * @param column
+ * @param updateMe
+ */
+void dataLayer::updateTable(int id, string table, string column, string updateMe)
+{
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
+        query.bindValue(":table", QString::fromStdString(table));
+        query.bindValue(":column", QString::fromStdString(column));
+        query.bindValue(":updateMe", QString::fromStdString(updateMe));
+        query.bindValue(":id", id);
+        query.exec();
+    }
+    return;
+}
+/**
  * @brief dataLayer::deletePerson
  * @param deleteMe
  * @return
