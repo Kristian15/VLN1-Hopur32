@@ -412,7 +412,7 @@ void userInterface::ifYouWantToSave(vector<Person> saveMe)
         cout << "Write the name of the file you want to save" << endl;
         string fileName;
         cin >> fileName;
-        service.saveData(fileName, saveMe);
+        // service.saveData(fileName, saveMe); er ekki til lengur
     }
 }
 

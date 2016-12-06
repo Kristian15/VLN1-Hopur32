@@ -47,8 +47,6 @@ public:
     // uses the validate help functions
     // returns true if the input is valid and false otherwise
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
-    // function to call saveData() in dataLayer with these parameters
-    void saveData(string fileName, vector<Person> saveMe);
     // calls findAndDelete()
     // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
     bool deletePerson(string name);

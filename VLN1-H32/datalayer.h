@@ -42,8 +42,6 @@ public:
     string getDelimeter(){ return _d; }
     // returns a vector with the lines in fileName
     vector<string> loadData(string fileName);
-    // save data to supplied fileName, if fileName == "current" it saves to current filename
-    void saveData(string fileName, vector<Person> persons);
     // overwrites the current persons vector
     void setPersons(vector<Person> persons){ _persons = persons; }
     // calls updateData function to save new person and save to vector

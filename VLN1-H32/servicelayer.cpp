@@ -398,15 +398,6 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     return b;
 }
 
-/**
- * @brief serviceLayer::saveData
- * @param fileName
- * @param saveMe
- */
-void serviceLayer::saveData(string fileName, vector<Person> saveMe)
-{
-    data.saveData(fileName, saveMe);
-}
 
 /**
  * @brief serviceLayer::deletePerson
