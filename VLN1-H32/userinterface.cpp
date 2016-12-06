@@ -284,6 +284,11 @@ void userInterface::printComputerFromSearch()
  */
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
+    const char seperator = ' ';
+    const int nameWidth  = 36;
+    const int genderWidth = 6;
+    const int birthYearWidth = 4;
+    const int deathYearWidth = 4;
     if(!printMe.empty())
     {
         cout << inMessage << endl;
@@ -292,7 +297,6 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
         {
             cout << printMe[i] << endl;
         }
-
         cout << endl;
     }
     else
@@ -527,7 +531,6 @@ void userInterface::linkPersonAndComputer()
     string personname;
     Person person;
     person.setID(-1);
-    cout << person;
     Computer computer;
     cin >> ws;
     getline(cin, personname);
@@ -560,47 +563,50 @@ void userInterface::linkPersonAndComputer()
         input--;
         person = linkperson[input];
     }
-    cout << "Link computer with the following name: ";
-    cout << "Input: ";
-    string computername;
-    cin >> ws;
-    getline(cin, computername);
-    vector<Computer> linkcomputer = service.searchComputers(computername, 1);
-    if(linkcomputer.size() == 0)
+    if(person.getID() != -1)
     {
-        cout << "No such Computer!";
-    }
-    else if(linkcomputer.size() == 1)
-    {
+        cout << "Link computer with the following name: ";
+        cout << "Input: ";
+        string computername;
+        cin >> ws;
+        getline(cin, computername);
+        vector<Computer> linkcomputer = service.searchComputers(computername, 1);
+        if(linkcomputer.size() == 0)
+        {
+            cout << "No such Computer!";
+        }
+        else if(linkcomputer.size() == 1)
+        {
 
-        cout << "Do you want to link the following computer? (Y/N) ";
-        cout << linkcomputer[0].getName();
-        string answer;
-        cin >> answer;
-        if(answer == "y" || answer == "Y")
-        {
-            computer = linkcomputer[0];
+            cout << "Do you want to link the following computer? (Y/N) ";
+            cout << linkcomputer[0].getName();
+            string answer;
+            cin >> answer;
+            if(answer == "y" || answer == "Y")
+            {
+                computer = linkcomputer[0];
+            }
         }
-    }
-    else
-    {
-        cout << "which of the following computers do you want to link" << endl;
-        for(unsigned int i = 0; i < linkcomputer.size(); i++)
+        else
         {
-            cout << i+1 << linkcomputer[i].getName();
+            cout << "which of the following computers do you want to link" << endl;
+            for(unsigned int i = 0; i < linkcomputer.size(); i++)
+            {
+                cout << i+1 << linkcomputer[i].getName();
+            }
+            int input;
+            cin >> input;
+            input--;
+            computer = linkcomputer[input];
         }
-        int input;
-        cin >> input;
-        input--;
-        computer = linkcomputer[input];
-    }
-    if(service.link(person.getID(), computer.getID()))
-    {
-        cout << "Link successful!";
-    }
-    else
-    {
-        cout << "Link unsuccessful!";
+        if(service.link(person.getID(), computer.getID()))
+        {
+            cout << "Link successful!";
+        }
+        else
+        {
+            cout << "Link unsuccessful!";
+        }
     }
 
 }

@@ -48,6 +48,7 @@ Person::Person(string name, string gender, string nationality, int byear)
  */
 ostream& operator <<(ostream& lhs, Person& rhs)
 {
+
     lhs << "Name:          " << rhs._name << endl;
     lhs << "Gender:        " << rhs._gender << endl;
     lhs << "Nationality:   " << rhs._nationality << endl;;
