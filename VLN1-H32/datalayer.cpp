@@ -145,15 +145,16 @@ vector<Computer> dataLayer::getSortedComputers(string order)
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
+    QString queryString = "SELECT * FROM Persons WHERE ";
+    queryString.append(QString::fromStdString(column));
+    queryString.append(" LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE");
 
     if(db.isOpen())
     {
-        cout << "findpersons: " << findMe << "column: " << column << endl;
         QSqlQuery query;
-        query.prepare("SELECT * FROM Persons WHERE :column LIKE '%:findMe%' COLLATE NOCASE");
-        query.bindValue(":column", QString::fromStdString(column));
-        query.bindValue(":findMe", QString::fromStdString(findMe));
-        query.exec();
+        query.exec(queryString);
 
         while(query.next())
         {
@@ -176,13 +177,16 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
 
+    QString queryString = "SELECT * FROM Computers WHERE ";
+    queryString.append(QString::fromStdString(column));
+    queryString.append(" LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE");
+
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("SELECT * FROM Computers WHERE :column LIKE '%:findMe%' COLLATE NOCASE");
-        query.bindValue(":column", QString::fromStdString(column));
-        query.bindValue(":findMe", QString::fromStdString(findMe));
-        query.exec();
+        query.exec(queryString);
 
         while(query.next())
         {
