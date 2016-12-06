@@ -131,10 +131,10 @@ vector<Computer> dataLayer::getSortedComputers(string column)
  * @param findMe
  * @return
  */
-template <typename T>
-vector<T> dataLayer::find(string table, string column, string findMe)
+//template <typename T>
+vector<Person> dataLayer::findPersons(string table, string column, string findMe)
 {
-    vector<T> persons;
+    vector<Person> persons;
     // QString queryString = "SELECT * FROM Persons WHERE ";
     QString queryString = "SELECT * FROM ";
     queryString.append(table);
@@ -144,7 +144,7 @@ vector<T> dataLayer::find(string table, string column, string findMe)
     queryString.append(QString::fromStdString(findMe));
     queryString.append("%' COLLATE NOCASE");
 
-   /* if(db.isOpen())
+  /*  if(db.isOpen())
     {
         QSqlQuery query;
         query.exec(queryString);
@@ -166,10 +166,10 @@ vector<T> dataLayer::find(string table, string column, string findMe)
     return setter(queryString);
 }
 
-template <typename T>
-vector<T> dataLayer::setter(QString queryString, string table)
+//template <typename T>
+vector<Person> dataLayer::setter(QString queryString, string table)
 {
-    vector<T> persons;
+    vector<Person> persons;
     if(db.isOpen())
     {
         QSqlQuery query;
@@ -177,7 +177,7 @@ vector<T> dataLayer::setter(QString queryString, string table)
 
         while(query.next())
         {
-            T person;
+            Person person;
             person.setID(query.value("ID").toUInt());
             person.setName(query.value("Name").toString().toStdString());
             if(table == "Persons")
@@ -197,7 +197,7 @@ vector<T> dataLayer::setter(QString queryString, string table)
         }
     }
     return persons;
-}
+}*/
 
 
 /**
@@ -206,7 +206,7 @@ vector<T> dataLayer::setter(QString queryString, string table)
  * @param findMe
  * @return
  */
-/*vector<Computer> dataLayer::findComputers(string column, string findMe)
+vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
 
@@ -235,7 +235,7 @@ vector<T> dataLayer::setter(QString queryString, string table)
     }
 
     return computers;
-}*/
+}
 /**
  * @brief dataLayer::updateTable
  * @param id

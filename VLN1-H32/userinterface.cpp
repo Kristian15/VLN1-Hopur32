@@ -52,7 +52,7 @@ void userInterface::run()
             printComputerFromSearch();
             break;
         case Link_Scientist_and_Computer:
-            linkPersonAndComputer();
+
             break;
         case Quit:
             quit = doYouWantToQuit();
@@ -284,38 +284,15 @@ void userInterface::printComputerFromSearch()
  */
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
-    const char seperator = ' ';
-    const int nameWidth  = 30;
-    const int genderWidth = 10;
-    const int nationalitWidth = 25;
-    const int birthYearWidth = 12;
-    const int deathYearWidth = 12;
     if(!printMe.empty())
     {
         cout << inMessage << endl;
-        cout << left << setw(nameWidth) << setfill(seperator) << "Name";
-        cout << left << setw(genderWidth) << setfill(seperator) << "Gender";
-        cout << left << setw(nationalitWidth) << setfill(seperator) << "Nationality";
-        cout << left << setw(birthYearWidth) << setfill(seperator) << "Birth Year";
-        cout << left << setw(deathYearWidth) << setfill(seperator) << "Death Year" << endl;
-        cout << left << setfill('-') << setw(90) << "-" << endl;
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
-            cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
-            cout << left << setw(genderWidth) << setfill(seperator) << printMe[i].getGender();
-            cout << left << setw(nationalitWidth) << setfill(seperator) << printMe[i].getNationality();
-            cout << left << setw(birthYearWidth) << setfill(seperator) << printMe[i].getByear();
-            if(printMe[i].getDyear() != 0)
-            {
-                cout << left << setw(deathYearWidth) << setfill(seperator) << printMe[i].getDyear() << endl;
-            }
-            else
-            {
-                cout << left << setw(birthYearWidth) << setfill(seperator) << "-" << endl;
-            }
-
+            cout << printMe[i] << endl;
         }
+
         cout << endl;
     }
     else
@@ -325,34 +302,13 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
 }
 void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
 {
-    const char seperator = ' ';
-    const int nameWidth  = 30;
-    const int yearWidth = 10;
-    const int typeWidth = 10;
-    const int builtWidth = 10;
-
     if(!printMe.empty())
     {
         cout << inMessage << endl;
-        cout << left << setw(nameWidth) << setfill(seperator) << "Name";
-        cout << left << setw(yearWidth) << setfill(seperator) << "Year";
-        cout << left << setw(typeWidth) << setfill(seperator) << "Type";
-        cout << left << setw(builtWidth) << setfill(seperator) << "Built" << endl;
-        cout << left << setfill('-') << setw(90) << "-" << endl;
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
-            cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
-            cout << left << setw(yearWidth) << setfill(seperator) << printMe[i].getYear();
-            cout << left << setw(typeWidth) << setfill(seperator) << printMe[i].getType();
-            if(printMe[i].getBuilt())
-            {
-                cout << left << setw(builtWidth) << setfill(seperator) << "Yes";
-            }
-            else
-            {
-                cout << left << setw(builtWidth) << setfill(seperator) << "No";
-            }
+            cout << printMe[i] << endl;
         }
 
         cout << endl;
@@ -566,12 +522,9 @@ void userInterface::deleteComputer()
 }
 void userInterface::linkPersonAndComputer()
 {
-    cout << "Link person with the following name: " << endl;
+    cout << "Link person with the following name: ";
     cout << "Input: ";
     string personname;
-    Person person;
-    person.setID(-1);
-    Computer computer;
     cin >> ws;
     getline(cin, personname);
     vector<Person> linkperson = service.searchPersons(personname, 1);
@@ -583,12 +536,12 @@ void userInterface::linkPersonAndComputer()
     {
 
         cout << "Do you want to link the following person? (Y/N) ";
-        cout << linkperson[0].getName() << endl;
+        cout << linkperson[0].getName();
         string answer;
         cin >> answer;
         if(answer == "y" || answer == "Y")
         {
-            person = linkperson[0];
+            Person persontolink = linkperson[0];
         }
     }
     else
@@ -601,52 +554,50 @@ void userInterface::linkPersonAndComputer()
         int input;
         cin >> input;
         input--;
-        person = linkperson[input];
+        Person persontolink = linkperson[input];
     }
-    if(person.getID() != -1)
-    {
-        cout << "Link computer with the following name: ";
-        cout << "Input: ";
-        string computername;
-        cin >> ws;
-        getline(cin, computername);
-        vector<Computer> linkcomputer = service.searchComputers(computername, 1);
-        if(linkcomputer.size() == 0)
-        {
-            cout << "No such Computer!";
-        }
-        else if(linkcomputer.size() == 1)
-        {
 
-            cout << "Do you want to link the following computer? (Y/N) ";
-            cout << linkcomputer[0].getName();
-            string answer;
-            cin >> answer;
-            if(answer == "y" || answer == "Y")
-            {
-                computer = linkcomputer[0];
-            }
-        }
-        else
+    cout << "Link computer with the following name: ";
+    cout << "Input: ";
+    string computername;
+    cin >> ws;
+    getline(cin, computername);
+    vector<Computer> linkcomputer = service.searchComputers(computername, 1);
+    if(linkcomputer.size() == 0)
+    {
+        cout << "No such Computer!";
+    }
+    else if(linkcomputer.size() == 1)
+    {
+
+        cout << "Do you want to link the following computer? (Y/N) ";
+        cout << linkcomputer[0].getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
         {
-            cout << "which of the following computers do you want to link" << endl;
-            for(unsigned int i = 0; i < linkcomputer.size(); i++)
-            {
-                cout << i+1 << linkcomputer[i].getName();
-            }
-            int input;
-            cin >> input;
-            input--;
-            computer = linkcomputer[input];
+            Computer computertolink = linkcomputer[0];
         }
-        if(service.link(person.getID(), computer.getID()))
+    }
+    else
+    {
+        cout << "which of the following computers do you want to link" << endl;
+        for(unsigned int i = 0; i < linkcomputer.size(); i++)
         {
-            cout << "Link successful!";
+            cout << i+1 << linkcomputer[i].getName();
         }
-        else
-        {
-            cout << "Link unsuccessful!";
-        }
+        int input;
+        cin >> input;
+        input--;
+        Computer computertolink = linkcomputer[input];
+    }
+    if(service.link(persontolink.getID(), computertolink.getID()))
+    {
+        cout << "Link successful!";
+    }
+    else
+    {
+        cout << "Link unsuccessful!";
     }
 
 }

@@ -29,7 +29,6 @@ private:
 public:
     // searchList() calls the correct find help function with findMe as input
     // returns a vector with the findings
-    template <typename T>
     vector<Person> searchPersons(string findMe, int by);
     vector<Computer> searchComputers(string findMe, int by);
     // sortList() calls the correct sort help function

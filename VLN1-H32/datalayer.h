@@ -23,9 +23,9 @@ public:
     vector<Person> getSortedPersons(string column);
     vector<Computer> getSortedComputers(string column);
     template <typename T>
-    vector<T> find(string table, string column, string findMe);
-   // vector<Person> findPersons(string column, string findMe);
-  //  vector<Computer> findComputers(string column, string findMe);
+    //vector<T> find(string table, string column, string findMe);
+    vector<Person> findPersons(string column, string findMe);
+    vector<Computer> findComputers(string column, string findMe);
     void updateTable(int id, string table, string column, string updateMe);
     // delete person that matches provided string
     bool deletePerson(int id);
