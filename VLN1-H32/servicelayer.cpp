@@ -427,3 +427,8 @@ bool serviceLayer::deleteComputer(int id)
 {
    return data.deleteComputer(id);
 }
+
+bool serviceLayer::link(int personID, int computerID)
+{
+    return data.makeRelation(personID, computerID);
+}
