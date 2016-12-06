@@ -238,8 +238,8 @@ vector<Person> serviceLayer::searchPersons(string findMe, int by)
         findings = data.findPersons("BirthYear", findMe);
         break;
     case 5:
-        break;
         findings = data.findPersons("DeathYear", findMe);
+        break;
     default:
         break;
     }
@@ -291,10 +291,8 @@ vector<Person> serviceLayer::sortPersons(int order)
         sorted = data.getSortedPersons("BirthYear");
         break;
     case 5:
-    {
         sorted = data.getSortedPersons("DeathYear");
         break;
-    }
     default:
         break;
     }
@@ -432,3 +430,38 @@ bool serviceLayer::link(int personID, int computerID)
 {
     return data.makeRelation(personID, computerID);
 }
+
+bool serviceLayer::callUpdatePerson(int id, int column, string updateMe)
+{/* TODO Change column to correct string value
+  bool isValid = false;
+
+  switch(column){
+  case 1:
+     isValid = validateName(updateMe);
+      break;
+  case 2:
+     isValid = validateGender(updateMe);
+      break;
+  case 3:
+      isValid = validateNationality(updateMe);
+      break;
+  case 4:
+      isValid = validateYear(updateMe);
+      break;
+  default:
+      break;
+  }
+  if(isValid)
+  {
+    data.updateTable(id, "Persons", column, updateMe);
+    return isValid;
+  }*/
+  return false;
+}
+
+bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
+{ // TODO validation for computers
+  return false;
+}
+
+
