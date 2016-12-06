@@ -453,7 +453,7 @@ void userInterface::deleteComputer()
         cin >> answer;
         if(answer == "y" || answer == "Y")
         {
-            if(service.deleteComputer(deleteString))
+            if(service.deleteComputer[0].getID)
             {
                 cout << "Delete successful!" << endl;
             }
@@ -468,13 +468,12 @@ void userInterface::deleteComputer()
         cout << "which of the following computers do you want to delete";
         for(unsigned int i = 0; i < delcomputer.size(); i++)
         {
-
-            cout << i+1 << delcomputer[i].getName();
+            cout << i+1 << delcomputer[i];
         }
         int input;
         cin >> input;
         input--;
-        if(service.deleteComputer(delcomputer[input].getName()))
+        if(service.deleteComputer(delcomputer[input]))
         {
             cout << "Delete successful!" << endl;
         }
@@ -484,7 +483,4 @@ void userInterface::deleteComputer()
         }
 
     }
-
-
-
 }
