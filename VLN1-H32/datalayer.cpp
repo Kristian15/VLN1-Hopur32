@@ -89,6 +89,7 @@ vector<Person> dataLayer::getSortedPersons(string order)
     vector<Person> persons;
     QString queryString = "SELECT * FROM persons ORDER BY persons.";
     queryString.append(QString::fromStdString(order));
+    queryString.append("COLLATE NOCASE");
 
     if(db.isOpen())
     {
@@ -117,7 +118,7 @@ vector<Computer> dataLayer::getSortedComputers(string order)
     vector<Computer> computers;
     QString queryString = "SELECT * FROM computers ORDER BY computers.";
     queryString.append(QString::fromStdString(order));
-
+    queryString.append("COLLATE NOCASE");
 
     if(db.isOpen())
     {
