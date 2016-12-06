@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = '1', Display_Computer, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Openfile, Quit = 'q'};
+enum inputcases { Display_Scientis = '1', Display_Computer, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit = 'q'};
 
 /**
  * @brief userInterface::run
@@ -22,7 +22,6 @@ void userInterface::run()
 
     do{
         printMainMenu();
-        cout << "Input: ";
         cin >> input;
         cout << endl;
 
@@ -52,8 +51,8 @@ void userInterface::run()
         case Search_Computer:
             printComputerFromSearch();
             break;
-        case Openfile:
-            readList();
+        case Link_Scientist_and_Computer:
+
             break;
         case Quit:
             quit = doYouWantToQuit();
@@ -72,16 +71,18 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Display Scientist - Displays Scientists data in the selected order" << endl;
-    cout << "2 = Display Computer  - Displays Computer data in the selected order" << endl;
-    cout << "3 = Add Scientist     - Adds scientist to your database" << endl;
-    cout << "4 = Add Computer      - Adds computer to your database" << endl;
-    cout << "5 = Delete Scientist  - Deletes scientist from you database" << endl;
-    cout << "6 = Delete Computer   - Deletes computer from you database" << endl;
-    cout << "7 = Search Scientist  - Search for a scientist in your database" << endl;
-    cout << "8 = Search Computer   - Search for a computer in your database" << endl;
-    cout << "9 = Open File         - Adds scientists from a file" << endl;
-    cout << "q = quit              - Quit the program" << endl;
+    cout << "1 = Display Scientist           - Displays Scientists data in the selected order" << endl;
+    cout << "2 = Display Computer            - Displays Computer data in the selected order" << endl;
+    cout << "3 = Add Scientist               - Adds scientist to your database" << endl;
+    cout << "4 = Add Computer                - Adds computer to your database" << endl;
+    cout << "5 = Delete Scientist            - Deletes scientist from you database" << endl;
+    cout << "6 = Delete Computer             - Deletes computer from you database" << endl;
+    cout << "7 = Search Scientist            - Search for a scientist in your database" << endl;
+    cout << "8 = Search Computer             - Search for a computer in your database" << endl;
+    cout << "9 = Link Scientist and Computer - Adds scientists from a file" << endl;
+    cout << "q = quit                        - Quit the program" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "Input: ";
 }
 
 /**
@@ -96,6 +97,7 @@ void userInterface::printDisplayscientistsOptions()
     cout << "3 = Nationality  - Sort the scientists by their nationality" << endl;
     cout << "4 = Birthyear    - Sort the scientists by date of birth" << endl;
     cout << "5 = Deathyear    - Sort the scientists by who deceased first" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
 
@@ -107,6 +109,8 @@ void userInterface::printDisplaycomputerOptions()
     cout << "2 = Year  - sort the computer by year designed" << endl;
     cout << "3 = Type  - sort the computer by type" << endl;
     cout << "4 = Built - show computers that were built;" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "Input: ";
 }
 void userInterface::printSearchscientistsOptions()
 {
@@ -117,6 +121,7 @@ void userInterface::printSearchscientistsOptions()
     cout << "3 = Nationality   - Search for scientists with a specific nationality" << endl;
     cout << "4 = Year of birth - Search for scientists with a specific birth year" << endl;
     cout << "5 = Year of death - Search for scientists with a specific death year" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
 void userInterface::printSearchcomputersoptions()
@@ -127,6 +132,8 @@ void userInterface::printSearchcomputersoptions()
     cout << "2 = Year    - Search for computers from a specific year" << endl;
     cout << "3 = Type    - Search for computers of a specific type" << endl;
     cout << "4 = Built   - Search for computers that were built or not (Y / N)" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "Input: ";
 }
 
 /**
