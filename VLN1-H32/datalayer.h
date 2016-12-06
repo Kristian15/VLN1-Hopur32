@@ -32,6 +32,8 @@ public:
     vector<Computer> getSortedComputers(string order);
     vector<Computer> findComputers(string column, string findMe);
 
+    void updateTable(int id, string table, string column, string updateMe);
+
     // delete person that matches provided string
     bool deletePerson(string deleteMe);
     // delete computer that matches provided string

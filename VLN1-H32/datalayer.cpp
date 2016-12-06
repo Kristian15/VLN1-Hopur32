@@ -18,7 +18,7 @@ dataLayer::~dataLayer()
 // **** Private ****
 
 /**
- * @brief dataLayer::updateData
+ * @brief dataLayer::addNewPerson
  * @param person
  */
 void dataLayer::addNewPerson(Person person)
@@ -32,7 +32,14 @@ void dataLayer::addNewPerson(Person person)
        query.bindValue(":gender", QString::fromStdString(person.getGender()));
        query.bindValue(":nationality", QString::fromStdString(person.getNationality()));
        query.bindValue(":byear", person.getByear());
-       query.bindValue(":dyear", person.getDyear());
+       if(person.getDyear() != 0)
+       {
+           query.bindValue(":dyear", person.getDyear());
+       }
+       else
+       {
+           query.bindValue(":dyear", "");
+       }
        query.exec();
     }
 
@@ -66,7 +73,10 @@ void dataLayer::addNewPerson(Person person)
         dataStream.close();
     }
 }
-
+/**
+ * @brief dataLayer::addNewComputer
+ * @param computer
+ */
 void dataLayer::addNewComputer(Computer computer)
 {
     if(db.isOpen())
@@ -83,7 +93,11 @@ void dataLayer::addNewComputer(Computer computer)
 }
 
 // **** Public ****
-
+/**
+ * @brief dataLayer::getSortedPersons
+ * @param order
+ * @return
+ */
 vector<Person> dataLayer::getSortedPersons(string order)
 {
     vector<Person> persons;
@@ -98,13 +112,20 @@ vector<Person> dataLayer::getSortedPersons(string order)
 
         while (query.next())
         {
-            Person person;
-            //person.setId(query.value("ID").toInt());
+            Person person(
+                        /*query.value("ID").toInt(),*/
+                        query.value("Name").toString().toStdString(),
+                        query.value("Gender").toString().toStdString(),
+                        query.value("Nationality").toString().toStdString(),
+                        query.value("BirthYear").toInt(),
+                        query.value("DeathYear").toInt());
+
+            /*person.setId(query.value("ID").toInt());
             person.setName(query.value("Name").toString().toStdString());
             person.setGender(query.value("Gender").toString().toStdString());
             person.setNationality(query.value("Nationality").toString().toStdString());
             person.setByear(query.value("BirthYear").toInt());
-            person.setDyear(query.value("DeathYear").toInt());
+            person.setDyear(query.value("DeathYear").toInt());*/
 
             persons.push_back(person);
         }
@@ -112,7 +133,11 @@ vector<Person> dataLayer::getSortedPersons(string order)
 
     return persons;
 }
-
+/**
+ * @brief dataLayer::getSortedComputers
+ * @param order
+ * @return
+ */
 vector<Computer> dataLayer::getSortedComputers(string order)
 {
     vector<Computer> computers;
@@ -127,12 +152,18 @@ vector<Computer> dataLayer::getSortedComputers(string order)
 
         while (query.next())
         {
-            Computer computer;
-            computer.setId(query.value("Id").toInt());
+            Computer computer(
+                    query.value("Id").toInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Year").toInt(),
+                    query.value("Type").toString().toStdString(),
+                    query.value("Built").toBool());
+
+            /*computer.setId(query.value("Id").toInt());
             computer.setName(query.value("Name").toString().toStdString());
             computer.setYear(query.value("Year").toInt());
             computer.setType(query.value("Type").toString().toStdString());
-            computer.setBuilt(query.value("Built").toInt());
+            computer.setBuilt(query.value("Built").toInt());*/
 
 
             computers.push_back(computer);
@@ -141,7 +172,12 @@ vector<Computer> dataLayer::getSortedComputers(string order)
 
     return computers;
 }
-
+/**
+ * @brief dataLayer::findPersons
+ * @param column
+ * @param findMe
+ * @return
+ */
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
@@ -172,7 +208,12 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     return persons;
 }
-
+/**
+ * @brief dataLayer::findComputers
+ * @param column
+ * @param findMe
+ * @return
+ */
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
@@ -203,7 +244,32 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 
     return computers;
 }
-
+/**
+ * @brief dataLayer::updateTable
+ * @param id
+ * @param table
+ * @param column
+ * @param updateMe
+ */
+void dataLayer::updateTable(int id, string table, string column, string updateMe)
+{
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
+        query.bindValue(":table", QString::fromStdString(table));
+        query.bindValue(":column", QString::fromStdString(column));
+        query.bindValue(":updateMe", QString::fromStdString(updateMe));
+        query.bindValue(":id", id);
+        query.exec();
+    }
+    return;
+}
+/**
+ * @brief dataLayer::deletePerson
+ * @param deleteMe
+ * @return
+ */
 bool dataLayer::deletePerson(string deleteMe)
 {
     if(db.isOpen())
@@ -217,7 +283,11 @@ bool dataLayer::deletePerson(string deleteMe)
 
     return false;
 }
-
+/**
+ * @brief dataLayer::deleteComputer
+ * @param deleteMe
+ * @return
+ */
 bool dataLayer::deleteComputer(string deleteMe)
 {
     if(db.isOpen())
@@ -231,7 +301,12 @@ bool dataLayer::deleteComputer(string deleteMe)
 
     return false;
 }
-
+/**
+ * @brief dataLayer::makeRelation
+ * @param personId
+ * @param computerId
+ * @return
+ */
 bool dataLayer::makeRelation(int personId, int computerId)
 {
 
@@ -248,7 +323,6 @@ bool dataLayer::makeRelation(int personId, int computerId)
 
     return false;
 }
-
 /**
  * @brief dataLayer::loadData
  * @param fileName
@@ -283,4 +357,3 @@ vector<string> dataLayer::loadData(string fileName)
 
     return data;
 }
-
