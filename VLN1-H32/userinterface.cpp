@@ -52,7 +52,7 @@ void userInterface::run()
             printComputerFromSearch();
             break;
         case Link_Scientist_and_Computer:
-
+            linkPersonAndComputer();
             break;
         case Quit:
             quit = doYouWantToQuit();
@@ -522,9 +522,13 @@ void userInterface::deleteComputer()
 }
 void userInterface::linkPersonAndComputer()
 {
-    cout << "Link person with the following name: ";
+    cout << "Link person with the following name: " << endl;
     cout << "Input: ";
     string personname;
+    Person person;
+    person.setID(-1);
+    cout << person;
+    Computer computer;
     cin >> ws;
     getline(cin, personname);
     vector<Person> linkperson = service.searchPersons(personname, 1);
@@ -536,12 +540,12 @@ void userInterface::linkPersonAndComputer()
     {
 
         cout << "Do you want to link the following person? (Y/N) ";
-        cout << linkperson[0].getName();
+        cout << linkperson[0].getName() << endl;
         string answer;
         cin >> answer;
         if(answer == "y" || answer == "Y")
         {
-            Person persontolink = linkperson[0];
+            person = linkperson[0];
         }
     }
     else
@@ -554,9 +558,8 @@ void userInterface::linkPersonAndComputer()
         int input;
         cin >> input;
         input--;
-        Person persontolink = linkperson[input];
+        person = linkperson[input];
     }
-
     cout << "Link computer with the following name: ";
     cout << "Input: ";
     string computername;
@@ -576,7 +579,7 @@ void userInterface::linkPersonAndComputer()
         cin >> answer;
         if(answer == "y" || answer == "Y")
         {
-            Computer computertolink = linkcomputer[0];
+            computer = linkcomputer[0];
         }
     }
     else
@@ -589,9 +592,9 @@ void userInterface::linkPersonAndComputer()
         int input;
         cin >> input;
         input--;
-        Computer computertolink = linkcomputer[input];
+        computer = linkcomputer[input];
     }
-    if(service.link(persontolink.getID(), computertolink.getID()))
+    if(service.link(person.getID(), computer.getID()))
     {
         cout << "Link successful!";
     }
