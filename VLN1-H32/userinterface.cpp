@@ -356,9 +356,7 @@ void userInterface::readPerson()
 
 void userInterface::readComputer()
 {
-    string name, type, builtstring;
-    int year;
-    bool built;
+    string name, year, type, built;
     cout << "Name: ";
     cin >> ws;
     getline(cin, name);
@@ -368,15 +366,7 @@ void userInterface::readComputer()
     cin >> ws;
     getline(cin, type);
     cout << "Built (Y/N): ";
-    cin >> builtstring;
-    if(builtstring == "y" || builtstring =="Y")
-    {
-        built = true;
-    }
-    else if(builtstring == "n" || builtstring =="N")
-    {
-        built = false;
-    }
+    cin >> built;
     service.newComputer(name, year, type, built);
 }
 
