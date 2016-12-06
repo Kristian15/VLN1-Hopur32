@@ -52,4 +52,5 @@ public:
     // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
     bool deletePerson(int id);
     bool deleteComputer(int id);
+    bool link(int personID, int computerID);
 };
