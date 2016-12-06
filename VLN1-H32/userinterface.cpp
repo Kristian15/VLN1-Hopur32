@@ -285,17 +285,36 @@ void userInterface::printComputerFromSearch()
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
-    const int nameWidth  = 36;
-    const int genderWidth = 6;
-    const int birthYearWidth = 4;
-    const int deathYearWidth = 4;
+    const int nameWidth  = 30;
+    const int genderWidth = 10;
+    const int nationalitWidth = 25;
+    const int birthYearWidth = 12;
+    const int deathYearWidth = 12;
     if(!printMe.empty())
     {
         cout << inMessage << endl;
+        cout << left << setw(nameWidth) << setfill(seperator) << "Name";
+        cout << left << setw(genderWidth) << setfill(seperator) << "Gender";
+        cout << left << setw(nationalitWidth) << setfill(seperator) << "Nationality";
+        cout << left << setw(birthYearWidth) << setfill(seperator) << "Birth Year";
+        cout << left << setw(deathYearWidth) << setfill(seperator) << "Death Year" << endl;
+        cout << left << setfill('-') << setw(90) << "-" << endl;
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
-            cout << printMe[i] << endl;
+            cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
+            cout << left << setw(genderWidth) << setfill(seperator) << printMe[i].getGender();
+            cout << left << setw(nationalitWidth) << setfill(seperator) << printMe[i].getNationality();
+            cout << left << setw(birthYearWidth) << setfill(seperator) << printMe[i].getByear();
+            if(printMe[i].getDyear() != 0)
+            {
+                cout << left << setw(deathYearWidth) << setfill(seperator) << printMe[i].getDyear() << endl;
+            }
+            else
+            {
+                cout << left << setw(birthYearWidth) << setfill(seperator) << "-" << endl;
+            }
+
         }
         cout << endl;
     }
@@ -306,13 +325,34 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
 }
 void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
 {
+    const char seperator = ' ';
+    const int nameWidth  = 30;
+    const int yearWidth = 10;
+    const int typeWidth = 10;
+    const int builtWidth = 10;
+
     if(!printMe.empty())
     {
         cout << inMessage << endl;
+        cout << left << setw(nameWidth) << setfill(seperator) << "Name";
+        cout << left << setw(yearWidth) << setfill(seperator) << "Year";
+        cout << left << setw(typeWidth) << setfill(seperator) << "Type";
+        cout << left << setw(builtWidth) << setfill(seperator) << "Built" << endl;
+        cout << left << setfill('-') << setw(90) << "-" << endl;
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
-            cout << printMe[i] << endl;
+            cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
+            cout << left << setw(yearWidth) << setfill(seperator) << printMe[i].getYear();
+            cout << left << setw(typeWidth) << setfill(seperator) << printMe[i].getType();
+            if(printMe[i].getBuilt())
+            {
+                cout << left << setw(builtWidth) << setfill(seperator) << "Yes";
+            }
+            else
+            {
+                cout << left << setw(builtWidth) << setfill(seperator) << "No";
+            }
         }
 
         cout << endl;
