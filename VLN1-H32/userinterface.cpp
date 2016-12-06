@@ -273,7 +273,7 @@ void userInterface::printComputerFromSearch()
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
-    cout << "gemmer fall til að kalla í";
+    printComputers(service.searchComputers(searchFor, searchBy), "Search results: ", "No match!");
 }
 
 /**
@@ -429,7 +429,7 @@ void userInterface::deletePerson()
     else if(delperson.size() == 1)
     {
 
-        cout << "Do you want to delete the following person from database? (Y/N) ";
+        cout << "Do you want to delete the following person from the database? (Y/N) ";
         cout << delperson[0].getName();
         string answer;
         cin >> answer;
@@ -447,7 +447,7 @@ void userInterface::deletePerson()
     }
     else
     {
-        cout << "which of the following computers do you want to delete";
+        cout << "which of the following person do you want to delete";
         for(unsigned int i = 0; i < delperson.size(); i++)
         {
             cout << i+1 << delperson[i];
@@ -463,7 +463,6 @@ void userInterface::deletePerson()
         {
             cout << "Delete unsuccessful!" << endl;
         }
-
     }
 }
 
@@ -482,7 +481,7 @@ void userInterface::deleteComputer()
     else if(delcomputer.size() == 1)
     {
 
-        cout << "Do you want to delete the following computer from database? (Y/N) ";
+        cout << "Do you want to delete the following computer from the database? (Y/N) ";
         cout << delcomputer[0].getName();
         string answer;
         cin >> answer;
@@ -520,4 +519,85 @@ void userInterface::deleteComputer()
         }
 
     }
+}
+void userInterface::linkPersonAndComputer()
+{
+    cout << "Link person with the following name: ";
+    cout << "Input: ";
+    string personname;
+    cin >> ws;
+    getline(cin, personname);
+    vector<Person> linkperson = service.searchPersons(personname, 1);
+    if(linkperson.size() == 0)
+    {
+        cout << "No such person!";
+    }
+    else if(linkperson.size() == 1)
+    {
+
+        cout << "Do you want to link the following person? (Y/N) ";
+        cout << linkperson[0].getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
+        {
+            Person persontolink = linkperson[0];
+        }
+    }
+    else
+    {
+        cout << "which of the following person do you want to link" << endl;
+        for(unsigned int i = 0; i < linkperson.size(); i++)
+        {
+            cout << i+1 << linkperson[i].getName();
+        }
+        int input;
+        cin >> input;
+        input--;
+        Person persontolink = linkperson[input];
+    }
+
+    cout << "Link computer with the following name: ";
+    cout << "Input: ";
+    string computername;
+    cin >> ws;
+    getline(cin, computername);
+    vector<Computer> linkcomputer = service.searchComputers(computername, 1);
+    if(linkcomputer.size() == 0)
+    {
+        cout << "No such Computer!";
+    }
+    else if(linkcomputer.size() == 1)
+    {
+
+        cout << "Do you want to link the following computer? (Y/N) ";
+        cout << linkcomputer[0].getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
+        {
+            Computer computertolink = linkcomputer[0];
+        }
+    }
+    else
+    {
+        cout << "which of the following computers do you want to link" << endl;
+        for(unsigned int i = 0; i < linkcomputer.size(); i++)
+        {
+            cout << i+1 << linkcomputer[i].getName();
+        }
+        int input;
+        cin >> input;
+        input--;
+        Computer computertolink = linkcomputer[input];
+    }
+    if(service.link(persontolink.getID(), computertolink.getID()))
+    {
+        cout << "Link successful!";
+    }
+    else
+    {
+        cout << "Link unsuccessful!";
+    }
+
 }

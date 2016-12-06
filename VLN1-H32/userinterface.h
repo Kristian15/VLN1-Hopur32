@@ -49,6 +49,7 @@ private:
     void printSearchcomputersCommands(int input);
     void printComputerFromSearch();
     void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
+    void linkPersonAndComputer();
 
 
 
