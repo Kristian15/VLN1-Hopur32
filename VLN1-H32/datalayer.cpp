@@ -21,73 +21,44 @@ dataLayer::~dataLayer()
  * @brief dataLayer::addNewPerson
  * @param person
  */
-void dataLayer::addNewPerson(Person person)
+void dataLayer::addNewPerson(Person addMe)
 {
     if(db.isOpen())
     {
        QSqlQuery query;
        query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                      "VALUES (:name, :gender, :nationality, :byear, :dyear)");
-       query.bindValue(":name", QString::fromStdString(person.getName()));
-       query.bindValue(":gender", QString::fromStdString(person.getGender()));
-       query.bindValue(":nationality", QString::fromStdString(person.getNationality()));
-       query.bindValue(":byear", person.getByear());
-       if(person.getDyear() != 0)
+       query.bindValue(":name", QString::fromStdString(addMe.getName()));
+       query.bindValue(":gender", QString::fromStdString(addMe.getGender()));
+       query.bindValue(":nationality", QString::fromStdString(addMe.getNationality()));
+       query.bindValue(":byear", addMe.getByear());
+       if(addMe.getDyear() != 0)
        {
-           query.bindValue(":dyear", person.getDyear());
+           query.bindValue(":dyear", addMe.getDyear());
        }
        else
        {
            query.bindValue(":dyear", "");
        }
+
        query.exec();
-    }
-
-    string data = "";
-    bool match = false;
-
-    if(_persons.empty())
-    {
-        _fileName = "backup.txt";
-        match = true;
-    }
-
-    _persons.push_back(person);
-    data = person.getName() + _d + person.getGender() + _d + person.getNationality() + _d + to_string(person.getByear()) + _d;
-
-    if(person.getDyear() != 0)
-    {
-        data += to_string(person.getDyear()) + _d;
-    }
-
-    ofstream dataStream;
-    dataStream.open(_fileName, ios::app);
-
-    if(dataStream)
-    {
-        if(match == false)
-        {
-            dataStream << endl;
-        }
-        dataStream << data;
-        dataStream.close();
     }
 }
 /**
  * @brief dataLayer::addNewComputer
  * @param computer
  */
-void dataLayer::addNewComputer(Computer computer)
+void dataLayer::addNewComputer(Computer addMe)
 {
     if(db.isOpen())
     {
        QSqlQuery query;
        query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
                      "VALUES (:name, :year, :type, :built)");
-       query.bindValue(":name", QString::fromStdString(computer.getName()));
-       query.bindValue(":year", computer.getYear());
-       query.bindValue(":type", QString::fromStdString(computer.getType()));
-       query.bindValue(":built",computer.getBuilt());
+       query.bindValue(":name", QString::fromStdString(addMe.getName()));
+       query.bindValue(":year", addMe.getYear());
+       query.bindValue(":type", QString::fromStdString(addMe.getType()));
+       query.bindValue(":built",addMe.getBuilt());
        query.exec();
     }
 }
@@ -98,11 +69,11 @@ void dataLayer::addNewComputer(Computer computer)
  * @param order
  * @return
  */
-vector<Person> dataLayer::getSortedPersons(string order)
+vector<Person> dataLayer::getSortedPersons(string column)
 {
     vector<Person> persons;
     QString queryString = "SELECT * FROM persons ORDER BY persons.";
-    queryString.append(QString::fromStdString(order));
+    queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
 
     if(db.isOpen())
@@ -113,20 +84,11 @@ vector<Person> dataLayer::getSortedPersons(string order)
         while (query.next())
         {
             Person person(
-                        /*query.value("ID").toInt(),*/
                         query.value("Name").toString().toStdString(),
                         query.value("Gender").toString().toStdString(),
                         query.value("Nationality").toString().toStdString(),
                         query.value("BirthYear").toInt(),
                         query.value("DeathYear").toInt());
-
-            /*person.setId(query.value("ID").toInt());
-            person.setName(query.value("Name").toString().toStdString());
-            person.setGender(query.value("Gender").toString().toStdString());
-            person.setNationality(query.value("Nationality").toString().toStdString());
-            person.setByear(query.value("BirthYear").toInt());
-            person.setDyear(query.value("DeathYear").toInt());*/
-
             persons.push_back(person);
         }
     }
@@ -138,11 +100,11 @@ vector<Person> dataLayer::getSortedPersons(string order)
  * @param order
  * @return
  */
-vector<Computer> dataLayer::getSortedComputers(string order)
+vector<Computer> dataLayer::getSortedComputers(string column)
 {
     vector<Computer> computers;
     QString queryString = "SELECT * FROM computers ORDER BY computers.";
-    queryString.append(QString::fromStdString(order));
+    queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
 
     if(db.isOpen())
@@ -153,19 +115,10 @@ vector<Computer> dataLayer::getSortedComputers(string order)
         while (query.next())
         {
             Computer computer(
-                    query.value("Id").toInt(),
                     query.value("Name").toString().toStdString(),
                     query.value("Year").toInt(),
                     query.value("Type").toString().toStdString(),
                     query.value("Built").toBool());
-
-            /*computer.setId(query.value("Id").toInt());
-            computer.setName(query.value("Name").toString().toStdString());
-            computer.setYear(query.value("Year").toInt());
-            computer.setType(query.value("Type").toString().toStdString());
-            computer.setBuilt(query.value("Built").toInt());*/
-
-
             computers.push_back(computer);
         }
     }
@@ -201,7 +154,6 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
             person.setNationality(query.value("Nationality").toString().toStdString());
             person.setByear(query.value("BirthYear").toInt());
             person.setDyear(query.value("DeathYear").toInt());
-
             persons.push_back(person);
         }
     }
@@ -270,15 +222,15 @@ void dataLayer::updateTable(int id, string table, string column, string updateMe
  * @param deleteMe
  * @return
  */
-bool dataLayer::deletePerson(int deleteMe)
+bool dataLayer::deletePerson(int id)
 {
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("DELETE FROM persons WHERE ID = :deleteMe");
-        query.bindValue(":deleteMe", deleteMe);
+        query.prepare("DELETE FROM persons WHERE ID = :id");
+        query.bindValue(":id", id);
         query.exec();
-        return true; // TODO: make check for this
+        return true;
     }
 
     return false;
@@ -288,15 +240,15 @@ bool dataLayer::deletePerson(int deleteMe)
  * @param deleteMe
  * @return
  */
-bool dataLayer::deleteComputer(int deleteMe)
+bool dataLayer::deleteComputer(int id)
 {
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("DELETE FROM Computers WHERE ID = :deleteMe");
-        query.bindValue(":deleteMe", deleteMe);
+        query.prepare("DELETE FROM Computers WHERE ID = :id");
+        query.bindValue(":id", id);
         query.exec();
-        return true; // TODO: make check for this
+        return true;
     }
 
     return false;
@@ -328,7 +280,7 @@ bool dataLayer::makeRelation(int personId, int computerId)
  * @param fileName
  * @return vector<string>
  */
-vector<string> dataLayer::loadData(string fileName)
+/*vector<string> dataLayer::loadData(string fileName)
 {
    string line;
 
@@ -356,4 +308,4 @@ vector<string> dataLayer::loadData(string fileName)
     }
 
     return data;
-}
+}*/

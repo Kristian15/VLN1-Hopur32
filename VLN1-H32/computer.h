@@ -17,7 +17,7 @@ private:
 
 public:
     Computer();
-    Computer(int id, string name, int year, string type, bool built);
+    Computer(string name, int year, string type, bool built);
     int getID() const { return _id; }
     string getName() const { return _name; }
     int getYear() const { return _year; }
