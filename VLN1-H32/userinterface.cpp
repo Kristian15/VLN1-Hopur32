@@ -501,10 +501,10 @@ void userInterface::deleteComputer()
     }
     else
     {
-        cout << "which of the following computers do you want to delete";
+        cout << "which of the following computers do you want to delete" << endl;
         for(unsigned int i = 0; i < delcomputer.size(); i++)
         {
-            cout << i+1 << delcomputer[i];
+            cout << i+1 << delcomputer[i].getName();
         }
         int input;
         cin >> input;
