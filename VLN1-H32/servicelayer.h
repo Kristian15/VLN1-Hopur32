@@ -42,11 +42,12 @@ public:
     // calls the help function getPerson() that returns a Person
     // calls data.addPerson with that Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
-    void newComputer(string name, int year, string type, bool built);
+    void newComputer(string name, string year, string type, string built);
     // validate input that are used to create a new Person
     // uses the validate help functions
     // returns true if the input is valid and false otherwise
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
+    bool validateNewComputer(string name, string year, string type);
     // calls findAndDelete()
     // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
     bool deletePerson(string name);

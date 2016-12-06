@@ -23,7 +23,7 @@ bool serviceLayer::validateName(string name)
         }
     }
 
-    if (tmp == wordLength)
+    if ((tmp == wordLength) && (name != ""))
     {
         return true;
     }
@@ -246,29 +246,26 @@ vector<Person> serviceLayer::searchPersons(string findMe, int by)
     return findings;
 }
 
-/*vector<Computer> serviceLayer::searchComputers(string findMe, int by)
+vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
-    vector<Person> findings;
+    vector<Computer> findings;
 
     switch (by) {
     case 1:
-        findings = data.findComputer("Name", findMe);
+        findings = data.findComputers("Name", findMe);
         break;
     case 2:
-        findings = data.findComputer("Year", findMe);
+        findings = data.findComputers("Year", findMe);
         break;
     case 3:
-        findings = data.findComputer("Type", findMe);
+        findings = data.findComputers("Type", findMe);
         break;
-  //  case 4:
-   //     findings = data.findComputer("BirthYear", findMe);
-      //  break;
     default:
         break;
     }
 
     return findings;
-}*/
+}
 
 /**
  * @brief serviceLayer::sortList
@@ -304,9 +301,9 @@ vector<Person> serviceLayer::sortPersons(int order)
     return sorted;
 }
 
-/*vector<Person> serviceLayer::sortComputers(int order)
+vector<Computer> serviceLayer::sortComputers(int order)
 {
-    vector<Person> sorted;
+    vector<Computer> sorted;
 
     switch (order) {
     case 1:
@@ -318,15 +315,12 @@ vector<Person> serviceLayer::sortPersons(int order)
     case 3:
         sorted = data.getSortedComputers("Type");
         break;
-   // case 4:
-   //     sorted = data.getSortedComputers("Built");
-    //    break;
     default:
         break;
     }
 
     return sorted;
-}*/
+}
 
 /**
  * @brief serviceLayer::createList
@@ -355,16 +349,27 @@ void serviceLayer::newPerson(string name, string gender, string nationality, str
     data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
 }
 
-void serviceLayer::newComputer(string name, int year, string type, bool built)
+void serviceLayer::newComputer(string name, string year, string type, string built)
 {
-    // ***** TODO: Validation *****
-    Computer computer;
-    computer.setName(name);
-    computer.setYear(year);
-    computer.setType(type);
-    computer.setBuilt(built);
+    bool builtBool = false;
 
-    data.addComputer(computer);
+    if(validateNewComputer(name, year, type))
+    {
+        if((built == "y") || (built == "Y"))
+        {
+            builtBool = true;
+        }
+        else if ((built != "n") || (built != "N") || (builtBool == true))
+        {
+            Computer computer;
+            computer.setName(name);
+            computer.setYear(stoi(year));
+            computer.setType(type);
+            computer.setBuilt(builtBool);
+
+            data.addComputer(computer);
+        }
+    }
 }
 
 /**
@@ -398,6 +403,15 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     return b;
 }
 
+bool serviceLayer::validateNewComputer(string name, string year, string type)
+{
+    if((name != "") && validateYear(year) && (type != ""))
+    {
+        return true;
+    }
+
+    return false;
+}
 
 /**
  * @brief serviceLayer::deletePerson
