@@ -577,7 +577,7 @@ void userInterface::linkPersonAndComputer()
     vector<Person> linkperson = service.searchPersons(personname, 1);
     if(linkperson.size() == 0)
     {
-        cout << "No such person!";
+        cout << "No such person!" << endl;
     }
     else if(linkperson.size() == 1)
     {
@@ -613,7 +613,7 @@ void userInterface::linkPersonAndComputer()
         vector<Computer> linkcomputer = service.searchComputers(computername, 1);
         if(linkcomputer.size() == 0)
         {
-            cout << "No such Computer!";
+            cout << "No such Computer!" << endl;
         }
         else if(linkcomputer.size() == 1)
         {
@@ -641,11 +641,11 @@ void userInterface::linkPersonAndComputer()
         }
         if(service.link(person.getID(), computer.getID()))
         {
-            cout << "Link successful!";
+            cout << "Link successful!" << endl;
         }
         else
         {
-            cout << "Link unsuccessful!";
+            cout << "Link unsuccessful!" << endl;
         }
     }
 
