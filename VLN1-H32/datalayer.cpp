@@ -136,7 +136,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
 
-    QString queryString = "SELECT * FROM Computers WHERE ";
+    QString queryString = "SELECT * FROM Persons WHERE ";
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
     queryString.append(QString::fromStdString(findMe));
