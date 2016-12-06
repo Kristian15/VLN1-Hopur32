@@ -71,16 +71,16 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Display Scientist           - Displays Scientists data in the selected order" << endl;
-    cout << "2 = Display Computer            - Displays Computer data in the selected order" << endl;
-    cout << "3 = Add Scientist               - Adds scientist to your database" << endl;
-    cout << "4 = Add Computer                - Adds computer to your database" << endl;
-    cout << "5 = Delete Scientist            - Deletes scientist from you database" << endl;
-    cout << "6 = Delete Computer             - Deletes computer from you database" << endl;
-    cout << "7 = Search Scientist            - Search for a scientist in your database" << endl;
-    cout << "8 = Search Computer             - Search for a computer in your database" << endl;
-    cout << "9 = Link Scientist and Computer - Adds scientists from a file" << endl;
-    cout << "q = quit                        - Quit the program" << endl;
+    cout << "1 = Display Scientist - Displays Scientists data in the selected order" << endl;
+    cout << "2 = Display Computer  - Displays Computer data in the selected order" << endl;
+    cout << "3 = Add Scientist     - Adds scientist to your database" << endl;
+    cout << "4 = Add Computer      - Adds computer to your database" << endl;
+    cout << "5 = Delete Scientist  - Deletes scientist from you database" << endl;
+    cout << "6 = Delete Computer   - Deletes computer from you database" << endl;
+    cout << "7 = Search Scientist  - Search for a scientist in your database" << endl;
+    cout << "8 = Search Computer   - Search for a computer in your database" << endl;
+    cout << "9 = Link              - Link Scientist and Computer" << endl;
+    cout << "q = quit              - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -211,8 +211,7 @@ void userInterface::printScientistsFromDisplay()
     }
 
     vector<Person> sorted = service.sortPersons(input);
-    printList(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
-    ifYouWantToSave(sorted);
+    printPersons(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
 void userInterface::printComputersFromDisplay()
@@ -227,7 +226,8 @@ void userInterface::printComputersFromDisplay()
         cin.ignore(256, '\n');
         cin >> computeroption;
     }
-    cout << "gemmer fall í service til að kalla í";
+    vector<Computer> sorted = service.sortComputers(computeroption);
+    printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
 /**
@@ -252,7 +252,7 @@ void userInterface::printScientistFromSearch()
     cin >> ws;
     getline(cin, searchFor);
     cout << endl;
-    printList(service.searchPersons(searchFor, searchBy), "Search results: ", "No match!");
+    printPersons(service.searchPersons(searchFor, searchBy), "Search results: ", "No match!");
 }
 void userInterface::printComputerFromSearch()
 {
@@ -282,7 +282,7 @@ void userInterface::printComputerFromSearch()
  * @param inMessage
  * @param outMessage
  */
-void userInterface::printList(vector<Person> printMe, string inMessage, string outMessage)
+void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
     if(!printMe.empty())
     {
@@ -300,7 +300,24 @@ void userInterface::printList(vector<Person> printMe, string inMessage, string o
         cout << outMessage << endl << endl;
     }
 }
+void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
+{
+    if(!printMe.empty())
+    {
+        cout << inMessage << endl;
 
+        for(unsigned int i = 0; i < printMe.size(); i++)
+        {
+            cout << printMe[i] << endl;
+        }
+
+        cout << endl;
+    }
+    else
+    {
+        cout << outMessage << endl << endl;
+    }
+}
 /**
  * @brief userInterface::readList
  */
@@ -395,25 +412,6 @@ bool userInterface::doYouWantToQuit()
 }
 
 /**
- * @brief userInterface::ifYouWantToSave
- * @param saveMe
- */
-void userInterface::ifYouWantToSave(vector<Person> saveMe)
-{
-    cout << "Do you want to save your sorted list? Y/N: ";
-    char input;
-    cin >> input;
-
-    if ((input == 'y') || (input == 'Y'))
-    {
-        cout << "Write the name of the file you want to save" << endl;
-        string fileName;
-        cin >> fileName;
-        // service.saveData(fileName, saveMe); er ekki til lengur
-    }
-}
-
-/**
  * @brief userInterface::deletePerson
  */
 void userInterface::deletePerson()
@@ -441,13 +439,52 @@ void userInterface::deleteComputer()
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-
-    if(service.deleteComputer(deleteString))
+    vector<Computer> delcomputer = service.searchComputers(deleteString, 1);
+    if(delcomputer.size() == 0)
     {
-        cout << "Delete successful!" << endl;
+        cout << "No such Computer!";
+    }
+    else if(delcomputer.size() == 1)
+    {
+
+        cout << "Do you want to delete the following computer from database? (Y/N) ";
+        cout << delcomputer[0].getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
+        {
+            if(service.deleteComputer(deleteString))
+            {
+                cout << "Delete successful!" << endl;
+            }
+            else
+            {
+                cout << "Delete unsuccessful!" << endl;
+            }
+        }
     }
     else
     {
-        cout << "Delete unsuccessful!" << endl;
+        cout << "which of the following computers do you want to delete";
+        for(unsigned int i = 0; i < delcomputer.size(); i++)
+        {
+
+            cout << i+1 << delcomputer[i].getName();
+        }
+        int input;
+        cin >> input;
+        input--;
+        if(service.deleteComputer(delcomputer[input].getName()))
+        {
+            cout << "Delete successful!" << endl;
+        }
+        else
+        {
+            cout << "Delete unsuccessful!" << endl;
+        }
+
     }
+
+
+
 }

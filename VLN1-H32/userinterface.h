@@ -29,7 +29,7 @@ private:
     // calls printList() with the search matches
     void printScientistFromSearch();
     // outputs inMessage, prints printMe and outputs outMessage
-    void printList(vector<Person> printMe, string inMessage, string outMessage);
+    void printPersons(vector<Person> printMe, string inMessage, string outMessage);
     // gets a fileName from user and calls createList() in serviceLayer
     void readList();
     // gets information to create a new Person
@@ -48,6 +48,7 @@ private:
     void printSearchcomputersoptions();
     void printSearchcomputersCommands(int input);
     void printComputerFromSearch();
+    void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
 
 
 
