@@ -148,8 +148,9 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     if(db.isOpen())
     {
+        cout << "findpersons: " << findMe << "column: " << column << endl;
         QSqlQuery query;
-        query.prepare("SELECT * FROM persons WHERE :column LIKE %:findMe% COLLATE NOCASE");
+        query.prepare("SELECT * FROM Persons WHERE :column LIKE '%:findMe%' COLLATE NOCASE");
         query.bindValue(":column", QString::fromStdString(column));
         query.bindValue(":findMe", QString::fromStdString(findMe));
         query.exec();
@@ -178,7 +179,7 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("SELECT * FROM computers WHERE :column LIKE %:findMe% COLLATE NOCASE");
+        query.prepare("SELECT * FROM Computers WHERE :column LIKE '%:findMe%' COLLATE NOCASE");
         query.bindValue(":column", QString::fromStdString(column));
         query.bindValue(":findMe", QString::fromStdString(findMe));
         query.exec();
