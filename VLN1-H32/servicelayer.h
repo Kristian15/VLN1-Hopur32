@@ -53,4 +53,6 @@ public:
     bool deletePerson(int id);
     bool deleteComputer(int id);
     bool link(int personID, int computerID);
+    bool callUpdatePerson(int id, int column, string updateMe);
+    bool callUpdateComputer(int id, int column, string updateMe);
 };
