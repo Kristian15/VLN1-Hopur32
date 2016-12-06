@@ -222,23 +222,24 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
  */
 vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
+    const string fromTable = "Persons";
     vector<Person> findings;
 
     switch (by) {
     case 1:
-        findings = data.findPersons("Name", findMe);
+        findings = data.find(fromTable, "Name", findMe);
         break;
     case 2:
-        findings = data.findPersons("Gender", findMe);
+        findings = data.find(fromTable, "Gender", findMe);
         break;
     case 3:
-        findings = data.findPersons("Nationality", findMe);
+        findings = data.find(fromTable, "Nationality", findMe);
         break;
     case 4:
-        findings = data.findPersons("BirthYear", findMe);
+        findings = data.find(fromTable, "BirthYear", findMe);
         break;
     case 5:
-        findings = data.findPersons("DeathYear", findMe);
+        findings = data.find(fromTable, "DeathYear", findMe);
         break;
     default:
         break;
@@ -249,17 +250,18 @@ vector<Person> serviceLayer::searchPersons(string findMe, int by)
 
 vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
+    const string fromTable = "Computers";
     vector<Computer> findings;
 
     switch (by) {
     case 1:
-        findings = data.findComputers("Name", findMe);
+        findings = data.find(fromTable, "Name", findMe);
         break;
     case 2:
-        findings = data.findComputers("Year", findMe);
+        findings = data.find(fromTable, "Year", findMe);
         break;
     case 3:
-        findings = data.findComputers("Type", findMe);
+        findings = data.find(fromTable, "Type", findMe);
         break;
     default:
         break;
@@ -431,32 +433,36 @@ bool serviceLayer::link(int personID, int computerID)
     return data.makeRelation(personID, computerID);
 }
 
-bool serviceLayer::callUpdatePerson(int id, int column, string updateMe)
-{/* TODO Change column to correct string value
-  bool isValid = false;
-
-  switch(column){
-  case 1:
-     isValid = validateName(updateMe);
-      break;
-  case 2:
-     isValid = validateGender(updateMe);
-      break;
-  case 3:
-      isValid = validateNationality(updateMe);
-      break;
-  case 4:
-      isValid = validateYear(updateMe);
-      break;
-  default:
-      break;
-  }
-  if(isValid)
-  {
-    data.updateTable(id, "Persons", column, updateMe);
-    return isValid;
-  }*/
-  return false;
+bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
+{
+    bool isValid = false;
+    string column;
+    // *** todo *** beautify
+    switch(col){
+        case 1:
+            isValid = validateName(updateMe); column = "Name";
+            break;
+        case 2:
+            isValid = validateGender(updateMe); column = "Gender";
+            break;
+        case 3:
+            isValid = validateNationality(updateMe); column = "Nationality";
+            break;
+        case 4:
+            isValid = validateYear(updateMe); column = "bYear";
+            break;
+        case 5:
+            isValid = validateYear(updateMe); column = "dYear";
+            break;
+        default:
+            break;
+    }
+    if(isValid)
+    {
+        data.updateTable(id, "Persons", column, updateMe);
+        return isValid;
+    }
+    return false;
 }
 
 bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
