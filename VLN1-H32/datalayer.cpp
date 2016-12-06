@@ -131,20 +131,18 @@ vector<Computer> dataLayer::getSortedComputers(string column)
  * @param findMe
  * @return
  */
-//template <typename T>
-vector<Person> dataLayer::findPersons(string table, string column, string findMe)
+
+vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
-    // QString queryString = "SELECT * FROM Persons WHERE ";
-    QString queryString = "SELECT * FROM ";
-    queryString.append(table);
-    queryString.append(" WHERE ")
+
+    QString queryString = "SELECT * FROM Computers WHERE ";
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
     queryString.append(QString::fromStdString(findMe));
     queryString.append("%' COLLATE NOCASE");
 
-  /*  if(db.isOpen())
+    if(db.isOpen())
     {
         QSqlQuery query;
         query.exec(queryString);
@@ -160,14 +158,14 @@ vector<Person> dataLayer::findPersons(string table, string column, string findMe
             person.setDyear(query.value("DeathYear").toInt());
             persons.push_back(person);
         }
-    }*/
+    }
 
-    //return persons;
-    return setter(queryString);
+    return persons;
+   // return setter(queryString);
 }
 
-//template <typename T>
-vector<Person> dataLayer::setter(QString queryString, string table)
+
+/*vector<Person> dataLayer::setter(QString queryString, string table)
 {
     vector<Person> persons;
     if(db.isOpen())

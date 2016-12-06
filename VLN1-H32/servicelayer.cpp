@@ -222,24 +222,24 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
  */
 vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
-    const string fromTable = "Persons";
+   // string fromTable = "Persons";
     vector<Person> findings;
 
     switch (by) {
     case 1:
-        findings = data.find(fromTable, "Name", findMe);
+        findings = data.findPersons("Name", findMe);
         break;
     case 2:
-        findings = data.find(fromTable, "Gender", findMe);
+        findings = data.findPersons("Gender", findMe);
         break;
     case 3:
-        findings = data.find(fromTable, "Nationality", findMe);
+        findings = data.findPersons("Nationality", findMe);
         break;
     case 4:
-        findings = data.find(fromTable, "BirthYear", findMe);
+        findings = data.findPersons("BirthYear", findMe);
         break;
     case 5:
-        findings = data.find(fromTable, "DeathYear", findMe);
+        findings = data.findPersons("DeathYear", findMe);
         break;
     default:
         break;
@@ -250,18 +250,18 @@ vector<Person> serviceLayer::searchPersons(string findMe, int by)
 
 vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
-    const string fromTable = "Computers";
+  //  const string fromTable = "Computers";
     vector<Computer> findings;
 
     switch (by) {
     case 1:
-        findings = data.find(fromTable, "Name", findMe);
+        findings = data.findComputers("Name", findMe);
         break;
     case 2:
-        findings = data.find(fromTable, "Year", findMe);
+        findings = data.findComputers("Year", findMe);
         break;
     case 3:
-        findings = data.find(fromTable, "Type", findMe);
+        findings = data.findComputers("Type", findMe);
         break;
     default:
         break;
