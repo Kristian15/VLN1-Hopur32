@@ -462,11 +462,11 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
         data.updateTable(id, "Persons", column, updateMe);
         return isValid;
     }
-    return false;
+    return isValid;
 }
 
 bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
-{ // TODO validation for computers
+{ // **** TODO validation for computers ****
   return false;
 }
 
