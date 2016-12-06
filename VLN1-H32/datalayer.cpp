@@ -1,7 +1,7 @@
 #include "datalayer.h"
 #include <iostream>
 
-// **** Constructor ****
+// **** Constructor/Destructor ****
 
 dataLayer::dataLayer()
 {
@@ -238,7 +238,7 @@ bool dataLayer::makeRelation(int personId, int computerId)
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("INSERT INTO PersonAndComputer (PersonID, ComputerID) "
+        query.prepare("INSERT INTO Person_Computer (PersonID, ComputerID) "
                       "VALUES (:personId, :computerId)");
         query.bindValue(":personId", personId);
         query.bindValue(":computerId", computerId);
