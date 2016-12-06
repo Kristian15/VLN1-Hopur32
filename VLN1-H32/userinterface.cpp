@@ -347,11 +347,11 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
             cout << left << setw(typeWidth) << setfill(seperator) << printMe[i].getType();
             if(printMe[i].getBuilt())
             {
-                cout << left << setw(builtWidth) << setfill(seperator) << "Yes";
+                cout << left << setw(builtWidth) << setfill(seperator) << "Yes" << endl;
             }
             else
             {
-                cout << left << setw(builtWidth) << setfill(seperator) << "No";
+                cout << left << setw(builtWidth) << setfill(seperator) << "No" << endl;
             }
         }
 
@@ -596,8 +596,10 @@ void userInterface::linkPersonAndComputer()
         cout << "which of the following person do you want to link" << endl;
         for(unsigned int i = 0; i < linkperson.size(); i++)
         {
-            cout << i+1 << linkperson[i].getName();
+            cout << i+1 << " " << linkperson[i].getName() << endl;
+
         }
+        cout << "Input person number: ";
         int input;
         cin >> input;
         input--;
@@ -618,10 +620,11 @@ void userInterface::linkPersonAndComputer()
         else if(linkcomputer.size() == 1)
         {
 
-            cout << "Do you want to link the following computer? (Y/N) ";
-            cout << linkcomputer[0].getName();
+            cout << "Do you want to link the following computer? (Y/N) " << endl;
+            cout << linkcomputer[0].getName() << endl;
             string answer;
             cin >> answer;
+            cout << "Answer: ";
             if(answer == "y" || answer == "Y")
             {
                 computer = linkcomputer[0];
@@ -632,8 +635,9 @@ void userInterface::linkPersonAndComputer()
             cout << "which of the following computers do you want to link" << endl;
             for(unsigned int i = 0; i < linkcomputer.size(); i++)
             {
-                cout << i+1 << linkcomputer[i].getName();
+                cout << i+1 << " " << linkcomputer[i].getName() << endl;
             }
+            cout << "Input computer number: ";
             int input;
             cin >> input;
             input--;
