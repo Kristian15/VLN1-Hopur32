@@ -328,7 +328,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
     const char seperator = ' ';
     const int nameWidth  = 30;
     const int yearWidth = 10;
-    const int typeWidth = 30;
+    const int typeWidth = 35;
     const int builtWidth = 10;
 
     if(!printMe.empty())
@@ -460,7 +460,7 @@ bool userInterface::doYouWantToQuit()
  */
 void userInterface::deletePerson()
 {
-    cout << "Delete the persoon with the following name:" << endl;
+    cout << "Delete the person with the following name:" << endl;
     cout << "Input: ";
     string deleteString;
     cin >> ws;
@@ -569,9 +569,11 @@ void userInterface::linkPersonAndComputer()
     cout << "Link person with the following name: " << endl;
     cout << "Input: ";
     string personname;
+    Computer computer;
+    computer.setId(-1);
     Person person;
     person.setID(-1);
-    Computer computer;
+
     cin >> ws;
     getline(cin, personname);
     vector<Person> linkperson = service.searchPersons(personname, 1);
@@ -607,7 +609,7 @@ void userInterface::linkPersonAndComputer()
     }
     if(person.getID() != -1)
     {
-        cout << "Link computer with the following name: ";
+        cout << "Link computer with the following name: " << endl;
         cout << "Input: ";
         string computername;
         cin >> ws;
@@ -622,9 +624,9 @@ void userInterface::linkPersonAndComputer()
 
             cout << "Do you want to link the following computer? (Y/N) " << endl;
             cout << linkcomputer[0].getName() << endl;
+            cout << "Answer: ";
             string answer;
             cin >> answer;
-            cout << "Answer: ";
             if(answer == "y" || answer == "Y")
             {
                 computer = linkcomputer[0];
@@ -643,6 +645,7 @@ void userInterface::linkPersonAndComputer()
             input--;
             computer = linkcomputer[input];
         }
+        if(person.getID() != -1 && computer.getID() != -1)
         if(service.link(person.getID(), computer.getID()))
         {
             cout << "Link successful!" << endl;
