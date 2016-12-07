@@ -24,7 +24,7 @@ public:
     string getType() const { return _type; }
     bool getBuilt() const { return _built; }
 
-    void setId(int id) { _id = id; }
+    void setID(int id) { _id = id; }
     void setName(string name) { _name = name; }
     void setYear(int year) { _year = year; }
     void setType(string type) { _type = type; }
