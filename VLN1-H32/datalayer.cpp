@@ -8,6 +8,10 @@ dataLayer::dataLayer()
     db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
     db.open();
+    if(!db.isOpen())
+    {
+        throw string("Error!\nDatabase file not found!\nPlease check if database file is present!");
+    }
 }
 
 dataLayer::~dataLayer()
@@ -131,6 +135,10 @@ void dataLayer::deleteRelation(int personID, int computerID)
 }
 
 // **** Public ****
+/**
+ * @brief dataLayer::addPerson
+ * @param person
+ */
 void dataLayer::addPerson(Person person)
 {
     if(db.isOpen())
@@ -142,6 +150,10 @@ void dataLayer::addPerson(Person person)
         throw string("Error: No database connection!");
     }
 }
+/**
+ * @brief dataLayer::addComputer
+ * @param computer
+ */
 void dataLayer::addComputer(Computer computer)
 {
     if(db.isOpen())
@@ -311,6 +323,52 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
  * @param column
  * @param updateMe
  */
+
+/*vector<Person> dataLayer::relatedPersons(int ascDesc)
+{
+
+    QString queryString = "SELECT Name FROM Persons JOIN Person_Computer ON "
+            "Person_Computer.PersonID = Persons.ID ORDER BY ";
+    if(ascDesc == 1)
+    {
+        queryString.append("DESC");
+    }
+
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+    }
+
+    return persons;
+}*/
+
+vector<vector <string> > dataLayer::relatedComputers(int ascDesc)
+{
+    //select name from computers as c join person_computer as pc on c.id = pc.computerid
+    vector<vector<string> > resultMatrix;
+    //std::vector< std::vector< double > > twoDMatrix( 3, std::vector< double >( 4 ) );
+    int temp;
+
+    QString queryString = "SELECT DISTINCT id, name FROM computers AS c JOIN person_computer"
+                          " AS pc ON c.id = pc.computerid";
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.exec(queryString);
+
+        while(query.next())
+        {
+            temp = query.value("ID").toInt();
+            vector<string> item;
+            item.push_back(query.value("Name").toString().toStdString());
+            resultMatrix.push_back(item);
+        }
+    }
+
+    return resultMatrix;
+}
+
 void dataLayer::updateTable(int id, string table, string column, string updateMe)
 {
     if(db.isOpen())

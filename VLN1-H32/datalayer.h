@@ -30,6 +30,9 @@ public:
     vector<Person> findPersons(string column, string findMe);
     vector<Computer> findComputers(string column, string findMe);
     void updateTable(int id, string table, string column, string updateMe);
+    // return all related persons/computers by the provided id
+    vector<Person> relatedPersons(int ascDesc);
+    vector<vector <string> > relatedComputers(int ascDesc);
 
     bool deleteItem(string table, int id);
     // delete person that matches provided string
