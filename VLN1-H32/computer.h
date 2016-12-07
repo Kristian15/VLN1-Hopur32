@@ -14,7 +14,6 @@ private:
     int _year;
     string _type;
     bool _built;
-    vector<Person> _persons;
     friend ostream& operator << (ostream& outs, const Computer computer);
 
 public:
@@ -25,12 +24,10 @@ public:
     int getYear() const { return _year; }
     string getType() const { return _type; }
     bool getBuilt() const { return _built; }
-    vector<Person> getPersons() const { return _persons; }
 
     void setID(int id) { _id = id; }
     void setName(string name) { _name = name; }
     void setYear(int year) { _year = year; }
     void setType(string type) { _type = type; }
     void setBuilt(bool built) { _built = built; }
-    void setPersons(Person p) { _persons.push_back(p); }
 };
