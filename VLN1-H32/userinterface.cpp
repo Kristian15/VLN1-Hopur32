@@ -425,7 +425,7 @@ T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
             cout << i+1 << delItem[i].getName() << endl;;
         }
 
-        int input = getCorrectInt(itemSize);
+        int input = getCorrectInt(static_cast<int>(itemSize));
         input--;
         item = delItem[input];
     }
@@ -478,6 +478,38 @@ void userInterface::deleteComputer()
 }
 
 void userInterface::linkPersonAndComputer()
+{
+    cout << "Link person with the following name: " << endl;
+    cout << "Input: ";
+    string personName, computerName;
+    cin >> ws;
+    getline(cin, personName);
+    vector<Person> linkPerson = service.searchPersons(personName, 1);
+    Person person = chooseWhich(linkPerson, "No such person!",
+                                "Do you want to link the following person? (Y/N) ",
+                                "Which of the following persons do you want to link");
+
+    if(person.getID() != -1)
+    {
+        cout << "Link computer with the following name: " << endl;
+        cout << "Input: ";
+        cin >> ws;
+        getline(cin, computerName);
+        vector<Computer> linkComputer = service.searchComputers(computerName, 1);
+        Computer computer = chooseWhich(linkComputer, "No such Computer!",
+                                       "Do you want to link the following computer? (Y/N) ",
+                                       "Which of the following computers do you want to link");
+
+        if(computer.getID() != -1)
+        {
+            if(service.link(person.getID(), computer.getID()))
+            {
+                cout << "Link successful!" << endl;
+            }
+        }
+    }
+}
+void userInterface::unlinkPersonAndComputer()
 {
     cout << "Link person with the following name: " << endl;
     cout << "Input: ";

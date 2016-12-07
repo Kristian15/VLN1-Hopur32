@@ -53,6 +53,7 @@ private:
     void deletePerson();
     void deleteComputer();
     void linkPersonAndComputer();
+    void unlinkPersonAndComputer();
     bool doYouWantToQuit();
 public:
     void run();
