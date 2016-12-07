@@ -144,12 +144,21 @@ void dataLayer::addComputer(Computer computer)
  * @param order
  * @return
  */
-vector<Person> dataLayer::getSortedPersons(string column)
+vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 {
     vector<Person> persons;
     QString queryString = "SELECT * FROM persons ORDER BY persons.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
+
+    if(ascDesc == 1)
+    {
+        queryString.append(" ASC");
+    }
+    else if(ascDesc == 2)
+    {
+        queryString.append(" DESC");
+    }
 
     if(db.isOpen())
     {
@@ -175,12 +184,21 @@ vector<Person> dataLayer::getSortedPersons(string column)
  * @param order
  * @return
  */
-vector<Computer> dataLayer::getSortedComputers(string column)
+vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
     vector<Computer> computers;
     QString queryString = "SELECT * FROM computers ORDER BY computers.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
+
+    if(ascDesc == 1)
+    {
+        queryString.append(" ASC");
+    }
+    else if(ascDesc == 2)
+    {
+        queryString.append(" DESC");
+    }
 
     if(db.isOpen())
     {
