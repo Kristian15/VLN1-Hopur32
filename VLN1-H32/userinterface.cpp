@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit};
+enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist, Update_Computer, Link_Scientist_and_Computer, Quit};
 
 void userInterface::run()
 {
@@ -18,7 +18,7 @@ void userInterface::run()
     int input = 0;
     do{
         printMainMenu();
-        input = getCorrectInt(11);
+        input = getCorrectInt(13);
         switch (input)
         {
         case Display_Scientis:
@@ -48,6 +48,12 @@ void userInterface::run()
         case Search_Computer:
             printComputerFromSearch();
             break;
+        case Update_Scientist:
+            updatePerson();
+            break;
+        case Update_Computer:
+            updateComputer();
+            break;
         case Link_Scientist_and_Computer:
             linkPersonAndComputer();
             break;
@@ -75,8 +81,10 @@ void userInterface::printMainMenu()
     cout << "7 = Delete Computer     - Deletes computer from you database" << endl;
     cout << "8 = Search Scientist    - Search for a scientist in your database" << endl;
     cout << "9 = Search Computer     - Search for a computer in your database" << endl;
-    cout << "10 = Link               - Link Scientist and Computer" << endl;
-    cout << "11 = quit               - Quit the program" << endl;
+    cout << "10 = Update Scientist   - Update scientist in your database" << endl;
+    cout << "11 = Update Computer    - Update computer in your database" << endl;
+    cout << "12 = Link               - Link Scientist and Computer" << endl;
+    cout << "13 = quit               - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -118,6 +126,32 @@ void userInterface::printSearchPersonsOptions()
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
+
+void userInterface::printUpdatePersonOptions()
+{
+    cout << "Please enter what you want to change:" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "1 = Name          - Update the Name of the scientist" << endl;
+    cout << "2 = Gender        - Update the Gender of the scientist" << endl;
+    cout << "3 = Nationality   - Update the Nationality of the scientist" << endl;
+    cout << "4 = Year of birth - Update the Year of birth of the scientist" << endl;
+    cout << "5 = Year of death - Update the Year of Death of the scientist" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "Input: ";
+}
+
+void userInterface::printUpdateComputerOptions()
+{
+    cout << "Please enter what you want to change:" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "1 = Name           - Update the Name of the computer" << endl;
+    cout << "2 = Year           - Update the Year the computer was designed" << endl;
+    cout << "3 = Type           - Update the Type of the computer" << endl;
+    cout << "4 = Built          - Update ..?" << endl;
+    cout << setfill('-') << setw(80) << "-" << endl;
+    cout << "Input: ";
+}
+
 
 void userInterface::printSearchComputersOptions()
 {
@@ -207,29 +241,30 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
 {
     cout << "Do you want to the list by name of Scientists or by name of computers? (1/2)" << endl;
     cout << "Input: ";
-    int inputnameorcomputer = getCorrectInt(2);
-    cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
-    cout << "Input: ";
-    int inputascordesc = getCorrectInt(2);
-    if(inputnameorcomputer == 1)
+    int inputNameOrComputer = getCorrectInt(2);
+    vector<vector<string>> printMe;
+
+    if(inputNameOrComputer == 1)
     {
-        vector<vector<string> > onefndurnamepersonfirst;
-       for(unsigned int i = 0; i < onefndurnamepersonfirst.size(); i++)
+       printMe = service.getRelation("Person");
+
+       for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < onefndurnamepersonfirst[i].size(); k++)
+           for(unsigned int k = 0; k < printMe[i].size(); k++)
            {
-               cout << onefndurnamepersonfirst[i][k] << endl;
+               cout << printMe[i][k] << endl;
            }
        }
     }
     else
     {
-        vector<vector<string> > onefndurnamecomputerfirst;
-       for(unsigned int i = 0; i < onefndurnamecomputerfirst.size(); i++)
+       printMe = service.getRelation("Computer");
+
+       for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < onefndurnamecomputerfirst[i].size(); k++)
+           for(unsigned int k = 0; k < printMe[i].size(); k++)
            {
-               cout << onefndurnamecomputerfirst[i][k] << endl;
+               cout << printMe[i][k] << endl;
            }
        }
     }
@@ -516,6 +551,66 @@ void userInterface::deleteComputer()
         if(service.deleteComputer(computerID))
         {
             cout << "******" << endl;
+        }
+    }
+}
+
+void userInterface::updatePerson()
+{
+    cout << "Update the person with the following name:" << endl;
+    cout << "Input: ";
+    string deleteString;
+    cin >> ws;
+    getline(cin, deleteString);
+    vector<Person> delPerson = service.searchPersons(deleteString, 1);
+    Person person = chooseWhich(delPerson,"No such Person! ",
+                          "Do you want to update the following person from the database? (Y/N) ",
+                          "which of the following persons do you want to update");
+    int personID = person.getID();
+
+    if(personID != -1)
+    {
+        printUpdatePersonOptions();
+        int input = getCorrectInt(5);
+
+        cout << "Input the change: " ;
+        cin >> ws;
+        string changeString;
+        getline(cin, changeString);
+
+        if(service.callUpdatePerson(personID, input, changeString))
+        {
+            cout << "********" << endl;
+        }
+    }
+}
+
+void userInterface::updateComputer()
+{
+    cout << "Update the computer with the following name:" << endl;
+    cout << "Input: ";
+    string deleteString;
+    cin >> ws;
+    getline(cin, deleteString);
+    vector<Computer> delComputer = service.searchComputers(deleteString, 1);
+    Computer computer = chooseWhich(delComputer,"No such Computer! ",
+                          "Do you want to update the following computer from the database? (Y/N) ",
+                          "which of the following computer do you want to update");
+    int computerID = computer.getID();
+
+    if(computerID != -1)
+    {
+        printUpdateComputerOptions();
+        int input = getCorrectInt(4);
+
+        cout << "Input the change: " ;
+        cin >> ws;
+        string changeString;
+        getline(cin, changeString);
+
+        if(service.callUpdateComputer(computerID, input, changeString))
+        {
+            cout << "********" << endl;
         }
     }
 }

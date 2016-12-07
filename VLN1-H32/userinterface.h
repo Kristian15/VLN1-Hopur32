@@ -21,6 +21,8 @@ private:
     // Prints search options
     void printSearchPersonsOptions();
     void printSearchComputersOptions();
+    void printUpdatePersonOptions();
+    void printUpdateComputerOptions();
     // Prints search command for the input
     void printSearchPersonsCommands(int input);
     void printSearchComputersCommands(int input);
@@ -53,6 +55,8 @@ private:
     // *** ELSE ***
     void deletePerson();
     void deleteComputer();
+    void updatePerson();
+    void updateComputer();
     void linkPersonAndComputer();
     void unlinkPersonAndComputer();
     bool doYouWantToQuit();

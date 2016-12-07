@@ -23,6 +23,7 @@ dataLayer::~dataLayer()
 
 void dataLayer::addNewPerson(Person addMe)
 {
+    // sama ig í addNewComputer
     QSqlQuery query;
     query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
                  "VALUES (:name, :gender, :nationality, :byear, :dyear)");
@@ -45,6 +46,9 @@ void dataLayer::addNewPerson(Person addMe)
 
 void dataLayer::addNewComputer(Computer addMe)
 {
+    // er eðlilegra að senda upplýsingarnar áfram í dataLayer án þess að búa til nýja manneskju í service?
+    // addNewComputer(name, year, type, built)
+
     QSqlQuery query;
     query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
                  "VALUES (:name, :year, :type, :built)");
@@ -63,6 +67,8 @@ void dataLayer::deleteRow(string table, int id)
     query.bindValue(":id", id);
     query.exec();
 
+    //  Getum sett column inn i strenginn í staðin fyrir að gera if lykkju
+
     if(table == "Persons")
     {
         query.prepare("DELETE FROM Person_Computer WHERE PersonID = :id");
@@ -80,6 +86,8 @@ void dataLayer::deleteRow(string table, int id)
 
 void dataLayer::updateItem(int id, string table, string column, string updateME)
 {
+    // VIRKAR EKKI
+    cout << id << " " << table << " " << column << " " << updateME << endl;
     QSqlQuery query;
     query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
     query.bindValue(":table", QString::fromStdString(table));
@@ -137,6 +145,8 @@ void dataLayer::addComputer(Computer computer)
 
 vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 {
+    // setja í private ??
+
     vector<Person> persons;
     QString queryString = "SELECT * FROM persons ORDER BY persons.";
     queryString.append(QString::fromStdString(column));
@@ -173,6 +183,8 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 
 vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
+    // setja í private ??
+
     vector<Computer> computers;
     QString queryString = "SELECT * FROM computers ORDER BY computers.";
     queryString.append(QString::fromStdString(column));
@@ -208,6 +220,8 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
+    // setja í private ??
+
     vector<Person> persons;
 
     QString queryString = "SELECT * FROM Persons WHERE ";
@@ -239,6 +253,8 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
+    // setja í private ??
+
     vector<Computer> computers;
 
     QString queryString = "SELECT * FROM Computers WHERE ";
@@ -268,9 +284,10 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
     return computers;
 }
 
-
 vector<vector<string>> dataLayer::getRelation(string column)
 {
+    // setja í private ??
+
     vector<vector<string>> resultMatrix;
 
     QString queryString = "SELECT DISTINCT name FROM ";

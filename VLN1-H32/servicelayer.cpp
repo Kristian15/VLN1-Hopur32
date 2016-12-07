@@ -465,11 +465,12 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
         default:
             break;
     }
+
     if(isValid)
     {
         data.updateTable(id, "Persons", column, updateMe);
-        return isValid;
     }
+
     return isValid;
 }
 
