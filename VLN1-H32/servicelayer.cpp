@@ -281,19 +281,19 @@ vector<Person> serviceLayer::sortPersons(int order, int ascordesc)
 
     switch (order) {
     case 1:
-        sorted = data.getSortedPersons("Name");
+        sorted = data.getSortedPersons("Name", ascordesc);
         break;
     case 2:
-        sorted = data.getSortedPersons("Gender");
+        sorted = data.getSortedPersons("Gender", ascordesc);
         break;
     case 3:
-        sorted = data.getSortedPersons("Nationality");
+        sorted = data.getSortedPersons("Nationality", ascordesc);
         break;
     case 4:
-        sorted = data.getSortedPersons("BirthYear");
+        sorted = data.getSortedPersons("BirthYear", ascordesc);
         break;
     case 5:
-        sorted = data.getSortedPersons("DeathYear");
+        sorted = data.getSortedPersons("DeathYear", ascordesc);
         break;
     default:
         break;
@@ -302,19 +302,19 @@ vector<Person> serviceLayer::sortPersons(int order, int ascordesc)
     return sorted;
 }
 
-vector<Computer> serviceLayer::sortComputers(int order)
+vector<Computer> serviceLayer::sortComputers(int order, int ascordesc)
 {
     vector<Computer> sorted;
 
     switch (order) {
     case 1:
-        sorted = data.getSortedComputers("Name");
+        sorted = data.getSortedComputers("Name", ascordesc);
         break;
     case 2:
-        sorted = data.getSortedComputers("Year");
+        sorted = data.getSortedComputers("Year", ascordesc);
         break;
     case 3:
-        sorted = data.getSortedComputers("Type");
+        sorted = data.getSortedComputers("Type", ascordesc);
         break;
     default:
         break;
