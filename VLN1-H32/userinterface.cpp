@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = '1', Display_Computer, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit = 'q'};
+enum inputcases { Display_Scientis = '1', Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit = 'q'};
 
 void userInterface::run()
 {
@@ -29,6 +29,9 @@ void userInterface::run()
             break;
         case Display_Computer:
             printComputersFromDisplay();
+            break;
+        case Display_Linked_Computers_and_Scientists:
+            printLinkedComputersAndPersonsFromDisplay();
             break;
         case Add_Scientis:
             readPerson();
@@ -66,16 +69,17 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Display Scientist - Displays Scientists data in the selected order" << endl;
-    cout << "2 = Display Computer  - Displays Computer data in the selected order" << endl;
-    cout << "3 = Add Scientist     - Adds scientist to your database" << endl;
-    cout << "4 = Add Computer      - Adds computer to your database" << endl;
-    cout << "5 = Delete Scientist  - Deletes scientist from you database" << endl;
-    cout << "6 = Delete Computer   - Deletes computer from you database" << endl;
-    cout << "7 = Search Scientist  - Search for a scientist in your database" << endl;
-    cout << "8 = Search Computer   - Search for a computer in your database" << endl;
-    cout << "9 = Link              - Link Scientist and Computer" << endl;
-    cout << "q = quit              - Quit the program" << endl;
+    cout << "1 = Display Scientist   - Displays Scientists data in the selected order" << endl;
+    cout << "2 = Display Computer    - Displays Computer data in the selected order" << endl;
+    cout << "3 = Display linked C&S  - Displays linked Computers and Scientists in the selected order;" << endl;
+    cout << "4 = Add Scientist       - Adds scientist to your database" << endl;
+    cout << "5 = Add Computer        - Adds computer to your database" << endl;
+    cout << "6 = Delete Scientist    - Deletes scientist from you database" << endl;
+    cout << "7 = Delete Computer     - Deletes computer from you database" << endl;
+    cout << "8 = Search Scientist    - Search for a scientist in your database" << endl;
+    cout << "9 = Search Computer     - Search for a computer in your database" << endl;
+    cout << "10 = Link                - Link Scientist and Computer" << endl;
+    cout << "q = quit                - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -201,6 +205,16 @@ void userInterface::printComputersFromDisplay()
     int ascDesc = getCorrectInt(2);
     vector<Computer> sorted = service.sortComputers(input, ascDesc);
     printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+}
+void userInterface::printLinkedComputersAndPersonsFromDisplay()
+{
+    cout << "Do you want to the list by name of Scientists or by name of computers? (1/2)" << endl;
+    cout << "Input: ";
+    int inputnameorcomputer = getCorrectInt(2);
+    cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
+    cout << "Input: ";
+    int inputascordesc = getCorrectInt(2);
+
 }
 
 void userInterface::printPersonsFromSearch()
@@ -511,32 +525,32 @@ void userInterface::linkPersonAndComputer()
 }
 void userInterface::unlinkPersonAndComputer()
 {
-    cout << "Link person with the following name: " << endl;
+    cout << "Unlink person with the following name: " << endl;
     cout << "Input: ";
     string personName, computerName;
     cin >> ws;
     getline(cin, personName);
     vector<Person> linkPerson = service.searchPersons(personName, 1);
     Person person = chooseWhich(linkPerson, "No such person!",
-                                "Do you want to link the following person? (Y/N) ",
-                                "Which of the following persons do you want to link");
+                                "Do you want to unlink the following person? (Y/N) ",
+                                "Which of the following persons do you want to unlink");
 
     if(person.getID() != -1)
     {
-        cout << "Link computer with the following name: " << endl;
+        cout << "Unink computer with the following name: " << endl;
         cout << "Input: ";
         cin >> ws;
         getline(cin, computerName);
         vector<Computer> linkComputer = service.searchComputers(computerName, 1);
         Computer computer = chooseWhich(linkComputer, "No such Computer!",
-                                       "Do you want to link the following computer? (Y/N) ",
-                                       "Which of the following computers do you want to link");
+                                       "Do you want to unlink the following computer? (Y/N) ",
+                                       "Which of the following computers do you want to unlink");
 
         if(computer.getID() != -1)
         {
             if(service.link(person.getID(), computer.getID()))
             {
-                cout << "Link successful!" << endl;
+                cout << "Unlink successful!" << endl;
             }
         }
     }

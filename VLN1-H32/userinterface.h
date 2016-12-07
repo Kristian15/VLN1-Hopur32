@@ -30,6 +30,7 @@ private:
     // calls printList() with the sorted list and calls ifYouWantToSave()
     void printPersonsFromDisplay();
     void printComputersFromDisplay();
+    void printLinkedComputersAndPersonsFromDisplay();
     // calls printSearchOptions() and printSearchCommands()
     // calls searchList() from serviceLayer
     // calls printList() with the search matches
