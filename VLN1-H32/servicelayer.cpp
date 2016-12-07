@@ -354,23 +354,18 @@ void serviceLayer::newComputer(string name, string year, string type, string bui
 {
     bool builtBool = false;
 
-    if(validateNewComputer(name, year, type))
+    if((built == "y"))
     {
-        if((built == "y") || (built == "Y"))
-        {
-            builtBool = true;
-        }
-        else if ((built != "n") || (built != "N") || (builtBool == true))
-        {
-            Computer computer;
-            computer.setName(name);
-            computer.setYear(stoi(year));
-            computer.setType(type);
-            computer.setBuilt(builtBool);
-
-            data.addComputer(computer);
-        }
+        builtBool = true;
     }
+
+    Computer computer;
+    computer.setName(name);
+    computer.setYear(stoi(year));
+    computer.setType(type);
+    computer.setBuilt(builtBool);
+
+    data.addComputer(computer);
 }
 
 /**
@@ -404,11 +399,19 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     return b;
 }
 
-bool serviceLayer::validateNewComputer(string name, string year, string type)
+bool serviceLayer::validateNewComputer(string name, string year, string type, string& built)
 {
-    if((name != "") && validateYear(year) && (type != ""))
+    if(built.size() == 1)
     {
-        return true;
+        built = tolower(built[0]);
+
+        if((name != "") && validateYear(year) && (type != ""))
+        {
+            if((built == "y") || (built == "n"))
+            {
+                return true;
+            }
+        }
     }
 
     return false;

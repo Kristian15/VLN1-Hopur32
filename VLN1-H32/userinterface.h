@@ -12,48 +12,46 @@ class userInterface
 {
 private:
     serviceLayer service;
-
+    // *** PRINT INSTRUCTIONS FUNCTIONS ***
     // Prints the main menu
     void printMainMenu();
     // Prints options to sort by
-    void printDisplayscientistsOptions();
+    void printDisplayPersonsOptions();
+    void printDisplayComputersOptions();
     // Prints search options
-    void printSearchscientistsOptions();
+    void printSearchPersonsOptions();
+    void printSearchComputersOptions();
     // Prints search command for the input
-    void printSearchscientistsCommands(int input);
+    void printSearchPersonsCommands(int input);
+    void printSearchComputersCommands(int input);
+
+    // *** PRINT FUNCTIONS ***
     // calls printListOptions and calls sortList() from serviceLayer
     // calls printList() with the sorted list and calls ifYouWantToSave()
-    void printScientistsFromDisplay();
+    void printPersonsFromDisplay();
+    void printComputersFromDisplay();
     // calls printSearchOptions() and printSearchCommands()
     // calls searchList() from serviceLayer
     // calls printList() with the search matches
-    void printScientistFromSearch();
+    void printPersonsFromSearch();
+    void printComputerFromSearch();
     // outputs inMessage, prints printMe and outputs outMessage
     void printPersons(vector<Person> printMe, string inMessage, string outMessage);
-    // gets a fileName from user and calls createList() in serviceLayer
-    void readList();
+    void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
+
+    // *** INPUT FUNCTIONS ***
     // gets information to create a new Person
     // validates input with validateNewPerson() from serviceLayer
     // uses newPerson() from serviceLayer
     void readPerson();
-    bool doYouWantToQuit();
-    // called by printFromDisplay()
-    void ifYouWantToSave(vector<Person> saveMe);
-    void deletePerson();
-
-    void printDisplaycomputerOptions();
     void readComputer();
-    void printComputersFromDisplay();
-    void deleteComputer();
-    void printSearchcomputersoptions();
-    void printSearchcomputersCommands(int input);
-    void printComputerFromSearch();
-    void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
-    void linkPersonAndComputer();
     int getCorrectInt(int max);
 
-
-
+    // *** ELSE ***
+    void deletePerson();
+    void deleteComputer();
+    void linkPersonAndComputer();
+    bool doYouWantToQuit();
 public:
     void run();
 };
