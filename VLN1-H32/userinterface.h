@@ -52,6 +52,8 @@ private:
     void deleteComputer();
     void linkPersonAndComputer();
     bool doYouWantToQuit();
+    template <typename T>
+    T hjalp(vector<T> delPerson, string a, string b, string c);
 public:
     void run();
 };
