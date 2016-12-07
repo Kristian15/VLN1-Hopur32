@@ -46,14 +46,14 @@ private:
     void readPerson();
     void readComputer();
     int getCorrectInt(int max);
+    template <typename T>
+    T chooseWhich(vector<T> delItem, string s1, string s2, string s3);
 
     // *** ELSE ***
     void deletePerson();
     void deleteComputer();
     void linkPersonAndComputer();
     bool doYouWantToQuit();
-    template <typename T>
-    T chooseWhich(vector<T> delItem, string s1, string s2, string s3);
 public:
     void run();
 };

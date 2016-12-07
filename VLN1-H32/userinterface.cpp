@@ -390,6 +390,47 @@ int userInterface::getCorrectInt(int max)
     return input;
 }
 
+template <typename T>
+T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
+{
+    T item;
+    item.setID(-1);
+    size_t itemSize = delItem.size();
+
+    if(itemSize == 0)
+    {
+        cout << s1;
+    }
+    else if(itemSize == 1)
+    {
+        T theItem = delItem[0];
+        cout << s2;
+        cout << theItem.getName();
+        string answer;
+        cin >> answer;
+
+        if(answer == "y" || answer == "Y")
+        {
+            item = theItem;
+        }
+    }
+    else
+    {
+        cout << s3 << endl;
+
+        for(unsigned int i = 0; i < itemSize; i++)
+        {
+            cout << i+1 << delItem[i].getName() << endl;;
+        }
+
+        int input = getCorrectInt(itemSize);
+        input--;
+        item = delItem[input];
+    }
+
+    return item;
+}
+
 void userInterface::deletePerson()
 {
     cout << "Delete the person with the following name:" << endl;
@@ -432,47 +473,6 @@ void userInterface::deleteComputer()
             cout << "******" << endl;
         }
     }
-}
-
-template <typename T>
-T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
-{
-    T item;
-    item.setID(-1);
-    size_t itemSize = delItem.size();
-
-    if(itemSize == 0)
-    {
-        cout << s1;
-    }
-    else if(itemSize == 1)
-    {
-        T theItem = delItem[0];
-        cout << s2;
-        cout << theItem.getName();
-        string answer;
-        cin >> answer;
-
-        if(answer == "y" || answer == "Y")
-        {
-            item = theItem;
-        }
-    }
-    else
-    {
-        cout << s3 << endl;
-
-        for(unsigned int i = 0; i < itemSize; i++)
-        {
-            cout << i+1 << delItem[i].getName() << endl;;
-        }
-
-        int input = getCorrectInt(itemSize);
-        input--;
-        item = delItem[input];
-    }
-
-    return item;
 }
 
 void userInterface::linkPersonAndComputer()
