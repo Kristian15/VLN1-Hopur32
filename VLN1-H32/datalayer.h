@@ -18,6 +18,7 @@ private:
     void addNewPerson(Person addMe);
     void addNewComputer(Computer addMe);
     void deleteRow(string table, int id);
+    void updateItem(int id, string table, string column, string updateME);
 public:
     dataLayer();
     ~dataLayer();
@@ -34,6 +35,6 @@ public:
     bool deleteComputer(int id);
     // creates a relation between a comptuer and a scientist
     bool makeRelation(int personID, int computerID);
-    void addPerson(Person person){ addNewPerson(person); }
-    void addComputer(Computer computer) { addNewComputer(computer); }
+    void addPerson(Person person);
+    void addComputer(Computer computer);
 };

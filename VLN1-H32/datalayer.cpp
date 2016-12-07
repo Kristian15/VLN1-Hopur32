@@ -23,26 +23,24 @@ dataLayer::~dataLayer()
  */
 void dataLayer::addNewPerson(Person addMe)
 {
-    if(db.isOpen())
-    {
-       QSqlQuery query;
-       query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
-                     "VALUES (:name, :gender, :nationality, :byear, :dyear)");
-       query.bindValue(":name", QString::fromStdString(addMe.getName()));
-       query.bindValue(":gender", QString::fromStdString(addMe.getGender()));
-       query.bindValue(":nationality", QString::fromStdString(addMe.getNationality()));
-       query.bindValue(":byear", addMe.getByear());
-       if(addMe.getDyear() != 0)
-       {
-           query.bindValue(":dyear", addMe.getDyear());
-       }
-       else
-       {
-           query.bindValue(":dyear", "");
-       }
+    QSqlQuery query;
+    query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
+                 "VALUES (:name, :gender, :nationality, :byear, :dyear)");
+    query.bindValue(":name", QString::fromStdString(addMe.getName()));
+    query.bindValue(":gender", QString::fromStdString(addMe.getGender()));
+    query.bindValue(":nationality", QString::fromStdString(addMe.getNationality()));
+    query.bindValue(":byear", addMe.getByear());
 
-       query.exec();
+    if(addMe.getDyear() != 0)
+    {
+       query.bindValue(":dyear", addMe.getDyear());
     }
+    else
+    {
+       query.bindValue(":dyear", "");
+    }
+
+    query.exec();
 }
 /**
  * @brief dataLayer::addNewComputer
@@ -50,19 +48,20 @@ void dataLayer::addNewPerson(Person addMe)
  */
 void dataLayer::addNewComputer(Computer addMe)
 {
-    if(db.isOpen())
-    {
-       QSqlQuery query;
-       query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
-                     "VALUES (:name, :year, :type, :built)");
-       query.bindValue(":name", QString::fromStdString(addMe.getName()));
-       query.bindValue(":year", addMe.getYear());
-       query.bindValue(":type", QString::fromStdString(addMe.getType()));
-       query.bindValue(":built",addMe.getBuilt());
-       query.exec();
-    }
+    QSqlQuery query;
+    query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
+                 "VALUES (:name, :year, :type, :built)");
+    query.bindValue(":name", QString::fromStdString(addMe.getName()));
+    query.bindValue(":year", addMe.getYear());
+    query.bindValue(":type", QString::fromStdString(addMe.getType()));
+    query.bindValue(":built",addMe.getBuilt());
+    query.exec();
 }
-
+/**
+ * @brief dataLayer::deleteRow
+ * @param table
+ * @param id
+ */
 void dataLayer::deleteRow(string table, int id)
 {
     QSqlQuery query;
@@ -86,7 +85,41 @@ void dataLayer::deleteRow(string table, int id)
     return;
 }
 
+void dataLayer::updateItem(int id, string table, string column, string updateME)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
+    query.bindValue(":table", QString::fromStdString(table));
+    query.bindValue(":column", QString::fromStdString(column));
+    query.bindValue(":updateMe", QString::fromStdString(updateME));
+    query.bindValue(":id", id);
+    query.exec();
+}
+
 // **** Public ****
+void dataLayer::addPerson(Person person)
+{
+    if(db.isOpen())
+    {
+        addNewPerson(person);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+}
+void dataLayer::addComputer(Computer computer)
+{
+    if(db.isOpen())
+    {
+        addNewComputer(computer);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+}
+
 /**
  * @brief dataLayer::getSortedPersons
  * @param order
@@ -154,7 +187,6 @@ vector<Computer> dataLayer::getSortedComputers(string column)
  * @param findMe
  * @return
  */
-
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
@@ -185,8 +217,6 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     return persons;
 }
-
-
 /**
  * @brief dataLayer::findComputers
  * @param column
@@ -211,7 +241,7 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
         while(query.next())
         {
             Computer computer;
-            computer.setId(query.value("Id").toInt());
+            computer.setID(query.value("Id").toInt());
             computer.setName(query.value("Name").toString().toStdString());
             computer.setYear(query.value("Year").toInt());
             computer.setType(query.value("Type").toString().toStdString());
@@ -234,17 +264,20 @@ void dataLayer::updateTable(int id, string table, string column, string updateMe
 {
     if(db.isOpen())
     {
-        QSqlQuery query;
-        query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
-        query.bindValue(":table", QString::fromStdString(table));
-        query.bindValue(":column", QString::fromStdString(column));
-        query.bindValue(":updateMe", QString::fromStdString(updateMe));
-        query.bindValue(":id", id);
-        query.exec();
+        updateItem(id, table, column, updateMe);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
     }
     return;
 }
-
+/**
+ * @brief dataLayer::deleteItem
+ * @param table
+ * @param id
+ * @return
+ */
 bool dataLayer::deleteItem(string table, int id)
 {
     if(db.isOpen())
@@ -254,11 +287,10 @@ bool dataLayer::deleteItem(string table, int id)
     }
     else
     {
-        throw string("No database connection!");
+        throw string("Error: No database connection!");
     }
     return false;
 }
-
 /**
  * @brief dataLayer::deletePerson
  * @param deleteMe
