@@ -21,10 +21,6 @@ dataLayer::~dataLayer()
 
 // **** Private ****
 
-/**
- * @brief dataLayer::addNewPerson
- * @param person
- */
 void dataLayer::addNewPerson(Person addMe)
 {
     QSqlQuery query;
@@ -46,10 +42,7 @@ void dataLayer::addNewPerson(Person addMe)
 
     query.exec();
 }
-/**
- * @brief dataLayer::addNewComputer
- * @param computer
- */
+
 void dataLayer::addNewComputer(Computer addMe)
 {
     QSqlQuery query;
@@ -61,11 +54,7 @@ void dataLayer::addNewComputer(Computer addMe)
     query.bindValue(":built",addMe.getBuilt());
     query.exec();
 }
-/**
- * @brief dataLayer::deleteRow
- * @param table
- * @param id
- */
+
 void dataLayer::deleteRow(string table, int id)
 {
     QSqlQuery query;
@@ -88,13 +77,7 @@ void dataLayer::deleteRow(string table, int id)
     }
     return;
 }
-/**
- * @brief dataLayer::updateItem
- * @param id
- * @param table
- * @param column
- * @param updateME
- */
+
 void dataLayer::updateItem(int id, string table, string column, string updateME)
 {
     QSqlQuery query;
@@ -105,11 +88,7 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     query.bindValue(":id", id);
     query.exec();
 }
-/**
- * @brief dataLayer::createRelation
- * @param personID
- * @param computerID
- */
+
 void dataLayer::createRelation(int personID, int computerID)
 {
     QSqlQuery query;
@@ -119,11 +98,7 @@ void dataLayer::createRelation(int personID, int computerID)
     query.bindValue(":computerID", computerID);
     query.exec();
 }
-/**
- * @brief dataLayer::deleteRelation
- * @param personID
- * @param computerID
- */
+
 void dataLayer::deleteRelation(int personID, int computerID)
 {
     QSqlQuery query;
@@ -135,10 +110,7 @@ void dataLayer::deleteRelation(int personID, int computerID)
 }
 
 // **** Public ****
-/**
- * @brief dataLayer::addPerson
- * @param person
- */
+
 void dataLayer::addPerson(Person person)
 {
     if(db.isOpen())
@@ -150,10 +122,7 @@ void dataLayer::addPerson(Person person)
         throw string("Error: No database connection!");
     }
 }
-/**
- * @brief dataLayer::addComputer
- * @param computer
- */
+
 void dataLayer::addComputer(Computer computer)
 {
     if(db.isOpen())
@@ -165,11 +134,7 @@ void dataLayer::addComputer(Computer computer)
         throw string("Error: No database connection!");
     }
 }
-/**
- * @brief dataLayer::getSortedPersons
- * @param order
- * @return
- */
+
 vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 {
     vector<Person> persons;
@@ -205,11 +170,7 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 
     return persons;
 }
-/**
- * @brief dataLayer::getSortedComputers
- * @param order
- * @return
- */
+
 vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
     vector<Computer> computers;
@@ -244,12 +205,7 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 
     return computers;
 }
-/**
- * @brief dataLayer::findPersons
- * @param column
- * @param findMe
- * @return
- */
+
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     vector<Person> persons;
@@ -280,12 +236,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     return persons;
 }
-/**
- * @brief dataLayer::findComputers
- * @param column
- * @param findMe
- * @return
- */
+
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
@@ -316,42 +267,18 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 
     return computers;
 }
-/**
- * @brief dataLayer::updateTable
- * @param id
- * @param table
- * @param column
- * @param updateMe
- */
 
-/*vector<Person> dataLayer::relatedPersons(int ascDesc)
+
+vector<vector<string>> dataLayer::getRelation(string column)
 {
+    vector<vector<string>> resultMatrix;
 
-    QString queryString = "SELECT Name FROM Persons JOIN Person_Computer ON "
-            "Person_Computer.PersonID = Persons.ID ORDER BY ";
-    if(ascDesc == 1)
-    {
-        queryString.append("DESC");
-    }
+    QString queryString = "SELECT DISTINCT name FROM ";
+    queryString.append(QString::fromStdString(column));
+    queryString.append("s AS p JOIN Person_Computer AS pc ON p.id = pc.");
+    queryString.append(QString::fromStdString(column));
+    queryString.append("id");
 
-
-    if(db.isOpen())
-    {
-        QSqlQuery query;
-    }
-
-    return persons;
-}*/
-
-vector<vector <string> > dataLayer::relatedComputers(int ascDesc)
-{
-    //select name from computers as c join person_computer as pc on c.id = pc.computerid
-    vector<vector<string> > resultMatrix;
-    //std::vector< std::vector< double > > twoDMatrix( 3, std::vector< double >( 4 ) );
-    int temp;
-
-    QString queryString = "SELECT DISTINCT id, name FROM computers AS c JOIN person_computer"
-                          " AS pc ON c.id = pc.computerid";
     if(db.isOpen())
     {
         QSqlQuery query;
@@ -359,10 +286,44 @@ vector<vector <string> > dataLayer::relatedComputers(int ascDesc)
 
         while(query.next())
         {
-            temp = query.value("ID").toInt();
             vector<string> item;
             item.push_back(query.value("Name").toString().toStdString());
             resultMatrix.push_back(item);
+        }
+    }
+
+    queryString = "SELECT p.name, c.name FROM person_computer AS pc JOIN persons as p"
+            " ON p.ID = pc.personID JOIN computers AS c ON c.ID = pc.computerID";
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.exec(queryString);
+
+        while(query.next())
+        {
+            string a = query.value(0).toString().toStdString();
+            string b = query.value(1).toString().toStdString();
+
+            if(column == "Computer")
+            {
+                string tmp = a;
+                a = b;
+                b = tmp;
+            }
+
+            unsigned int pos;
+
+            for(unsigned int i = 0; i < resultMatrix.size(); i++)
+            {
+                cout << endl;
+                if(a == resultMatrix[i][0])
+                {
+                    pos = i;
+                }
+            }
+
+            resultMatrix[pos].push_back(b);
         }
     }
 
@@ -381,12 +342,7 @@ void dataLayer::updateTable(int id, string table, string column, string updateMe
     }
     return;
 }
-/**
- * @brief dataLayer::deleteItem
- * @param table
- * @param id
- * @return
- */
+
 bool dataLayer::deleteItem(string table, int id)
 {
     if(db.isOpen())
@@ -400,11 +356,7 @@ bool dataLayer::deleteItem(string table, int id)
     }
     return false;
 }
-/**
- * @brief dataLayer::deletePerson
- * @param deleteMe
- * @return
- */
+
 bool dataLayer::deletePerson(int id)
 {
     if(db.isOpen())
@@ -418,11 +370,7 @@ bool dataLayer::deletePerson(int id)
 
     return false;
 }
-/**
- * @brief dataLayer::deleteComputer
- * @param deleteMe
- * @return
- */
+
 bool dataLayer::deleteComputer(int id)
 {
     if(db.isOpen())
@@ -436,12 +384,7 @@ bool dataLayer::deleteComputer(int id)
 
     return false;
 }
-/**
- * @brief dataLayer::makeRelation
- * @param personId
- * @param computerId
- * @return
- */
+
 bool dataLayer::makeRelation(int personID, int computerID)
 {
 
@@ -455,12 +398,7 @@ bool dataLayer::makeRelation(int personID, int computerID)
         throw string("Error: No database connection!");
     }
 }
-/**
- * @brief dataLayer::unMakeRelation
- * @param personID
- * @param computerID
- * @return
- */
+
 bool dataLayer::unMakeRelation(int personID, int computerID)
 {
     if(db.isOpen())
