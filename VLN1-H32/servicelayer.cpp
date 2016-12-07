@@ -477,3 +477,13 @@ bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
 { // **** TODO validation for computers ****
   return false;
 }
+
+vector<Person> getLinkPersons(int ascDesc)
+{
+    return data.relatedPersons(ascDesc);
+}
+
+vector<Computer> getLinkComputers(int ascDesc)
+{
+    return data.relatedComputers(ascDesc);
+}
