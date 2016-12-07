@@ -197,7 +197,9 @@ void userInterface::printComputersFromDisplay()
 {
     printDisplayComputersOptions();
     int input = getCorrectInt(4);
-    vector<Computer> sorted = service.sortComputers(input);
+    cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
+    int ascDesc = getCorrectInt(2);
+    vector<Computer> sorted = service.sortComputers(input, ascDesc);
     printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
