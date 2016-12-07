@@ -53,7 +53,7 @@ private:
     void linkPersonAndComputer();
     bool doYouWantToQuit();
     template <typename T>
-    T hjalp(vector<T> delPerson, string a, string b, string c);
+    T chooseWhich(vector<T> delItem, string s1, string s2, string s3);
 public:
     void run();
 };

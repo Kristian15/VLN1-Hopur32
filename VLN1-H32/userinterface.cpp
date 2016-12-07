@@ -187,7 +187,9 @@ void userInterface::printPersonsFromDisplay()
 {
     printDisplayPersonsOptions();
     int input = getCorrectInt(5);
-    vector<Person> sorted = service.sortPersons(input);
+    cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
+    int ascDesc = getCorrectInt(2);
+    vector<Person> sorted = service.sortPersons(input, ascDesc);
     printPersons(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 
@@ -396,9 +398,11 @@ void userInterface::deletePerson()
     cin >> ws;
     getline(cin, deleteString);
     vector<Person> delPerson = service.searchPersons(deleteString, 1);
-
-    Person person = hjalp(delPerson,"No such Person!", "Do you want to delete the following person from the database? (Y/N) ", "which of the following persons do you want to delete");
+    Person person = chooseWhich(delPerson,"No such Person!",
+                          "Do you want to delete the following person from the database? (Y/N) ",
+                          "which of the following persons do you want to delete");
     int personID = person.getID();
+
     if(personID != -1)
     {
         if(service.deletePerson(personID))
@@ -415,87 +419,60 @@ void userInterface::deleteComputer()
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-   // Computer computer;
-   // computer.setId(-1);
     vector<Computer> delComputer = service.searchComputers(deleteString, 1);
-    Computer computer = hjalp(delComputer, "No such Computer!", "Do you want to delete the following computer from the database? (Y/N) ", "which of the following computers do you want to delete");
-    //size_t computerSize = delComputer.size();
-
-   /* if(computerSize == 0)
-    {
-        cout << "No such Computer!";
-    }
-    else if(computerSize == 1)
-    {
-        Computer  theComputer = delComputer[0];
-        cout << "Do you want to delete the following computer from the database? (Y/N) ";
-        cout << theComputer.getName();
-        string answer;
-        cin >> answer;
-        if(answer == "y" || answer == "Y")
-        {
-            computer = theComputer;
-        }
-    }
-    else
-    {
-        cout << "which of the following computers do you want to delete" << endl;
-        for(unsigned int i = 0; i < computerSize; i++)
-        {
-            cout << i+1 << delComputer[i].getName();
-        }
-        int input = getCorrectInt(computerSize);
-        input--;
-        computer = delComputer[input];
-    }
-
+    Computer computer = chooseWhich(delComputer, "No such Computer!",
+                              "Do you want to delete the following computer from the database? (Y/N) ",
+                              "which of the following computers do you want to delete");
     int computerID = computer.getID();
+
     if(computerID != -1)
     {
         if(service.deleteComputer(computerID))
         {
             cout << "******" << endl;
         }
-    }*/
+    }
 }
 
 template <typename T>
-T userInterface::hjalp(vector<T> delPerson, string a, string b, string c)
+T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
 {
-    T person;
-    person.setID(-1);
-    size_t personSize = delPerson.size();
+    T item;
+    item.setID(-1);
+    size_t itemSize = delItem.size();
 
-    if(personSize == 0)
+    if(itemSize == 0)
     {
-        cout << a;
+        cout << s1;
     }
-    else if(personSize == 1)
+    else if(itemSize == 1)
     {
-        T thePerson = delPerson[0];
-        cout << b;
-        cout << thePerson.getName();
+        T theItem = delItem[0];
+        cout << s2;
+        cout << theItem.getName();
         string answer;
         cin >> answer;
+
         if(answer == "y" || answer == "Y")
         {
-            person = thePerson;
+            item = theItem;
         }
     }
     else
     {
-        cout << c << endl;
+        cout << s3 << endl;
 
-        for(unsigned int i = 0; i < personSize; i++)
+        for(unsigned int i = 0; i < itemSize; i++)
         {
-            cout << i+1 << delPerson[i].getName();
+            cout << i+1 << delItem[i].getName() << endl;;
         }
 
-        int input = getCorrectInt(personSize);
+        int input = getCorrectInt(itemSize);
         input--;
-        person = delPerson[input];
+        item = delItem[input];
     }
-    return person;
+
+    return item;
 }
 
 void userInterface::linkPersonAndComputer()
@@ -503,47 +480,12 @@ void userInterface::linkPersonAndComputer()
     cout << "Link person with the following name: " << endl;
     cout << "Input: ";
     string personName, computerName;
-    Computer computer;
-    computer.setID(-1);
-    Person person;
-    person.setID(-1);
-
     cin >> ws;
     getline(cin, personName);
     vector<Person> linkPerson = service.searchPersons(personName, 1);
-    size_t personSize = linkPerson.size();
-
-    if(personSize == 0)
-    {
-        cout << "No such person!" << endl;
-    }
-    else if(personSize == 1)
-    {
-        Person thePerson = linkPerson[0];
-        cout << "Do you want to link the following person? (Y/N) ";
-        cout << thePerson.getName() << endl;
-        string answer;
-        cin >> answer;
-
-        if((answer == "y") || (answer == "Y"))
-        {
-            person = thePerson;
-        }
-    }
-    else
-    {
-        cout << "which of the following persons do you want to link" << endl;
-
-        for(unsigned int i = 0; i < personSize; i++)
-        {
-            cout << i+1 << " " << linkPerson[i].getName() << endl;
-        }
-
-        cout << "Input person number: ";
-        int input = getCorrectInt(personSize);
-        input--;
-        person = linkPerson[input];
-    }
+    Person person = chooseWhich(linkPerson, "No such person!",
+                "Do you want to link the following person? (Y/N) ",
+                "Which of the following persons do you want to link");
 
     if(person.getID() != -1)
     {
@@ -552,50 +494,16 @@ void userInterface::linkPersonAndComputer()
         cin >> ws;
         getline(cin, computerName);
         vector<Computer> linkComputer = service.searchComputers(computerName, 1);
-        size_t computerSize = linkComputer.size();
+        Computer computer = chooseWhich(linkComputer, "No such Computer!",
+                                       "Do you want to link the following computer? (Y/N) ",
+                                       "Which of the following computers do you want to link");
 
-        if(computerSize == 0)
-        {
-            cout << "No such Computer!" << endl;
-        }
-        else if(computerSize == 1)
-        {
-            Computer theComputer = linkComputer[0];
-            cout << "Do you want to link the following computer? (Y/N) " << endl;
-            cout << theComputer.getName() << endl;
-            cout << "Answer: ";
-            string answer;
-            cin >> answer;
-
-            if(answer == "y" || answer == "Y")
-            {
-                computer = theComputer;
-            }
-        }
-        else
-        {
-            cout << "which of the following computers do you want to link" << endl;
-
-            for(unsigned int i = 0; i < computerSize; i++)
-            {
-                cout << i+1 << " " << linkComputer[i].getName() << endl;
-            }
-
-            cout << "Input computer number: ";
-            int input = getCorrectInt(computerSize);
-            input--;
-            computer = linkComputer[input];
-        }
         if(computer.getID() != -1)
         {
             if(service.link(person.getID(), computer.getID()))
             {
                 cout << "Link successful!" << endl;
             }
-        }
-        else
-        {
-            cout << "Link unsuccessful!" << endl;
         }
     }
 }
