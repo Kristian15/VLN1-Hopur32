@@ -56,6 +56,5 @@ public:
     bool unLink(int personID, int computerID);
     bool callUpdatePerson(int id, int column, string updateMe);
     bool callUpdateComputer(int id, int column, string updateMe);
-    vector<Person> getLinkPersons(int ascDesc);
-    vector<Computer> getLinkComputers(int ascDesc);
+    vector<vector<string>> getRelation(string column);
 };

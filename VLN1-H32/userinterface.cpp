@@ -204,32 +204,33 @@ void userInterface::printComputersFromDisplay()
     printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
-{
+{    
     cout << "Do you want to the list by name of Scientists or by name of computers? (1/2)" << endl;
     cout << "Input: ";
-    int inputnameorcomputer = getCorrectInt(2);
-    cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
-    cout << "Input: ";
-    int inputascordesc = getCorrectInt(2);
-    if(inputnameorcomputer == 1)
+    int inputNameOrComputer = getCorrectInt(2);
+    vector<vector<string>> printMe;
+
+    if(inputNameOrComputer == 1)
     {
-        vector<vector<string> > onefndurnamepersonfirst;
-       for(unsigned int i = 0; i < onefndurnamepersonfirst.size(); i++)
+       printMe = service.getRelation("Person");
+
+       for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < onefndurnamepersonfirst[i].size(); k++)
+           for(unsigned int k = 0; k < printMe[i].size(); k++)
            {
-               cout << onefndurnamepersonfirst[i][k] << endl;
+               cout << printMe[i][k] << endl;
            }
        }
     }
     else
     {
-        vector<vector<string> > onefndurnamecomputerfirst;
-       for(unsigned int i = 0; i < onefndurnamecomputerfirst.size(); i++)
+       printMe = service.getRelation("Computer");
+
+       for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < onefndurnamecomputerfirst[i].size(); k++)
+           for(unsigned int k = 0; k < printMe[i].size(); k++)
            {
-               cout << onefndurnamecomputerfirst[i][k] << endl;
+               cout << printMe[i][k] << endl;
            }
        }
     }
@@ -573,7 +574,7 @@ void userInterface::unlinkPersonAndComputer()
 
         if(computer.getID() != -1)
         {
-            if(service.link(person.getID(), computer.getID()))
+            if(service.unLink(person.getID(), computer.getID()))
             {
                 cout << "Unlink successful!" << endl;
             }

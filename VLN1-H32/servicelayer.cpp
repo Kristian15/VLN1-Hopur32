@@ -478,4 +478,8 @@ bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
   return false;
 }
 
+vector<vector<string>> serviceLayer:: getRelation(string column)
+{
+    return data.getRelation(column);
+}
 
