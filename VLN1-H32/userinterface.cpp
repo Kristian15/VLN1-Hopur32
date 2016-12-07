@@ -213,11 +213,25 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     int inputascordesc = getCorrectInt(2);
     if(inputnameorcomputer == 1)
     {
-        cout << "ble";
+        vector<vector<string> > onefndurnamepersonfirst;
+       for(unsigned int i = 0; i < onefndurnamepersonfirst.size(); i++)
+       {
+           for(unsigned int k = 0; k < onefndurnamepersonfirst[i].size(); k++)
+           {
+               cout << onefndurnamepersonfirst[i][k] << endl;
+           }
+       }
     }
     else
     {
-        cout << "blu";
+        vector<vector<string> > onefndurnamecomputerfirst;
+       for(unsigned int i = 0; i < onefndurnamecomputerfirst.size(); i++)
+       {
+           for(unsigned int k = 0; k < onefndurnamecomputerfirst[i].size(); k++)
+           {
+               cout << onefndurnamecomputerfirst[i][k] << endl;
+           }
+       }
     }
 
 }
