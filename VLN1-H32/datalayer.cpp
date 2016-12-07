@@ -63,6 +63,29 @@ void dataLayer::addNewComputer(Computer addMe)
     }
 }
 
+void dataLayer::deleteRow(string table, int id)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM :table WHERE ID = :id");
+    query.bindValue(":table", QString::fromStdString(table));
+    query.bindValue(":id", id);
+    query.exec();
+
+    if(table == "Persons")
+    {
+        query.prepare("DELETE FROM Person_Computer WHERE PersonID = :id");
+        query.bindValue(":id", id);
+        query.exec();
+    }
+    else if(table == "Computers")
+    {
+        query.prepare("DELETE FROM Person_Computer WHERE ComputerID = :id");
+        query.bindValue(":id", id);
+        query.exec();
+    }
+    return;
+}
+
 // **** Public ****
 /**
  * @brief dataLayer::getSortedPersons
@@ -161,41 +184,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
     }
 
     return persons;
-   // return setter(queryString);
 }
-
-
-/*vector<Person> dataLayer::setter(QString queryString, string table)
-{
-    vector<Person> persons;
-    if(db.isOpen())
-    {
-        QSqlQuery query;
-        query.exec(queryString);
-
-        while(query.next())
-        {
-            Person person;
-            person.setID(query.value("ID").toUInt());
-            person.setName(query.value("Name").toString().toStdString());
-            if(table == "Persons")
-            {
-                person.setGender(query.value("Gender").toString().toStdString());
-                person.setNationality(query.value("Nationality").toString().toStdString());
-                person.setByear(query.value("BirthYear").toInt());
-                person.setDyear(query.value("DeathYear").toInt());
-            }
-            else
-            {
-                computer.setYear(query.value("Year").toInt());
-                computer.setType(query.value("Type").toString().toStdString());
-                computer.setBuilt(query.value("Built").toBool());
-            }
-            persons.push_back(person);
-        }
-    }
-    return persons;
-}*/
 
 
 /**
@@ -255,6 +244,21 @@ void dataLayer::updateTable(int id, string table, string column, string updateMe
     }
     return;
 }
+
+bool dataLayer::deleteItem(string table, int id)
+{
+    if(db.isOpen())
+    {
+        deleteRow(table, id);
+        return true;
+    }
+    else
+    {
+        throw string("No database connection!");
+    }
+    return false;
+}
+
 /**
  * @brief dataLayer::deletePerson
  * @param deleteMe
@@ -313,37 +317,3 @@ bool dataLayer::makeRelation(int personId, int computerId)
 
     return false;
 }
-/**
- * @brief dataLayer::loadData
- * @param fileName
- * @return vector<string>
- */
-/*vector<string> dataLayer::loadData(string fileName)
-{
-   string line;
-
-    _fileName = fileName;
-    vector<string> data;
-    ifstream iDataStream;
-    iDataStream.open(fileName);
-
-    if(iDataStream)
-    {
-        while(getline(iDataStream,line))
-        {
-            if(!line.empty())
-            {
-                data.push_back(line);
-            }
-        }
-
-        iDataStream.close();
-    }
-    else
-    {
-        // Throwing error that user interface catches
-        throw string("No data file found!");
-    }
-
-    return data;
-}*/
