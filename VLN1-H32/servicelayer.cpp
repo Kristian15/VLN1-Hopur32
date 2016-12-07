@@ -275,7 +275,7 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
  * @param order
  * @return vector<Person>
  */
-vector<Person> serviceLayer::sortPersons(int order)
+vector<Person> serviceLayer::sortPersons(int order, int ascordesc)
 {
     vector<Person> sorted;
 
@@ -385,7 +385,7 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     {
         if(dyear != "0")
         {
-            if(validateYear(dyear))
+            if(validateYear(dyear) && dyear > byear)
             {
                 b = true;
             }
