@@ -395,41 +395,9 @@ void userInterface::deletePerson()
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-    Person person;
-    person.setID(-1);
     vector<Person> delPerson = service.searchPersons(deleteString, 1);
-    size_t personSize = delPerson.size();
 
-    if(personSize == 0)
-    {
-        cout << "No such Person!";
-    }
-    else if(personSize == 1)
-    {
-        Person  thePerson = delPerson[0];
-        cout << "Do you want to delete the following person from the database? (Y/N) ";
-        cout << thePerson.getName();
-        string answer;
-        cin >> answer;
-        if(answer == "y" || answer == "Y")
-        {
-            person = thePerson;
-        }
-    }
-    else
-    {
-        cout << "which of the following persons do you want to delete" << endl;
-
-        for(unsigned int i = 0; i < personSize; i++)
-        {
-            cout << i+1 << delPerson[i].getName();
-        }
-
-        int input = getCorrectInt(personSize);
-        input--;
-        person= delPerson[input];
-    }
-
+    Person person = hjalp(delPerson,"No such Person!", "Do you want to delete the following person from the database? (Y/N) ", "which of the following persons do you want to delete");
     int personID = person.getID();
     if(personID != -1)
     {
@@ -447,12 +415,13 @@ void userInterface::deleteComputer()
     string deleteString;
     cin >> ws;
     getline(cin, deleteString);
-    Computer computer;
-    computer.setId(-1);
+   // Computer computer;
+   // computer.setId(-1);
     vector<Computer> delComputer = service.searchComputers(deleteString, 1);
-    size_t computerSize = delComputer.size();
+    Computer computer = hjalp(delComputer, "No such Computer!", "Do you want to delete the following computer from the database? (Y/N) ", "which of the following computers do you want to delete");
+    //size_t computerSize = delComputer.size();
 
-    if(computerSize == 0)
+   /* if(computerSize == 0)
     {
         cout << "No such Computer!";
     }
@@ -487,13 +456,47 @@ void userInterface::deleteComputer()
         {
             cout << "******" << endl;
         }
-    }
+    }*/
 }
 
-/*Person userInterface::hjalp(string a, string b, string c)
+template <typename T>
+T userInterface::hjalp(vector<T> delPerson, string a, string b, string c)
 {
+    T person;
+    person.setID(-1);
+    size_t personSize = delPerson.size();
 
-}*/
+    if(personSize == 0)
+    {
+        cout << a;
+    }
+    else if(personSize == 1)
+    {
+        T thePerson = delPerson[0];
+        cout << b;
+        cout << thePerson.getName();
+        string answer;
+        cin >> answer;
+        if(answer == "y" || answer == "Y")
+        {
+            person = thePerson;
+        }
+    }
+    else
+    {
+        cout << c << endl;
+
+        for(unsigned int i = 0; i < personSize; i++)
+        {
+            cout << i+1 << delPerson[i].getName();
+        }
+
+        int input = getCorrectInt(personSize);
+        input--;
+        person = delPerson[input];
+    }
+    return person;
+}
 
 void userInterface::linkPersonAndComputer()
 {
@@ -501,7 +504,7 @@ void userInterface::linkPersonAndComputer()
     cout << "Input: ";
     string personName, computerName;
     Computer computer;
-    computer.setId(-1);
+    computer.setID(-1);
     Person person;
     person.setID(-1);
 

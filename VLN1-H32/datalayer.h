@@ -15,9 +15,12 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
+    // functions that add, remove or change values in database are private
     void addNewPerson(Person addMe);
     void addNewComputer(Computer addMe);
     void deleteRow(string table, int id);
+    void updateItem(int id, string table, string column, string updateME);
+    void createRelation(int pID, int cID);
 public:
     dataLayer();
     ~dataLayer();
@@ -34,6 +37,6 @@ public:
     bool deleteComputer(int id);
     // creates a relation between a comptuer and a scientist
     bool makeRelation(int personID, int computerID);
-    void addPerson(Person person){ addNewPerson(person); }
-    void addComputer(Computer computer) { addNewComputer(computer); }
+    void addPerson(Person person);
+    void addComputer(Computer computer);
 };
