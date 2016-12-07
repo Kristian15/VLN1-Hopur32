@@ -24,8 +24,8 @@ private:
 public:
     dataLayer();
     ~dataLayer();
-    vector<Person> getSortedPersons(string column);
-    vector<Computer> getSortedComputers(string column);
+    vector<Person> getSortedPersons(string column, int ascDesc);
+    vector<Computer> getSortedComputers(string column, int ascDesc);
     vector<Person> findPersons(string column, string findMe);
     vector<Computer> findComputers(string column, string findMe);
     void updateTable(int id, string table, string column, string updateMe);
