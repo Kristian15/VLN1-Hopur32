@@ -110,9 +110,23 @@ void dataLayer::createRelation(int personID, int computerID)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Person_Computer (PersonID, ComputerID) "
-                  "VALUES (:personId, :computerId)");
-    query.bindValue(":personId", personID);
-    query.bindValue(":computerId", computerID);
+                  "VALUES (:personID, :computerID)");
+    query.bindValue(":personID", personID);
+    query.bindValue(":computerID", computerID);
+    query.exec();
+}
+/**
+ * @brief dataLayer::deleteRelation
+ * @param personID
+ * @param computerID
+ */
+void dataLayer::deleteRelation(int personID, int computerID)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Person_Computer (PersonID, ComuterID) "
+                  "Values (:personID, :computerID");
+    query.bindValue(":personID", personID);
+    query.bindValue(":computerID", computerID);
     query.exec();
 }
 
@@ -382,4 +396,22 @@ bool dataLayer::makeRelation(int personID, int computerID)
     {
         throw string("Error: No database connection!");
     }
+}
+/**
+ * @brief dataLayer::unMakeRelation
+ * @param personID
+ * @param computerID
+ * @return
+ */
+bool dataLayer::unMakeRelation(int personID, int computerID)
+{
+    if(db.isOpen())
+    {
+        deleteRelation(personID, computerID);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+    return true;
 }
