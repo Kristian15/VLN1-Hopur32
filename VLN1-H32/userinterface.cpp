@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = '1', Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit = 'q'};
+enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Link_Scientist_and_Computer, Quit};
 
 void userInterface::run()
 {
@@ -15,13 +15,10 @@ void userInterface::run()
     cout << endl;
 
     bool quit = false;
-    char input;
-
+    int input = 0;
     do{
         printMainMenu();
-        cin >> input;
-        cout << endl;
-
+        input = getCorrectInt(11);
         switch (input)
         {
         case Display_Scientis:
@@ -78,8 +75,8 @@ void userInterface::printMainMenu()
     cout << "7 = Delete Computer     - Deletes computer from you database" << endl;
     cout << "8 = Search Scientist    - Search for a scientist in your database" << endl;
     cout << "9 = Search Computer     - Search for a computer in your database" << endl;
-    cout << "10 = Link                - Link Scientist and Computer" << endl;
-    cout << "q = quit                - Quit the program" << endl;
+    cout << "10 = Link               - Link Scientist and Computer" << endl;
+    cout << "11 = quit               - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
