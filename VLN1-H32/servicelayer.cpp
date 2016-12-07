@@ -436,6 +436,11 @@ bool serviceLayer::link(int personID, int computerID)
     return data.makeRelation(personID, computerID);
 }
 
+bool serviceLayer::unLink(int personID, int computerID)
+{
+    return data.unMakeRelation(personID, computerID);
+}
+
 bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
 {
     bool isValid = false;
