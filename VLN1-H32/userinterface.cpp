@@ -485,45 +485,9 @@ void userInterface::linkPersonAndComputer()
     cin >> ws;
     getline(cin, personName);
     vector<Person> linkPerson = service.searchPersons(personName, 1);
-<<<<<<< HEAD
-    size_t personSize = linkPerson.size();
-
-    if(personSize == 0)
-    {
-        cout << "No such person!" << endl;
-    }
-    else if(personSize == 1)
-    {
-        Person thePerson = linkPerson[0];
-        cout << "Do you want to link the following person? (Y/N) " << endl;
-        cout << thePerson.getName() << endl;
-        string answer;
-        cin >> answer;
-
-        if((answer == "y") || (answer == "Y"))
-        {
-            person = thePerson;
-        }
-    }
-    else
-    {
-        cout << "which of the following persons do you want to link" << endl;
-
-        for(unsigned int i = 0; i < personSize; i++)
-        {
-            cout << i+1 << " " << linkPerson[i].getName() << endl;
-        }
-
-        cout << "Input person number: ";
-        int input = getCorrectInt(personSize);
-        input--;
-        person = linkPerson[input];
-    }
-=======
     Person person = chooseWhich(linkPerson, "No such person!",
-                "Do you want to link the following person? (Y/N) ",
-                "Which of the following persons do you want to link");
->>>>>>> 21bf8b6ffa3344722e470b58a4ef7e91affb3779
+                                "Do you want to link the following person? (Y/N) ",
+                                "Which of the following persons do you want to link");
 
     if(person.getID() != -1)
     {
