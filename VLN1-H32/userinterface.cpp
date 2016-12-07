@@ -517,7 +517,7 @@ void userInterface::linkPersonAndComputer()
     else if(personSize == 1)
     {
         Person thePerson = linkPerson[0];
-        cout << "Do you want to link the following person? (Y/N) ";
+        cout << "Do you want to link the following person? (Y/N) " << endl;
         cout << thePerson.getName() << endl;
         string answer;
         cin >> answer;
