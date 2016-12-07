@@ -34,7 +34,7 @@ public:
     // sortList() calls the correct sort help function
     // returns the vector in dataLayer
     vector<Person> sortPersons(int order, int ascdesc);
-    vector<Computer> sortComputers(int order);
+    vector<Computer> sortComputers(int order, int ascordesc);
     // uses loadData in dataLayer and gets a vector of strings from the file back
     // calls splitLine() with a vector of Persons that is called by reference
     // calls setPersons() in dataLayer with the vector
