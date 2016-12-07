@@ -214,6 +214,14 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
     cout << "Input: ";
     int inputascordesc = getCorrectInt(2);
+    if(inputnameorcomputer == 1)
+    {
+        cout << "ble";
+    }
+    else
+    {
+        cout << "blu";
+    }
 
 }
 
@@ -244,6 +252,7 @@ void userInterface::printComputerFromSearch()
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
+    const int indexWidth = 6;
     const int nameWidth  = 30;
     const int genderWidth = 10;
     const int nationalitWidth = 25;
@@ -253,6 +262,7 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
     if(!printMe.empty())
     {
         cout << inMessage << endl;
+        cout << left << setw(indexWidth) << setfill(seperator) << "Index";
         cout << left << setw(nameWidth) << setfill(seperator) << "Name";
         cout << left << setw(genderWidth) << setfill(seperator) << "Gender";
         cout << left << setw(nationalitWidth) << setfill(seperator) << "Nationality";
@@ -262,6 +272,7 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
+            cout << left << setw(indexWidth) << setfill(seperator) << i;
             cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
             cout << left << setw(genderWidth) << setfill(seperator) << printMe[i].getGender();
             cout << left << setw(nationalitWidth) << setfill(seperator) << printMe[i].getNationality();
@@ -287,6 +298,7 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
 void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
+    const int indexWidth = 6;
     const int nameWidth  = 30;
     const int yearWidth = 10;
     const int typeWidth = 35;
@@ -295,6 +307,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
     if(!printMe.empty())
     {
         cout << inMessage << endl;
+        cout << left << setw(indexWidth) << setfill(seperator) << "Index";
         cout << left << setw(nameWidth) << setfill(seperator) << "Name";
         cout << left << setw(yearWidth) << setfill(seperator) << "Year";
         cout << left << setw(typeWidth) << setfill(seperator) << "Type";
@@ -303,6 +316,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
 
         for(unsigned int i = 0; i < printMe.size(); i++)
         {
+            cout << left << setw(indexWidth) << setfill(seperator) << i;
             cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
             cout << left << setw(yearWidth) << setfill(seperator) << printMe[i].getYear();
             cout << left << setw(typeWidth) << setfill(seperator) << printMe[i].getType();
