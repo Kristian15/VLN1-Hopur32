@@ -41,7 +41,7 @@ public:
     bool deleteComputer(int id);
     // creates a relation between a comptuer and a scientist
     bool makeRelation(int personID, int computerID);
-    bool dataLayer::unMakeRelation(int personID, int computerID);
+    bool unMakeRelation(int personID, int computerID);
     void addPerson(Person person);
     void addComputer(Computer computer);
 };
