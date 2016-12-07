@@ -425,7 +425,7 @@ T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
             cout << i+1 << delItem[i].getName() << endl;;
         }
 
-        int input = getCorrectInt(itemSize);
+        size_t input = getCorrectInt(itemSize);
         input--;
         item = delItem[input];
     }
