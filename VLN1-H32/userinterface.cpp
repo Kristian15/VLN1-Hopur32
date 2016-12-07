@@ -198,18 +198,7 @@ void userInterface::printSearchcomputersCommands(int input)
 void userInterface::printScientistsFromDisplay()
 {
     printDisplayscientistsOptions();
-    int input;
-    cin >> input;
-    cout << endl;
-
-    while(cin.fail() || (input > 5) || (input < 1))
-    {
-        cout << "Invalid input, try again:" << endl;
-        cin.clear();
-        cin.ignore(256, '\n');
-        cin >> input;
-    }
-
+    int input = getCorrectInt(5);
     vector<Person> sorted = service.sortPersons(input);
     printPersons(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
@@ -217,17 +206,23 @@ void userInterface::printScientistsFromDisplay()
 void userInterface::printComputersFromDisplay()
 {
     printDisplaycomputerOptions();
-    int computeroption;
-    cin >> computeroption;
-    while(cin.fail() || (computeroption > 4) || (computeroption < 1))
+    int input = getCorrectInt(4);
+    vector<Computer> sorted = service.sortComputers(input);
+    printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+}
+
+int userInterface::getCorrectInt(int max)
+{
+    int input;
+    cin >> input;
+    while(cin.fail() || (input > max) || (input < 1))
     {
         cout << "Invalid input, try again!" << endl;
         cin.clear();
         cin.ignore(256, '\n');
-        cin >> computeroption;
+        cin >> input;
     }
-    vector<Computer> sorted = service.sortComputers(computeroption);
-    printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    return input;
 }
 
 /**

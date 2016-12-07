@@ -50,6 +50,7 @@ private:
     void printComputerFromSearch();
     void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
     void linkPersonAndComputer();
+    int getCorrectInt(int max);
 
 
 
