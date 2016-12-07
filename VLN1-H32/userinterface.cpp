@@ -214,6 +214,14 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
     cout << "Input: ";
     int inputascordesc = getCorrectInt(2);
+    if(inputnameorcomputer == 1)
+    {
+        cout << "ble";
+    }
+    else
+    {
+        cout << "blu";
+    }
 
 }
 

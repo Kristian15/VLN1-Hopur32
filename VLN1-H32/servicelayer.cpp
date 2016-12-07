@@ -478,12 +478,4 @@ bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
   return false;
 }
 
-vector<Person> getLinkPersons(int ascDesc)
-{
-    return data.relatedPersons(ascDesc);
-}
 
-vector<Computer> getLinkComputers(int ascDesc)
-{
-    return data.relatedComputers(ascDesc);
-}
