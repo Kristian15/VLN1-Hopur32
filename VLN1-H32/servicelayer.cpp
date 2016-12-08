@@ -322,10 +322,10 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
             isValid = validateNationality(updateMe); column = "Nationality";
             break;
         case 4:
-            isValid = validateYear(updateMe); column = "bYear";
+            isValid = validateYear(updateMe); column = "BirthYear";
             break;
         case 5:
-            isValid = validateYear(updateMe); column = "dYear";
+            isValid = validateYear(updateMe); column = "DeathYear";
             break;
         default:
             break;
