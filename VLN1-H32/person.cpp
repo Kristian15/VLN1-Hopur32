@@ -7,6 +7,17 @@ using namespace std;
  */
 Person::Person(){}
 
+
+Person::Person(int id, string name, string gender, string nationality, int byear, int dyear)
+{
+    _id = id;
+    _name = name;
+    _gender = gender;
+    _nationality = nationality;
+    _byear= byear;
+    _dyear  = dyear;
+}
+
 /**
  * @brief Person::Person
  * @param name
