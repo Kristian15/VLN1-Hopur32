@@ -69,42 +69,49 @@ private:
     // If the value is a integer between 1 and max the function returns the integer
     // else it asks the user for another integer
     int getCorrectInt(int max);
-    // Used to display delItem and make the user choose which element in delItem he wants to use
-    // The function returns that item
+    // Used to make the user choose the correct element in vector vec to use
+    // Returns that element
     template <typename T>
     T chooseWhich(vector<T> vec, string action, string type);
+    // Gets a name of a Person from the user
+    // Uses searchPersons() in serviceLayer to search for the name
+    // Uses chooseWhich() to get the correct Person from the vector searchPersons() returns
+    // If the Persons ID is -1 vec was empty or the user did not choose a element from vec
     Person getRightPerson(string action);
+    // Works like getRightPerson()
+    // Uses searchComputers() , returns a Computer
     Computer getRightComputer(string action);
 
     // *** ELSE ***
     // Used when the user wants to delete a scientist from the database
-    // Asks for the name of the scientist the user wants to delete
-    // Uses searchPersons() in serviceLayer to find matches
-    // Uses chooseWhich() to get the scientist the user wants to delete out of the ones found
-    // Uses deletePerson() in serviceLayer to delete the scientist
+    // Uses getRightPerson() to get the Person the user wants to delete
+    // Deletes the Person using deletePerson() in serviceLayer
     void deletePerson();
     // Used when the user wants to delete a computer from the database
-    // Works like deletePerson()
-    // Uses searchComputers() and deleteComputer() in serviceLayer
+    // Uses getRightComputer() to get the Computer the user wants to delete
+    // Deletes the Computer using deleteComputer() in serviceLayer
     void deleteComputer();
     // Used when the user wants to update information about a scientist in the database
-    // Asks for the name of the scientist the user wants to delete
-    // Uses searchPersons() in serviceLayer to find matches
-    // Uses chooseWhich() to get scientists the user wants to update out of the ones found
+    // Uses getRightPerson() to get the Person the user wants to delete
     // Uses callUpdatePerson() in serviceLayer to update the scientist
     void updatePerson();
     // Used when the user wants to update information about a computer in the database
-    // Works like updatePerson()
-    // Uses searchComputers() and callUpdateComputer() in serviceLayer
+    // Uses getRightComputer() to get the Computer the user wants to delete
+    // Uses callUpdateComputer() in serviceLayer to update the computer
     void updateComputer();
     // Used when the user wants to link a computer to a scientist
-    // Asks for the names of the scientist and computer
-    // Uses searchPerons() and searchComputers() in serviceLayer to find matches
-    // Uses chooseWhich() to get get the scientist and computer the user wants to use
+    // Uses getRightPerson() and getRightComputer() to get the Person and the Computer
+    // that the user wants to link
     // Uses link() in serviceLayer to link the computer and the scientist
     void linkPersonAndComputer();
+    // Used when the user wants to unlink a computer and a scientist
+    // Uses getRightPerson() and getRightComputer() to get the Person and the Computer
+    // that the user wants to unlink
+    // Uses link() in serviceLayer to unlink the computer and the scientist
     void unlinkPersonAndComputer();
+    // Used if the user wants to quit the program
     bool doYouWantToQuit();
 public:
+    // To run the program
     void run();
 };
