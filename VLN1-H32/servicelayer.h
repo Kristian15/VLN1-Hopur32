@@ -11,7 +11,6 @@ class serviceLayer
 {
 private:
     dataLayer data;
-
     // validate functions, called by validateNewPerson():
     // return true if the inputs are valid and false otherwise
     bool validateName(string name);
@@ -19,31 +18,27 @@ private:
     bool validateNationality(string nationality);
     bool validateYear(string year);
     bool validateBuilt(string& built);
-    // toLower changes all uppercase letters in string s to lowercase letters
-  //  string toLower(string s);
-    // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
-    // splits the line where ";" is and adds it to newPersons
-  //  void splitAndAdd(string s, int index);
     // creates a new person and returns it
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
+    // creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
 
 public:
-    // searchList() calls the correct find help function with findMe as input
+    // calls findPersons() in dataLayer
     // returns a vector with the findings
     vector<Person> searchPersons(string findMe, int by);
+    // calls findComputers() in dataLayer
+    // returns a vector with the findings
     vector<Computer> searchComputers(string findMe, int by);
-    // sortList() calls the correct sort help function
-    // returns the vector in dataLayer
+    // calls getSortedPersons() in dataLayer
+    // returns a vector with the sorted scientists
     vector<Person> sortPersons(int order, int ascOrDesc);
+    // calls getSortedComputers() in dataLayer
+    // returns a vector with the sorted computers
     vector<Computer> sortComputers(int order, int ascOrDesc);
-    // uses loadData in dataLayer and gets a vector of strings from the file back
-    // calls splitLine() with a vector of Persons that is called by reference
-    // calls setPersons() in dataLayer with the vector
-    //void createList(string fileName);
     // calls the help function getPerson() that returns a Person
-    // calls data.addPerson with that Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
+    // calls the help function getComputer() that returns a Computer
     void newComputer(string name, string year, string type, string built);
     // validate input that are used to create a new Person
     // uses the validate help functions
