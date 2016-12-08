@@ -356,7 +356,7 @@ bool serviceLayer::callUpdateComputer(int id, int col, string updateMe)
 
     if(isValid)
     {
-        data.updateTable(id, "Person", column, updateMe);
+        data.updateTable(id, "Computer", column, updateMe);
     }
 
     return isValid;

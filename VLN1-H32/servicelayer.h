@@ -40,16 +40,21 @@ public:
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
     // calls the help function getComputer() that returns a Computer
     void newComputer(string name, string year, string type, string built);
-    // validate input that are used to create a new Person
+    // vaidate functions that are used to validate input
     // uses the validate help functions
     // returns true if the input is valid and false otherwise
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
     bool validateNewComputer(string name, string year, string type, string& built);
-    // calls findAndDelete()
-    // calls saveData() in dataLayer with the string 'current' and the persons vector from dataLayer
+    // the delete functions use deleteItem() in dataLayer to delete
+    // the idem with ID = id
+    // return true if the item was deleted
     bool deletePerson(int id);
     bool deleteComputer(int id);
+    // calls makeRelation() in dataLayer with personID and computerID
+    // returns true if the connection was a success
     bool link(int personID, int computerID);
+    // calls unMakeRelation() in dataLayer with personID and computerID
+    // returns true if the
     bool unLink(int personID, int computerID);
     bool callUpdatePerson(int id, int col, string updateMe);
     bool callUpdateComputer(int id, int col, string updateMe);
