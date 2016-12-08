@@ -22,6 +22,10 @@ private:
     void updateItem(int id, string table, string column, string updateME);
     void createRelation(int personID, int computerID);
     void deleteRelation(int personID, int computerID);
+
+    // Get functions to avoid code repetition
+    vector<Person> getPersons(QString queryString);
+    vector<Computer> getComputers(QString queryString);
 public:
     dataLayer();
     ~dataLayer();
