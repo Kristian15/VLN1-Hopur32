@@ -61,9 +61,9 @@ void dataLayer::addNewComputer(Computer addMe)
 
 void dataLayer::deleteRow(string table, int id)
 {
+    QString qTable = QString::fromStdString(table);
     QSqlQuery query;
-    query.prepare("DELETE FROM :table WHERE ID = :id");
-    query.bindValue(":table", QString::fromStdString(table));
+    query.prepare("DELETE FROM " + qTable + " WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
 
@@ -73,20 +73,7 @@ void dataLayer::deleteRow(string table, int id)
     queryString.append(QString::fromStdString(table));
     queryString.append("ID = ");
     queryString.append(id);
-    query.exec();
-
-   /* if(table == "Persons")
-    {
-        query.prepare("DELETE FROM Person_Computer WHERE PersonID = :id");
-        query.bindValue(":id", id);
-        query.exec();
-    }
-    else if(table == "Computers")
-    {
-        query.prepare("DELETE FROM Person_Computer WHERE ComputerID = :id");
-        query.bindValue(":id", id);
-        query.exec();
-    }*/
+    query.exec(queryString);
 }
 
 void dataLayer::updateItem(int id, string table, string column, string updateME)
