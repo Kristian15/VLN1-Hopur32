@@ -91,13 +91,21 @@ void dataLayer::deleteRow(string table, int id)
 
 void dataLayer::updateItem(int id, string table, string column, string updateME)
 {
-    // VIRKAR EKKI
-    cout << id << " " << table << " " << column << " " << updateME << endl;
+    QString qTable = QString::fromStdString(table);
+    QString qColumn = QString::fromStdString(column);
+    QString qUpdateME = QString::fromStdString(updateME);
+
+    if(column == "Built" && updateME == "yes")
+    {
+        qUpdateME = "1";
+    }
+    else if(column == "Built" && updateME == "no")
+    {
+        qUpdateME = "0";
+    }
+
     QSqlQuery query;
-    query.prepare("UPDATE :table SET :column = :updateMe WHERE ID = :id");
-    query.bindValue(":table", QString::fromStdString(table));
-    query.bindValue(":column", QString::fromStdString(column));
-    query.bindValue(":updateMe", QString::fromStdString(updateME));
+    query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
 }
@@ -189,7 +197,6 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
     // setja í private ??
-
     vector<Computer> computers;
     QString queryString = "SELECT * FROM computer ORDER BY computer.";
     queryString.append(QString::fromStdString(column));
@@ -338,7 +345,6 @@ vector<vector<string>> dataLayer::getRelation(string column)
 
             for(unsigned int i = 0; i < resultMatrix.size(); i++)
             {
-                cout << endl;
                 if(a == resultMatrix[i][0])
                 {
                     pos = i;
