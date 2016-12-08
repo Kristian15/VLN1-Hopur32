@@ -83,11 +83,11 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     QString qColumn = QString::fromStdString(column);
     QString qUpdateME = QString::fromStdString(updateME);
 
-    if(column == "Built" && updateME == "yes")
+    if(column == "Built" && updateME == "y")
     {
         qUpdateME = "1";
     }
-    else if(column == "Built" && updateME == "no")
+    else if(column == "Built" && updateME == "n")
     {
         qUpdateME = "0";
     }
@@ -96,6 +96,8 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
+
+    qDebug() << query.lastError().text();
 }
 
 void dataLayer::createRelation(int personID, int computerID)
