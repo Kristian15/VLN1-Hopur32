@@ -287,8 +287,7 @@ void userInterface::printPersonsFromSearch()
     printSearchPersonsCommands(searchBy);
     if((searchBy == 4) || (searchBy ==5))
     {
-        int first;
-        int second = 0;
+        int first, second;
         int oneOrRange = getCorrectInt(2);
 
         if(oneOrRange == 1)
@@ -296,6 +295,7 @@ void userInterface::printPersonsFromSearch()
             cout << "Enter the year you want to search for: " << endl;
             cout << "Year: ";
             cin >> first;
+            second = first;
         }
 
         else
@@ -330,8 +330,7 @@ void userInterface::printComputerFromSearch()
     printSearchComputersCommands(searchBy);
     if(searchBy == 2)
     {
-        int first;
-        int second = 0;
+        int first, second;
         int oneOrRange = getCorrectInt(2);
 
         if(oneOrRange == 1)
@@ -339,6 +338,7 @@ void userInterface::printComputerFromSearch()
             cout << "Enter the year you want to search for: " << endl;
             cout << "Year: " ;
             cin >> first;
+            second = first;
         }
         else
         {
