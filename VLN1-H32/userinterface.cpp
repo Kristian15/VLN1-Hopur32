@@ -240,41 +240,59 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     cout << "Input: ";
     int inputNameOrComputer = getCorrectInt(2);
     vector<vector<string>> printMe;
+    size_t printMeSize;
 
     if(inputNameOrComputer == 1)
     {
        printMe = service.getRelation("Person");
-       for(unsigned int i = 0; i < printMe.size(); i++)
+       printMeSize = printMe.size();
+
+       if(printMeSize == 0)
        {
-           cout << printMe[i][0] << " ";
-           cout << "is linked to the following computer(s)";
-           for(unsigned int k = 1; k < printMe[i].size(); k++)
-           {
-               cout << ": " << printMe[i][k] << " ";
-           }
-           cout <<endl;
+           cout << "No links" << endl;
        }
-       cout << endl;
-       cout << left << setfill('-') << setw(80) << "-" << endl;
-       cout << endl;
+       else
+       {
+           for(unsigned int i = 0; i < printMeSize; i++)
+           {
+               cout << printMe[i][0] << " ";
+               cout << "is linked to the following computer(s)";
+               for(unsigned int k = 1; k < printMe[i].size(); k++)
+               {
+                   cout << ": " << printMe[i][k] << " ";
+               }
+               cout <<endl;
+           }
+           cout << endl;
+           cout << left << setfill('-') << setw(80) << "-" << endl;
+           cout << endl;
+       }
     }
     else
     {
        printMe = service.getRelation("Computer");
+       printMeSize = printMe.size();
 
-       for(unsigned int i = 0; i < printMe.size(); i++)
+       if(printMeSize == 0)
        {
-           cout << printMe[i][0] << " ";
-           cout << "is linked to the following scientist(s)";
-           for(unsigned int k = 1; k < printMe[i].size(); k++)
+           cout << "No links!" << endl;
+       }
+       else
+       {
+           for(unsigned int i = 0; i < printMeSize; i++)
            {
-               cout << ": " << printMe[i][k] << " ";
+               cout << printMe[i][0] << " ";
+               cout << "is linked to the following scientist(s)";
+               for(unsigned int k = 1; k < printMe[i].size(); k++)
+               {
+                   cout << ": " << printMe[i][k] << " ";
+               }
+               cout << endl;
            }
            cout << endl;
+           cout << left << setfill('-') << setw(80) << "-" << endl;
+           cout << endl;
        }
-       cout << endl;
-       cout << left << setfill('-') << setw(80) << "-" << endl;
-       cout << endl;
     }
 
 }
