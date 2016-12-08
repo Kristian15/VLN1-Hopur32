@@ -36,22 +36,6 @@ Person::Person(string name, string gender, string nationality, int byear, int dy
 }
 
 /**
- * @brief Person::Person
- * @param name
- * @param gender
- * @param nationality
- * @param byear
- */
-Person::Person(string name, string gender, string nationality, int byear)
-{
-    _name   = name;
-    _gender = gender;
-    _nationality = nationality;
-    _byear  = byear;
-    _dyear  = 0;
-}
-
-/**
  * @brief operator <<
  * @param lhs
  * @param rhs

@@ -102,23 +102,16 @@ bool serviceLayer::validateBuilt(string& built)
 Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
-    int Byear, Dyear;
+    int Byear = stoi(byear);
+    int Dyear = 0;
 
     // if there is no death year
     if(dyear != "0")
     {
-        Byear = stoi(byear);
-        Dyear = stoi(dyear);
+        Dyear = stoi(dyear);   
+    }
 
-        if (Byear < Dyear)
-        {
-            newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
-        }
-    }
-    else
-    {
-        newP = Person(name, gender, nationality, stoi(byear));
-    }
+    newP = Person(name, gender, nationality, Byear, Dyear);
 
     return newP;
 }
