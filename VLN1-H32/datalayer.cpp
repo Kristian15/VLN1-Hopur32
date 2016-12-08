@@ -116,8 +116,6 @@ void dataLayer::deleteRelation(int personID, int computerID)
     query.prepare("DELETE FROM Person_Computer WHERE PersonID = " +
                   qPersID + " AND computerID = " + qCompID);
     query.exec();
-
-    qDebug() << query.lastError().text();
 }
 
 // **** Public ****
