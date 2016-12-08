@@ -1,7 +1,7 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist, Update_Computer, Link_Scientist_and_Computer, Quit};
+enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist, Update_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
 void userInterface::run()
 {
@@ -18,7 +18,7 @@ void userInterface::run()
     int input = 0;
     do{
         printMainMenu();
-        input = getCorrectInt(13);
+        input = getCorrectInt(14);
         switch (input)
         {
         case Display_Scientis:
@@ -57,6 +57,9 @@ void userInterface::run()
         case Link_Scientist_and_Computer:
             linkPersonAndComputer();
             break;
+        case Unlink_Scientist_and_Computer:
+            unlinkPersonAndComputer();
+            break;
         case Quit:
             quit = doYouWantToQuit();
             break;
@@ -84,7 +87,8 @@ void userInterface::printMainMenu()
     cout << "10 = Update Scientist   - Update scientist in your database" << endl;
     cout << "11 = Update Computer    - Update computer in your database" << endl;
     cout << "12 = Link               - Link Scientist and Computer" << endl;
-    cout << "13 = quit               - Quit the program" << endl;
+    cout << "13 = Unlink             - Unlink Scientist and Computer" << endl;
+    cout << "14 = quit               - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -247,14 +251,19 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     if(inputNameOrComputer == 1)
     {
        printMe = service.getRelation("Person");
-
        for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < printMe[i].size(); k++)
+           cout << printMe[i][0] << " ";
+           cout << "is linked to the following computer(s)";
+           for(unsigned int k = 1; k < printMe[i].size(); k++)
            {
-               cout << printMe[i][k] << endl;
+               cout << ": " << printMe[i][k] << " ";
            }
+           cout <<endl;
        }
+       cout << endl;
+       cout << left << setfill('-') << setw(80) << "-" << endl;
+       cout << endl;
     }
     else
     {
@@ -262,11 +271,17 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
 
        for(unsigned int i = 0; i < printMe.size(); i++)
        {
-           for(unsigned int k = 0; k < printMe[i].size(); k++)
+           cout << printMe[i][0] << " ";
+           cout << "is linked to the following scientist(s)";
+           for(unsigned int k = 1; k < printMe[i].size(); k++)
            {
-               cout << printMe[i][k] << endl;
+               cout << ": " << printMe[i][k] << " ";
            }
+           cout << endl;
        }
+       cout << endl;
+       cout << left << setfill('-') << setw(80) << "-" << endl;
+       cout << endl;
     }
 
 }
@@ -478,12 +493,12 @@ T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
 
     if(itemSize == 0)
     {
-        cout << s1;
+        cout << s1 << endl;;
     }
     else if(itemSize == 1)
     {
         T theItem = delItem[0];
-        cout << s2;
+        cout << s2 << endl;
         cout << theItem.getName() << ": ";
         string answer;
         cin >> answer;
@@ -527,7 +542,7 @@ void userInterface::deletePerson()
     {
         if(service.deletePerson(personID))
         {
-            cout << "Delete successfull!" << endl;
+            cout << "Delete successful!" << endl;
         }
     }
 }
@@ -549,7 +564,7 @@ void userInterface::deleteComputer()
     {
         if(service.deleteComputer(computerID))
         {
-            cout << "Delete successfull!" << endl;
+            cout << "Delete successful!" << endl;
         }
     }
 }
@@ -579,7 +594,7 @@ void userInterface::updatePerson()
 
         if(service.callUpdatePerson(personID, input, changeString))
         {
-            cout << "Update successfull!" << endl;
+            cout << "Update successful!" << endl;
         }
     }
 }
@@ -609,7 +624,7 @@ void userInterface::updateComputer()
 
         if(service.callUpdateComputer(computerID, input, changeString))
         {
-            cout << "Update successfull!" << endl;
+            cout << "Update successful!" << endl;
         }
     }
 }
@@ -654,25 +669,25 @@ void userInterface::unlinkPersonAndComputer()
     string personName, computerName;
     cin >> ws;
     getline(cin, personName);
-    vector<Person> linkPerson = service.searchPersons(personName, 1);
-    Person person = chooseWhich(linkPerson, "No such person! ",
+    vector<Person> unlinkPerson = service.searchPersons(personName, 1);
+    Person person = chooseWhich(unlinkPerson, "No such person! ",
                                 "Do you want to unlink the following person? (Y/N) ",
                                 "Which of the following persons do you want to unlink");
 
     if(person.getID() != -1)
     {
-        cout << "Unink computer with the following name: " << endl;
+        cout << "Unlink computer with the following name: " << endl;
         cout << "Input: ";
         cin >> ws;
         getline(cin, computerName);
-        vector<Computer> linkComputer = service.searchComputers(computerName, 1);
-        Computer computer = chooseWhich(linkComputer, "No such Computer! ",
+        vector<Computer> unlinkComputer = service.searchComputers(computerName, 1);
+        Computer computer = chooseWhich(unlinkComputer, "No such Computer! ",
                                        "Do you want to unlink the following computer? (Y/N) ",
                                        "Which of the following computers do you want to unlink");
 
         if(computer.getID() != -1)
         {
-            if(service.link(person.getID(), computer.getID()))
+            if(service.unLink(person.getID(), computer.getID()))
             {
                 cout << "Unlink successful!" << endl;
             }
