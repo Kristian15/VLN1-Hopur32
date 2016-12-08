@@ -129,13 +129,13 @@ vector<Person> dataLayer::getPersons(QString queryString)
 
     while(query.next())
     {
-        Person person;
-        person.setID(query.value("ID").toUInt());
-        person.setName(query.value("Name").toString().toStdString());
-        person.setGender(query.value("Gender").toString().toStdString());
-        person.setNationality(query.value("Nationality").toString().toStdString());
-        person.setByear(query.value("BirthYear").toInt());
-        person.setDyear(query.value("DeathYear").toInt());
+        Person person(
+                    query.value("ID").toUInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Gender").toString().toStdString(),
+                    query.value("Nationality").toString().toStdString(),
+                    query.value("BirthYear").toInt(),
+                    query.value("DeathYear").toInt());
         persons.push_back(person);
     }
     return persons;
@@ -151,10 +151,11 @@ vector<Computer> dataLayer::getComputers(QString queryString)
     while (query.next())
     {
         Computer computer(
-                query.value("Name").toString().toStdString(),
-                query.value("Year").toInt(),
-                query.value("Type").toString().toStdString(),
-                query.value("Built").toBool());
+                    query.value("ID").toInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Year").toInt(),
+                    query.value("Type").toString().toStdString(),
+                    query.value("Built").toBool());
         computers.push_back(computer);
     }
     return computers;
