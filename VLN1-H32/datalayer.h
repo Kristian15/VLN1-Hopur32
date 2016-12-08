@@ -32,7 +32,10 @@ public:
     vector<Person> getSortedPersons(string column, int ascDesc);
     vector<Computer> getSortedComputers(string column, int ascDesc);
     vector<Person> findPersons(string column, string findMe);
+    vector<Person> searchPersonYears(int from, int to);
+    vector<Computer> searchComputerYears(int from, int to);
     vector<Computer> findComputers(string column, string findMe);
+
     void updateTable(int id, string table, string column, string updateMe);
     // return all related persons/computers by the provided id
     vector<vector<string>> getRelation(string column);
