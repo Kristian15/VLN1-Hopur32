@@ -118,6 +118,46 @@ void dataLayer::deleteRelation(int personID, int computerID)
     query.exec();
 }
 
+vector<Person> dataLayer::getPersons(QString queryString)
+{
+    vector<Person> persons;
+
+    QSqlQuery query;
+    query.exec(queryString);
+
+    while(query.next())
+    {
+        Person person;
+        person.setID(query.value("ID").toUInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+        persons.push_back(person);
+    }
+    return persons;
+}
+
+vector<Computer> dataLayer::getComputers(QString queryString)
+{
+    vector<Computer> computers;
+
+    QSqlQuery query;
+    query.exec(queryString);
+
+    while (query.next())
+    {
+        Computer computer(
+                query.value("Name").toString().toStdString(),
+                query.value("Year").toInt(),
+                query.value("Type").toString().toStdString(),
+                query.value("Built").toBool());
+        computers.push_back(computer);
+    }
+    return computers;
+}
+
 // **** Public ****
 
 void dataLayer::addPerson(Person person)
@@ -146,9 +186,6 @@ void dataLayer::addComputer(Computer computer)
 
 vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 {
-    // setja í private ??
-
-    vector<Person> persons;
     QString queryString = "SELECT * FROM person ORDER BY person.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
@@ -164,28 +201,16 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 
     if(db.isOpen())
     {
-        QSqlQuery query;
-        query.exec(queryString);
-
-        while (query.next())
-        {
-            Person person(
-                        query.value("Name").toString().toStdString(),
-                        query.value("Gender").toString().toStdString(),
-                        query.value("Nationality").toString().toStdString(),
-                        query.value("BirthYear").toInt(),
-                        query.value("DeathYear").toInt());
-            persons.push_back(person);
-        }
+        return getPersons(queryString);
     }
-
-    return persons;
+    else
+    {
+        throw string("Error: No database connection!");
+    }
 }
 
 vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
-    // setja í private ??
-    vector<Computer> computers;
     QString queryString = "SELECT * FROM computer ORDER BY computer.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
@@ -201,29 +226,16 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 
     if(db.isOpen())
     {
-        QSqlQuery query;
-        query.exec(queryString);
-
-        while (query.next())
-        {
-            Computer computer(
-                    query.value("Name").toString().toStdString(),
-                    query.value("Year").toInt(),
-                    query.value("Type").toString().toStdString(),
-                    query.value("Built").toBool());
-            computers.push_back(computer);
-        }
+        return getComputers(queryString);
     }
-
-    return computers;
+    else
+    {
+        throw string("Error: No database connection!");
+    }
 }
 
 vector<Person> dataLayer::findPersons(string column, string findMe)
 {
-    // setja í private ??
-
-    vector<Person> persons;
-
     QString queryString = "SELECT * FROM Person WHERE ";
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
@@ -232,28 +244,16 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     if(db.isOpen())
     {
-        QSqlQuery query;
-        query.exec(queryString);
-
-        while(query.next())
-        {
-            Person person;
-            person.setID(query.value("ID").toUInt());
-            person.setName(query.value("Name").toString().toStdString());
-            person.setGender(query.value("Gender").toString().toStdString());
-            person.setNationality(query.value("Nationality").toString().toStdString());
-            person.setByear(query.value("BirthYear").toInt());
-            person.setDyear(query.value("DeathYear").toInt());
-            persons.push_back(person);
-        }
+        return getPersons(queryString);
     }
-
-    return persons;
+    else
+    {
+        throw string("Error: No database connection!");
+    }
 }
 
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
-    // setja í private ??
     vector<Computer> computers;
 
     QString queryString = "SELECT * FROM Computer WHERE ";
@@ -264,22 +264,12 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 
     if(db.isOpen())
     {
-        QSqlQuery query;
-        query.exec(queryString);
-
-        while(query.next())
-        {
-            Computer computer;
-            computer.setID(query.value("Id").toInt());
-            computer.setName(query.value("Name").toString().toStdString());
-            computer.setYear(query.value("Year").toInt());
-            computer.setType(query.value("Type").toString().toStdString());
-            computer.setBuilt(query.value("Built").toBool());
-
-            computers.push_back(computer);
-        }
+        return getComputers(queryString);
     }
-
+    else
+    {
+        throw string("Error: No database connection!");
+    }
     return computers;
 }
 
