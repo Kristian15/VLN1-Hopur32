@@ -253,47 +253,27 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
 
 bool serviceLayer::validateNewComputer(string name, string year, string type, string& built)
 {
-  /*  bool theBuilt;
-    if(validateBuilt(built, theBuilt))
+    if((name != "") && validateYear(year) && (type != "") && validateBuilt(built))
     {
-
-    }*/
-    if(built.size() == 1)
-    {
-        built = tolower(built[0]);
-
-        if((name != "") && validateYear(year) && (type != ""))
-        {
-            if((built == "y") || (built == "n"))
-            {
-                return true;
-            }
-        }
+            return true;
     }
 
     return false;
 }
 
-/*bool serviceLayer::validateBuilt(string built, bool& theBuilt)
+bool serviceLayer::validateBuilt(string& built)
 {
     if(built.size() == 1)
     {
         built = tolower(built[0]);
-
-        if(built == "y")
+        if((built == "y") || (built == "n"))
         {
-            theBuilt = true;
-            return true;
-        }
-        else if(built == "n")
-        {
-            theBuilt = false;
             return true;
         }
     }
 
     return false;
-}*/
+}
 
 bool serviceLayer::deletePerson(int id)
 {
@@ -348,9 +328,9 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
     return isValid;
 }
 
-bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
+bool serviceLayer::callUpdateComputer(int id, int col, string updateMe)
 {
-   /* bool isValid = false;
+    bool isValid = false;
     string column;
     // *** todo *** beautify
     switch(col){
@@ -358,13 +338,13 @@ bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
             isValid = (updateMe != ""); column = "Name";
             break;
         case 2:
-            isValid = validateYear(updateMe); column = "Gender";
+            isValid = validateYear(updateMe); column = "Year";
             break;
         case 3:
-            isValid = (updateMe != ""); column = "Nationality";
+            isValid = (updateMe != ""); column = "Type";
             break;
         case 4:
-            isValid = validateYear(updateMe); column = "bYear";
+            isValid = validateBuilt(updateMe); column = "Built";
             break;
         default:
             break;
@@ -375,8 +355,7 @@ bool serviceLayer::callUpdateComputer(int id, int column, string updateMe)
         data.updateTable(id, "Person", column, updateMe);
     }
 
-    return isValid;*/
-    return false;
+    return isValid;
 }
 
 vector<vector<string>> serviceLayer:: getRelation(string column)

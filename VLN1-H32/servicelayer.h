@@ -18,6 +18,7 @@ private:
     bool validateGender(string gender);
     bool validateNationality(string nationality);
     bool validateYear(string year);
+    bool validateBuilt(string& built);
     // toLower changes all uppercase letters in string s to lowercase letters
   //  string toLower(string s);
     // splitLine takes string s in the format: "name;gender;nationality;birth year;death year;"
@@ -55,7 +56,7 @@ public:
     bool deleteComputer(int id);
     bool link(int personID, int computerID);
     bool unLink(int personID, int computerID);
-    bool callUpdatePerson(int id, int column, string updateMe);
-    bool callUpdateComputer(int id, int column, string updateMe);
+    bool callUpdatePerson(int id, int col, string updateMe);
+    bool callUpdateComputer(int id, int col, string updateMe);
     vector<vector<string>> getRelation(string column);
 };

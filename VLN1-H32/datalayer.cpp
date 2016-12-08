@@ -259,7 +259,6 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     // setja í private ??
-
     vector<Computer> computers;
 
     QString queryString = "SELECT * FROM Computer WHERE ";
