@@ -64,7 +64,6 @@ void userInterface::run()
             quit = doYouWantToQuit();
             break;
         default:
-            cout << endl << "Invalid Input!" << endl;
             break;
         }
    }while(!quit);
