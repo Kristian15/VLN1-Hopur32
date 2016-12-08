@@ -1,23 +1,6 @@
 #include "datalayer.h"
 #include <iostream>
 
-// **** Constructor/Destructor ****
-
-dataLayer::dataLayer()
-{
-    db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
-    db.setDatabaseName(DB_NAME);
-    db.open();
-    if(!db.isOpen())
-    {
-        throw string("Error!\nDatabase file not found!\nPlease check if database file is present!");
-    }
-}
-
-dataLayer::~dataLayer()
-{
-    db.close();
-}
 
 // **** Private ****
 
@@ -62,17 +45,18 @@ void dataLayer::addNewComputer(Computer addMe)
 void dataLayer::deleteRow(string table, int id)
 {
     QString qTable = QString::fromStdString(table);
+
     QSqlQuery query;
-    query.prepare("DELETE FROM " + qTable + " WHERE ID = :id");
+    query.prepare("DELETE FROM " + qTable + " WHERE ID = :id ");
+    //query.bindValue(":table", QString::fromStdString(table)); why does the other one work and not this
     query.bindValue(":id", id);
     query.exec();
-
-    // Getum sett column inn i strenginn í staðin fyrir að gera if skilyrði
 
     qTable.append("ID");
 
     QSqlQuery query2;
     query2.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
+    //query2.bindValue(":column", qTable);
     query2.bindValue(":id", id);
     query2.exec();
 }
@@ -82,42 +66,22 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     QString qTable = QString::fromStdString(table);
     QString qColumn = QString::fromStdString(column);
     QString qUpdateME = QString::fromStdString(updateME);
-    QRegExp numTest("\\d*");
-    int ifNumber = 0;
 
-    if(numTest.exactMatch(qUpdateME))
+    if(column == "Built" && updateME == "y")
     {
-        cout << "It's a number!" << endl;
-        cout << "id: " << id << " table: " << table << " column: " << column << " updateStr: " << updateME << endl;
-        QSqlQuery query;
-        ifNumber = qUpdateME.toInt();
-        query.prepare("UPDATE " + qTable + " SET " + qColumn + "=:updateME WHERE ID = :id");
-        query.bindValue(":updateME", ifNumber);
-        query.bindValue(":id", id);
-        query.exec();
-
-        qDebug() << query.lastError().text();
+        qUpdateME = "1";
     }
-    else
+    else if(column == "Built" && updateME == "n")
     {
-        cout << "Not a number!" << endl;
-        cout << "id: " << id << " table: " << table << " column: " << column << " updateStr: " << updateME << endl;
-        if(column == "Built" && updateME == "y")
-        {
-            qUpdateME = "1";
-        }
-        else if(column == "Built" && updateME == "n")
-        {
-            qUpdateME = "0";
-        }
-
-        QSqlQuery query;
-        query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
-        query.bindValue(":id", id);
-        query.exec();
-
-        qDebug() << query.lastError().text();
+        qUpdateME = "0";
     }
+
+    QSqlQuery query;
+    query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    qDebug() << query.lastError().text();
 }
 
 void dataLayer::createRelation(int personID, int computerID)
@@ -150,7 +114,7 @@ vector<Person> dataLayer::getPersons(QString queryString)
     while(query.next())
     {
         Person person(
-                    query.value("ID").toUInt(),
+                    query.value("ID").toInt(),
                     query.value("Name").toString().toStdString(),
                     query.value("Gender").toString().toStdString(),
                     query.value("Nationality").toString().toStdString(),
@@ -182,6 +146,35 @@ vector<Computer> dataLayer::getComputers(QString queryString)
 }
 
 // **** Public ****
+
+// **** Constructor/Destructor ****
+
+dataLayer::dataLayer()
+{
+    db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
+    db.setDatabaseName(DB_NAME);
+}
+
+dataLayer::~dataLayer()
+{
+    db.close();
+}
+
+// **** Public Functions ****
+
+bool dataLayer::openDatabase()
+{
+    QFileInfo checkFile(DB_NAME);
+    if(checkFile.exists())
+    {
+        db.open();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 void dataLayer::addPerson(Person person)
 {
@@ -445,34 +438,6 @@ bool dataLayer::deleteItem(string table, int id)
     }
     return false;
 }
-
-/*bool dataLayer::deletePerson(int id, string column)
-{
-    if(db.isOpen())
-    {
-        QSqlQuery query;
-        query.prepare("DELETE FROM column WHERE ID = :id");
-        query.bindValue(":id", id);
-        query.exec();
-        return true;
-    }
-
-    return false;
-}*/
-
-/*bool dataLayer::deleteComputer(int id)
-{
-    if(db.isOpen())
-    {
-        QSqlQuery query;
-        query.prepare("DELETE FROM Computers WHERE ID = :id");
-        query.bindValue(":id", id);
-        query.exec();
-        return true;
-    }
-
-    return false;
-}*/
 
 bool dataLayer::makeRelation(int personID, int computerID)
 {

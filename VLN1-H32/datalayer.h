@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <QFileInfo>
 #include <vector>
 #include <string>
 #include <QtSql>
@@ -29,6 +30,7 @@ private:
 public:
     dataLayer();
     ~dataLayer();
+    bool openDatabase();
     vector<Person> getSortedPersons(string column, int ascDesc);
     vector<Computer> getSortedComputers(string column, int ascDesc);
     vector<Person> findPersons(string column, string findMe);

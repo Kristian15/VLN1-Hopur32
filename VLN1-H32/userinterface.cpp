@@ -14,6 +14,13 @@ void userInterface::run()
     cout << "\\_____/   \\____/ |__|  |______| |_|  \\__|    |_|    |__|  \\_____/     |_|     \\_____/      " << endl;
     cout << endl;
 
+    if(!openDatabase())
+    {
+        cout << "Error: No database file found!" << endl;
+        cout << "Check program folder then restart program." << endl;
+        return;
+    }
+
     bool quit = false;
     int input = 0;
     do{

@@ -83,6 +83,8 @@ private:
     Computer getRightComputer(string action);
 
     // *** ELSE ***
+    // tests if database exists
+    bool openDatabase(){ return service.openDatabase(); }
     // Used when the user wants to delete a scientist from the database
     // Uses getRightPerson() to get the Person the user wants to delete
     // Deletes the Person using deletePerson() in serviceLayer

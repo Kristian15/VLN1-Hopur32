@@ -23,6 +23,7 @@ private:
     // creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
 public:
+    bool openDatabase(){ return data.openDatabase(); }
     // calls findPersons() in dataLayer
     // returns a vector with the findings
     vector<Person> searchPersons(string findMe, int by);
