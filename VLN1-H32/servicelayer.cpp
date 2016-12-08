@@ -182,16 +182,12 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 
 vector<Person> serviceLayer::searchPersonYears(int first, int second)
 {
-    //return data.searchYears("Person", first, second);
-    vector<Person> tmp;
-    return tmp;
+    return data.searchPersonYears(first, second);
 }
 
 vector<Computer> serviceLayer::searchComputerYears(int first, int second)
 {
-    //return data.searchYears("Computer", first, second);
-    vector<Computer> tmp;
-    return tmp;
+    return data.searchComputerYears(first, second);
 }
 
 vector<Person> serviceLayer::sortPersons(int order, int ascOrDesc)

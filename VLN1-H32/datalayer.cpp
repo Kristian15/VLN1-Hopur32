@@ -82,22 +82,42 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     QString qTable = QString::fromStdString(table);
     QString qColumn = QString::fromStdString(column);
     QString qUpdateME = QString::fromStdString(updateME);
+    QRegExp numTest("\\d*");
+    int ifNumber = 0;
 
-    if(column == "Built" && updateME == "y")
+    if(numTest.exactMatch(qUpdateME))
     {
-        qUpdateME = "1";
+        cout << "It's a number!" << endl;
+        cout << "id: " << id << " table: " << table << " column: " << column << " updateStr: " << updateME << endl;
+        QSqlQuery query;
+        ifNumber = qUpdateME.toInt();
+        query.prepare("UPDATE " + qTable + " SET " + qColumn + "=:updateME WHERE ID = :id");
+        query.bindValue(":updateME", ifNumber);
+        query.bindValue(":id", id);
+        query.exec();
+
+        qDebug() << query.lastError().text();
     }
-    else if(column == "Built" && updateME == "n")
+    else
     {
-        qUpdateME = "0";
+        cout << "Not a number!" << endl;
+        cout << "id: " << id << " table: " << table << " column: " << column << " updateStr: " << updateME << endl;
+        if(column == "Built" && updateME == "y")
+        {
+            qUpdateME = "1";
+        }
+        else if(column == "Built" && updateME == "n")
+        {
+            qUpdateME = "0";
+        }
+
+        QSqlQuery query;
+        query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
+        query.bindValue(":id", id);
+        query.exec();
+
+        qDebug() << query.lastError().text();
     }
-
-    QSqlQuery query;
-    query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
-    query.bindValue(":id", id);
-    query.exec();
-
-    qDebug() << query.lastError().text();
 }
 
 void dataLayer::createRelation(int personID, int computerID)
@@ -255,6 +275,67 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
     }
 }
 
+vector<Person> dataLayer::searchPersonYears(int from, int to)
+{
+    vector<Person> persons;
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM Person WHERE BirthYear BETWEEN :from AND :to");
+        query.bindValue(":from", from);
+        query.bindValue(":to", to);
+        query.exec();
+
+        while(query.next())
+        {
+            Person person(
+                        query.value("ID").toUInt(),
+                        query.value("Name").toString().toStdString(),
+                        query.value("Gender").toString().toStdString(),
+                        query.value("Nationality").toString().toStdString(),
+                        query.value("BirthYear").toInt(),
+                        query.value("DeathYear").toInt());
+            persons.push_back(person);
+        }
+        return persons;
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+}
+
+vector<Computer> dataLayer::searchComputerYears(int from, int to)
+{
+    vector<Computer> computers;
+
+    if(db.isOpen())
+    {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM Computer WHERE BirthYear BETWEEN :from AND :to");
+        query.bindValue(":from", from);
+        query.bindValue(":to", to);
+        query.exec();
+
+        while(query.next())
+        {
+            Computer computer(
+                        query.value("ID").toInt(),
+                        query.value("Name").toString().toStdString(),
+                        query.value("Year").toInt(),
+                        query.value("Type").toString().toStdString(),
+                        query.value("Built").toBool());
+            computers.push_back(computer);
+        }
+        return computers;
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+}
+
 vector<Computer> dataLayer::findComputers(string column, string findMe)
 {
     vector<Computer> computers;
@@ -338,11 +419,11 @@ vector<vector<string>> dataLayer::getRelation(string column)
     return resultMatrix;
 }
 
-void dataLayer::updateTable(int id, string table, string column, string updateMe)
+void dataLayer::updateTable(int id, string table, string column, string updateME)
 {
     if(db.isOpen())
     {
-        updateItem(id, table, column, updateMe);
+        updateItem(id, table, column, updateME);
     }
     else
     {
