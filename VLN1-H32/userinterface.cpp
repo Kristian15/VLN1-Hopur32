@@ -152,7 +152,6 @@ void userInterface::printUpdateComputerOptions()
     cout << "Input: ";
 }
 
-
 void userInterface::printSearchComputersOptions()
 {
     cout << "Please enter one of the following optins to search by" << endl;
@@ -237,6 +236,7 @@ void userInterface::printComputersFromDisplay()
     vector<Computer> sorted = service.sortComputers(input, ascDesc);
     printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
 }
+
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
 {
     cout << "Do you want to the list by name of Scientists or by name of computers? (1/2)" << endl;
@@ -411,10 +411,8 @@ void userInterface::readPerson()
         cout << "Invalid input!" << endl;
         cout << "input 'c' to cancel or any character to continue: ";
         cin >> input;
-        if((input == "c") || (input == "C"))
-        {
 
-        }
+        if((input == "c") || (input == "C")){}
         else
         {
             readPerson();
@@ -444,10 +442,11 @@ void userInterface::readComputer()
     {
         cout << "Invalid input!" << endl;
         cout << "input 'c' to cancel or any character to continue: ";
+        cin >> input;
 
-        if((input != "c") || (input != "C"))
+        if((input == "c") || (input == "C")){}
+        else
         {
-            cin >> input;
             readComputer();
         }
 
@@ -528,7 +527,7 @@ void userInterface::deletePerson()
     {
         if(service.deletePerson(personID))
         {
-            cout << "********" << endl;
+            cout << "Delete successfull!" << endl;
         }
     }
 }
@@ -550,7 +549,7 @@ void userInterface::deleteComputer()
     {
         if(service.deleteComputer(computerID))
         {
-            cout << "******" << endl;
+            cout << "Delete successfull!" << endl;
         }
     }
 }
@@ -580,7 +579,7 @@ void userInterface::updatePerson()
 
         if(service.callUpdatePerson(personID, input, changeString))
         {
-            cout << "********" << endl;
+            cout << "Update successfull!" << endl;
         }
     }
 }
@@ -610,7 +609,7 @@ void userInterface::updateComputer()
 
         if(service.callUpdateComputer(computerID, input, changeString))
         {
-            cout << "********" << endl;
+            cout << "Update successfull!" << endl;
         }
     }
 }
@@ -647,6 +646,7 @@ void userInterface::linkPersonAndComputer()
         }
     }
 }
+
 void userInterface::unlinkPersonAndComputer()
 {
     cout << "Unlink person with the following name: " << endl;

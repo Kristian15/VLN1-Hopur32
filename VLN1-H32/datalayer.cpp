@@ -23,9 +23,9 @@ dataLayer::~dataLayer()
 
 void dataLayer::addNewPerson(Person addMe)
 {
-    // sama ig í addNewComputer
+    // sama og í addNewComputer
     QSqlQuery query;
-    query.prepare("INSERT INTO persons (Name, Gender, Nationality, BirthYear, DeathYear) "
+    query.prepare("INSERT INTO person (Name, Gender, Nationality, BirthYear, DeathYear) "
                  "VALUES (:name, :gender, :nationality, :byear, :dyear)");
     query.bindValue(":name", QString::fromStdString(addMe.getName()));
     query.bindValue(":gender", QString::fromStdString(addMe.getGender()));
@@ -50,7 +50,7 @@ void dataLayer::addNewComputer(Computer addMe)
     // addNewComputer(name, year, type, built)
 
     QSqlQuery query;
-    query.prepare("INSERT INTO computers (Name, Year, Type, Built) "
+    query.prepare("INSERT INTO computer (Name, Year, Type, Built) "
                  "VALUES (:name, :year, :type, :built)");
     query.bindValue(":name", QString::fromStdString(addMe.getName()));
     query.bindValue(":year", addMe.getYear());
@@ -69,7 +69,13 @@ void dataLayer::deleteRow(string table, int id)
 
     //  Getum sett column inn i strenginn í staðin fyrir að gera if lykkju
 
-    if(table == "Persons")
+    QString queryString = "DELETE FROM Person_Computer WHERE ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(id);
+    query.exec();
+
+   /* if(table == "Persons")
     {
         query.prepare("DELETE FROM Person_Computer WHERE PersonID = :id");
         query.bindValue(":id", id);
@@ -80,8 +86,7 @@ void dataLayer::deleteRow(string table, int id)
         query.prepare("DELETE FROM Person_Computer WHERE ComputerID = :id");
         query.bindValue(":id", id);
         query.exec();
-    }
-    return;
+    }*/
 }
 
 void dataLayer::updateItem(int id, string table, string column, string updateME)
@@ -148,7 +153,7 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
     // setja í private ??
 
     vector<Person> persons;
-    QString queryString = "SELECT * FROM persons ORDER BY persons.";
+    QString queryString = "SELECT * FROM person ORDER BY person.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
 
@@ -186,7 +191,7 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
     // setja í private ??
 
     vector<Computer> computers;
-    QString queryString = "SELECT * FROM computers ORDER BY computers.";
+    QString queryString = "SELECT * FROM computer ORDER BY computers.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
 
@@ -224,7 +229,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 
     vector<Person> persons;
 
-    QString queryString = "SELECT * FROM Persons WHERE ";
+    QString queryString = "SELECT * FROM Person WHERE ";
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
     queryString.append(QString::fromStdString(findMe));
@@ -257,7 +262,7 @@ vector<Computer> dataLayer::findComputers(string column, string findMe)
 
     vector<Computer> computers;
 
-    QString queryString = "SELECT * FROM Computers WHERE ";
+    QString queryString = "SELECT * FROM Computer WHERE ";
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '%");
     queryString.append(QString::fromStdString(findMe));
@@ -292,7 +297,7 @@ vector<vector<string>> dataLayer::getRelation(string column)
 
     QString queryString = "SELECT DISTINCT name FROM ";
     queryString.append(QString::fromStdString(column));
-    queryString.append("s AS p JOIN Person_Computer AS pc ON p.id = pc.");
+    queryString.append(" AS p JOIN Person_Computer AS pc ON p.id = pc.");
     queryString.append(QString::fromStdString(column));
     queryString.append("id");
 
@@ -309,8 +314,8 @@ vector<vector<string>> dataLayer::getRelation(string column)
         }
     }
 
-    queryString = "SELECT p.name, c.name FROM person_computer AS pc JOIN persons as p"
-            " ON p.ID = pc.personID JOIN computers AS c ON c.ID = pc.computerID";
+    queryString = "SELECT p.name, c.name FROM person_computer AS pc JOIN person as p"
+            " ON p.ID = pc.personID JOIN computer AS c ON c.ID = pc.computerID";
 
     if(db.isOpen())
     {
@@ -374,21 +379,21 @@ bool dataLayer::deleteItem(string table, int id)
     return false;
 }
 
-bool dataLayer::deletePerson(int id)
+/*bool dataLayer::deletePerson(int id, string column)
 {
     if(db.isOpen())
     {
         QSqlQuery query;
-        query.prepare("DELETE FROM persons WHERE ID = :id");
+        query.prepare("DELETE FROM column WHERE ID = :id");
         query.bindValue(":id", id);
         query.exec();
         return true;
     }
 
     return false;
-}
+}*/
 
-bool dataLayer::deleteComputer(int id)
+/*bool dataLayer::deleteComputer(int id)
 {
     if(db.isOpen())
     {
@@ -400,7 +405,7 @@ bool dataLayer::deleteComputer(int id)
     }
 
     return false;
-}
+}*/
 
 bool dataLayer::makeRelation(int personID, int computerID)
 {
@@ -408,7 +413,7 @@ bool dataLayer::makeRelation(int personID, int computerID)
     if(db.isOpen())
     {
         createRelation(personID, computerID);
-        return true; // make check for it
+        return true;
     }
     else
     {
