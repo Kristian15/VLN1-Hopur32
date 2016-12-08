@@ -105,7 +105,7 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     int Byear = stoi(byear);
     int Dyear = 0;
 
-    // if there is no death year
+    // if there is a death year
     if(dyear != "0")
     {
         Dyear = stoi(dyear);   
@@ -178,6 +178,20 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
     }
 
     return findings;
+}
+
+vector<Person> serviceLayer::searchPersonYears(int first, int second)
+{
+    //return data.searchYears("Person", first, second);
+    vector<Person> tmp;
+    return tmp;
+}
+
+vector<Computer> serviceLayer::searchComputerYears(int first, int second)
+{
+    //return data.searchYears("Computer", first, second);
+    vector<Computer> tmp;
+    return tmp;
 }
 
 vector<Person> serviceLayer::sortPersons(int order, int ascOrDesc)
@@ -308,10 +322,10 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
             isValid = validateNationality(updateMe); column = "Nationality";
             break;
         case 4:
-            isValid = validateYear(updateMe); column = "bYear";
+            isValid = validateYear(updateMe); column = "BirthYear";
             break;
         case 5:
-            isValid = validateYear(updateMe); column = "dYear";
+            isValid = validateYear(updateMe); column = "DeathYear";
             break;
         default:
             break;

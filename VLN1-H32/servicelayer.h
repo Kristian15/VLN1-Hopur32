@@ -29,6 +29,8 @@ public:
     // calls findComputers() in dataLayer
     // returns a vector with the findings
     vector<Computer> searchComputers(string findMe, int by);
+    vector<Person> searchPersonYears(int first, int second);
+    vector<Computer> searchComputerYears(int first, int second);
     // calls getSortedPersons() in dataLayer
     // returns a vector with the sorted scientists
     vector<Person> sortPersons(int order, int ascOrDesc);

@@ -184,15 +184,10 @@ void userInterface::printSearchPersonsCommands(int input)
         cout << "Enter nationality: " << endl;
         cout << "Nationality: ";
     }
-    else if(input == 4)
+    else if((input == 4) || (input == 5))
     {
-        cout << "Enter the year of birth you want to search for: " << endl;
+        cout << "Do you want to search for one year or a range of year? (1/2): " << endl;
         cout << "Year of birth: ";
-    }
-    else if(input == 5)
-    {
-        cout << "Enter the year of death you want to search for: " << endl;
-        cout << "Year of death: ";
     }
 }
 
@@ -205,8 +200,7 @@ void userInterface::printSearchComputersCommands(int input)
     }
     else if(input == 2)
     {
-        cout << "Enter from what year the computer is you want to search for: " << endl;
-        cout << "Year: ";
+        cout << "Do you want to search for one year or a range of years? (1/2) " << endl;
     }
     else if(input == 3)
     {
@@ -287,26 +281,89 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
 
 void userInterface::printPersonsFromSearch()
 {
+    vector<Person> printMe;
     printSearchPersonsOptions();
     int searchBy = getCorrectInt(5);
-    string searchFor;
-    printSearchPersonsCommands(searchBy);
-    cin >> ws;
-    getline(cin, searchFor);
-    cout << endl;
-    printPersons(service.searchPersons(searchFor, searchBy), "Search results: ", "No match!");
+
+    if((searchBy == 4) || (searchBy ==5))
+    {
+        int first;
+        int second = 0;
+        int oneOrRange = getCorrectInt(2);
+
+        if(oneOrRange == 1)
+        {
+            cout << "Enter the year you want to search for: " << endl;
+            cout << "Year: ";
+            cin >> first;
+        }
+
+        else
+        {
+            cout << "Enter the first year: " << endl;
+            cout << "Year: " ;
+            cin >> first;
+            cout << "Enter the second year: " << endl;
+            cout << "Year: " ;
+            cin >> second;
+        }
+
+        printMe = service.searchPersonYears(first, second);
+    }
+    else
+    {
+        string searchFor;
+        printSearchPersonsCommands(searchBy);
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+        printMe = service.searchPersons(searchFor, searchBy);
+    }
+
+    printPersons(printMe, "Search results: ", "No match!");
 }
 
 void userInterface::printComputerFromSearch()
 {
+    vector<Computer> printMe;
     printSearchComputersOptions();
     int searchBy = getCorrectInt(4);
-    string searchFor;
-    printSearchComputersCommands(searchBy);
-    cin >> ws;
-    getline(cin, searchFor);
-    cout << endl;
-    printComputers(service.searchComputers(searchFor, searchBy), "Search results: ", "No match!");
+
+    if(searchBy == 2)
+    {
+        int first;
+        int second = 0;
+        int oneOrRange = getCorrectInt(2);
+
+        if(oneOrRange == 1)
+        {
+            cout << "Enter the year you want to search for: " << endl;
+            cout << "Year: " ;
+            cin >> first;
+        }
+        else
+        {
+            cout << "Enter the first year: " << endl;
+            cout << "Year: " ;
+            cin >> first;
+            cout << "Enter the second year: " << endl;
+            cout << "Year: " ;
+            cin >> second;
+        }
+
+        printMe = service.searchComputerYears(first, second);
+    }
+    else
+    {
+        string searchFor;
+        printSearchComputersCommands(searchBy);
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+        printMe = service.searchComputers(searchFor, searchBy);
+    }
+
+    printComputers(printMe, "Search results: ", "No match!");
 }
 
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
