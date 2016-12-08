@@ -67,13 +67,14 @@ void dataLayer::deleteRow(string table, int id)
     query.bindValue(":id", id);
     query.exec();
 
-    //  Getum sett column inn i strenginn í staðin fyrir að gera if lykkju
+    // Getum sett column inn i strenginn í staðin fyrir að gera if skilyrði
 
-    QString queryString = "DELETE FROM Person_Computer WHERE ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("ID = ");
-    queryString.append(id);
-    query.exec(queryString);
+    qTable.append("ID");
+
+    QSqlQuery query2;
+    query2.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
+    query2.bindValue(":id", id);
+    query2.exec();
 }
 
 void dataLayer::updateItem(int id, string table, string column, string updateME)
@@ -109,12 +110,14 @@ void dataLayer::createRelation(int personID, int computerID)
 
 void dataLayer::deleteRelation(int personID, int computerID)
 {
+    QString qPersID = QString::number(personID);
+    QString qCompID = QString::number(computerID);
     QSqlQuery query;
-    query.prepare("DELETE FROM Person_Computer (PersonID, ComuterID) "
-                  "Values (:personID, :computerID");
-    query.bindValue(":personID", personID);
-    query.bindValue(":computerID", computerID);
+    query.prepare("DELETE FROM Person_Computer WHERE PersonID = " +
+                  qPersID + " AND computerID = " + qCompID);
     query.exec();
+
+    qDebug() << query.lastError().text();
 }
 
 // **** Public ****
