@@ -313,7 +313,6 @@ void userInterface::printPersonsFromSearch()
     else
     {
         string searchFor;
-        //printSearchPersonsCommands(searchBy);
         cin >> ws;
         getline(cin, searchFor);
         cout << endl;
@@ -356,7 +355,6 @@ void userInterface::printComputerFromSearch()
     else
     {
         string searchFor;
-        //printSearchComputersCommands(searchBy);
         cin >> ws;
         getline(cin, searchFor);
         cout << endl;
