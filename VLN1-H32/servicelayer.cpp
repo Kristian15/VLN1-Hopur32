@@ -11,7 +11,6 @@ bool serviceLayer::validateName(string name)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        // if the name does not include a digit it is valid
         if (!isdigit(name[i]) && (name != ""))
         {
             tmp ++;
@@ -87,9 +86,10 @@ bool serviceLayer::validateYear(string year)
 
 bool serviceLayer::validateBuilt(string& built)
 {
-    if(built.size() == 1)
+    if(built.size() == 1) // check if built is only one character
     {
         built = tolower(built[0]);
+
         if((built == "y") || (built == "n"))
         {
             return true;

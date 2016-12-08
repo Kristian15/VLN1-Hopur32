@@ -22,7 +22,6 @@ private:
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
     // creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
-
 public:
     // calls findPersons() in dataLayer
     // returns a vector with the findings
@@ -54,9 +53,14 @@ public:
     // returns true if the connection was a success
     bool link(int personID, int computerID);
     // calls unMakeRelation() in dataLayer with personID and computerID
-    // returns true if the
+    // returns true if the linking was a success
     bool unLink(int personID, int computerID);
+    // The update functions calls updateTable() in dataLayer with the
+    // id of the item the user wants to change,
+    // the column the user wants to change and the change the user wants to make
     bool callUpdatePerson(int id, int col, string updateMe);
     bool callUpdateComputer(int id, int col, string updateMe);
+    // Gets all linked computers and persons by using getRelation() in dataLayer
+    // returns a double vector with the information
     vector<vector<string>> getRelation(string column);
 };
