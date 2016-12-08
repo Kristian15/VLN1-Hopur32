@@ -111,9 +111,9 @@ void userInterface::printDisplayComputersOptions()
     cout << "Please enter one of the following options to sort by: " << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "1 = Name  - sort the computers by name" << endl;
-    cout << "2 = Year  - sort the computer by year designed" << endl;
-    cout << "3 = Type  - sort the computer by type" << endl;
-    cout << "4 = Built - show computers that were built;" << endl;
+    cout << "2 = Year  - sort the computers by year designed" << endl;
+    cout << "3 = Type  - sort the computers by type" << endl;
+    cout << "4 = Built - sort computers after built status;" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -222,7 +222,7 @@ void userInterface::printPersonsFromDisplay()
     cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
     int ascDesc = getCorrectInt(2);
     vector<Person> sorted = service.sortPersons(input, ascDesc);
-    printPersons(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    printPersons(sorted, "Here is your list sorted: " , "No scientist in the database!");
 }
 
 void userInterface::printComputersFromDisplay()
@@ -232,7 +232,7 @@ void userInterface::printComputersFromDisplay()
     cout << "Do you want the list in ascending or descending order (1/2) ?" << endl;
     int ascDesc = getCorrectInt(2);
     vector<Computer> sorted = service.sortComputers(input, ascDesc);
-    printComputers(sorted, "Here is your list sorted: " , "Your database is empty! Please add database from \"Open file\" in Main Menu");
+    printComputers(sorted, "Here is your list sorted: " , "No computer in the database!");
 }
 
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
