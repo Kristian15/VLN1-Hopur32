@@ -43,10 +43,6 @@ public:
     vector<vector<string>> getRelation(string column);
 
     bool deleteItem(string table, int id);
-    // delete person that matches provided string
-  //  bool deletePerson(int id, string column);
-    // delete computer that matches provided string
-  //  bool deleteComputer(int id);
     // creates a relation between a comptuer and a scientist
     bool makeRelation(int personID, int computerID);
     bool unMakeRelation(int personID, int computerID);
