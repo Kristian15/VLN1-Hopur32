@@ -11,7 +11,6 @@ bool serviceLayer::validateName(string name)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        // if the name does not include a digit it is valid
         if (!isdigit(name[i]) && (name != ""))
         {
             tmp ++;
@@ -87,9 +86,10 @@ bool serviceLayer::validateYear(string year)
 
 bool serviceLayer::validateBuilt(string& built)
 {
-    if(built.size() == 1)
+    if(built.size() == 1) // check if built is only one character
     {
         built = tolower(built[0]);
+
         if((built == "y") || (built == "n"))
         {
             return true;
@@ -102,23 +102,16 @@ bool serviceLayer::validateBuilt(string& built)
 Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
-    int Byear, Dyear;
+    int Byear = stoi(byear);
+    int Dyear = 0;
 
     // if there is no death year
     if(dyear != "0")
     {
-        Byear = stoi(byear);
-        Dyear = stoi(dyear);
+        Dyear = stoi(dyear);   
+    }
 
-        if (Byear < Dyear)
-        {
-            newP = Person(name, gender, nationality, stoi(byear), stoi(dyear));
-        }
-    }
-    else
-    {
-        newP = Person(name, gender, nationality, stoi(byear));
-    }
+    newP = Person(name, gender, nationality, Byear, Dyear);
 
     return newP;
 }
@@ -356,7 +349,7 @@ bool serviceLayer::callUpdateComputer(int id, int col, string updateMe)
 
     if(isValid)
     {
-        data.updateTable(id, "Person", column, updateMe);
+        data.updateTable(id, "Computer", column, updateMe);
     }
 
     return isValid;

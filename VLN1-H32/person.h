@@ -18,8 +18,8 @@ private:
 
 public:
     Person();
+    Person(int id, string name, string gender, string nationality, int byear, int dyear);
     Person(string name, string gender, string nationality, int byear, int dyear);
-    Person(string name, string gender, string nationality, int byear);
 
     int getID() { return _id; }
     string getName(){ return _name; }
