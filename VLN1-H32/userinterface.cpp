@@ -500,7 +500,7 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
     else if(vecSize == 1)
     {
         T theItem = vec[0];
-        cout << "Do you want to " << action << " the following " << type << " from the databasae? (Y/N): " ;
+        cout << "Do you want to " << action << " the following " << type << " from the database? (Y/N): " ;
         cout << theItem.getName() << ": ";
         string answer;
         cin >> answer;
