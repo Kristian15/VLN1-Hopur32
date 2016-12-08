@@ -498,7 +498,7 @@ T userInterface::chooseWhich(vector<T> delItem, string s1, string s2, string s3)
     else if(itemSize == 1)
     {
         T theItem = delItem[0];
-        cout << s2 << endl;
+        cout << s2;
         cout << theItem.getName() << ": ";
         string answer;
         cin >> answer;
