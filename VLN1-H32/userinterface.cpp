@@ -323,6 +323,7 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
             cout << left << setw(genderWidth) << setfill(seperator) << printMe[i].getGender();
             cout << left << setw(nationalitWidth) << setfill(seperator) << printMe[i].getNationality();
             cout << left << setw(birthYearWidth) << setfill(seperator) << printMe[i].getByear();
+
             if(printMe[i].getDyear() != 0)
             {
                 cout << left << setw(deathYearWidth) << setfill(seperator) << printMe[i].getDyear() << endl;
@@ -366,6 +367,7 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
             cout << left << setw(nameWidth) << setfill(seperator) << printMe[i].getName();
             cout << left << setw(yearWidth) << setfill(seperator) << printMe[i].getYear();
             cout << left << setw(typeWidth) << setfill(seperator) << printMe[i].getType();
+
             if(printMe[i].getBuilt())
             {
                 cout << left << setw(builtWidth) << setfill(seperator) << "Yes" << endl;

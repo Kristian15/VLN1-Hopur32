@@ -85,6 +85,20 @@ bool serviceLayer::validateYear(string year)
     return false;
 }
 
+bool serviceLayer::validateBuilt(string& built)
+{
+    if(built.size() == 1)
+    {
+        built = tolower(built[0]);
+        if((built == "y") || (built == "n"))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
@@ -164,6 +178,8 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
     case 3:
         findings = data.findComputers("Type", findMe);
         break;
+    case 4:
+        findings = data.findComputers("Built", findMe);
     default:
         break;
     }
@@ -212,6 +228,8 @@ vector<Computer> serviceLayer::sortComputers(int order, int ascOrDesc)
     case 3:
         sorted = data.getSortedComputers("Type", ascOrDesc);
         break;
+    case 4:
+        sorted = data.getSortedComputers("Built", ascOrDesc);
     default:
         break;
     }
@@ -256,20 +274,6 @@ bool serviceLayer::validateNewComputer(string name, string year, string type, st
     if((name != "") && validateYear(year) && (type != "") && validateBuilt(built))
     {
             return true;
-    }
-
-    return false;
-}
-
-bool serviceLayer::validateBuilt(string& built)
-{
-    if(built.size() == 1)
-    {
-        built = tolower(built[0]);
-        if((built == "y") || (built == "n"))
-        {
-            return true;
-        }
     }
 
     return false;
