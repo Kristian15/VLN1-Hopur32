@@ -72,7 +72,9 @@ private:
     // Used to display delItem and make the user choose which element in delItem he wants to use
     // The function returns that item
     template <typename T>
-    T chooseWhich(vector<T> delItem, string s1, string s2, string s3);
+    T chooseWhich(vector<T> vec, string action, string type);
+    Person getRightPerson(string action);
+    Computer getRightComputer(string action);
 
     // *** ELSE ***
     // Used when the user wants to delete a scientist from the database
