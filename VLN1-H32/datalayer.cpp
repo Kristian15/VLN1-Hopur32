@@ -191,7 +191,7 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
     // setja í private ??
 
     vector<Computer> computers;
-    QString queryString = "SELECT * FROM computer ORDER BY computers.";
+    QString queryString = "SELECT * FROM computer ORDER BY computer.";
     queryString.append(QString::fromStdString(column));
     queryString.append(" COLLATE NOCASE");
 
