@@ -184,9 +184,9 @@ void userInterface::printSearchPersonsCommands(int input)
         cout << "Enter nationality: " << endl;
         cout << "Nationality: ";
     }
-    else if((input == 4) || (input == 5))
+    else
     {
-        cout << "Do you want to search for one year or a range of year? (1/2): " << endl;
+        cout << "Do you want to search for one year or a range of years? (1/2): " << endl;
         cout << "Year of birth: ";
     }
 }
@@ -284,7 +284,7 @@ void userInterface::printPersonsFromSearch()
     vector<Person> printMe;
     printSearchPersonsOptions();
     int searchBy = getCorrectInt(5);
-
+    printSearchPersonsCommands(searchBy);
     if((searchBy == 4) || (searchBy ==5))
     {
         int first;
@@ -328,7 +328,7 @@ void userInterface::printComputerFromSearch()
     vector<Computer> printMe;
     printSearchComputersOptions();
     int searchBy = getCorrectInt(4);
-
+    printSearchComputersCommands(searchBy);
     if(searchBy == 2)
     {
         int first;
