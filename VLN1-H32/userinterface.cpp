@@ -519,9 +519,16 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
             cout << i+1 <<": " << vec[i].getName() << endl;
         }
 
-        int input = getCorrectInt(static_cast<int>(vecSize));
-        input--;
-        item = vec[input];
+        cout << vecSize+1 <<": " << "Cancel" << endl;
+
+        int vecSizeInt = static_cast<int>(vecSize + 1);
+        int input = getCorrectInt(vecSizeInt);
+
+        if(input < vecSizeInt)
+        {
+            input--;
+            item = vec[input];
+        }
     }
 
     return item;
