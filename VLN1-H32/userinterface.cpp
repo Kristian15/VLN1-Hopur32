@@ -367,18 +367,21 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
         cout << computer.getName();
     }
 
-    if(printMe.size() == 0)
+    unsigned int printMeSize = printMe.size();
+
+    if(printMeSize == 0)
     {
         cout << " is not linked to any " << printTmp << endl;
     }
     else
     {
-        cout << " is linked to the following " << printTmp << "(s)): ";
+        cout << " is linked to the following " << printTmp << "(s))";
 
-        for(unsigned int i = 0; i < printMe.size(); i++)
+        for(unsigned int i = 0; i < printMeSize; i++)
         {
             cout << ": " << printMe[i];
         }
+
         cout << endl;
     }
 }
