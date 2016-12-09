@@ -30,7 +30,13 @@ public:
     // Calls findComputers() in dataLayer
     // Returns a vector with the findings
     vector<Computer> searchComputers(string findMe, int by);
+    // When searching for birth year or death year
+    // Calls searchPersonYears in data layer
+    // Returns vector with the findings
     vector<Person> searchPersonYears(int first, int second, int by);
+    // When searching for year of design
+    // Calls searchComputerYears in data layer
+    // Returns vector with the findings
     vector<Computer> searchComputerYears(int first, int second);
     // Calls getSortedPersons() in dataLayer
     // Returns a vector with the sorted scientists
