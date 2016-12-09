@@ -353,7 +353,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     int searchBy = getCorrectInt(2);
     if(searchBy == 1)
     {
-        cout << "Enter the name of computer you want to search for: " << endl;
+        cout << "Enter name of the computer you want to search for: " << endl;
         cout << "Name: ";
         cin >> ws;
         getline(cin, searchFor);
@@ -361,7 +361,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     }
     else
     {
-        cout << "Enter the name of scientist you want to search for: " << endl;
+        cout << "Enter name of the scientist you want to search for: " << endl;
         cout << "Name: ";
         cin >> ws;
         getline(cin, searchFor);
