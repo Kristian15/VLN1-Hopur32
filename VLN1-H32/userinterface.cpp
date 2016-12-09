@@ -2,7 +2,7 @@
 
 //numeration for switch case in main menu
 enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Search_Scientist,
-                  Search_Computer, Add_Scientis, Add_Computer, Update_Scientist, Update_Computer, Delete_Scientist,
+                  Search_Computer, SearchCorS, Add_Scientis, Add_Computer, Update_Scientist, Update_Computer, Delete_Scientist,
                   Delete_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
 void userInterface::run()
@@ -28,7 +28,7 @@ void userInterface::run()
 
     do{
         printMainMenu();
-        input = getCorrectInt(14);
+        input = getCorrectInt(15);
 
         switch (input)
         {
@@ -46,6 +46,9 @@ void userInterface::run()
             break;
         case Search_Computer:
             printComputerFromSearch();
+            break;
+        case SearchCorS:
+            printLinkedComputersAndPersonsFromSearch();
             break;
         case Add_Scientis:
             readPerson();
@@ -90,15 +93,16 @@ void userInterface::printMainMenu()
     cout << "3  = Display linked C&S  - Displays linked Computers and Scientists in the selected order" << endl;
     cout << "4  = Search Scientist    - Search for a scientist in your database" << endl;
     cout << "5  = Search Computer     - Search for a computer in your database" << endl;
-    cout << "6  = Add Scientist       - Adds scientist to your database" << endl;
-    cout << "7  = Add Computer        - Adds computer to your database" << endl;
-    cout << "8  = Update Scientist    - Update scientist in your database" << endl;
-    cout << "9  = Update Computer     - Update computer in your database" << endl;
-    cout << "10 = Delete Scientist    - Deletes scientist from you database" << endl;
-    cout << "11 = Delete Computer     - Deletes computer from you database" << endl;
-    cout << "12 = Link                - Link Scientist and Computer" << endl;
-    cout << "13 = Unlink              - Unlink Scientist and Computer" << endl;
-    cout << "14 = quit                - Quit the program" << endl;
+    cout << "6  = Search linked C|S   - Search for linked scientist or computer" << endl;
+    cout << "7  = Add Scientist       - Adds scientist to your database" << endl;
+    cout << "8  = Add Computer        - Adds computer to your database" << endl;
+    cout << "9  = Update Scientist    - Update scientist in your database" << endl;
+    cout << "10  = Update Computer     - Update computer in your database" << endl;
+    cout << "11 = Delete Scientist    - Deletes scientist from you database" << endl;
+    cout << "12 = Delete Computer     - Deletes computer from you database" << endl;
+    cout << "13 = Link                - Link Scientist and Computer" << endl;
+    cout << "14 = Unlink              - Unlink Scientist and Computer" << endl;
+    cout << "15 = quit                - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -261,7 +265,7 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     else
     {
        printMe = service.getRelation("Computer");
-       coutTmp = "Person(s)";
+       coutTmp = "Scientist(s)";
     }
 
     printMeSize = printMe.size();
@@ -275,7 +279,7 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
        for(unsigned int i = 0; i < printMeSize; i++)
        {
            cout << printMe[i][0] << " ";
-           cout << "is linked to the following " << coutTmp;
+           cout << "is linked to the " << coutTmp;
 
            for(unsigned int k = 1; k < printMe[i].size(); k++)
            {
@@ -340,6 +344,29 @@ void userInterface::printComputerFromSearch()
     }
 
     printComputers(printMe, "Search results: ", "No match!");
+}
+void userInterface::printLinkedComputersAndPersonsFromSearch()
+{
+    vector<string> printMe;
+    string searchFor;
+    cout << "Do you want to search for a computer or a scientist (1/2)? ";
+    int searchBy = getCorrectInt(2);
+    if(searchBy == 1)
+    {
+        cout << "Enter the name of computer you want to search for: " << endl;
+        cout << "Name: ";
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+    }
+    else
+    {
+        cout << "Enter the name of scientist you want to search for: " << endl;
+        cout << "Name: ";
+        cin >> ws;
+        getline(cin, searchFor);
+        cout << endl;
+    }
 }
 
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)

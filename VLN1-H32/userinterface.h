@@ -53,6 +53,7 @@ private:
     // Prints using printComputers()
     void printComputerFromSearch();
     // outputs inMessage, prints printMe and outputs outMessage
+    void printLinkedComputersAndPersonsFromSearch();
     void printPersons(vector<Person> printMe, string inMessage, string outMessage);
     // outputs inMessage, prints printMe and outputs outMessage
     void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
