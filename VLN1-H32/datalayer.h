@@ -66,7 +66,7 @@ public:
     vector<Computer> searchComputerYears(int from, int to);
     // Return all related persons/computers
     // Returns a double vector where first element in every row is the name of the scientist/computer
-    // The following elements are the scientists/computers that are linked to it
+    // the following elements are the scientists/computers that are linked to it
     vector<vector<string>> getRelation(string column);
     // Return related persons/computers from the item with ID = id
     vector<string> searchRelation(int id, string table);
