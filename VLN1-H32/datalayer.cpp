@@ -437,21 +437,20 @@ vector<string> dataLayer::searchRelation(int id, string table)
 {
     if(db.isOpen())
     {
-        /*QString qTable = QString::fromStdString(table);
-        QString qFindME = QString::fromStdString(findME);
-        QString queryString = "SELECT DISTINCT p.Name, c.Name ";
-        queryString.append("FROM Person_Computer pc ");
-        queryString.append("JOIN Person p ON p.ID = pc.PersonID ");
-        queryString.append("JOIN Computer c ON c.ID = pc.ComputerID ");
-        queryString.append("WHERE " + qTable + ".name LIKE '%:findME");*/
+        QString idCheck;
 
-        /*SELECT DISTINCT Computer.Name from Computer
-        JOIN Person_Computer pc ON pc.ComputerID = computer.ID
-        WHERE pc.PersonID = 1*/
+        if(table == "Person")
+        {
+            idCheck = "pc.PersonID";
+        }
+        else
+        {
+            idCheck = "pc.ComputerID";
+        }
         QString qTable = QString::fromStdString(table);
         QString queryString = "SELECT DISTINCT " + qTable + ".Name from " + qTable;
         queryString.append(" JOIN Person_Computer AS pc ON pc." + qTable + "ID = " + qTable + ".ID");
-        queryString.append(" WHERE pc.PersonID = :id");
+        queryString.append(" WHERE " + idCheck + " = :id");
 
         return findRelation(queryString, id);
     }
