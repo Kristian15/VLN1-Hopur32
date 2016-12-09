@@ -16,19 +16,23 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
-    // adds a new Person to the database
+    // add functions
     void addNewPerson(Person addMe);
-    // adds a new Computer to the database
     void addNewComputer(Computer addMe);
-    // deletes
-    void deleteRow(string table, int id);
-    void updateItem(int id, string table, string column, string updateME);
     void createRelation(int personID, int computerID);
-    void deleteRelation(int personID, int computerID);
 
-    //
+    // read functions
     vector<Person> getPersons(QString queryString);
     vector<Computer> getComputers(QString queryString);
+    vector<string> findRelation(QString queryString, int id);
+
+    // delete functions
+    void deleteRelation(int personID, int computerID);
+    void deleteRow(string table, int id);
+
+    // update function
+    void updateItem(int id, string table, string column, string updateME);
+
 public:
     dataLayer();
     ~dataLayer();
@@ -41,8 +45,10 @@ public:
     vector<Computer> findComputers(string column, string findMe);
 
     void updateTable(int id, string table, string column, string updateMe);
-    // return all related persons/computers by the provided id
+    // return all related persons/computers
     vector<vector<string>> getRelation(string column);
+    // return all related persons/computers
+    vector<string> searchRelation(int id, string table);
 
     bool deleteItem(string table, int id);
     // creates a relation between a comptuer and a scientist

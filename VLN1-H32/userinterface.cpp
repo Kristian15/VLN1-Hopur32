@@ -351,27 +351,36 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     vector<string> printMe;
     cout << "Do you want to search for a scientist or a computer (1/2)? ";
     int searchBy = getCorrectInt(2);
+    string printTmp = "Computer";
 
     if(searchBy == 1)
     {
         Person person = getRightPerson("get linked computers from");
-        cout << person.getName() << " is linked to the following computer(s): ";
-
+        printMe = service.getOneRelation(person.getID(), "Computer");
+        cout << person.getName();
     }
     else
     {
         Computer computer = getRightComputer("get linked scientists from");
-        cout << computer.getName() << " is linked to the following scientist(s)): ";
+        printMe = service.getOneRelation(computer.getID(), "Person");
+        printTmp = "scientist";
+        cout << computer.getName();
     }
-    printMe.push_back("kalli");
-    printMe.push_back("mac");
-    printMe.push_back("pc");
-    //cout << printMe[0] << " is linked to the " << coutTmp;
-    for(unsigned int i = 1; i < printMe.size(); i++)
+
+    if(printMe.size() == 0)
     {
-        cout << ": " << printMe[i];
+        cout << " is not linked to any " << printTmp << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << " is linked to the following" << printTmp << "(s)): ";
+
+        for(unsigned int i = 1; i < printMe.size(); i++)
+        {
+            cout << ": " << printMe[i];
+        }
+        cout << endl;
+    }
 }
 
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)

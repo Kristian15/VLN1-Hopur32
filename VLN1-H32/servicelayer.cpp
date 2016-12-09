@@ -357,7 +357,7 @@ vector<vector<string>> serviceLayer::getRelation(string column)
     return data.getRelation(column);
 }
 
-vector<string> serviceLayer::getOneRelation(string column, int id)
+vector<string> serviceLayer::getOneRelation(int id, string table)
 {
-
+    return data.searchRelation(id, table);
 }
