@@ -356,7 +356,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
 
     if(searchBy == 1)
     {
-        Person person = getRightPerson("Get linked computers from");
+        Person person = getRightPerson("Get linked computers to");
 
         if(person.getID() != -1)
         {
@@ -367,7 +367,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     }
     else
     {
-        Computer computer = getRightComputer("Get linked scientists from");
+        Computer computer = getRightComputer("Get linked scientists to");
         if(computer.getID() != -1)
         {
             printMe = service.getOneRelation(computer.getID(), "Person");
