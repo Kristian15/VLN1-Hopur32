@@ -164,7 +164,7 @@ dataLayer::~dataLayer()
 bool dataLayer::openDatabase()
 {
     QFileInfo checkFile(DB_NAME);
-    if(checkFile.exists())
+    if(checkFile.exists() && checkFile.isFile())
     {
         db.open();
         return true;
