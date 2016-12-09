@@ -52,20 +52,21 @@ private:
     // Uses serachComputers() in serviceLayer to search the database
     // Prints using printComputers()
     void printComputerFromSearch();
-    // outputs inMessage, prints printMe and outputs outMessage
+    // Prints the links between computers and persons that the user searched for
     void printLinkedComputersAndPersonsFromSearch();
+    // Outputs inMessage, prints printMe and outputs outMessage
     void printPersons(vector<Person> printMe, string inMessage, string outMessage);
-    // outputs inMessage, prints printMe and outputs outMessage
+    // Outputs inMessage, prints printMe and outputs outMessage
     void printComputers(vector<Computer> printMe, string inMessage, string outMessage);
 
     // *** INPUT FUNCTIONS ***
-    // gets information to create a new Person
-    // validates input with validateNewPerson() in serviceLayer
-    // uses newPerson() in serviceLayer
+    // Gets information to create a new Person
+    // Validates input with validateNewPerson() in serviceLayer
+    // Uses newPerson() in serviceLayer
     void readPerson();
-    // gets information to create a new Computer
-    // validates input with validateNewComputer() in serviceLayer
-    // uses newComputer() in serviceLayer
+    // Gets information to create a new Computer
+    // Validates input with validateNewComputer() in serviceLayer
+    // Uses newComputer() in serviceLayer
     void readComputer();
     // Asks the user for a integer value
     // If the value is a integer between 1 and max the function returns the integer
@@ -87,7 +88,7 @@ private:
     void getSearchYears(int oneOrRange, int& first, int& second);
 
     // *** ELSE ***
-    // tests if database exists
+    // Tests if database exists
     bool openDatabase(){ return service.openDatabase(); }
     // Used when the user wants to delete a scientist from the database
     // Uses getRightPerson() to get the Person the user wants to delete

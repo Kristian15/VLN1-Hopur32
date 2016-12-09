@@ -5,6 +5,9 @@ enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Compute
                   Search_Computer, SearchCorS, Add_Scientis, Add_Computer, Update_Scientist, Update_Computer, Delete_Scientist,
                   Delete_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
+/**
+ * @brief userInterface::run
+ */
 void userInterface::run()
 {
 
@@ -84,6 +87,10 @@ void userInterface::run()
 }
 
 // *** PRIVATE ***
+
+/**
+ * @brief userInterface::printMainMenu
+ */
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
@@ -107,6 +114,9 @@ void userInterface::printMainMenu()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printDisplayPersonsOptions
+ */
 void userInterface::printDisplayPersonsOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
@@ -120,6 +130,9 @@ void userInterface::printDisplayPersonsOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printDisplayComputersOptions
+ */
 void userInterface::printDisplayComputersOptions()
 {
     cout << "Please enter one of the following options to sort by: " << endl;
@@ -132,6 +145,9 @@ void userInterface::printDisplayComputersOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printSearchPersonsOptions
+ */
 void userInterface::printSearchPersonsOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
@@ -145,6 +161,9 @@ void userInterface::printSearchPersonsOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printUpdatePersonOptions
+ */
 void userInterface::printUpdatePersonOptions()
 {
     cout << "Please enter what you want to change:" << endl;
@@ -158,6 +177,9 @@ void userInterface::printUpdatePersonOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printUpdateComputerOptions
+ */
 void userInterface::printUpdateComputerOptions()
 {
     cout << "Please enter what you want to change:" << endl;
@@ -170,6 +192,9 @@ void userInterface::printUpdateComputerOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printSearchComputersOptions
+ */
 void userInterface::printSearchComputersOptions()
 {
     cout << "Please enter one of the following optins to search by" << endl;
@@ -182,6 +207,10 @@ void userInterface::printSearchComputersOptions()
     cout << "Input: ";
 }
 
+/**
+ * @brief userInterface::printSearchPersonsCommands
+ * @param input
+ */
 void userInterface::printSearchPersonsCommands(int input)
 {
     if(input == 1)
@@ -199,12 +228,16 @@ void userInterface::printSearchPersonsCommands(int input)
         cout << "Enter nationality: " << endl;
         cout << "Nationality: ";
     }
-    else
+    else //case 4&5
     {
         cout << "Do you want to search for one year or a range of years? (1/2): " << endl;
     }
 }
 
+/**
+ * @brief userInterface::printSearchComputersCommands
+ * @param input
+ */
 void userInterface::printSearchComputersCommands(int input)
 {
     if(input == 1)
