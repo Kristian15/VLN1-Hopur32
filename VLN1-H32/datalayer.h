@@ -16,9 +16,11 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
-    // add functions
+    // adds a new Person to the database
     void addNewPerson(Person addMe);
+    // adds a new Computer to the database
     void addNewComputer(Computer addMe);
+    // deletes
     void deleteRow(string table, int id);
     void updateItem(int id, string table, string column, string updateME);
     void createRelation(int personID, int computerID);

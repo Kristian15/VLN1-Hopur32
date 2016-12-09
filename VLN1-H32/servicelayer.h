@@ -66,4 +66,5 @@ public:
     // Gets all linked computers and persons by using getRelation() in dataLayer
     // returns a double vector with the information
     vector<vector<string>> getRelation(string column);
+    vector<string> getOneRelation(string column, int id);
 };

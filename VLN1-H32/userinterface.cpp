@@ -345,39 +345,33 @@ void userInterface::printComputerFromSearch()
 
     printComputers(printMe, "Search results: ", "No match!");
 }
+
 void userInterface::printLinkedComputersAndPersonsFromSearch()
 {
     vector<string> printMe;
-    string searchFor;
-    string coutTmp;
-    cout << "Do you want to search for a computer or a scientist (1/2)? ";
+    cout << "Do you want to search for a scientist or a computer (1/2)? ";
     int searchBy = getCorrectInt(2);
+
     if(searchBy == 1)
     {
-        cout << "Enter name of the computer you want to search for: " << endl;
-        cout << "Name: ";
-        cin >> ws;
-        getline(cin, searchFor);
-        cout << endl;
-        coutTmp = "scientist(s)";
+        Person person = getRightPerson("get linked computers from");
+        cout << person.getName() << " is linked to the following computer(s): ";
+
     }
     else
     {
-        cout << "Enter name of the scientist you want to search for: " << endl;
-        cout << "Name: ";
-        cin >> ws;
-        getline(cin, searchFor);
-        cout << endl;
-        coutTmp = "computer(s)";
+        Computer computer = getRightComputer("get linked scientists from");
+        cout << computer.getName() << " is linked to the following scientist(s)): ";
     }
     printMe.push_back("kalli");
     printMe.push_back("mac");
     printMe.push_back("pc");
-    cout << printMe[0] << " is linked to the " << coutTmp;
+    //cout << printMe[0] << " is linked to the " << coutTmp;
     for(unsigned int i = 1; i < printMe.size(); i++)
     {
         cout << ": " << printMe[i];
     }
+    cout << endl;
 }
 
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
@@ -606,7 +600,7 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
 
 Person userInterface::getRightPerson(string action)
 {
-    cout << action << " the scientist" << " with the following name" << endl;
+    cout << action << " the scientist with the following name" << endl;
     cout << "Input: ";
     string input;
     cin >> ws;
@@ -617,7 +611,7 @@ Person userInterface::getRightPerson(string action)
 
 Computer userInterface::getRightComputer(string action)
 {
-    cout << action << " the computer" << " with the following name" << endl;
+    cout << action << " the computer with the following name" << endl;
     cout << "Input: ";
     string input;
     cin >> ws;

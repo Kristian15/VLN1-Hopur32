@@ -352,8 +352,12 @@ bool serviceLayer::updateComputer(int id, int col, string updateMe)
     return isValid;
 }
 
-vector<vector<string>> serviceLayer:: getRelation(string column)
+vector<vector<string>> serviceLayer::getRelation(string column)
 {
     return data.getRelation(column);
 }
 
+vector<string> serviceLayer::getOneRelation(string column, int id)
+{
+
+}
