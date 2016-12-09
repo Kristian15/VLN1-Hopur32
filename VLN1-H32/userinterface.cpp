@@ -250,7 +250,7 @@ void userInterface::printComputersFromDisplay()
 
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
 {
-    cout << "Do you want to the list by name of Scientists or by name of computers? (1/2)" << endl;
+    cout << "Do you want the list sorted by name of scientists or by name of computers? (1/2)" << endl;
     cout << "Input: ";
     int inputNameOrComputer = getCorrectInt(2);
     vector<vector<string>> printMe;
