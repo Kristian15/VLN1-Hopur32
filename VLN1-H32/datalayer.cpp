@@ -451,7 +451,7 @@ vector<string> dataLayer::searchRelation(int id, string table)
         QString qTable = QString::fromStdString(table);
         QString queryString = "SELECT DISTINCT " + qTable + ".Name from " + qTable;
         queryString.append(" JOIN Person_Computer AS pc ON pc." + qTable + "ID = " + qTable + ".ID");
-        queryString.append("WHERE pc." + qTable + " = :id");
+        queryString.append(" WHERE pc.PersonID = :id");
 
         return findRelation(queryString, id);
     }

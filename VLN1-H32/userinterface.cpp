@@ -351,7 +351,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     vector<string> printMe;
     cout << "Do you want to search for a scientist or a computer (1/2)? ";
     int searchBy = getCorrectInt(2);
-    string printTmp = "Computer";
+    string printTmp = "computer";
 
     if(searchBy == 1)
     {
@@ -373,9 +373,9 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     }
     else
     {
-        cout << " is linked to the following" << printTmp << "(s)): ";
+        cout << " is linked to the following " << printTmp << "(s)): ";
 
-        for(unsigned int i = 1; i < printMe.size(); i++)
+        for(unsigned int i = 0; i < printMe.size(); i++)
         {
             cout << ": " << printMe[i];
         }
