@@ -1,7 +1,6 @@
 #include "datalayer.h"
 #include <iostream>
 
-
 // **** Private ****
 
 void dataLayer::addNewPerson(Person addMe)
