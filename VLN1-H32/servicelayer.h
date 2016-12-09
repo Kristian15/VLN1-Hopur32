@@ -11,60 +11,60 @@ class serviceLayer
 {
 private:
     dataLayer data;
-    // validate functions, called by validateNewPerson():
-    // return true if the inputs are valid and false otherwise
+    // Validate functions, called by validateNewPerson():
+    // Return true if the inputs are valid and false otherwise
     bool validateName(string name);
     bool validateGender(string gender);
     bool validateNationality(string nationality);
     bool validateYear(string year);
     bool validateBuilt(string& built);
-    // creates a new person and returns it
+    // Creates a new person and returns it
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
-    // creates a new computer and returns it
+    // Creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
 public:
     bool openDatabase(){ return data.openDatabase(); }
-    // calls findPersons() in dataLayer
-    // returns a vector with the findings
+    // Calls findPersons() in dataLayer
+    // Returns a vector with the findings
     vector<Person> searchPersons(string findMe, int by);
-    // calls findComputers() in dataLayer
-    // returns a vector with the findings
+    // Calls findComputers() in dataLayer
+    // Returns a vector with the findings
     vector<Computer> searchComputers(string findMe, int by);
     vector<Person> searchPersonYears(int first, int second, int by);
     vector<Computer> searchComputerYears(int first, int second);
-    // calls getSortedPersons() in dataLayer
-    // returns a vector with the sorted scientists
+    // Calls getSortedPersons() in dataLayer
+    // Returns a vector with the sorted scientists
     vector<Person> sortPersons(int order, int ascOrDesc);
-    // calls getSortedComputers() in dataLayer
-    // returns a vector with the sorted computers
+    // Calls getSortedComputers() in dataLayer
+    // Returns a vector with the sorted computers
     vector<Computer> sortComputers(int order, int ascOrDesc);
-    // calls the help function getPerson() that returns a Person
+    // Calls the help function getPerson() that returns a Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
-    // calls the help function getComputer() that returns a Computer
+    // Calls the help function getComputer() that returns a Computer
     void newComputer(string name, string year, string type, string built);
-    // vaidate functions that are used to validate input
-    // uses the validate help functions
-    // returns true if the input is valid and false otherwise
+    // Vaidate functions that are used to validate input
+    // Uses the validate help functions
+    // Returns true if the input is valid and false otherwise
     bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
     bool validateNewComputer(string name, string year, string type, string& built);
-    // the delete functions use deleteItem() in dataLayer to delete
+    // The delete functions use deleteItem() in dataLayer to delete
     // the idem with ID = id
-    // return true if the item was deleted
     void deletePerson(int id);
     void deleteComputer(int id);
-    // calls makeRelation() in dataLayer with personID and computerID
-    // returns true if the connection was a success
+    // Calls makeRelation() in dataLayer with personID and computerID
     void link(int personID, int computerID);
-    // calls unMakeRelation() in dataLayer with personID and computerID
-    // returns true if the linking was a success
+    // Calls unMakeRelation() in dataLayer with personID and computerID
     void unLink(int personID, int computerID);
     // The update functions calls updateTable() in dataLayer with the
     // id of the item the user wants to change,
     // the column the user wants to change and the change the user wants to make
+    // returns true if updateMe is a valid input
     bool updatePerson(int id, int col, string updateMe);
     bool updateComputer(int id, int col, string updateMe);
     // Gets all linked computers and persons by using getRelation() in dataLayer
-    // returns a double vector with the information
+    // Returns a double vector with the information
     vector<vector<string>> getRelation(string column);
+    // Gets all links to the item with ID = id from table
+    // Uses searchRelation() in dataLayer
     vector<string> getOneRelation(int id, string table);
 };
