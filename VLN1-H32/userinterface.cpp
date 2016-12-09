@@ -762,6 +762,9 @@ void userInterface::getSearchYears(int oneOrRange, string& first, string& second
     }
 }
 
+/**
+ * @brief userInterface::deletePerson
+ */
 void userInterface::deletePerson()
 {
     Person person = getRightPerson("Delete");
@@ -774,6 +777,9 @@ void userInterface::deletePerson()
     }
 }
 
+/**
+ * @brief userInterface::deleteComputer
+ */
 void userInterface::deleteComputer()
 {
     Computer computer = getRightComputer("Delete");
@@ -786,6 +792,9 @@ void userInterface::deleteComputer()
     }
 }
 
+/**
+ * @brief userInterface::updatePerson
+ */
 void userInterface::updatePerson()
 {    
     Person person = getRightPerson("Update");
@@ -815,6 +824,9 @@ void userInterface::updatePerson()
     }
 }
 
+/**
+ * @brief userInterface::updateComputer
+ */
 void userInterface::updateComputer()
 {
     Computer computer = getRightComputer("Update");
@@ -837,6 +849,9 @@ void userInterface::updateComputer()
     }
 }
 
+/**
+ * @brief userInterface::linkPersonAndComputer
+ */
 void userInterface::linkPersonAndComputer()
 {    
     Person person = getRightPerson("Link");
@@ -853,6 +868,9 @@ void userInterface::linkPersonAndComputer()
     }
 }
 
+/**
+ * @brief userInterface::unlinkPersonAndComputer
+ */
 void userInterface::unlinkPersonAndComputer()
 {
     Person person = getRightPerson("Unlink");
@@ -869,6 +887,10 @@ void userInterface::unlinkPersonAndComputer()
     }
 }
 
+/**
+ * @brief userInterface::doYouWantToQuit
+ * @return bool
+ */
 bool userInterface::doYouWantToQuit()
 {
     cout << "Are you sure you want to quit? Y/N: ";
