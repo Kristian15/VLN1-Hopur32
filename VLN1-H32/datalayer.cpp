@@ -6,7 +6,6 @@
 
 void dataLayer::addNewPerson(Person addMe)
 {
-    // sama og í addNewComputer
     QSqlQuery query;
     query.prepare("INSERT INTO person (Name, Gender, Nationality, BirthYear, DeathYear) "
                  "VALUES (:name, :gender, :nationality, :byear, :dyear)");
@@ -256,7 +255,7 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
     queryString.append(QString::fromStdString(column));
     queryString.append(" LIKE '");
 
-    if(column != "Gender")
+    if(column != "Gender") // so female do not come up when searching for male
     {
         queryString.append("%");
     }

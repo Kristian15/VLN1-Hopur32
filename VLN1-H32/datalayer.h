@@ -16,7 +16,7 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
-    // functions that add, remove or change values in database are private
+    // add functions
     void addNewPerson(Person addMe);
     void addNewComputer(Computer addMe);
     void deleteRow(string table, int id);
@@ -24,7 +24,7 @@ private:
     void createRelation(int personID, int computerID);
     void deleteRelation(int personID, int computerID);
 
-    // Get functions to avoid code repetition
+    //
     vector<Person> getPersons(QString queryString);
     vector<Computer> getComputers(QString queryString);
 public:
