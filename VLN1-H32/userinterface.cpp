@@ -352,37 +352,50 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     cout << "Do you want to search for a scientist or a computer (1/2)? ";
     int searchBy = getCorrectInt(2);
     string printTmp = "computer";
+    bool match = false;
 
     if(searchBy == 1)
     {
         Person person = getRightPerson("Get linked computers from");
-        printMe = service.getOneRelation(person.getID(), "Computer");
-        cout << person.getName();
+
+        if(person.getID() != -1)
+        {
+            printMe = service.getOneRelation(person.getID(), "Computer");
+            cout << person.getName();
+            match = true;
+        }
     }
     else
     {
         Computer computer = getRightComputer("Get linked scientists from");
-        printMe = service.getOneRelation(computer.getID(), "Person");
-        printTmp = "scientist";
-        cout << computer.getName();
-    }
-
-    unsigned int printMeSize = printMe.size();
-
-    if(printMeSize == 0)
-    {
-        cout << " is not linked to any " << printTmp << endl;
-    }
-    else
-    {
-        cout << " is linked to the following " << printTmp << "(s))";
-
-        for(unsigned int i = 0; i < printMeSize; i++)
+        if(computer.getID() != -1)
         {
-            cout << ": " << printMe[i];
+            printMe = service.getOneRelation(computer.getID(), "Person");
+            printTmp = "scientist";
+            cout << computer.getName();
+            match = true;
         }
+    }
 
-        cout << endl;
+    if(match)
+    {
+        unsigned int printMeSize = printMe.size();
+
+        if(printMeSize == 0)
+        {
+            cout << " is not linked to any " << printTmp << endl;
+        }
+        else
+        {
+            cout << " is linked to the following " << printTmp << "(s)";
+
+            for(unsigned int i = 0; i < printMeSize; i++)
+            {
+                cout << ": " << printMe[i];
+            }
+
+            cout << endl;
+        }
     }
 }
 
