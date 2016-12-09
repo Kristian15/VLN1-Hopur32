@@ -18,13 +18,13 @@ private:
 
     // Adds a new Person to the database
     void addNewPerson(Person addMe);
-    // Adds a new Person to the database
+    // Adds a new Computer to the database
     void addNewComputer(Computer addMe);
     // Creates a relation between the Person with personID and the Computer with computerID
     void createRelation(int personID, int computerID);
     // Executes query using queryString and returns a vector of Persons
     vector<Person> getPersons(QString queryString);
-    // Executes query using queryString and returns a vector of Persons
+    // Executes query using queryString and returns a vector of Computers
     vector<Computer> getComputers(QString queryString);
     // Delete the row from table where ID = id
     void deleteRow(string table, int id);
@@ -38,7 +38,7 @@ public:
     dataLayer();
     // Destructor
     ~dataLayer();
-    // Checks if the database exists or not and opens it if it does
+    // Checks if the database exists or not and opens it if does exists
     bool openDatabase();
     // Uses addNewPerson()
     void addPerson(Person person);
@@ -64,11 +64,11 @@ public:
     vector<Person> searchPersonYears(string column, int from, int to);
     // Used if the user want to search by design year
     vector<Computer> searchComputerYears(int from, int to);
-    // return all related persons/computers
-    // returns a double vector where first element in every row is the name of the scientist/computer
-    // the following elements are the scientists/computers that are linked to it
+    // Return all related persons/computers
+    // Returns a double vector where first element in every row is the name of the scientist/computer
+    // The following elements are the scientists/computers that are linked to it
     vector<vector<string>> getRelation(string column);
-    // return related persons/computers from the item with ID = id
+    // Return related persons/computers from the item with ID = id
     vector<string> searchRelation(int id, string table);
     // Updates the item in column to updateMe from table
     void updateTable(int id, string table, string column, string updateMe);
