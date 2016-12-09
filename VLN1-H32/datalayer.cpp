@@ -101,7 +101,8 @@ vector<string> dataLayer::findRelation(QString queryString, int id)
 
     while(query.next())
     {
-        resultVector.push_back(query.value(0).toString().toStdString());
+        resultVector.push_back(query.value("Name").toString().toStdString());
+        cout << query.value("Name").toString().toStdString() << endl;
     }
 
     return resultVector;
@@ -439,11 +440,11 @@ vector<string> dataLayer::searchRelation(int id, string table)
 
         if(table == "Person")
         {
-            idCheck = "pc.PersonID";
+            idCheck = "pc.ComputerID";
         }
         else
         {
-            idCheck = "pc.ComputerID";
+            idCheck = "pc.PersonID";
         }
         QString qTable = QString::fromStdString(table);
         QString queryString = "SELECT DISTINCT " + qTable + ".Name from " + qTable;
