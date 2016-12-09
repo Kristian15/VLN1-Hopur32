@@ -308,7 +308,7 @@ bool serviceLayer::updatePerson(int id, int col, string updateMe)
             isValid = validateYear(updateMe); column = "BirthYear";
             break;
         case 5:
-            isValid = validateYear(updateMe); column = "DeathYear";
+            isValid = (validateYear(updateMe) || updateMe == "0"); column = "DeathYear";
             break;
         default:
             break;
