@@ -97,7 +97,7 @@ void userInterface::printMainMenu()
     cout << "7  = Add Scientist       - Adds scientist to your database" << endl;
     cout << "8  = Add Computer        - Adds computer to your database" << endl;
     cout << "9  = Update Scientist    - Update scientist in your database" << endl;
-    cout << "10  = Update Computer     - Update computer in your database" << endl;
+    cout << "10 = Update Computer     - Update computer in your database" << endl;
     cout << "11 = Delete Scientist    - Deletes scientist from you database" << endl;
     cout << "12 = Delete Computer     - Deletes computer from you database" << endl;
     cout << "13 = Link                - Link Scientist and Computer" << endl;
@@ -349,6 +349,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
 {
     vector<string> printMe;
     string searchFor;
+    string coutTmp;
     cout << "Do you want to search for a computer or a scientist (1/2)? ";
     int searchBy = getCorrectInt(2);
     if(searchBy == 1)
@@ -358,6 +359,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
         cin >> ws;
         getline(cin, searchFor);
         cout << endl;
+        coutTmp = "scientist(s)";
     }
     else
     {
@@ -366,6 +368,15 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
         cin >> ws;
         getline(cin, searchFor);
         cout << endl;
+        coutTmp = "computer(s)";
+    }
+    printMe.push_back("kalli");
+    printMe.push_back("mac");
+    printMe.push_back("pc");
+    cout << printMe[0] << " is linked to the " << coutTmp;
+    for(unsigned int i = 1; i < printMe.size(); i++)
+    {
+        cout << ": " << printMe[i];
     }
 }
 
