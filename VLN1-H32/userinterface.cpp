@@ -1,9 +1,9 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis,
-                  Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist,
-                  Update_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
+enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Search_Scientist,
+                  Search_Computer, Add_Scientis, Add_Computer, Update_Scientist, Update_Computer, Delete_Scientist,
+                  Delete_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
 void userInterface::run()
 {
@@ -41,23 +41,17 @@ void userInterface::run()
         case Display_Linked_Computers_and_Scientists:
             printLinkedComputersAndPersonsFromDisplay();
             break;
-        case Add_Scientis:
-            readPerson();
-            break;
-        case Add_Computer:
-            readComputer();
-            break;
-        case Delete_Scientist:
-            deletePerson();
-            break;
-        case Delete_Computer:
-            deleteComputer();
-            break;
         case Search_Scientist:
             printPersonsFromSearch();
             break;
         case Search_Computer:
             printComputerFromSearch();
+            break;
+        case Add_Scientis:
+            readPerson();
+            break;
+        case Add_Computer:
+            readComputer();
             break;
         case Update_Scientist:
             updatePerson();
@@ -65,6 +59,12 @@ void userInterface::run()
         case Update_Computer:
             updateComputer();
             break;
+        case Delete_Scientist:
+            deletePerson();
+            break;
+        case Delete_Computer:
+            deleteComputer();
+            break; 
         case Link_Scientist_and_Computer:
             linkPersonAndComputer();
             break;
@@ -88,14 +88,14 @@ void userInterface::printMainMenu()
     cout << "1  = Display Scientist   - Displays Scientists data in the selected order" << endl;
     cout << "2  = Display Computer    - Displays Computer data in the selected order" << endl;
     cout << "3  = Display linked C&S  - Displays linked Computers and Scientists in the selected order" << endl;
-    cout << "4  = Add Scientist       - Adds scientist to your database" << endl;
-    cout << "5  = Add Computer        - Adds computer to your database" << endl;
-    cout << "6  = Delete Scientist    - Deletes scientist from you database" << endl;
-    cout << "7  = Delete Computer     - Deletes computer from you database" << endl;
-    cout << "8  = Search Scientist    - Search for a scientist in your database" << endl;
-    cout << "9  = Search Computer     - Search for a computer in your database" << endl;
-    cout << "10 = Update Scientist    - Update scientist in your database" << endl;
-    cout << "11 = Update Computer     - Update computer in your database" << endl;
+    cout << "4  = Search Scientist    - Search for a scientist in your database" << endl;
+    cout << "5  = Search Computer     - Search for a computer in your database" << endl;
+    cout << "6  = Add Scientist       - Adds scientist to your database" << endl;
+    cout << "7  = Add Computer        - Adds computer to your database" << endl;
+    cout << "8  = Update Scientist    - Update scientist in your database" << endl;
+    cout << "9  = Update Computer     - Update computer in your database" << endl;
+    cout << "10 = Delete Scientist    - Deletes scientist from you database" << endl;
+    cout << "11 = Delete Computer     - Deletes computer from you database" << endl;
     cout << "12 = Link                - Link Scientist and Computer" << endl;
     cout << "13 = Unlink              - Unlink Scientist and Computer" << endl;
     cout << "14 = quit                - Quit the program" << endl;
