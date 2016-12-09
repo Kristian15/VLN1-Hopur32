@@ -481,7 +481,6 @@ vector<string> dataLayer::searchRelation(int id, string table)
         while(query.next())
         {
             resultVector.push_back(query.value("Name").toString().toStdString());
-            cout << query.value("Name").toString().toStdString() << endl;
         }
 
         return resultVector;
