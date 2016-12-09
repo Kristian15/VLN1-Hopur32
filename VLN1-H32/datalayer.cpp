@@ -254,7 +254,13 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
 {
     QString queryString = "SELECT * FROM Person WHERE ";
     queryString.append(QString::fromStdString(column));
-    queryString.append(" LIKE '%");
+    queryString.append(" LIKE '");
+
+    if(column != "Gender")
+    {
+        queryString.append("%");
+    }
+
     queryString.append(QString::fromStdString(findMe));
     queryString.append("%' COLLATE NOCASE");
 
@@ -268,14 +274,36 @@ vector<Person> dataLayer::findPersons(string column, string findMe)
     }
 }
 
-vector<Person> dataLayer::searchPersonYears(int from, int to)
+vector<Computer> dataLayer::findComputers(string column, string findMe)
+{
+    vector<Computer> computers;
+
+    QString queryString = "SELECT * FROM Computer WHERE ";
+    queryString.append(QString::fromStdString(column));
+    queryString.append(" LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE");
+
+    if(db.isOpen())
+    {
+        return getComputers(queryString);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
+    return computers;
+}
+
+vector<Person> dataLayer::searchPersonYears(string column, int from, int to)
 {
     vector<Person> persons;
 
     if(db.isOpen())
     {
+        QString qColumn = QString::fromStdString(column);
         QSqlQuery query;
-        query.prepare("SELECT * FROM Person WHERE BirthYear BETWEEN :from AND :to");
+        query.prepare("SELECT * FROM Person WHERE " + qColumn + " BETWEEN :from AND :to");
         query.bindValue(":from", from);
         query.bindValue(":to", to);
         query.exec();
@@ -327,27 +355,6 @@ vector<Computer> dataLayer::searchComputerYears(int from, int to)
     {
         throw string("Error: No database connection!");
     }
-}
-
-vector<Computer> dataLayer::findComputers(string column, string findMe)
-{
-    vector<Computer> computers;
-
-    QString queryString = "SELECT * FROM Computer WHERE ";
-    queryString.append(QString::fromStdString(column));
-    queryString.append(" LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
-    queryString.append("%' COLLATE NOCASE");
-
-    if(db.isOpen())
-    {
-        return getComputers(queryString);
-    }
-    else
-    {
-        throw string("Error: No database connection!");
-    }
-    return computers;
 }
 
 vector<vector<string>> dataLayer::getRelation(string column)

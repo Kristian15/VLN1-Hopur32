@@ -12,6 +12,7 @@ class userInterface
 {
 private:
     serviceLayer service;
+
     // *** PRINT INSTRUCTIONS FUNCTIONS ***
     // Prints the main menu
     void printMainMenu();
@@ -81,6 +82,8 @@ private:
     // Works like getRightPerson()
     // Uses searchComputers() , returns a Computer
     Computer getRightComputer(string action);
+    // Used when user wants to search for a year or a range of years
+    void getSearchYears(int oneOrRange, int& first, int& second);
 
     // *** ELSE ***
     // tests if database exists

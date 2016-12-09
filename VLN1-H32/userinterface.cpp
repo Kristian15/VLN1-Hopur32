@@ -1,7 +1,9 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis, Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist, Update_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
+enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Add_Scientis,
+                  Add_Computer, Delete_Scientist, Delete_Computer, Search_Scientist, Search_Computer, Update_Scientist,
+                  Update_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
 void userInterface::run()
 {
@@ -23,9 +25,11 @@ void userInterface::run()
 
     bool quit = false;
     int input = 0;
+
     do{
         printMainMenu();
         input = getCorrectInt(14);
+
         switch (input)
         {
         case Display_Scientis:
@@ -194,7 +198,6 @@ void userInterface::printSearchPersonsCommands(int input)
     else
     {
         cout << "Do you want to search for one year or a range of years? (1/2): " << endl;
-        cout << "Year of birth: ";
     }
 }
 
@@ -248,60 +251,43 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     int inputNameOrComputer = getCorrectInt(2);
     vector<vector<string>> printMe;
     size_t printMeSize;
+    string coutTmp;
 
     if(inputNameOrComputer == 1)
     {
        printMe = service.getRelation("Person");
-       printMeSize = printMe.size();
-
-       if(printMeSize == 0)
-       {
-           cout << "No links" << endl;
-       }
-       else
-       {
-           for(unsigned int i = 0; i < printMeSize; i++)
-           {
-               cout << printMe[i][0] << " ";
-               cout << "is linked to the following computer(s)";
-               for(unsigned int k = 1; k < printMe[i].size(); k++)
-               {
-                   cout << ": " << printMe[i][k] << " ";
-               }
-               cout <<endl;
-           }
-           cout << endl;
-           cout << left << setfill('-') << setw(80) << "-" << endl;
-           cout << endl;
-       }
+       coutTmp = "Computer(s)";
     }
     else
     {
        printMe = service.getRelation("Computer");
-       printMeSize = printMe.size();
-
-       if(printMeSize == 0)
-       {
-           cout << "No links!" << endl;
-       }
-       else
-       {
-           for(unsigned int i = 0; i < printMeSize; i++)
-           {
-               cout << printMe[i][0] << " ";
-               cout << "is linked to the following scientist(s)";
-               for(unsigned int k = 1; k < printMe[i].size(); k++)
-               {
-                   cout << ": " << printMe[i][k] << " ";
-               }
-               cout << endl;
-           }
-           cout << endl;
-           cout << left << setfill('-') << setw(80) << "-" << endl;
-           cout << endl;
-       }
+       coutTmp = "Person(s)";
     }
 
+    printMeSize = printMe.size();
+
+    if(printMeSize == 0)
+    {
+       cout << "No links" << endl;
+    }
+    else
+    {
+       for(unsigned int i = 0; i < printMeSize; i++)
+       {
+           cout << printMe[i][0] << " ";
+           cout << "is linked to the following " << coutTmp;
+
+           for(unsigned int k = 1; k < printMe[i].size(); k++)
+           {
+               cout << ": " << printMe[i][k] << " ";
+           }
+           cout <<endl;
+       }
+
+       cout << endl;
+       cout << left << setfill('-') << setw(80) << "-" << endl;
+       cout << endl;
+    }
 }
 
 void userInterface::printPersonsFromSearch()
@@ -310,30 +296,13 @@ void userInterface::printPersonsFromSearch()
     printSearchPersonsOptions();
     int searchBy = getCorrectInt(5);
     printSearchPersonsCommands(searchBy);
-    if((searchBy == 4) || (searchBy ==5))
+
+    if((searchBy == 4) || (searchBy ==5)) // if user wants to search for a year/s
     {
         int first, second;
         int oneOrRange = getCorrectInt(2);
-
-        if(oneOrRange == 1)
-        {
-            cout << "Enter the year you want to search for: " << endl;
-            cout << "Year: ";
-            cin >> first;
-            second = first;
-        }
-
-        else
-        {
-            cout << "Enter the first year: " << endl;
-            cout << "Year: " ;
-            cin >> first;
-            cout << "Enter the second year: " << endl;
-            cout << "Year: " ;
-            cin >> second;
-        }
-
-        printMe = service.searchPersonYears(first, second);
+        getSearchYears(oneOrRange, first, second);
+        printMe = service.searchPersonYears(first, second, searchBy);
     }
     else
     {
@@ -353,28 +322,12 @@ void userInterface::printComputerFromSearch()
     printSearchComputersOptions();
     int searchBy = getCorrectInt(4);
     printSearchComputersCommands(searchBy);
-    if(searchBy == 2)
+
+    if(searchBy == 2) // if user wants to search for a year/s
     {
         int first, second;
         int oneOrRange = getCorrectInt(2);
-
-        if(oneOrRange == 1)
-        {
-            cout << "Enter the year you want to search for: " << endl;
-            cout << "Year: " ;
-            cin >> first;
-            second = first;
-        }
-        else
-        {
-            cout << "Enter the first year: " << endl;
-            cout << "Year: " ;
-            cin >> first;
-            cout << "Enter the second year: " << endl;
-            cout << "Year: " ;
-            cin >> second;
-        }
-
+        getSearchYears(oneOrRange, first, second);
         printMe = service.searchComputerYears(first, second);
     }
     else
@@ -569,7 +522,7 @@ template <typename T>
 T userInterface::chooseWhich(vector<T> vec, string action, string type)
 {
     T item;
-    item.setID(-1);
+    item.setID(-1); // No Item was chosen if the ID is still -1 when the function returns item
     size_t vecSize = vec.size();
 
     if(vecSize == 0)
@@ -603,7 +556,7 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
         int vecSizeInt = static_cast<int>(vecSize + 1);
         int input = getCorrectInt(vecSizeInt);
 
-        if(input < vecSizeInt)
+        if(input < vecSizeInt) // else the user chose to cancel
         {
             input--;
             item = vec[input];
@@ -633,6 +586,26 @@ Computer userInterface::getRightComputer(string action)
     getline(cin, input);
     vector<Computer> vec = service.searchComputers(input, 1);
     return chooseWhich(vec, action, "computer");
+}
+
+void userInterface::getSearchYears(int oneOrRange, int& first, int& second)
+{
+    if(oneOrRange == 1)
+    {
+        cout << "Enter the year you want to search for: " << endl;
+        cout << "Year: ";
+        cin >> first;
+        second = first;
+    }
+    else
+    {
+        cout << "Enter the first year: " << endl;
+        cout << "Year: " ;
+        cin >> first;
+        cout << "Enter the second year: " << endl;
+        cout << "Year: " ;
+        cin >> second;
+    }
 }
 
 void userInterface::deletePerson()
@@ -673,12 +646,12 @@ void userInterface::updatePerson()
         printUpdatePersonOptions();
         int input = getCorrectInt(5);
 
-        cout << "Input the change: " ;
+        cout << "Input the change you want to make: " ;
         cin >> ws;
         string changeString;
         getline(cin, changeString);
 
-        if(service.callUpdatePerson(personID, input, changeString))
+        if(service.updatePerson(personID, input, changeString))
         {
             cout << "Update successful!" << endl;
         }
@@ -695,12 +668,12 @@ void userInterface::updateComputer()
         printUpdateComputerOptions();
         int input = getCorrectInt(4);
 
-        cout << "Input the change: " ;
+        cout << "Input the change you want to make: " ;
         cin >> ws;
         string changeString;
         getline(cin, changeString);
 
-        if(service.callUpdateComputer(computerID, input, changeString))
+        if(service.updateComputer(computerID, input, changeString))
         {
             cout << "Update successful!" << endl;
         }

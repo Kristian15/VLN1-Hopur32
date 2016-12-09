@@ -30,7 +30,7 @@ public:
     // calls findComputers() in dataLayer
     // returns a vector with the findings
     vector<Computer> searchComputers(string findMe, int by);
-    vector<Person> searchPersonYears(int first, int second);
+    vector<Person> searchPersonYears(int first, int second, int by);
     vector<Computer> searchComputerYears(int first, int second);
     // calls getSortedPersons() in dataLayer
     // returns a vector with the sorted scientists
@@ -61,8 +61,8 @@ public:
     // The update functions calls updateTable() in dataLayer with the
     // id of the item the user wants to change,
     // the column the user wants to change and the change the user wants to make
-    bool callUpdatePerson(int id, int col, string updateMe);
-    bool callUpdateComputer(int id, int col, string updateMe);
+    bool updatePerson(int id, int col, string updateMe);
+    bool updateComputer(int id, int col, string updateMe);
     // Gets all linked computers and persons by using getRelation() in dataLayer
     // returns a double vector with the information
     vector<vector<string>> getRelation(string column);

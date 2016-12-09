@@ -34,7 +34,7 @@ public:
     vector<Person> getSortedPersons(string column, int ascDesc);
     vector<Computer> getSortedComputers(string column, int ascDesc);
     vector<Person> findPersons(string column, string findMe);
-    vector<Person> searchPersonYears(int from, int to);
+    vector<Person> searchPersonYears(string column, int from, int to);
     vector<Computer> searchComputerYears(int from, int to);
     vector<Computer> findComputers(string column, string findMe);
 

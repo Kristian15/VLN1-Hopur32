@@ -42,8 +42,9 @@ bool serviceLayer::validateNationality(string nationality)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        // spaces and alphas are alowed
-        if ((isspace(nationality[i])) || (isalpha(nationality[i])))
+        char c = nationality[i];
+
+        if ((isspace(c)) || (isalpha(c)))
         {
             tmp ++;
         }
@@ -132,57 +133,49 @@ Computer serviceLayer:: getNewComputer(string name, string year, string type, st
 
 vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
-    vector<Person> findings;
+    string col = "Name"; // case 1
 
     switch (by) {
-    case 1:
-        findings = data.findPersons("Name", findMe);
-        break;
     case 2:
-        findings = data.findPersons("Gender", findMe);
+        col = "Gender";
         break;
     case 3:
-        findings = data.findPersons("Nationality", findMe);
-        break;
-    case 4:
-        findings = data.findPersons("BirthYear", findMe);
-        break;
-    case 5:
-        findings = data.findPersons("DeathYear", findMe);
+        col = "Nationality";
         break;
     default:
         break;
     }
 
-    return findings;
+    return data.findPersons(col, findMe);
 }
 
 vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
-    vector<Computer> findings;
+    string col = "Name"; // case 1
 
-    switch (by) {
-    case 1:
-        findings = data.findComputers("Name", findMe);
-        break;
-    case 2:
-        findings = data.findComputers("Year", findMe);
-        break;
+    switch (by) { // case 2 is handled by searchComputerYears()
     case 3:
-        findings = data.findComputers("Type", findMe);
+        col = "Type";
         break;
     case 4:
-        findings = data.findComputers("Built", findMe);
+        col = "Built";
     default:
         break;
     }
 
-    return findings;
+    return data.findComputers(col, findMe);
 }
 
-vector<Person> serviceLayer::searchPersonYears(int first, int second)
+vector<Person> serviceLayer::searchPersonYears(int first, int second, int by)
 {
-    return data.searchPersonYears(first, second);
+    string col = "BirthYear";
+
+    if(by == 5)
+    {
+        col = "DeathYear";
+    }
+
+    return data.searchPersonYears(col, first, second);
 }
 
 vector<Computer> serviceLayer::searchComputerYears(int first, int second)
@@ -192,52 +185,46 @@ vector<Computer> serviceLayer::searchComputerYears(int first, int second)
 
 vector<Person> serviceLayer::sortPersons(int order, int ascOrDesc)
 {
-    vector<Person> sorted;
+    string col = "Name"; // case 1
 
     switch (order) {
-    case 1:
-        sorted = data.getSortedPersons("Name", ascOrDesc);
-        break;
     case 2:
-        sorted = data.getSortedPersons("Gender", ascOrDesc);
+        col = "Gender";
         break;
     case 3:
-        sorted = data.getSortedPersons("Nationality", ascOrDesc);
+        col = "Nationality";
         break;
     case 4:
-        sorted = data.getSortedPersons("BirthYear", ascOrDesc);
+        col = "BirthYear";
         break;
     case 5:
-        sorted = data.getSortedPersons("DeathYear", ascOrDesc);
+        col = "DeathYear";
         break;
     default:
         break;
     }
 
-    return sorted;
+    return data.getSortedPersons(col, ascOrDesc);
 }
 
 vector<Computer> serviceLayer::sortComputers(int order, int ascOrDesc)
 {
-    vector<Computer> sorted;
+    string col = "Name"; // case 1
 
     switch (order) {
-    case 1:
-        sorted = data.getSortedComputers("Name", ascOrDesc);
-        break;
     case 2:
-        sorted = data.getSortedComputers("Year", ascOrDesc);
+        col = "Year";
         break;
     case 3:
-        sorted = data.getSortedComputers("Type", ascOrDesc);
+        col = "Type";
         break;
     case 4:
-        sorted = data.getSortedComputers("Built", ascOrDesc);
+        col = "Built";
     default:
         break;
     }
 
-    return sorted;
+    return data.getSortedComputers(col, ascOrDesc);
 }
 
 void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
@@ -252,24 +239,24 @@ void serviceLayer::newComputer(string name, string year, string type, string bui
 
 bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
-    bool b = false;
+    bool isValid = false;
 
     if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
     {
         if(dyear != "0")
         {
-            if(validateYear(dyear) && dyear > byear)
+            if(validateYear(dyear) && (dyear > byear))
             {
-                b = true;
+                isValid = true;
             }
         }
         else
         {
-            b = true;
+            isValid = true;
         }
     }
 
-    return b;
+    return isValid;
 }
 
 bool serviceLayer::validateNewComputer(string name, string year, string type, string& built)
@@ -302,11 +289,11 @@ bool serviceLayer::unLink(int personID, int computerID)
     return data.unMakeRelation(personID, computerID);
 }
 
-bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
+bool serviceLayer::updatePerson(int id, int col, string updateMe)
 {
     bool isValid = false;
     string column;
-    // *** todo *** beautify
+
     switch(col){
         case 1:
             isValid = validateName(updateMe); column = "Name";
@@ -335,11 +322,11 @@ bool serviceLayer::callUpdatePerson(int id, int col, string updateMe)
     return isValid;
 }
 
-bool serviceLayer::callUpdateComputer(int id, int col, string updateMe)
+bool serviceLayer::updateComputer(int id, int col, string updateMe)
 {
     bool isValid = false;
     string column;
-    // *** todo *** beautify
+
     switch(col){
         case 1:
             isValid = (updateMe != ""); column = "Name";
