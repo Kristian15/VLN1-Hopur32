@@ -16,12 +16,13 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
-    // add functions
+    // adds a new Person to the database
     void addNewPerson(Person addMe);
+    // adds a new Person to the database
     void addNewComputer(Computer addMe);
+    // creates a relation between the Person with personID and the Computer with computerID
     void createRelation(int personID, int computerID);
-
-    // read functions
+    //
     vector<Person> getPersons(QString queryString);
     vector<Computer> getComputers(QString queryString);
     vector<string> findRelation(QString queryString, int id);
