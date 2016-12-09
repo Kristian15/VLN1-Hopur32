@@ -40,46 +40,6 @@ void dataLayer::addNewComputer(Computer addMe)
     query.exec();
 }
 
-void dataLayer::deleteRow(string table, int id)
-{
-    QString qTable = QString::fromStdString(table);
-
-    QSqlQuery query;
-    query.prepare("DELETE FROM " + qTable + " WHERE ID = :id ");
-    query.bindValue(":id", id);
-    query.exec();
-
-    qTable.append("ID");
-
-    QSqlQuery query2;
-    query2.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
-    query2.bindValue(":id", id);
-    query2.exec();
-}
-
-void dataLayer::updateItem(int id, string table, string column, string updateME)
-{
-    QString qTable = QString::fromStdString(table);
-    QString qColumn = QString::fromStdString(column);
-    QString queryString = "UPDATE " + qTable + " SET " + qColumn + " = (:updateME) WHERE ID = (:id)";
-    QString qUpdateME = QString::fromStdString(updateME);
-
-    if(column == "Built" && updateME == "y")
-    {
-        qUpdateME = "1";
-    }
-    else if(column == "Built" && updateME == "n")
-    {
-        qUpdateME = "0";
-    }
-
-    QSqlQuery query;
-    query.prepare(queryString);
-    query.bindValue(":updateME", qUpdateME);
-    query.bindValue(":id", id);
-    query.exec();
-}
-
 void dataLayer::createRelation(int personID, int computerID)
 {
     QSqlQuery query;
@@ -87,16 +47,6 @@ void dataLayer::createRelation(int personID, int computerID)
                   "VALUES (:personID, :computerID)");
     query.bindValue(":personID", personID);
     query.bindValue(":computerID", computerID);
-    query.exec();
-}
-
-void dataLayer::deleteRelation(int personID, int computerID)
-{
-    QString qPersID = QString::number(personID);
-    QString qCompID = QString::number(computerID);
-    QSqlQuery query;
-    query.prepare("DELETE FROM Person_Computer WHERE PersonID = " +
-                  qPersID + " AND computerID = " + qCompID);
     query.exec();
 }
 
@@ -156,6 +106,56 @@ vector<string> dataLayer::findRelation(QString queryString, int id)
     }
 
     return resultVector;
+}
+
+void dataLayer::deleteRow(string table, int id)
+{
+    QString qTable = QString::fromStdString(table);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM " + qTable + " WHERE ID = :id ");
+    query.bindValue(":id", id);
+    query.exec();
+
+    qTable.append("ID");
+
+    QSqlQuery query2;
+    query2.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
+    query2.bindValue(":id", id);
+    query2.exec();
+}
+
+void dataLayer::deleteRelation(int personID, int computerID)
+{
+    QString qPersID = QString::number(personID);
+    QString qCompID = QString::number(computerID);
+    QSqlQuery query;
+    query.prepare("DELETE FROM Person_Computer WHERE PersonID = " +
+                  qPersID + " AND computerID = " + qCompID);
+    query.exec();
+}
+
+void dataLayer::updateItem(int id, string table, string column, string updateME)
+{
+    QString qTable = QString::fromStdString(table);
+    QString qColumn = QString::fromStdString(column);
+    QString queryString = "UPDATE " + qTable + " SET " + qColumn + " = (:updateME) WHERE ID = (:id)";
+    QString qUpdateME = QString::fromStdString(updateME);
+
+    if(column == "Built" && updateME == "y")
+    {
+        qUpdateME = "1";
+    }
+    else if(column == "Built" && updateME == "n")
+    {
+        qUpdateME = "0";
+    }
+
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":updateME", qUpdateME);
+    query.bindValue(":id", id);
+    query.exec();
 }
 
 // **** Public ****
@@ -472,27 +472,24 @@ void dataLayer::updateTable(int id, string table, string column, string updateME
     return;
 }
 
-bool dataLayer::deleteItem(string table, int id)
+void dataLayer::deleteItem(string table, int id)
 {
     if(db.isOpen())
     {
         deleteRow(table, id);
-        return true;
     }
     else
     {
         throw string("Error: No database connection!");
     }
-    return false;
 }
 
-bool dataLayer::makeRelation(int personID, int computerID)
+void dataLayer::makeRelation(int personID, int computerID)
 {
 
     if(db.isOpen())
     {
         createRelation(personID, computerID);
-        return true;
     }
     else
     {
@@ -500,7 +497,7 @@ bool dataLayer::makeRelation(int personID, int computerID)
     }
 }
 
-bool dataLayer::unMakeRelation(int personID, int computerID)
+void dataLayer::unMakeRelation(int personID, int computerID)
 {
     if(db.isOpen())
     {
@@ -510,5 +507,4 @@ bool dataLayer::unMakeRelation(int personID, int computerID)
     {
         throw string("Error: No database connection!");
     }
-    return true;
 }
