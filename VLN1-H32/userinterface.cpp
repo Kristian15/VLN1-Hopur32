@@ -102,7 +102,7 @@ void userInterface::printMainMenu()
     cout << "12 = Delete Computer     - Deletes computer from you database" << endl;
     cout << "13 = Link                - Link Scientist and Computer" << endl;
     cout << "14 = Unlink              - Unlink Scientist and Computer" << endl;
-    cout << "15 = quit                - Quit the program" << endl;
+    cout << "15 = Quit                - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
@@ -355,13 +355,13 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
 
     if(searchBy == 1)
     {
-        Person person = getRightPerson("get linked computers from");
+        Person person = getRightPerson("Get linked computers from");
         printMe = service.getOneRelation(person.getID(), "Computer");
         cout << person.getName();
     }
     else
     {
-        Computer computer = getRightComputer("get linked scientists from");
+        Computer computer = getRightComputer("Get linked scientists from");
         printMe = service.getOneRelation(computer.getID(), "Person");
         printTmp = "scientist";
         cout << computer.getName();
@@ -651,7 +651,7 @@ void userInterface::getSearchYears(int oneOrRange, int& first, int& second)
 
 void userInterface::deletePerson()
 {
-    Person person = getRightPerson("delete");
+    Person person = getRightPerson("Delete");
     int personID = person.getID();
 
     if(personID != -1)
@@ -665,7 +665,7 @@ void userInterface::deletePerson()
 
 void userInterface::deleteComputer()
 {
-    Computer computer = getRightComputer("delete");
+    Computer computer = getRightComputer("Delete");
     int computerID = computer.getID();
 
     if(computerID != -1)
