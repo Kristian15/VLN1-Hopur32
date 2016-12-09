@@ -261,6 +261,9 @@ void userInterface::printSearchComputersCommands(int input)
     }
 }
 
+/**
+ * @brief userInterface::printPersonsFromDisplay
+ */
 void userInterface::printPersonsFromDisplay()
 {
     printDisplayPersonsOptions();
@@ -271,6 +274,9 @@ void userInterface::printPersonsFromDisplay()
     printPersons(sorted, "Here is your list sorted: " , "No scientist in the database!");
 }
 
+/**
+ * @brief userInterface::printComputersFromDisplay
+ */
 void userInterface::printComputersFromDisplay()
 {
     printDisplayComputersOptions();
@@ -281,6 +287,9 @@ void userInterface::printComputersFromDisplay()
     printComputers(sorted, "Here is your list sorted: " , "No computer in the database!");
 }
 
+/**
+ * @brief userInterface::printLinkedComputersAndPersonsFromDisplay
+ */
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
 {
     cout << "Do you want the list sorted by name of scientists or by name of computers? (1/2)" << endl;
@@ -412,7 +421,7 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
 
     if(match)
     {
-        unsigned int printMeSize = printMe.size();
+        size_t printMeSize = printMe.size();
 
         if(printMeSize == 0)
         {
