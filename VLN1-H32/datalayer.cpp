@@ -345,18 +345,14 @@ vector<Person> dataLayer::searchPersonYears(string column, int from, int to)
 
     while(query.next())
     {
-        int deathYear = query.value("DeathYear").toInt();
-        if(deathYear != 0)
-        {
-            Person person(
-                        query.value("ID").toUInt(),
-                        query.value("Name").toString().toStdString(),
-                        query.value("Gender").toString().toStdString(),
-                        query.value("Nationality").toString().toStdString(),
-                        query.value("BirthYear").toInt(),
-                        deathYear);
-            persons.push_back(person);
-        }
+        Person person(
+                    query.value("ID").toUInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Gender").toString().toStdString(),
+                    query.value("Nationality").toString().toStdString(),
+                    query.value("BirthYear").toInt(),
+                    query.value("DeathYear").toInt());
+        persons.push_back(person);
     }
     return persons;
 }

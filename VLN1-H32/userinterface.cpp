@@ -336,6 +336,9 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     }
 }
 
+/**
+ * @brief userInterface::printPersonsFromSearch
+ */
 void userInterface::printPersonsFromSearch()
 {
     vector<Person> printMe;
@@ -345,7 +348,7 @@ void userInterface::printPersonsFromSearch()
 
     if((searchBy == 4) || (searchBy ==5)) // if user wants to search for a year/s
     {
-        int first, second;
+        string first, second;
         int oneOrRange = getCorrectInt(2);
         getSearchYears(oneOrRange, first, second);
         printMe = service.searchPersonYears(first, second, searchBy);
@@ -362,6 +365,9 @@ void userInterface::printPersonsFromSearch()
     printPersons(printMe, "Search results: ", "No match!");
 }
 
+/**
+ * @brief userInterface::printComputerFromSearch
+ */
 void userInterface::printComputerFromSearch()
 {
     vector<Computer> printMe;
@@ -371,7 +377,7 @@ void userInterface::printComputerFromSearch()
 
     if(searchBy == 2) // if user wants to search for a year/s
     {
-        int first, second;
+        string first, second;
         int oneOrRange = getCorrectInt(2);
         getSearchYears(oneOrRange, first, second);
         printMe = service.searchComputerYears(first, second);
@@ -388,6 +394,9 @@ void userInterface::printComputerFromSearch()
     printComputers(printMe, "Search results: ", "No match!");
 }
 
+/**
+ * @brief userInterface::printLinkedComputersAndPersonsFromSearch
+ */
 void userInterface::printLinkedComputersAndPersonsFromSearch()
 {
     vector<string> printMe;
@@ -441,6 +450,12 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     }
 }
 
+/**
+ * @brief userInterface::printPersons
+ * @param printMe
+ * @param inMessage
+ * @param outMessage
+ */
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
@@ -488,6 +503,12 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
     }
 }
 
+/**
+ * @brief userInterface::printComputers
+ * @param printMe
+ * @param inMessage
+ * @param outMessage
+ */
 void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
@@ -532,6 +553,9 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
     }
 }
 
+/**
+ * @brief userInterface::readPerson
+ */
 void userInterface::readPerson()
 {
     string name, gender, nationality, byear, dyear, input;
@@ -568,6 +592,9 @@ void userInterface::readPerson()
     }
 }
 
+/**
+ * @brief userInterface::readComputer
+ */
 void userInterface::readComputer()
 {
     string name, year, type, built, input;
@@ -601,6 +628,11 @@ void userInterface::readComputer()
     }
 }
 
+/**
+ * @brief userInterface::getCorrectInt
+ * @param max
+ * @return int
+ */
 int userInterface::getCorrectInt(int max)
 {
     int input;
@@ -617,6 +649,13 @@ int userInterface::getCorrectInt(int max)
     return input;
 }
 
+/**
+ * @brief userInterface::chooseWhich
+ * @param vec
+ * @param action
+ * @param type
+ * @return T
+ */
 template <typename T>
 T userInterface::chooseWhich(vector<T> vec, string action, string type)
 {
@@ -665,6 +704,11 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
     return item;
 }
 
+/**
+ * @brief userInterface::getRightPerson
+ * @param action
+ * @return Person
+ */
 Person userInterface::getRightPerson(string action)
 {
     cout << action << " the scientist with the following name" << endl;
@@ -676,6 +720,11 @@ Person userInterface::getRightPerson(string action)
     return chooseWhich(vec, action, "scientist");
 }
 
+/**
+ * @brief userInterface::getRightComputer
+ * @param action
+ * @return Computer
+ */
 Computer userInterface::getRightComputer(string action)
 {
     cout << action << " the computer with the following name" << endl;
@@ -687,7 +736,13 @@ Computer userInterface::getRightComputer(string action)
     return chooseWhich(vec, action, "computer");
 }
 
-void userInterface::getSearchYears(int oneOrRange, int& first, int& second)
+/**
+ * @brief userInterface::getSearchYears
+ * @param oneOrRange
+ * @param first
+ * @param second
+ */
+void userInterface::getSearchYears(int oneOrRange, string& first, string& second)
 {
     if(oneOrRange == 1)
     {

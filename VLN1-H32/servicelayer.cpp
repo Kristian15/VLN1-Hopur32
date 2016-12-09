@@ -227,16 +227,23 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
  * @param by
  * @return vector<Person>
  */
-vector<Person> serviceLayer::searchPersonYears(int first, int second, int by)
+vector<Person> serviceLayer::searchPersonYears(string first, string second, int by)
 {
-    string col = "BirthYear";
+    vector<Person> vec;
 
-    if(by == 5)
+    if(validateYear(first) && validateYear(second))
     {
-        col = "DeathYear";
+        string col = "BirthYear";
+
+        if(by == 5)
+        {
+            col = "DeathYear";
+        }
+
+        vec = data.searchPersonYears(col, stoi(first), stoi(second));
     }
 
-    return data.searchPersonYears(col, first, second);
+    return vec;
 }
 
 /**
@@ -245,9 +252,16 @@ vector<Person> serviceLayer::searchPersonYears(int first, int second, int by)
  * @param second
  * @return vector<Computer>
  */
-vector<Computer> serviceLayer::searchComputerYears(int first, int second)
+vector<Computer> serviceLayer::searchComputerYears(string first, string second)
 {
-    return data.searchComputerYears(first, second);
+    vector<Computer> vec;
+
+    if(validateYear(first) && validateYear(second))
+    {
+        vec = data.searchComputerYears(stoi(first), stoi(second));
+    }
+
+    return vec;
 }
 
 /**

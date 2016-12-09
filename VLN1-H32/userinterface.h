@@ -85,7 +85,7 @@ private:
     // Uses searchComputers() , returns a Computer
     Computer getRightComputer(string action);
     // Used when user wants to search for a year or a range of years
-    void getSearchYears(int oneOrRange, int& first, int& second);
+    void getSearchYears(int oneOrRange, string& first, string& second);
 
     // *** ELSE ***
     // Tests if database exists
