@@ -47,7 +47,6 @@ void dataLayer::deleteRow(string table, int id)
 
     QSqlQuery query;
     query.prepare("DELETE FROM " + qTable + " WHERE ID = :id ");
-    //query.bindValue(":table", QString::fromStdString(table)); why does the other one work and not this
     query.bindValue(":id", id);
     query.exec();
 
@@ -55,7 +54,6 @@ void dataLayer::deleteRow(string table, int id)
 
     QSqlQuery query2;
     query2.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
-    //query2.bindValue(":column", qTable);
     query2.bindValue(":id", id);
     query2.exec();
 }
@@ -64,6 +62,7 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
 {
     QString qTable = QString::fromStdString(table);
     QString qColumn = QString::fromStdString(column);
+    QString queryString = "UPDATE " + qTable + " SET " + qColumn + " = (:updateME) WHERE ID = (:id)";
     QString qUpdateME = QString::fromStdString(updateME);
 
     if(column == "Built" && updateME == "y")
@@ -76,11 +75,10 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
     }
 
     QSqlQuery query;
-    query.prepare("UPDATE " + qTable + " SET " + qColumn + "='" + qUpdateME + "' WHERE ID = :id");
+    query.prepare(queryString);
+    query.bindValue(":updateME", qUpdateME);
     query.bindValue(":id", id);
     query.exec();
-
-    qDebug() << query.lastError().text();
 }
 
 void dataLayer::createRelation(int personID, int computerID)
@@ -142,6 +140,23 @@ vector<Computer> dataLayer::getComputers(QString queryString)
         computers.push_back(computer);
     }
     return computers;
+}
+
+vector<string> dataLayer::findRelation(QString queryString, int id)
+{
+    vector<string> resultVector;
+
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":id", id);
+    query.exec();
+
+    while(query.next())
+    {
+        resultVector.push_back(query.value(0).toString().toStdString());
+    }
+
+    return resultVector;
 }
 
 // **** Public ****
@@ -416,6 +431,34 @@ vector<vector<string>> dataLayer::getRelation(string column)
     }
 
     return resultMatrix;
+}
+
+vector<string> dataLayer::searchRelation(int id, string table)
+{
+    if(db.isOpen())
+    {
+        /*QString qTable = QString::fromStdString(table);
+        QString qFindME = QString::fromStdString(findME);
+        QString queryString = "SELECT DISTINCT p.Name, c.Name ";
+        queryString.append("FROM Person_Computer pc ");
+        queryString.append("JOIN Person p ON p.ID = pc.PersonID ");
+        queryString.append("JOIN Computer c ON c.ID = pc.ComputerID ");
+        queryString.append("WHERE " + qTable + ".name LIKE '%:findME");*/
+
+        /*SELECT DISTINCT Computer.Name from Computer
+        JOIN Person_Computer pc ON pc.ComputerID = computer.ID
+        WHERE pc.PersonID = 1*/
+        QString qTable = QString::fromStdString(table);
+        QString queryString = "SELECT DISTINCT " + qTable + ".Name from " + qTable;
+        queryString.append(" JOIN Person_Computer pc ON pc." + qTable + "ID = " + qTable + ".ID");
+        queryString.append("WHERE pc." + qTable + " = :id");
+
+        return findRelation(queryString, id);
+    }
+    else
+    {
+        throw string("Error: No database connection!");
+    }
 }
 
 void dataLayer::updateTable(int id, string table, string column, string updateME)
