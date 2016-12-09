@@ -85,20 +85,20 @@ void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
-    cout << "1 = Display Scientist   - Displays Scientists data in the selected order" << endl;
-    cout << "2 = Display Computer    - Displays Computer data in the selected order" << endl;
-    cout << "3 = Display linked C&S  - Displays linked Computers and Scientists in the selected order" << endl;
-    cout << "4 = Add Scientist       - Adds scientist to your database" << endl;
-    cout << "5 = Add Computer        - Adds computer to your database" << endl;
-    cout << "6 = Delete Scientist    - Deletes scientist from you database" << endl;
-    cout << "7 = Delete Computer     - Deletes computer from you database" << endl;
-    cout << "8 = Search Scientist    - Search for a scientist in your database" << endl;
-    cout << "9 = Search Computer     - Search for a computer in your database" << endl;
-    cout << "10 = Update Scientist   - Update scientist in your database" << endl;
-    cout << "11 = Update Computer    - Update computer in your database" << endl;
-    cout << "12 = Link               - Link Scientist and Computer" << endl;
-    cout << "13 = Unlink             - Unlink Scientist and Computer" << endl;
-    cout << "14 = quit               - Quit the program" << endl;
+    cout << "1  = Display Scientist   - Displays Scientists data in the selected order" << endl;
+    cout << "2  = Display Computer    - Displays Computer data in the selected order" << endl;
+    cout << "3  = Display linked C&S  - Displays linked Computers and Scientists in the selected order" << endl;
+    cout << "4  = Add Scientist       - Adds scientist to your database" << endl;
+    cout << "5  = Add Computer        - Adds computer to your database" << endl;
+    cout << "6  = Delete Scientist    - Deletes scientist from you database" << endl;
+    cout << "7  = Delete Computer     - Deletes computer from you database" << endl;
+    cout << "8  = Search Scientist    - Search for a scientist in your database" << endl;
+    cout << "9  = Search Computer     - Search for a computer in your database" << endl;
+    cout << "10 = Update Scientist    - Update scientist in your database" << endl;
+    cout << "11 = Update Computer     - Update computer in your database" << endl;
+    cout << "12 = Link                - Link Scientist and Computer" << endl;
+    cout << "13 = Unlink              - Unlink Scientist and Computer" << endl;
+    cout << "14 = quit                - Quit the program" << endl;
     cout << setfill('-') << setw(80) << "-" << endl;
     cout << "Input: ";
 }
