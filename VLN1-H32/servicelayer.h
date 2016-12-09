@@ -50,14 +50,14 @@ public:
     // the delete functions use deleteItem() in dataLayer to delete
     // the idem with ID = id
     // return true if the item was deleted
-    bool deletePerson(int id);
-    bool deleteComputer(int id);
+    void deletePerson(int id);
+    void deleteComputer(int id);
     // calls makeRelation() in dataLayer with personID and computerID
     // returns true if the connection was a success
-    bool link(int personID, int computerID);
+    void link(int personID, int computerID);
     // calls unMakeRelation() in dataLayer with personID and computerID
     // returns true if the linking was a success
-    bool unLink(int personID, int computerID);
+    void unLink(int personID, int computerID);
     // The update functions calls updateTable() in dataLayer with the
     // id of the item the user wants to change,
     // the column the user wants to change and the change the user wants to make

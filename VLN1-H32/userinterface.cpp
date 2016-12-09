@@ -656,10 +656,8 @@ void userInterface::deletePerson()
 
     if(personID != -1)
     {
-        if(service.deletePerson(personID))
-        {
-            cout << "Delete successful!" << endl;
-        }
+        service.deletePerson(personID);
+        cout << "Delete successful!" << endl;
     }
 }
 
@@ -670,10 +668,8 @@ void userInterface::deleteComputer()
 
     if(computerID != -1)
     {
-        if(service.deleteComputer(computerID))
-        {
-            cout << "Delete successful!" << endl;
-        }
+        service.deleteComputer(computerID);
+        cout << "Delete successful!" << endl;
     }
 }
 
@@ -731,10 +727,8 @@ void userInterface::linkPersonAndComputer()
 
         if(computer.getID() != -1)
         {
-            if(service.link(person.getID(), computer.getID()))
-            {
-                cout << "Link successful!" << endl;
-            }
+            service.link(person.getID(), computer.getID());
+            cout << "Link successful!" << endl;
         }
     }
 }
@@ -749,10 +743,8 @@ void userInterface::unlinkPersonAndComputer()
 
         if(computer.getID() != -1)
         {
-            if(service.unLink(person.getID(), computer.getID()))
-            {
-                cout << "Unlink successful!" << endl;
-            }
+            service.unLink(person.getID(), computer.getID());
+            cout << "Unlink successful!" << endl;
         }
     }
 }
