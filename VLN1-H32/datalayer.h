@@ -27,8 +27,8 @@ private:
     vector<string> findRelation(QString queryString, int id);
 
     // delete functions
-    void deleteRelation(int personID, int computerID);
     void deleteRow(string table, int id);
+    void deleteRelation(int personID, int computerID);
 
     // update function
     void updateItem(int id, string table, string column, string updateME);
@@ -50,10 +50,10 @@ public:
     // return all related persons/computers
     vector<string> searchRelation(int id, string table);
 
-    bool deleteItem(string table, int id);
+    void deleteItem(string table, int id);
     // creates a relation between a comptuer and a scientist
-    bool makeRelation(int personID, int computerID);
-    bool unMakeRelation(int personID, int computerID);
+    void makeRelation(int personID, int computerID);
+    void unMakeRelation(int personID, int computerID);
     void addPerson(Person person);
     void addComputer(Computer computer);
 };
