@@ -684,6 +684,13 @@ void userInterface::updatePerson()
         int input = getCorrectInt(5);
 
         cout << "Input the change you want to make: " ;
+
+        if(input == 5)
+        {
+            cout << endl;
+            cout << "Input 0 if you want to remove the year of death: ";
+        }
+
         cin >> ws;
         string changeString;
         getline(cin, changeString);

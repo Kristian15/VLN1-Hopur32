@@ -27,9 +27,6 @@ void dataLayer::addNewPerson(Person addMe)
 
 void dataLayer::addNewComputer(Computer addMe)
 {
-    // er eðlilegra að senda upplýsingarnar áfram í dataLayer án þess að búa til nýja manneskju í service?
-    // addNewComputer(name, year, type, built)
-
     QSqlQuery query;
     query.prepare("INSERT INTO computer (Name, Year, Type, Built) "
                  "VALUES (:name, :year, :type, :built)");
@@ -68,6 +65,7 @@ vector<Person> dataLayer::getPersons(QString queryString)
                     query.value("DeathYear").toInt());
         persons.push_back(person);
     }
+
     return persons;
 }
 
@@ -88,6 +86,7 @@ vector<Computer> dataLayer::getComputers(QString queryString)
                     query.value("Built").toBool());
         computers.push_back(computer);
     }
+
     return computers;
 }
 

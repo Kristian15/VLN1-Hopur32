@@ -16,27 +16,31 @@ private:
     const QString DB_NAME = "skil2.sqlite";
     QSqlDatabase db;
 
-    // adds a new Person to the database
+    // Adds a new Person to the database
     void addNewPerson(Person addMe);
-    // adds a new Person to the database
+    // Adds a new Person to the database
     void addNewComputer(Computer addMe);
-    // creates a relation between the Person with personID and the Computer with computerID
+    // Creates a relation between the Person with personID and the Computer with computerID
     void createRelation(int personID, int computerID);
-    //
+    // Executes query using queryString and returns a vector of Persons
     vector<Person> getPersons(QString queryString);
+    // Executes query using queryString and returns a vector of Persons
     vector<Computer> getComputers(QString queryString);
+
     vector<string> findRelation(QString queryString, int id);
-
-    // delete functions
+    // Delete the row from table where ID = id
     void deleteRow(string table, int id);
+    // Delete the row from the relation table with personID and computerID
     void deleteRelation(int personID, int computerID);
-
-    // update function
+    // Updates the column with ID = id from table to updateME
     void updateItem(int id, string table, string column, string updateME);
 
 public:
+    // Constructor
     dataLayer();
+    // Destructor
     ~dataLayer();
+
     bool openDatabase();
     vector<Person> getSortedPersons(string column, int ascDesc);
     vector<Computer> getSortedComputers(string column, int ascDesc);
