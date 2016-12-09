@@ -4,6 +4,11 @@ using namespace std;
 
 // **** PRIVATE*****
 
+/**
+ * @brief serviceLayer::validateName
+ * @param name
+ * @return bool
+ */
 bool serviceLayer::validateName(string name)
 {
     size_t wordLength = name.length();
@@ -25,6 +30,11 @@ bool serviceLayer::validateName(string name)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateGender
+ * @param gender
+ * @return bool
+ */
 bool serviceLayer::validateGender(string gender)
 {
     if ((gender == "male") || (gender == "female"))
@@ -35,6 +45,11 @@ bool serviceLayer::validateGender(string gender)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateNationality
+ * @param nationality
+ * @return bool
+ */
 bool serviceLayer::validateNationality(string nationality)
 {
     size_t wordLength = nationality.length();
@@ -58,6 +73,11 @@ bool serviceLayer::validateNationality(string nationality)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateYear
+ * @param year
+ * @return bool
+ */
 bool serviceLayer::validateYear(string year)
 {
     size_t wordLength = year.length();
@@ -85,6 +105,11 @@ bool serviceLayer::validateYear(string year)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateBuilt
+ * @param built
+ * @return bool
+ */
 bool serviceLayer::validateBuilt(string& built)
 {
     if(built.size() == 1) // check if built is only one character
@@ -100,6 +125,15 @@ bool serviceLayer::validateBuilt(string& built)
     return false;
 }
 
+/**
+ * @brief serviceLayer::getNewPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return Person
+ */
 Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
@@ -117,6 +151,14 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     return newP;
 }
 
+/**
+ * @brief serviceLayer::getNewComputer
+ * @param name
+ * @param year
+ * @param type
+ * @param built
+ * @return Computer
+ */
 Computer serviceLayer:: getNewComputer(string name, string year, string type, string built)
 {
     bool builtBool = false;
@@ -131,6 +173,12 @@ Computer serviceLayer:: getNewComputer(string name, string year, string type, st
 
 //*****PUBLIC*****
 
+/**
+ * @brief serviceLayer::searchPersons
+ * @param findMe
+ * @param by
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::searchPersons(string findMe, int by)
 {
     string col = "Name"; // case 1
@@ -149,6 +197,12 @@ vector<Person> serviceLayer::searchPersons(string findMe, int by)
     return data.findPersons(col, findMe);
 }
 
+/**
+ * @brief serviceLayer::searchComputers
+ * @param findMe
+ * @param by
+ * @return vector<Computer>
+ */
 vector<Computer> serviceLayer::searchComputers(string findMe, int by)
 {
     string col = "Name"; // case 1
@@ -166,6 +220,13 @@ vector<Computer> serviceLayer::searchComputers(string findMe, int by)
     return data.findComputers(col, findMe);
 }
 
+/**
+ * @brief serviceLayer::searchPersonYears
+ * @param first
+ * @param second
+ * @param by
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::searchPersonYears(int first, int second, int by)
 {
     string col = "BirthYear";
@@ -178,11 +239,23 @@ vector<Person> serviceLayer::searchPersonYears(int first, int second, int by)
     return data.searchPersonYears(col, first, second);
 }
 
+/**
+ * @brief serviceLayer::searchComputerYears
+ * @param first
+ * @param second
+ * @return vector<Computer>
+ */
 vector<Computer> serviceLayer::searchComputerYears(int first, int second)
 {
     return data.searchComputerYears(first, second);
 }
 
+/**
+ * @brief serviceLayer::sortPersons
+ * @param order
+ * @param ascOrDesc
+ * @return vector<Person>
+ */
 vector<Person> serviceLayer::sortPersons(int order, int ascOrDesc)
 {
     string col = "Name"; // case 1
@@ -207,6 +280,12 @@ vector<Person> serviceLayer::sortPersons(int order, int ascOrDesc)
     return data.getSortedPersons(col, ascOrDesc);
 }
 
+/**
+ * @brief serviceLayer::sortComputers
+ * @param order
+ * @param ascOrDesc
+ * @return vector<Computer>
+ */
 vector<Computer> serviceLayer::sortComputers(int order, int ascOrDesc)
 {
     string col = "Name"; // case 1
@@ -227,16 +306,40 @@ vector<Computer> serviceLayer::sortComputers(int order, int ascOrDesc)
     return data.getSortedComputers(col, ascOrDesc);
 }
 
+/**
+ * @brief serviceLayer::newPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ */
 void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
 }
 
+/**
+ * @brief serviceLayer::newComputer
+ * @param name
+ * @param year
+ * @param type
+ * @param built
+ */
 void serviceLayer::newComputer(string name, string year, string type, string built)
 {
     data.addComputer(getNewComputer(name, year, type, built));
 }
 
+/**
+ * @brief serviceLayer::validateNewPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return bool
+ */
 bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     bool isValid = false;
@@ -259,6 +362,14 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
     return isValid;
 }
 
+/**
+ * @brief serviceLayer::validateNewComputer
+ * @param name
+ * @param year
+ * @param type
+ * @param built
+ * @return bool
+ */
 bool serviceLayer::validateNewComputer(string name, string year, string type, string& built)
 {
     if((name != "") && validateYear(year) && (type != "") && validateBuilt(built))
@@ -269,26 +380,51 @@ bool serviceLayer::validateNewComputer(string name, string year, string type, st
     return false;
 }
 
+/**
+ * @brief serviceLayer::deletePerson
+ * @param id
+ */
 void serviceLayer::deletePerson(int id)
 {
     data.deleteItem("Person", id);
 }
 
+/**
+ * @brief serviceLayer::deleteComputer
+ * @param id
+ */
 void serviceLayer::deleteComputer(int id)
 {
    data.deleteItem("Computer", id);
 }
 
+/**
+ * @brief serviceLayer::link
+ * @param personID
+ * @param computerID
+ */
 void serviceLayer::link(int personID, int computerID)
 {
     data.makeRelation(personID, computerID);
 }
 
+/**
+ * @brief serviceLayer::unLink
+ * @param personID
+ * @param computerID
+ */
 void serviceLayer::unLink(int personID, int computerID)
 {
     data.unMakeRelation(personID, computerID);
 }
 
+/**
+ * @brief serviceLayer::updatePerson
+ * @param id
+ * @param col
+ * @param updateMe
+ * @return bool
+ */
 bool serviceLayer::updatePerson(int id, int col, string updateMe)
 {
     bool isValid = false;
@@ -322,6 +458,13 @@ bool serviceLayer::updatePerson(int id, int col, string updateMe)
     return isValid;
 }
 
+/**
+ * @brief serviceLayer::updateComputer
+ * @param id
+ * @param col
+ * @param updateMe
+ * @return bool
+ */
 bool serviceLayer::updateComputer(int id, int col, string updateMe)
 {
     bool isValid = false;
@@ -352,11 +495,22 @@ bool serviceLayer::updateComputer(int id, int col, string updateMe)
     return isValid;
 }
 
+/**
+ * @brief serviceLayer::getRelation
+ * @param column
+ * @return vector<vector<string>>
+ */
 vector<vector<string>> serviceLayer::getRelation(string column)
 {
     return data.getRelation(column);
 }
 
+/**
+ * @brief serviceLayer::getOneRelation
+ * @param id
+ * @param table
+ * @return vector<string>
+ */
 vector<string> serviceLayer::getOneRelation(int id, string table)
 {
     return data.searchRelation(id, table);
