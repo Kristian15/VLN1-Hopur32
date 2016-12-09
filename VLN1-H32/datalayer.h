@@ -26,8 +26,6 @@ private:
     vector<Person> getPersons(QString queryString);
     // Executes query using queryString and returns a vector of Persons
     vector<Computer> getComputers(QString queryString);
-
-    vector<string> findRelation(QString queryString, int id);
     // Delete the row from table where ID = id
     void deleteRow(string table, int id);
     // Delete the row from the relation table with personID and computerID
@@ -40,25 +38,46 @@ public:
     dataLayer();
     // Destructor
     ~dataLayer();
-
+    // Checks if the database exists or not and opens it if it does
     bool openDatabase();
-    vector<Person> getSortedPersons(string column, int ascDesc);
-    vector<Computer> getSortedComputers(string column, int ascDesc);
-    vector<Person> findPersons(string column, string findMe);
-    vector<Person> searchPersonYears(string column, int from, int to);
-    vector<Computer> searchComputerYears(int from, int to);
-    vector<Computer> findComputers(string column, string findMe);
-
-    void updateTable(int id, string table, string column, string updateMe);
-    // return all related persons/computers
-    vector<vector<string>> getRelation(string column);
-    // return all related persons/computers
-    vector<string> searchRelation(int id, string table);
-
-    void deleteItem(string table, int id);
-    // creates a relation between a comptuer and a scientist
-    void makeRelation(int personID, int computerID);
-    void unMakeRelation(int personID, int computerID);
+    // Uses addNewPerson()
     void addPerson(Person person);
+    // Uses addNewComputer()
     void addComputer(Computer computer);
+    // Gets all scientists from the database sorted after column and ascDesc
+    // Returns a vector of Persons with the sorted list
+    // Uses getPersons()
+    vector<Person> getSortedPersons(string column, int ascDesc);
+    // Gets all computers from the database sorted after column and ascDesc
+    // Returns a vector of Computer with the sorted list
+    // Uses getComputers()
+    vector<Computer> getSortedComputers(string column, int ascDesc);
+    // Find scientists in the database where findMe matches the item in column
+    // Returns a vector with the scientists
+    // Uses getPersons()
+    vector<Person> findPersons(string column, string findMe);
+    // Find computers in the database where findMe matches the item in column
+    // Returns a vector with the computers
+    // Uses getComputers()
+    vector<Computer> findComputers(string column, string findMe);
+    // Used if the user wants to search by birth year or death year
+    vector<Person> searchPersonYears(string column, int from, int to);
+    // Used if the user want to search by design year
+    vector<Computer> searchComputerYears(int from, int to);
+    // return all related persons/computers
+    // returns a double vector where first element in every row is the name of the scientist/computer
+    // the following elements are the scientists/computers that are linked to it
+    vector<vector<string>> getRelation(string column);
+    // return related persons/computers from the item with ID = id
+    vector<string> searchRelation(int id, string table);
+    // Updates the item in column to updateMe from table
+    void updateTable(int id, string table, string column, string updateMe);
+    // Uses deleteRow() to delete
+    void deleteItem(string table, int id);
+    // Creates a relation between a computer and a scientist
+    // Uses createRelation()
+    void makeRelation(int personID, int computerID);
+    // Removes a relation between a computer and a scientist
+    // Uses deleteRelation()
+    void unMakeRelation(int personID, int computerID);
 };
