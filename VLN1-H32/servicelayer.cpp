@@ -269,24 +269,24 @@ bool serviceLayer::validateNewComputer(string name, string year, string type, st
     return false;
 }
 
-bool serviceLayer::deletePerson(int id)
+void serviceLayer::deletePerson(int id)
 {
-    return data.deleteItem("Person", id);
+    data.deleteItem("Person", id);
 }
 
-bool serviceLayer::deleteComputer(int id)
+void serviceLayer::deleteComputer(int id)
 {
-   return data.deleteItem("Computer", id);
+   data.deleteItem("Computer", id);
 }
 
-bool serviceLayer::link(int personID, int computerID)
+void serviceLayer::link(int personID, int computerID)
 {
-    return data.makeRelation(personID, computerID);
+    data.makeRelation(personID, computerID);
 }
 
-bool serviceLayer::unLink(int personID, int computerID)
+void serviceLayer::unLink(int personID, int computerID)
 {
-    return data.unMakeRelation(personID, computerID);
+    data.unMakeRelation(personID, computerID);
 }
 
 bool serviceLayer::updatePerson(int id, int col, string updateMe)
