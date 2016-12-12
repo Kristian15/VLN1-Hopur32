@@ -2,11 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <vector>
+#include "computer.h"
+#include "servicelayer.h"
 #include "addscientistdialog.h"
 #include "addcomputerdialog.h"
 #include "addlinkdialog.h"
 #include "editscientistdialog.h"
 #include "editcomputerdialog.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -31,7 +35,12 @@ private slots:
 
     void on_button_addLink_clicked();
 
+    void on_table_computers_activated(const QModelIndex &index);
+
 private:
+    void populateTable();
+    serviceLayer service;
+    Computer computer;
     Ui::MainWindow *ui;
     AddScientistDialog addSci;
     AddComputerDialog addComp;
