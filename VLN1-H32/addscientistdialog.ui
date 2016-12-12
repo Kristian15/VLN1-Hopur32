@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
+    <width>679</width>
     <height>347</height>
    </rect>
   </property>
@@ -18,6 +18,11 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label_scientistHeader">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>&lt;h2&gt;Add a new scientist&lt;/h2&gt;</string>
        </property>
@@ -29,6 +34,7 @@
         <widget class="QLabel" name="label_scientistName">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -40,6 +46,11 @@
        </item>
        <item>
         <widget class="QLabel" name="label_scientistName_error">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -48,7 +59,13 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="input_scientistName"/>
+      <widget class="QLineEdit" name="input_scientistName">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -56,6 +73,7 @@
         <widget class="QLabel" name="label_scientistGender">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -87,6 +105,7 @@
         <widget class="QLabel" name="label_scientistBirthYear">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -98,6 +117,11 @@
        </item>
        <item>
         <widget class="QLabel" name="label_scientistBirthYear_Error">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -106,7 +130,13 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="input_scientistBirthYear"/>
+      <widget class="QLineEdit" name="input_scientistBirthYear">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -114,6 +144,7 @@
         <widget class="QLabel" name="label_scientistDeathYear">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -126,7 +157,13 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="input_scientistDeathYear"/>
+      <widget class="QLineEdit" name="input_scientistDeathYear">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_scientistInput_Error">
@@ -141,6 +178,11 @@
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QPushButton" name="button_ok">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>OK</string>
        </property>
@@ -148,6 +190,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="button_cancel">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>

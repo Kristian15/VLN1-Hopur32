@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
+    <width>736</width>
     <height>347</height>
    </rect>
   </property>
@@ -46,6 +46,11 @@
        </item>
        <item>
         <widget class="QLabel" name="label_scientistName_error">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -62,6 +67,7 @@
         <widget class="QLabel" name="label_scientistGender">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -75,6 +81,11 @@
      </item>
      <item>
       <widget class="QComboBox" name="dropDown_scientistGender">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <item>
         <property name="text">
          <string>female</string>
@@ -93,6 +104,7 @@
         <widget class="QLabel" name="label_scientistBirthYear">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -104,6 +116,11 @@
        </item>
        <item>
         <widget class="QLabel" name="label_scientistBirthYear_Error">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -120,6 +137,7 @@
         <widget class="QLabel" name="label_scientistDeathYear">
          <property name="font">
           <font>
+           <pointsize>9</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -147,6 +165,11 @@
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QPushButton" name="button_ok">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>OK</string>
        </property>
@@ -154,6 +177,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="button_cancel">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
