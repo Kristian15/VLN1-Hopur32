@@ -139,6 +139,11 @@
      </item>
      <item>
       <widget class="QComboBox" name="dropDown_computerBuilt">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
        <item>
         <property name="text">
          <string>Yes</string>
