@@ -16,7 +16,8 @@ AddComputerDialog::~AddComputerDialog()
 
 void AddComputerDialog::on_button_ok_clicked()
 {
-    bool temp = servicelayer.openDatabase();
+    //bool temp = servicelayer.openDatabase();
+    displayAllComputers();
     ui->label_computerName_Error->setText("");
     ui->label_computerType_Error->setText("");
     ui->label_computerDesignYear_Error->setText("");
@@ -58,7 +59,7 @@ void AddComputerDialog::on_button_ok_clicked()
     {
         return;
     }
-    servicelayer.closeDatabase();
+    //temp = servicelayer.closeDatabase();
 
 }
 
