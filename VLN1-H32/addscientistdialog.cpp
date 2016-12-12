@@ -15,7 +15,7 @@ AddScientistDialog::~AddScientistDialog()
 
 void AddScientistDialog::on_button_ok_clicked()
 {
-    bool error = false;
+    bool error = service.openDatabase();
     QString name = ui -> input_scientistName -> text();
     QString byear = ui -> input_scientistBirthYear -> text();
     QString dyear = ui -> input_scientistDeathYear -> text();
@@ -29,4 +29,6 @@ void AddScientistDialog::on_button_ok_clicked()
 
  //ef validation er true þá vil ég kalla í service Newperson
  // ef  false þá kalla eg i error
+
+    service.closeDatabase();
 }
