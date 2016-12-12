@@ -1,6 +1,8 @@
 QT += core
 QT += core gui
 QT += sql
+QT += widgets
+QT += gui
 
 CONFIG += c++11
 
@@ -15,11 +17,24 @@ SOURCES += main.cpp \
     servicelayer.cpp \
     datalayer.cpp \
     person.cpp \
-    computer.cpp
+    computer.cpp \
+    mainwindow.cpp \
+    addscientistdialog.cpp \
+    addcomputerdialog.cpp
 
 HEADERS += \
     userinterface.h \
     servicelayer.h \
     datalayer.h \
     person.h \
-    computer.h
+    computer.h \
+    mainwindow.h \
+    addscientistdialog.h \
+    addcomputerdialog.h
+
+DISTFILES +=
+
+FORMS += \
+    mainwindow.ui \
+    addscientistdialog.ui \
+    addcomputerdialog.ui

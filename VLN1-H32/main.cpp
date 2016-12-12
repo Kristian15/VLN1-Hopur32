@@ -1,9 +1,13 @@
-#include "userinterface.h"
+#include <QApplication>
 
-int main()
+#include "userinterface.h"
+#include "mainwindow.h"
+int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
     userInterface ui;
     ui.run();
-
-    return 0;
+    mainwindow mainwin;
+    mainwin.show();
+    return a.exec();
 }
