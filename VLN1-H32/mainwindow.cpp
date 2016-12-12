@@ -24,7 +24,7 @@ void MainWindow::populateTable()
 
     for(size_t i = 0; i < computers.size(); i++)
     {
-        string test = computers[0].getName();
+
     }
 }
 

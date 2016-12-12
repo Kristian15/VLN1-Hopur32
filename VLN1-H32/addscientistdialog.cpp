@@ -15,16 +15,17 @@ AddScientistDialog::~AddScientistDialog()
 
 void AddScientistDialog::on_button_ok_clicked()
 {
+    bool error = false;
     QString name = ui -> input_scientistName -> text();
     QString byear = ui -> input_scientistBirthYear -> text();
     QString dyear = ui -> input_scientistDeathYear -> text();
 
-    service.validateNewPerson(name, gender, nationality, byear, dyear) = test;
-    if(name == true)
+    error = service.validateNewPerson(name.toStdString(), "gender", "nationality", byear.toStdString(), dyear.toStdString());
+    /*if(name == true)
     {
         return true;
     }
-    return false;
+    return false;*/
 
  //ef validation er true þá vil ég kalla í service Newperson
  // ef  false þá kalla eg i error
