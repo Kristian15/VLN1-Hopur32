@@ -40,6 +40,11 @@ private:
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
+    AddScientistDialog addSci;
+    AddComputerDialog addComp;
+    EditComputerDialog editComp;
+    EditScientistDialog editSci;
+    AddLinkDialog addLink;
 };
 
 #endif // MAINWINDOW_H
