@@ -119,7 +119,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="input_computerType"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout1_4">

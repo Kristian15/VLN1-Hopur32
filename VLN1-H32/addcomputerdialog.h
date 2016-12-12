@@ -2,6 +2,7 @@
 #define ADDCOMPUTERDIALOG_H
 
 #include <QDialog>
+#include "servicelayer.h"
 
 namespace Ui {
 class AddComputerDialog;
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::AddComputerDialog *ui;
+    serviceLayer servicelayer;
 };
 
 #endif // ADDCOMPUTERDIALOG_H
