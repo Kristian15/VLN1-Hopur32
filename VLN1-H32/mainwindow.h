@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include "addscientistdialog.h"
 #include "addcomputerdialog.h"
+#include "addlinkdialog.h"
 #include "editscientistdialog.h"
+#include "editcomputerdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,10 +23,22 @@ public:
 private slots:
     void on_button_addScientist_clicked();
 
+    void on_button_addComputer_clicked();
+
+    void on_button_editComputer_clicked();
+
+    void on_button_editScientist_clicked();
+
+    void on_button_addLink_clicked();
+
 private:
     Ui::MainWindow *ui;
     AddScientistDialog addSci;
+    AddComputerDialog addComp;
+    AddLinkDialog addLink;
 
+    EditScientistDialog editSci;
+    EditComputerDialog editComp;
 };
 
 #endif // MAINWINDOW_H
