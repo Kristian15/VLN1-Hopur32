@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 void MainWindow::populateTable()
 {
     bool temp = service.openDatabase();
+
     vector<Computer> computers;
     computers = service.sortComputers(1, 1);
     ui->table_computers->setRowCount((int)computers.size());
@@ -33,10 +34,11 @@ void MainWindow::populateTable()
         built = QString::number(computers[i].getBuilt());
 
         ui->table_computers->setItem(i, 0, new QTableWidgetItem(name));
-        ui->table_computers->setItem(i, 0, new QTableWidgetItem(designed));
-        ui->table_computers->setItem(i, 0, new QTableWidgetItem(type));
-        ui->table_computers->setItem(i, 0, new QTableWidgetItem(built));
+        ui->table_computers->setItem(i, 1, new QTableWidgetItem(designed));
+        ui->table_computers->setItem(i, 2, new QTableWidgetItem(type));
+        ui->table_computers->setItem(i, 3, new QTableWidgetItem(built));
     }
+
     service.closeDatabase();
 }
 

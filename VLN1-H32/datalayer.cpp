@@ -187,8 +187,6 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
  */
 dataLayer::dataLayer()
 {
-    db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
-    db.setDatabaseName(DB_NAME);
 }
 
 /**
@@ -205,6 +203,8 @@ dataLayer::~dataLayer()
  */
 bool dataLayer::openDatabase()
 {
+    db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
+    db.setDatabaseName(DB_NAME);
     QFileInfo checkFile(DB_NAME);
     if(checkFile.exists() && checkFile.isFile())
     {
