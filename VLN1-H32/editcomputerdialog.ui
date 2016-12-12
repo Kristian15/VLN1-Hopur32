@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddComputerDialog</class>
- <widget class="QDialog" name="AddComputerDialog">
+ <class>EditComputerDialog</class>
+ <widget class="QDialog" name="EditComputerDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -24,7 +24,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&lt;h2&gt;Add a new computer&lt;/h2&gt;</string>
+        <string>&lt;h2&gt;Edit computer&lt;/h2&gt;</string>
        </property>
       </widget>
      </item>
@@ -119,7 +119,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="input_computerType"/>
+      <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout1_4">
