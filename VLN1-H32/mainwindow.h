@@ -36,7 +36,8 @@ private slots:
     void on_button_addLink_clicked();
 
 private:
-    void populateTable();
+    void fillCompTable();
+    void fillSciTable();
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
