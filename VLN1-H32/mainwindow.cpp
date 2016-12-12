@@ -42,30 +42,25 @@ void MainWindow::populateTable()
 
 void MainWindow::on_button_addComputer_clicked()
 {
-    AddComputerDialog addComp;
     addComp.show();
 }
 
 void MainWindow::on_button_addScientist_clicked()
 {
-    AddScientistDialog addSci;
     addSci.show();
 }
 
 void MainWindow::on_button_editComputer_clicked()
 {
-    EditComputerDialog editComp;
     editComp.show();
 }
 
 void MainWindow::on_button_editScientist_clicked()
 {
-    EditScientistDialog editSci;
     editSci.show();
 }
 
 void MainWindow::on_button_addLink_clicked()
 {
-    AddLinkDialog addLink;
     addLink.show();
 }
