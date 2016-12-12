@@ -24,6 +24,7 @@ private:
     Computer getNewComputer(string name, string year, string type, string built);
 public:
     bool openDatabase(){ return data.openDatabase(); }
+    void closeDatabase() { data.closeDatabase(); }
     // Calls findPersons() in dataLayer
     // Returns a vector with the findings
     vector<Person> searchPersons(string findMe, int by);

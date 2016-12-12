@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::populateTable()
 {
-
+    bool temp = service.openDatabase();
     vector<Computer> computers;
     computers = service.sortComputers(1, 1);
     ui->table_computers->setRowCount((int)computers.size());
@@ -37,6 +37,7 @@ void MainWindow::populateTable()
         ui->table_computers->setItem(i, 0, new QTableWidgetItem(type));
         ui->table_computers->setItem(i, 0, new QTableWidgetItem(built));
     }
+    service.closeDatabase();
 }
 
 void MainWindow::on_button_addComputer_clicked()

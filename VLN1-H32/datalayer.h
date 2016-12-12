@@ -40,6 +40,8 @@ public:
     ~dataLayer();
     // Checks if the database exists or not and opens it if does exists
     bool openDatabase();
+
+    void closeDatabase();
     // Uses addNewPerson()
     void addPerson(Person person);
     // Uses addNewComputer()
