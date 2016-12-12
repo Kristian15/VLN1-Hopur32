@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     computer.cpp \
     mainwindow.cpp \
     addscientistdialog.cpp \
-    addcomputerdialog.cpp
+    addcomputerdialog.cpp \
+    addlinkdialog.cpp
 
 HEADERS += \
     userinterface.h \
@@ -30,11 +31,13 @@ HEADERS += \
     computer.h \
     mainwindow.h \
     addscientistdialog.h \
-    addcomputerdialog.h
+    addcomputerdialog.h \
+    addlinkdialog.h
 
 DISTFILES +=
 
 FORMS += \
     mainwindow.ui \
     addscientistdialog.ui \
-    addcomputerdialog.ui
+    addcomputerdialog.ui \
+    addlinkdialog.ui
