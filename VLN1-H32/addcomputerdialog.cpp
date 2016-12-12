@@ -6,7 +6,9 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
+    bool temp = servicelayer.openDatabase();
     displayAllComputers();
+    servicelayer.closeDatabase();
 }
 
 AddComputerDialog::~AddComputerDialog()
@@ -16,6 +18,8 @@ AddComputerDialog::~AddComputerDialog()
 
 void AddComputerDialog::on_button_ok_clicked()
 {
+    bool temp = servicelayer.openDatabase();
+
     displayAllComputers();
     ui->label_computerName_Error->setText("");
     ui->label_computerType_Error->setText("");
@@ -63,6 +67,8 @@ void AddComputerDialog::on_button_ok_clicked()
     {
         return;
     }
+
+    servicelayer.closeDatabase();
 
 }
 
