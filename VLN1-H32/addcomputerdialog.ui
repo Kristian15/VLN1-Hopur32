@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>714</width>
-    <height>358</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_computerName_Error">
          <property name="font">
           <font>
            <pointsize>9</pointsize>
@@ -197,6 +197,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QListWidget" name="listComputers"/>
    </item>
   </layout>
  </widget>

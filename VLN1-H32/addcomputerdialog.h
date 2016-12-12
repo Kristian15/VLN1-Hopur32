@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "servicelayer.h"
+#include <vector>
 
 namespace Ui {
 class AddComputerDialog;
@@ -19,9 +20,14 @@ public:
 private slots:
     void on_button_ok_clicked();
 
+    void on_button_cancel_clicked();
+
+
+
 private:
     Ui::AddComputerDialog *ui;
     serviceLayer servicelayer;
+    void displayAllComputers();
 };
 
 #endif // ADDCOMPUTERDIALOG_H

@@ -189,6 +189,7 @@ dataLayer::dataLayer()
 {
     db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
+    db.open();
 }
 
 /**
