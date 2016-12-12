@@ -15,5 +15,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_button_addScientist_clicked()
 {
-
+    addSci.show();
 }

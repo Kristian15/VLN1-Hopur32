@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "addscientistdialog.h"
+#include "addcomputerdialog.h"
+#include "editscientistdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +23,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    AddScientistDialog addSci;
 
 };
 
