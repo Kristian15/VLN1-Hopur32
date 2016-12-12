@@ -189,7 +189,6 @@ dataLayer::dataLayer()
 {
     db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
-    db.open();
 }
 
 /**
@@ -215,6 +214,14 @@ bool dataLayer::openDatabase()
     else
     {
         return false;
+    }
+}
+
+void dataLayer::closeDatabase()
+{
+    if(db.open())
+    {
+        db.close();
     }
 }
 
