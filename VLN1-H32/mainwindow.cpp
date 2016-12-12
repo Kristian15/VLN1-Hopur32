@@ -6,11 +6,26 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    populateTable();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::populateTable()
+{
+    vector<Computer> computers;
+    computers = service.sortComputers(1, 1);
+    ui->table_computers->setRowCount(5);
+    ui->table_computers->setItem(0,0,new QTableWidgetItem("Hello"));
+
+    for(size_t i = 0; i < computers.size(); i++)
+    {
+        string test = computers[0].getName();
+    }
 }
 
 void MainWindow::on_button_addComputer_clicked()
@@ -36,4 +51,9 @@ void MainWindow::on_button_editScientist_clicked()
 void MainWindow::on_button_addLink_clicked()
 {
     addLink.show();
+}
+
+void MainWindow::on_table_computers_activated(const QModelIndex &index)
+{
+
 }

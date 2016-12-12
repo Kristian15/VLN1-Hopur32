@@ -2,6 +2,7 @@
 #define ADDSCIENTISTDIALOG_H
 
 #include <QDialog>
+#include "servicelayer.h"
 
 namespace Ui {
 class AddScientistDialog;
@@ -15,7 +16,13 @@ public:
     explicit AddScientistDialog(QWidget *parent = 0);
     ~AddScientistDialog();
 
+private slots:
+    void on_button_ok_clicked();
+
 private:
+    serviceLayer service;
+   // bool validatePerson();
+
     Ui::AddScientistDialog *ui;
 };
 
