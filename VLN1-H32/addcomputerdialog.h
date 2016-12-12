@@ -28,6 +28,7 @@ private:
     Ui::AddComputerDialog *ui;
     serviceLayer servicelayer;
     void displayAllComputers();
+    void displayComputers(vector<Computer> computers);
 };
 
 #endif // ADDCOMPUTERDIALOG_H
