@@ -16,7 +16,7 @@ AddComputerDialog::~AddComputerDialog()
 
 void AddComputerDialog::on_button_ok_clicked()
 {
-
+    bool temp = servicelayer.openDatabase();
     ui->label_computerName_Error->setText("");
     ui->label_computerType_Error->setText("");
     ui->label_computerDesignYear_Error->setText("");
@@ -30,15 +30,15 @@ void AddComputerDialog::on_button_ok_clicked()
 
     if(name.isEmpty())
     {
-        //ui->label_computerName_Error->
+        ui->label_computerName_Error->setText("Settu nafn bjáni");
     }
     if(type.isEmpty())
     {
-        return;
+        ui->label_computerType_Error->setText("hvarígangi");
     }
     if(year.isEmpty())
     {
-        return;
+        ui->label_computerDesignYear_Error->setText("ohhhh");
     }
 
     bool validcomputerinput = servicelayer.validateNewComputer(name.toStdString(), type.toStdString(),
@@ -58,6 +58,7 @@ void AddComputerDialog::on_button_ok_clicked()
     {
         return;
     }
+    servicelayer.closeDatabase();
 
 }
 
