@@ -35,19 +35,11 @@ private slots:
 
     void on_button_addLink_clicked();
 
-    void on_table_computers_activated(const QModelIndex &index);
-
 private:
     void populateTable();
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
-    AddScientistDialog addSci;
-    AddComputerDialog addComp;
-    AddLinkDialog addLink;
-
-    EditScientistDialog editSci;
-    EditComputerDialog editComp;
 };
 
 #endif // MAINWINDOW_H
