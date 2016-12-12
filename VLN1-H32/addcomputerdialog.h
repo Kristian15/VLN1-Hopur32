@@ -15,6 +15,9 @@ public:
     explicit AddComputerDialog(QWidget *parent = 0);
     ~AddComputerDialog();
 
+private slots:
+    void on_button_ok_clicked();
+
 private:
     Ui::AddComputerDialog *ui;
 };
