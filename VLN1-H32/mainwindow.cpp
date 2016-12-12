@@ -61,6 +61,7 @@ void MainWindow::fillSciTable()
         birthYear = QString::number(persons[i].getByear());
         deathYear = QString::number(persons[i].getDyear());
 
+
         ui->table_scientists->setItem(i, 0, new QTableWidgetItem(name));
         ui->table_scientists->setItem(i, 1, new QTableWidgetItem(gender));
         ui->table_scientists->setItem(i, 2, new QTableWidgetItem(nationality));
