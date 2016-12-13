@@ -101,7 +101,7 @@ void MainWindow::on_button_editComputer_clicked()
 
 void MainWindow::on_button_editScientist_clicked()
 {
-    editSci.show();
+    addSci.show();
 }
 
 void MainWindow::on_button_addLink_clicked()
@@ -122,3 +122,9 @@ void MainWindow::on_button_deleteComputer_clicked()
 }
 
 
+
+void MainWindow::on_table_scientists_itemSelectionChanged()
+{
+    ui->button_editScientist->setEnabled(true);
+    ui->button_deleteScientist->setEnabled(true);
+}
