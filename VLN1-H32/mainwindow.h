@@ -44,6 +44,8 @@ private slots:
 
     void on_button_deleteScientist_clicked();
 
+    void on_input_computerFilter_textChanged(const QString &arg1);
+
 private:
     void fillCompTable();
     void fillSciTable();
