@@ -165,5 +165,6 @@ void MainWindow::on_button_deleteScientist_clicked()
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(currentlySelectePersonIndex,5)).toInt();
     DeleteConfirmationDialog delornodel(id, "person");
     delornodel.exec();
+    ui->table_scientists->clearContents();
     fillSciTable();
 }
