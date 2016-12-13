@@ -38,6 +38,7 @@ private slots:
 private:
     void fillCompTable();
     void fillSciTable();
+    void fillLinkTable();
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;

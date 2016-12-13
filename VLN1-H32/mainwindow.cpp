@@ -5,20 +5,26 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    bool temp = service.openDatabase();
+
     ui->setupUi(this);
 
     fillCompTable();
     fillSciTable();
+
 }
 
 MainWindow::~MainWindow()
 {
+    service.closeDatabase();
+    ui->table_computers->clearContents();
+    ui->table_links->clearContents();
+    ui->table_scientists->clearContents();
     delete ui;
 }
 
 void MainWindow::fillCompTable()
 {
-    bool temp = service.openDatabase();
 
     vector<Computer> computers;
     computers = service.sortComputers(1, 1);
@@ -39,14 +45,10 @@ void MainWindow::fillCompTable()
         ui->table_computers->setItem(i, 2, new QTableWidgetItem(designed));
         ui->table_computers->setItem(i, 3, new QTableWidgetItem(built));
     }
-
-    service.closeDatabase();
 }
 
 void MainWindow::fillSciTable()
 {
-    bool temp = service.openDatabase();
-
     vector<Person> persons;
     persons = service.sortPersons(1, 1);
     ui->table_scientists->setRowCount((int)persons.size());
@@ -68,8 +70,12 @@ void MainWindow::fillSciTable()
         ui->table_scientists->setItem(i, 3, new QTableWidgetItem(birthYear));
         ui->table_scientists->setItem(i, 4, new QTableWidgetItem(deathYear));
     }
+}
 
-    service.closeDatabase();
+void MainWindow::fillLinkTable()
+{
+
+    vector<vector<string>> links;
 }
 
 void MainWindow::on_button_addComputer_clicked()
