@@ -340,11 +340,11 @@ void serviceLayer::newComputer(string name, string year, string type, string bui
  * @param dyear
  * @return bool
  */
-bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
+bool serviceLayer::validateNewPerson(string name, string nationality, string byear, string dyear)
 {
     bool isValid = false;
 
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
+    if(validateName(name) && validateNationality(nationality) && validateYear(byear))
     {
         if(dyear != "0")
         {

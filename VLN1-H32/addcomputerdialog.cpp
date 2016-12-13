@@ -44,10 +44,10 @@ void AddComputerDialog::on_button_ok_clicked()
     {
         servicelayer.newComputer(name.toStdString(), year.toStdString(),
                              type.toStdString(), built.toStdString());
-        displayAllComputers();
         ui->input_computerName->setText("");
         ui->input_computerType->setText("");
         ui->input_computerDesignYear->setText("");
+        this->close();
     }
     else
     {

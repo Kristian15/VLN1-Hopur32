@@ -54,7 +54,7 @@ public:
     // Vaidate functions that are used to validate input
     // Uses the validate help functions
     // Returns true if the input is valid and false otherwise
-    bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
+    bool validateNewPerson(string name, string nationality, string byear, string dyear);
     bool validateNewComputer(string name, string year, string type);
     // The delete functions use deleteItem() in dataLayer to delete
     // the idem with ID = id
