@@ -835,7 +835,7 @@ void userInterface::updateComputer()
     if(computerID != -1)
     {
         printUpdateComputerOptions();
-        int input = getCorrectInt(4);
+        //int input = getCorrectInt(4);
 
         cout << "Input the change you want to make: " ;
         cin >> ws;
