@@ -384,7 +384,7 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
  * @param built
  * @return bool
  */
-bool serviceLayer::validateNewComputer(string name, string year, string type, string& built)
+bool serviceLayer::validateNewComputer(string name, string year, string type, string built)
 {
     if((name != "") && validateYear(year) && (type != "") && validateBuilt(built))
     {
