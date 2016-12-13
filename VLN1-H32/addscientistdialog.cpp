@@ -19,7 +19,7 @@ AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     _edit = true;
 
     ui->setupUi(this);
-    this->setWindowTitle(QString::fromStdString(person.getName()));
+    this->setWindowTitle("Edit Scientist");
     ui->label_scientistHeader->setText(QString::fromStdString(person.getName()));
 
     _person = person;

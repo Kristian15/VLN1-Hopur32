@@ -90,6 +90,8 @@ void MainWindow::on_button_addComputer_clicked()
     addComp.exec();
     ui->table_computers->clearContents();
     fillCompTable();
+    ui->button_editComputer->setEnabled(false);
+    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::on_button_addScientist_clicked()
@@ -99,6 +101,9 @@ void MainWindow::on_button_addScientist_clicked()
     addSci.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
+
+    ui->button_editScientist->setEnabled(false);
+    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_editComputer_clicked()
@@ -161,6 +166,7 @@ void MainWindow::on_button_deleteScientist_clicked()
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(currentlySelectePersonIndex,5)).toInt();
     DeleteConfirmationDialog delornodel(id, "person");
     delornodel.exec();
+    ui->table_scientists->clearContents();
     fillSciTable();
     ui->button_deleteScientist->setEnabled(false);
 }
