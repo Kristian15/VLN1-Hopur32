@@ -23,6 +23,7 @@ private:
     // Creates a relation between the Person with personID and the Computer with computerID
     void createRelation(int personID, int computerID);
     void createPersonFact(int personID, string fact);
+    void createComputerFact(int computerID, string fact);
     // Executes query using queryString and returns a vector of Persons
     vector<Person> getPersons(QString queryString);
     // Executes query using queryString and returns a vector of Computers
@@ -32,6 +33,7 @@ private:
     // Delete the row from the relation table with personID and computerID
     void deleteRelation(int personID, int computerID);
     void deletePersonFact(int factID);
+    void deleteComputerFact(int factID);
     // Updates the column with ID = id from table to updateME
     void updateItem(int id, string table, string column, string updateME);
 
@@ -89,4 +91,7 @@ public:
     // Removes a relation between a computer and a scientist
     // Uses deleteRelation()
     void unMakeRelation(int personID, int computerID);
+    void createFact(string table, int id, string fact);
+    void deleteFact(string table, int factID);
+    vector<string> getFacts(string table, int id);
 };
