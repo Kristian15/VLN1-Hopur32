@@ -40,7 +40,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_computers">
        <property name="enabled">
@@ -120,6 +120,16 @@
              </property>
              <property name="text">
               <string>Delete computer</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_computerFacts">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Facts</string>
              </property>
             </widget>
            </item>
@@ -289,6 +299,16 @@
              </property>
              <property name="text">
               <string>Delete scientist</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_scientistFacts">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Facts</string>
              </property>
             </widget>
            </item>
