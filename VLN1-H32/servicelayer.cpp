@@ -466,7 +466,7 @@ void serviceLayer::updatePerson(Person person)
  * @param updateMe
  * @return bool
  */
-bool serviceLayer::updateComputer(Computer computer)
+void serviceLayer::updateComputer(Computer computer)
 {
     data.updateComputer(computer);
 }
