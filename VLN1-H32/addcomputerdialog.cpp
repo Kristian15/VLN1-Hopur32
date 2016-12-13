@@ -6,6 +6,28 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
+    ui->label_computerHeader->setText("Add a new computer");
+}
+
+AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AddComputerDialog)
+{
+    ui->setupUi(this);
+    ui->label_computerHeader->setText("Edit computer");
+
+    ui->input_computerName->setText(QString::fromStdString(computer.getName()));
+    ui->input_computerType->setText(QString::fromStdString(computer.getType()));
+    ui->input_computerDesignYear->setText(QString::number(computer.getYear()));
+
+    if(computer.getBuilt() == true)
+    {
+        ui->dropDown_computerBuilt->setCurrentIndex(0);
+    }
+    else
+    {
+        ui->dropDown_computerBuilt->setCurrentIndex(1);
+    }
 }
 
 AddComputerDialog::~AddComputerDialog()
