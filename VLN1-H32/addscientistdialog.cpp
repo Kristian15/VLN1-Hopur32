@@ -75,7 +75,7 @@ void AddScientistDialog::on_button_ok_clicked()
             _person.setByear(byear.toInt());
             _person.setDyear(dyear.toInt());
 
-            servicelayer.updatePerson(_person);
+            service.updatePerson(_person);
         }
         else
         {

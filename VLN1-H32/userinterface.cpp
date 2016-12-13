@@ -817,10 +817,10 @@ void userInterface::updatePerson()
         string changeString;
         getline(cin, changeString);
 
-        if(service.updatePerson(personID, input, changeString))
+        /*if(service.updatePerson(personID, input, changeString))
         {
             cout << "Update successful!" << endl;
-        }
+        }*/
     }
 }
 
