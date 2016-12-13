@@ -18,7 +18,7 @@ void AddScientistDialog::on_button_ok_clicked()
     QString name = ui -> input_scientistName -> text();
     QString byear = ui -> input_scientistBirthYear -> text();
     QString dyear = ui -> input_scientistDeathYear -> text();
-
+    bool error;
     error = service.validateNewPerson(name.toStdString(), "gender", "nationality", byear.toStdString(), dyear.toStdString());
     /*if(name == true)
     {
