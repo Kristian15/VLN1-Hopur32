@@ -13,7 +13,7 @@ class DeleteConfirmationDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DeleteConfirmationDialog(int id, QWidget *parent = 0);
+    explicit DeleteConfirmationDialog(int id, string comporpers, QWidget *parent = 0);
     ~DeleteConfirmationDialog();
 
 private slots:
@@ -24,6 +24,7 @@ private slots:
 private:
     Ui::DeleteConfirmationDialog *ui;
     int _id;
+    string _comporpers;
     serviceLayer service;
 };
 
