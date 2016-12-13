@@ -95,4 +95,5 @@ public:
     void deleteFact(string table, int factID);
     vector<string> getFacts(string table, int id);
     vector<Computer> searchComputers(string findMe);
+    vector<Person> searchPersons(string findMe);
 };

@@ -78,5 +78,6 @@ public:
     // Uses searchRelation() in dataLayer
     vector<string> getOneRelation(int id, string table);
     vector<Computer> searchComputers(string input);
+    vector<Person> searchPersons(string input);
 
 };

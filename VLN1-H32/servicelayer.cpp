@@ -496,3 +496,8 @@ vector<Computer> serviceLayer::searchComputers(string input)
 {
     return data.searchComputers(input);
 }
+
+vector<Person> serviceLayer::searchPersons(string input)
+{
+    return data.searchPersons(input);
+}

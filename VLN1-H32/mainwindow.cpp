@@ -191,3 +191,10 @@ void MainWindow::on_input_computerFilter_textChanged(const QString &arg1)
     vector<Computer> computers = service.searchComputers(input);
     fillCompTable(computers);
 }
+
+void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
+{
+    string input = ui->input_scientistFilter->text().toStdString();
+    vector<Person> persons = service.searchPersons(input);
+    fillSciTable(persons);
+}
