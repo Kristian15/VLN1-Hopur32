@@ -43,7 +43,7 @@ void AddScientistDialog::on_button_ok_clicked()
     ui->label_scientistDeathYear_Error->setText("");
 
     QString name = ui -> input_scientistName -> text();
-    QString nationality = ui->input_scientistNationality->text();
+    QString nationality = ui-> input_scientistNationality->text();
     QString gender = ui->dropDown_scientistGender->currentText();
     QString byear = ui -> input_scientistBirthYear -> text();
     QString dyear = ui -> input_scientistDeathYear -> text();

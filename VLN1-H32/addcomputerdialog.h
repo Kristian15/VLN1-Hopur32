@@ -26,10 +26,12 @@ private slots:
 
 
 private:
-    Ui::AddComputerDialog *ui;
+    bool _edit;
+    Computer _computer;
     serviceLayer servicelayer;
     void displayAllComputers();
     void displayComputers(vector<Computer> computers);
+    Ui::AddComputerDialog *ui;
 };
 
 #endif // ADDCOMPUTERDIALOG_H

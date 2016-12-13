@@ -6,6 +6,7 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Add computer");
     ui->label_computerHeader->setText("Add a new computer");
 }
 
@@ -13,12 +14,16 @@ AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddComputerDialog)
 {
-    ui->setupUi(this);
-    ui->label_computerHeader->setText("Edit computer");
+    _edit = true;
 
-    ui->input_computerName->setText(QString::fromStdString(computer.getName()));
-    ui->input_computerType->setText(QString::fromStdString(computer.getType()));
-    ui->input_computerDesignYear->setText(QString::number(computer.getYear()));
+    ui->setupUi(this);
+    this->setWindowTitle(QString::fromStdString(computer.getName()));
+    ui->label_computerHeader->setText(QString::fromStdString(computer.getName()));
+
+    _computer = computer;
+    ui->input_computerName->setText(QString::fromStdString(_computer.getName()));
+    ui->input_computerType->setText(QString::fromStdString(_computer.getType()));
+    ui->input_computerDesignYear->setText(QString::number(_computer.getYear()));
 
     if(computer.getBuilt() == true)
     {
@@ -64,8 +69,19 @@ void AddComputerDialog::on_button_ok_clicked()
 
     if(validcomputerinput)
     {
-        servicelayer.newComputer(name.toStdString(), year.toStdString(),
-                             type.toStdString(), built.toStdString());
+        if(_edit)
+        {
+            _computer.setName(name.toStdString());
+            _computer.setType(type.toStdString());
+            _computer.setYear(year.toInt());
+            _computer.setBuilt(built.toInt());
+
+            servicelayer.updateComputer(_computer);
+        }
+        else
+        {
+        servicelayer.newComputer(name.toStdString(), year.toStdString(), type.toStdString(), built.toStdString());
+        }
         ui->input_computerName->setText("");
         ui->input_computerType->setText("");
         ui->input_computerDesignYear->setText("");
