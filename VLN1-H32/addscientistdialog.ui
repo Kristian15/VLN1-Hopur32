@@ -98,7 +98,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="input_scientistNationality"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -184,6 +184,13 @@
          </property>
          <property name="text">
           <string>Year died</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_scientistDeathYear_Error">
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>

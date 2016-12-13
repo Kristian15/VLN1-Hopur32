@@ -574,7 +574,7 @@ void userInterface::readPerson()
     cin >> dyear;
     cout << endl;
 
-    if(service.validateNewPerson(name, gender, nationality, byear, dyear))
+    if(service.validateNewPerson(name, nationality, byear, dyear))
     {
         service.newPerson(name, gender, nationality, byear, dyear);
     }
@@ -817,10 +817,10 @@ void userInterface::updatePerson()
         string changeString;
         getline(cin, changeString);
 
-        if(service.updatePerson(personID, input, changeString))
+        /*if(service.updatePerson(personID, input, changeString))
         {
             cout << "Update successful!" << endl;
-        }
+        }*/
     }
 }
 

@@ -6,6 +6,28 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
+    ui->label_computerHeader->setText("Add a new computer");
+}
+
+AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AddComputerDialog)
+{
+    ui->setupUi(this);
+    ui->label_computerHeader->setText("Edit computer");
+
+    ui->input_computerName->setText(QString::fromStdString(computer.getName()));
+    ui->input_computerType->setText(QString::fromStdString(computer.getType()));
+    ui->input_computerDesignYear->setText(QString::number(computer.getYear()));
+
+    if(computer.getBuilt() == true)
+    {
+        ui->dropDown_computerBuilt->setCurrentIndex(0);
+    }
+    else
+    {
+        ui->dropDown_computerBuilt->setCurrentIndex(1);
+    }
 }
 
 AddComputerDialog::~AddComputerDialog()
@@ -44,14 +66,14 @@ void AddComputerDialog::on_button_ok_clicked()
     {
         servicelayer.newComputer(name.toStdString(), year.toStdString(),
                              type.toStdString(), built.toStdString());
-        displayAllComputers();
         ui->input_computerName->setText("");
         ui->input_computerType->setText("");
         ui->input_computerDesignYear->setText("");
+        this->close();
     }
-    else
+    else if (!validcomputerinput && !name.isEmpty() && !type.isEmpty())
     {
-        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Check if year is less than current year</span>");
+        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Check if design year is less than current year</span>");
     }
 }
 

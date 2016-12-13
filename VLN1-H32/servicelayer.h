@@ -23,6 +23,8 @@ private:
     // Creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
 public:
+    Person getPersonByID(int id){ return data.getPersonByID(id); }
+    Computer getCompByID(int id){ return data.getCompByID(id); }
     bool openDatabase(){ return data.openDatabase(); }
     void closeDatabase() { data.closeDatabase(); }
     // Calls findPersons() in dataLayer
@@ -52,7 +54,7 @@ public:
     // Vaidate functions that are used to validate input
     // Uses the validate help functions
     // Returns true if the input is valid and false otherwise
-    bool validateNewPerson(string name, string gender, string nationality, string byear, string dyear);
+    bool validateNewPerson(string name, string nationality, string byear, string dyear);
     bool validateNewComputer(string name, string year, string type);
     // The delete functions use deleteItem() in dataLayer to delete
     // the idem with ID = id
@@ -66,7 +68,7 @@ public:
     // id of the item the user wants to change,
     // the column the user wants to change and the change the user wants to make
     // returns true if updateMe is a valid input
-    bool updatePerson(int id, int col, string updateMe);
+    void updatePerson(Person person);
     bool updateComputer(int id, int col, string updateMe);
     // Gets all linked computers and persons by using getRelation() in dataLayer
     // Returns a double vector with the information

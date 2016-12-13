@@ -539,6 +539,35 @@ void dataLayer::updateTable(int id, string table, string column, string updateME
     updateItem(id, table, column, updateME);
 }
 
+void dataLayer::updatePerson(Person person)
+{
+    QSqlQuery query;
+
+    query.prepare("UPDATE Person SET name = :name, gender = gender, nationality = :nat, "
+                  "birthyear = :byear, deathyear = :dyear WHERE ID = :id");
+    query.bindValue(":name", QString::fromStdString(person.getName()));
+    query.bindValue(":gender", QString::fromStdString(person.getGender()));
+    query.bindValue(":nat", QString::fromStdString(person.getNationality()));
+    query.bindValue(":byear", person.getByear());
+    query.bindValue(":dyear", person.getDyear());
+    query.bindValue(":id", person.getID());
+    query.exec();
+}
+
+void dataLayer::updateComputer(Computer computer)
+{
+    QSqlQuery query;
+
+    query.prepare("UPDATE Computer SET name = :name, year = :year, type = :type, "
+                  "built = :built WHERE id = :id");
+    query.bindValue(":name", QString::fromStdString(computer.getName()));
+    query.bindValue(":year", computer.getYear());
+    query.bindValue(":type", QString::fromStdString(computer.getType()));
+    query.bindValue(":built", computer.getBuilt());
+    query.bindValue(":id", computer.getID());
+    query.exec();
+}
+
 /**
  * @brief dataLayer::deleteItem
  * @param table

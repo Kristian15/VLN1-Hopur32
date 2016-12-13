@@ -340,11 +340,11 @@ void serviceLayer::newComputer(string name, string year, string type, string bui
  * @param dyear
  * @return bool
  */
-bool serviceLayer::validateNewPerson(string name, string gender, string nationality, string byear, string dyear)
+bool serviceLayer::validateNewPerson(string name, string nationality, string byear, string dyear)
 {
     bool isValid = false;
 
-    if(validateName(name) && validateGender(gender) && validateNationality(nationality) && validateYear(byear))
+    if(validateName(name) && validateNationality(nationality) && validateYear(byear))
     {
         if(dyear != "0")
         {
@@ -425,9 +425,10 @@ void serviceLayer::unLink(int personID, int computerID)
  * @param updateMe
  * @return bool
  */
-bool serviceLayer::updatePerson(int id, int col, string updateMe)
+void serviceLayer::updatePerson(Person person)
 {
-    bool isValid = false;
+    data.updatePerson(person);
+    /*bool isValid = false;
     string column;
 
     switch(col){
@@ -455,7 +456,7 @@ bool serviceLayer::updatePerson(int id, int col, string updateMe)
         data.updateTable(id, "Person", column, updateMe);
     }
 
-    return isValid;
+    return isValid;*/
 }
 
 /**

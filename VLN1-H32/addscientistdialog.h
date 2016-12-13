@@ -14,12 +14,15 @@ class AddScientistDialog : public QDialog
 
 public:
     explicit AddScientistDialog(QWidget *parent = 0);
+    explicit AddScientistDialog(Person person, QWidget *parent = 0);
     ~AddScientistDialog();
 
 private slots:
     void on_button_ok_clicked();
 
 private:
+    bool _edit;
+    Person _person;
     serviceLayer service;
    // bool validatePerson();
 
