@@ -49,8 +49,6 @@ private:
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
-    AddComputerDialog addComp;
-    AddScientistDialog addSci;
     EditComputerDialog editComp;
     EditScientistDialog editSci;
     AddLinkDialog addLink;

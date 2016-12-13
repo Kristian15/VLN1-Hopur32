@@ -8,6 +8,7 @@ AddScientistDialog::AddScientistDialog(QWidget *parent) :
     _edit = false;
 
     ui->setupUi(this);
+    this->setWindowTitle("Add scientist");
     ui->label_scientistHeader->setText("Add a new scientist");
 }
 
@@ -18,14 +19,15 @@ AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     _edit = true;
 
     ui->setupUi(this);
-    ui->label_scientistHeader->setText("Edit scientist");
+    this->setWindowTitle(QString::fromStdString(person.getName()));
+    ui->label_scientistHeader->setText(QString::fromStdString(person.getName()));
 
     _person = person;
-    ui->label_scientistName->setText(QString::fromStdString(person.getName()));
-    ui->label_scientistNationality->setText(QString::fromStdString(person.getNationality()));
-    ui->label_scientistGender->setText(QString::fromStdString(person.getGender()));
-    ui->label_scientistBirthYear->setText(QString::number(person.getByear()));
-    ui->label_scientistDeathYear->setText(QString::number(person.getDyear()));
+    ui->label_scientistName->setText(QString::fromStdString(_person.getName()));
+    ui->label_scientistNationality->setText(QString::fromStdString(_person.getNationality()));
+    ui->label_scientistGender->setText(QString::fromStdString(_person.getGender()));
+    ui->label_scientistBirthYear->setText(QString::number(_person.getByear()));
+    ui->label_scientistDeathYear->setText(QString::number(_person.getDyear()));
 }
 
 AddScientistDialog::~AddScientistDialog()

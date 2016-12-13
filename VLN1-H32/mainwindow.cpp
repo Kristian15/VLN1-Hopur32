@@ -85,21 +85,32 @@ void MainWindow::fillLinkTable()
 
 void MainWindow::on_button_addComputer_clicked()
 {
-    addComp.show();
+    AddComputerDialog addComp;
+
+    addComp.exec();
     ui->table_computers->clearContents();
     fillCompTable();
 }
 
 void MainWindow::on_button_addScientist_clicked()
 {
-    addSci.show();
+    AddScientistDialog addSci;
+
+    addSci.exec();
     ui->table_scientists->clearContents();
-    fillCompTable();
+    fillSciTable();
 }
 
 void MainWindow::on_button_editComputer_clicked()
 {
-    editComp.show();
+    int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
+    int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
+
+    AddComputerDialog addComp(service.getCompByID(id));
+
+    addComp.exec();
+    ui->table_computers->clearContents();
+    fillCompTable();
 }
 
 void MainWindow::on_button_editScientist_clicked()
@@ -107,7 +118,14 @@ void MainWindow::on_button_editScientist_clicked()
     int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
 
-    editSci.show();
+    AddScientistDialog addSci(service.getPersonByID(id));
+
+    addSci.exec();
+
+    ui->table_scientists->clearContents();
+    fillSciTable();
+    ui->button_editScientist->setEnabled(false);
+    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_addLink_clicked()
