@@ -110,20 +110,6 @@ bool serviceLayer::validateYear(string year)
  * @param built
  * @return bool
  */
-bool serviceLayer::validateBuilt(string& built)
-{
-    if(built.size() == 1) // check if built is only one character
-    {
-        built = tolower(built[0]);
-
-        if((built == "y") || (built == "n"))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
 
 /**
  * @brief serviceLayer::getNewPerson
@@ -384,9 +370,9 @@ bool serviceLayer::validateNewPerson(string name, string gender, string national
  * @param built
  * @return bool
  */
-bool serviceLayer::validateNewComputer(string name, string year, string type, string built)
+bool serviceLayer::validateNewComputer(string name, string year, string type)
 {
-    if((name != "") && validateYear(year) && (type != "") && validateBuilt(built))
+    if((name != "") && validateYear(year) && (type != ""))
     {
             return true;
     }
@@ -493,9 +479,6 @@ bool serviceLayer::updateComputer(int id, int col, string updateMe)
             break;
         case 3:
             isValid = (updateMe != ""); column = "Type";
-            break;
-        case 4:
-            isValid = validateBuilt(updateMe); column = "Built";
             break;
         default:
             break;

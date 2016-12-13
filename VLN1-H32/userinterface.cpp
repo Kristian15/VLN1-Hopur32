@@ -609,7 +609,7 @@ void userInterface::readComputer()
     cout << "Built (Y/N): ";
     cin >> built;
 
-    if(service.validateNewComputer(name, year, type, built))
+    if(service.validateNewComputer(name, year, type))
     {
         service.newComputer(name, year, type, built);
     }
