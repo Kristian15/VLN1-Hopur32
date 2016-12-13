@@ -15,6 +15,7 @@ class AddComputerDialog : public QDialog
 
 public:
     explicit AddComputerDialog(QWidget *parent = 0);
+    explicit AddComputerDialog(Computer computer, QWidget *parent = 0);
     ~AddComputerDialog();
 
 private slots:
