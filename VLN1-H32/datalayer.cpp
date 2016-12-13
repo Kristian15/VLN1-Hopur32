@@ -60,6 +60,16 @@ void dataLayer::createRelation(int personID, int computerID)
     query.exec();
 }
 
+void dataLayer::createPersonFact(int personID, string fact)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Person_Computer (PersonID, Fact) "
+                  "VALUES (:personID, :fact)");
+    query.bindValue(":personID", personID);
+    query.bindValue(":fact", QString::fromStdString(fact));
+    query.exec();
+}
+
 /**
  * @brief dataLayer::getPersons
  * @param queryString
@@ -147,6 +157,15 @@ void dataLayer::deleteRelation(int personID, int computerID)
     QSqlQuery query;
     query.prepare("DELETE FROM Person_Computer WHERE PersonID = " +
                   qPersID + " AND computerID = " + qCompID);
+    query.exec();
+}
+
+void dataLayer::deletePersonFact(int factID)
+{
+    QString qFactID = QString::number(factID);
+    QSqlQuery query;
+    query.prepare("DELETE FROM Person_Fact WHERE FactID = " +
+                  qFactID);
     query.exec();
 }
 
@@ -250,14 +269,24 @@ Person dataLayer::getPersonByID(int id)
     query.prepare("SELECT * FROM Person WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
+    Person person;
 
-    Person person(
+    while(query.next())
+    {
+       /* person(
                 query.value("ID").toInt(),
                 query.value("Name").toString().toStdString(),
                 query.value("Gender").toString().toStdString(),
                 query.value("Nationality").toString().toStdString(),
                 query.value("BirthYear").toInt(),
-                query.value("DeathYear").toInt());
+                query.value("DeathYear").toInt());*/
+        person.setID(query.value("ID").toInt());
+        person.setName(query.value("Name").toString().toStdString());
+        person.setGender(query.value("Gender").toString().toStdString());
+        person.setNationality(query.value("Nationality").toString().toStdString());
+        person.setByear(query.value("BirthYear").toInt());
+        person.setDyear(query.value("DeathYear").toInt());
+    }
 
     return person;
 }
@@ -269,13 +298,22 @@ Computer dataLayer::getCompByID(int id)
     query.prepare("SELECT * FROM Computer WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
+    Computer computer;
 
-    Computer computer(
-                query.value("ID").toInt(),
-                query.value("Name").toString().toStdString(),
-                query.value("Year").toInt(),
-                query.value("Type").toString().toStdString(),
-                query.value("Built").toBool());
+    while(query.next())
+    {
+        /*Computer computer(
+                    query.value("ID").toInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Year").toInt(),
+                    query.value("Type").toString().toStdString(),
+                    query.value("Built").toBool());*/
+        computer.setID(query.value("ID").toInt());
+        computer.setName(query.value("Name").toString().toStdString());
+        computer.setYear(query.value("Year").toInt());
+        computer.setType(query.value("Type").toString().toStdString());
+        computer.setBuilt(query.value("Built").toBool());
+    }
 
     return computer;
 }

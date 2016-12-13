@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,8 +48,6 @@ void MainWindow::fillCompTable()
         ui->table_computers->setItem(i, 4, new QTableWidgetItem(id));
     }
     ui->table_computers->setColumnHidden(4, true);
-
-    currentlyDisplayedComputers = computers;
 }
 
 void MainWindow::fillSciTable()
@@ -86,24 +85,52 @@ void MainWindow::fillLinkTable()
 
 void MainWindow::on_button_addComputer_clicked()
 {
-    addComp.show();
+    AddComputerDialog addComp;
+
+    addComp.exec();
     ui->table_computers->clearContents();
     fillCompTable();
+    ui->button_editComputer->setEnabled(false);
+    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::on_button_addScientist_clicked()
 {
-    addSci.show();
+    AddScientistDialog addSci;
+
+    addSci.exec();
+    ui->table_scientists->clearContents();
+    fillSciTable();
+
+    ui->button_editScientist->setEnabled(false);
+    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_editComputer_clicked()
 {
-    editComp.show();
+    int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
+    int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
+
+    AddComputerDialog addComp(service.getCompByID(id));
+
+    addComp.exec();
+    ui->table_computers->clearContents();
+    fillCompTable();
 }
 
 void MainWindow::on_button_editScientist_clicked()
 {
-    addSci.show();
+    int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
+    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
+
+    AddScientistDialog addSci(service.getPersonByID(id));
+
+    addSci.exec();
+
+    ui->table_scientists->clearContents();
+    fillSciTable();
+    ui->button_editScientist->setEnabled(false);
+    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_addLink_clicked()
@@ -113,20 +140,31 @@ void MainWindow::on_button_addLink_clicked()
 
 void MainWindow::on_table_computers_clicked(const QModelIndex &index)
 {
+    ui->button_editComputer->setEnabled(true);
     ui->button_deleteComputer->setEnabled(true);
 }
 
 void MainWindow::on_button_deleteComputer_clicked()
 {
     int currentlySelectedComputerIndex = ui->table_computers->currentIndex().row();
-    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
-    service.deleteComputer(currentlySelectedComputer.getID());
+    int id = ui->table_computers->model()->data(ui->table_computers->model()->index(currentlySelectedComputerIndex,4)).toInt();
+    DeleteConfirmationDialog delornodel(id, "computer");
+    delornodel.exec();
+    fillCompTable();
 }
-
-
 
 void MainWindow::on_table_scientists_itemSelectionChanged()
 {
     ui->button_editScientist->setEnabled(true);
     ui->button_deleteScientist->setEnabled(true);
+}
+
+void MainWindow::on_button_deleteScientist_clicked()
+{
+    int currentlySelectePersonIndex = ui->table_scientists->currentIndex().row();
+    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(currentlySelectePersonIndex,5)).toInt();
+    DeleteConfirmationDialog delornodel(id, "person");
+    delornodel.exec();
+    ui->table_scientists->clearContents();
+    fillSciTable();
 }

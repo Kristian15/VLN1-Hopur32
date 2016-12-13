@@ -8,6 +8,7 @@ AddScientistDialog::AddScientistDialog(QWidget *parent) :
     _edit = false;
 
     ui->setupUi(this);
+    this->setWindowTitle("Add scientist");
     ui->label_scientistHeader->setText("Add a new scientist");
 }
 
@@ -18,14 +19,22 @@ AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     _edit = true;
 
     ui->setupUi(this);
-    ui->label_scientistHeader->setText("Edit scientist");
+    this->setWindowTitle("Edit Scientist");
+    ui->label_scientistHeader->setText(QString::fromStdString(person.getName()));
 
     _person = person;
-    ui->label_scientistName->setText(QString::fromStdString(person.getName()));
-    ui->label_scientistNationality->setText(QString::fromStdString(person.getNationality()));
-    ui->label_scientistGender->setText(QString::fromStdString(person.getGender()));
-    ui->label_scientistBirthYear->setText(QString::number(person.getByear()));
-    ui->label_scientistDeathYear->setText(QString::number(person.getDyear()));
+    ui->input_scientistName->setText(QString::fromStdString(_person.getName()));
+    ui->input_scientistNationality->setText(QString::fromStdString(_person.getNationality()));
+    if(person.getGender() == "female")
+    {
+        ui->dropDown_scientistGender->setCurrentIndex(0);
+    }
+    else
+    {
+        ui->dropDown_scientistGender->setCurrentIndex(1);
+    }
+    ui->input_scientistBirthYear->setText(QString::number(_person.getByear()));
+    ui->input_scientistDeathYear->setText(QString::number(_person.getDyear()));
 }
 
 AddScientistDialog::~AddScientistDialog()
@@ -93,4 +102,9 @@ void AddScientistDialog::on_button_ok_clicked()
         ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Check if birth year is less than current year</span>");
     }
 
+}
+
+void AddScientistDialog::on_button_cancel_clicked()
+{
+    this->close();
 }
