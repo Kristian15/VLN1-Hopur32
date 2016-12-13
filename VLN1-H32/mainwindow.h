@@ -10,6 +10,7 @@
 #include "addlinkdialog.h"
 #include "editscientistdialog.h"
 #include "editcomputerdialog.h"
+#include "deleteconfirmationdialog.h"
 
 
 namespace Ui {
@@ -53,7 +54,6 @@ private:
     EditComputerDialog editComp;
     EditScientistDialog editSci;
     AddLinkDialog addLink;
-    vector<Computer> currentlyDisplayedComputers;
 };
 
 #endif // MAINWINDOW_H

@@ -48,8 +48,6 @@ void MainWindow::fillCompTable()
         ui->table_computers->setItem(i, 4, new QTableWidgetItem(id));
     }
     ui->table_computers->setColumnHidden(4, true);
-
-    currentlyDisplayedComputers = computers;
 }
 
 void MainWindow::fillSciTable()
@@ -125,11 +123,11 @@ void MainWindow::on_table_computers_clicked(const QModelIndex &index)
 void MainWindow::on_button_deleteComputer_clicked()
 {
     int currentlySelectedComputerIndex = ui->table_computers->currentIndex().row();
-    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
-    service.deleteComputer(currentlySelectedComputer.getID());
+    int id = ui->table_computers->model()->data(ui->table_computers->model()->index(currentlySelectedComputerIndex,4)).toInt();
+    DeleteConfirmationDialog delernodel(id);
+    delernodel.exec();
+    fillCompTable();
 }
-
-
 
 void MainWindow::on_table_scientists_itemSelectionChanged()
 {
