@@ -23,6 +23,8 @@ private:
     // Creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
 public:
+    Person getPersonByID(int id){ return data.getPersonByID(id); }
+    Computer getCompByID(int id){ return data.getCompByID(id); }
     bool openDatabase(){ return data.openDatabase(); }
     void closeDatabase() { data.closeDatabase(); }
     // Calls findPersons() in dataLayer
