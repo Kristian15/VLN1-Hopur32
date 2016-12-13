@@ -243,6 +243,43 @@ void dataLayer::addComputer(Computer computer)
     addNewComputer(computer);
 }
 
+Person dataLayer::getPersonByID(int id)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM Person WHERE ID = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    Person person(
+                query.value("ID").toInt(),
+                query.value("Name").toString().toStdString(),
+                query.value("Gender").toString().toStdString(),
+                query.value("Nationality").toString().toStdString(),
+                query.value("BirthYear").toInt(),
+                query.value("DeathYear").toInt());
+
+    return person;
+}
+
+Computer dataLayer::getCompByID(int id)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM Computer WHERE ID = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    Computer computer(
+                query.value("ID").toInt(),
+                query.value("Name").toString().toStdString(),
+                query.value("Year").toInt(),
+                query.value("Type").toString().toStdString(),
+                query.value("Built").toBool());
+
+    return computer;
+}
+
 /**
  * @brief dataLayer::getSortedPersons
  * @param column

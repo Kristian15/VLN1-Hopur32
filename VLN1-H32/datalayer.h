@@ -49,6 +49,8 @@ public:
     // Gets all scientists from the database sorted after column and ascDesc
     // Returns a vector of Persons with the sorted list
     // Uses getPersons()
+    Person getPersonByID(int id);
+    Computer getCompByID(int id);
     vector<Person> getSortedPersons(string column, int ascDesc);
     // Gets all computers from the database sorted after column and ascDesc
     // Returns a vector of Computer with the sorted list
