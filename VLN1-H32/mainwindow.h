@@ -39,6 +39,8 @@ private slots:
 
     void on_table_computers_clicked(const QModelIndex &index);
 
+    void on_table_scientists_itemSelectionChanged();
+
 private:
     void fillCompTable();
     void fillSciTable();
