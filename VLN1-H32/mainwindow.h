@@ -42,6 +42,8 @@ private slots:
 
     void on_table_scientists_itemSelectionChanged();
 
+    void on_button_deleteScientist_clicked();
+
 private:
     void fillCompTable();
     void fillSciTable();
