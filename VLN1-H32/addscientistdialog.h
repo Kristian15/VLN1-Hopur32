@@ -20,6 +20,8 @@ public:
 private slots:
     void on_button_ok_clicked();
 
+    void on_button_cancel_clicked();
+
 private:
     bool _edit;
     Person _person;

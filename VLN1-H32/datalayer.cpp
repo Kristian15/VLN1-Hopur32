@@ -63,9 +63,19 @@ void dataLayer::createRelation(int personID, int computerID)
 void dataLayer::createPersonFact(int personID, string fact)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO Person_Computer (PersonID, Fact) "
+    query.prepare("INSERT INTO Person_Fact (PersonID, Fact) "
                   "VALUES (:personID, :fact)");
     query.bindValue(":personID", personID);
+    query.bindValue(":fact", QString::fromStdString(fact));
+    query.exec();
+}
+
+void dataLayer::createComputerFact(int computerID, string fact)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Computer_Fact (ComputerID, Fact) "
+                  "VALUES (:computerID, :fact)");
+    query.bindValue(":computerID", computerID);
     query.bindValue(":fact", QString::fromStdString(fact));
     query.exec();
 }
@@ -165,6 +175,15 @@ void dataLayer::deletePersonFact(int factID)
     QString qFactID = QString::number(factID);
     QSqlQuery query;
     query.prepare("DELETE FROM Person_Fact WHERE FactID = " +
+                  qFactID);
+    query.exec();
+}
+
+void dataLayer::deleteComputerFact(int factID)
+{
+    QString qFactID = QString::number(factID);
+    QSqlQuery query;
+    query.prepare("DELETE FROM Computer_Fact WHERE FactID = " +
                   qFactID);
     query.exec();
 }
@@ -634,4 +653,66 @@ void dataLayer::makeRelation(int personID, int computerID)
 void dataLayer::unMakeRelation(int personID, int computerID)
 {
     deleteRelation(personID, computerID);
+}
+
+void dataLayer::createFact(string table, int id, string fact)
+{
+    if(table == "person")
+    {
+        createPersonFact(id, fact);
+    }
+    else
+    {
+        createComputerFact(id, fact);
+    }
+}
+
+void dataLayer::deleteFact(string table, int factID)
+{
+    if(table == "person")
+    {
+        deletePersonFact(factID);
+    }
+    else
+    {
+        deleteComputerFact(factID);
+    }
+}
+
+vector<string> dataLayer::getFacts(string table, int id)
+{
+    vector<string> resultMatrix;
+
+    QString queryString = "SELECT Fact FROM ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Fact WHERE ");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(id);
+
+    QSqlQuery query;
+    query.exec(queryString);
+
+    while(query.next())
+    {
+        resultMatrix.push_back(query.value("Fact").toString().toStdString());
+    }
+
+    return resultMatrix;
+}
+
+vector<Computer> dataLayer::searchComputers(string findMe)
+{
+    QString queryString = "SELECT * FROM Computer WHERE Name LIKE '%";
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE OR Gender LIKE '");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("' OR Nationality LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE OR BirthYear LIKE ");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append(" OR DeathYear LIKE ");
+    queryString.append(QString::fromStdString(findMe));
+
+    return getComputers(queryString);
 }
