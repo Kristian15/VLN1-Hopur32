@@ -75,7 +75,6 @@ void MainWindow::fillSciTable()
 void MainWindow::fillLinkTable()
 {
 
-    vector<vector<string>> links;
 }
 
 void MainWindow::on_button_addComputer_clicked()
