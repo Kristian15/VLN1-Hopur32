@@ -76,6 +76,8 @@ public:
     vector<string> searchRelation(int id, string table);
     // Updates the item in column to updateMe from table
     void updateTable(int id, string table, string column, string updateMe);
+
+    void updatePerson(Person person);
     // Uses deleteRow() to delete
     void deleteItem(string table, int id);
     // Creates a relation between a computer and a scientist

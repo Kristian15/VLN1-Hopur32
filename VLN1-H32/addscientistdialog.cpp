@@ -5,7 +5,27 @@ AddScientistDialog::AddScientistDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddScientistDialog)
 {
+    _edit = false;
+
     ui->setupUi(this);
+    ui->label_scientistHeader->setText("Add a new scientist");
+}
+
+AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AddScientistDialog)
+{
+    _edit = true;
+
+    ui->setupUi(this);
+    ui->label_scientistHeader->setText("Edit scientist");
+
+    _person = person;
+    ui->label_scientistName->setText(QString::fromStdString(person.getName()));
+    ui->label_scientistNationality->setText(QString::fromStdString(person.getNationality()));
+    ui->label_scientistGender->setText(QString::fromStdString(person.getGender()));
+    ui->label_scientistBirthYear->setText(QString::number(person.getByear()));
+    ui->label_scientistDeathYear->setText(QString::number(person.getDyear()));
 }
 
 AddScientistDialog::~AddScientistDialog()
@@ -47,7 +67,21 @@ void AddScientistDialog::on_button_ok_clicked()
 
     if(validscientistinput)
     {
-        service.newPerson(name.toStdString(), gender.toStdString(), nationality.toStdString(), byear.toStdString(), dyear.toStdString());
+        if(_edit)
+        {
+            _person.setName(name.toStdString());
+            _person.setNationality(nationality.toStdString());
+            _person.setGender(gender.toStdString());
+            _person.setByear(byear.toInt());
+            _person.setDyear(dyear.toInt());
+
+            servicelayer.updatePerson(_person);
+        }
+        else
+        {
+            service.newPerson(name.toStdString(), gender.toStdString(), nationality.toStdString(), byear.toStdString(), dyear.toStdString());
+
+        }
         ui->input_scientistName->setText("");
         ui->input_scientistNationality->setText("");
         ui->input_scientistBirthYear->setText("");

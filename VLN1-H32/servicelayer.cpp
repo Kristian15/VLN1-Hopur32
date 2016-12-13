@@ -425,9 +425,10 @@ void serviceLayer::unLink(int personID, int computerID)
  * @param updateMe
  * @return bool
  */
-bool serviceLayer::updatePerson(int id, int col, string updateMe)
+void serviceLayer::updatePerson(Person person)
 {
-    bool isValid = false;
+    data.updatePerson(person);
+    /*bool isValid = false;
     string column;
 
     switch(col){
@@ -455,7 +456,7 @@ bool serviceLayer::updatePerson(int id, int col, string updateMe)
         data.updateTable(id, "Person", column, updateMe);
     }
 
-    return isValid;
+    return isValid;*/
 }
 
 /**

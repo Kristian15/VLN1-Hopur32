@@ -539,6 +539,22 @@ void dataLayer::updateTable(int id, string table, string column, string updateME
     updateItem(id, table, column, updateME);
 }
 
+void dataLayer::updatePerson(Person person)
+{
+    QString name, nationality, gender;
+    int id, birthYear, deathYear;
+    name = QString::fromStdString(person.getName());
+    nationality = QString::fromStdString(person.getNationality());
+    gender = QString::fromStdString(person.getGender());
+    id = person.getID();
+    birthYear = person.getByear();
+    deathYear = person.getDyear();
+    QSqlQuery query;
+
+    query.prepare("");
+
+}
+
 /**
  * @brief dataLayer::deleteItem
  * @param table
