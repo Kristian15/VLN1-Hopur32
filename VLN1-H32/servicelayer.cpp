@@ -513,3 +513,9 @@ vector<string> serviceLayer::getOneRelation(int id, string table)
 {
     return data.searchRelation(id, table);
 }
+
+vector<Computer> serviceLayer::searchComputers(string input)
+{
+    vector<Computer> vec;
+    return vec;
+}

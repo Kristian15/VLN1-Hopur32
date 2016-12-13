@@ -22,6 +22,7 @@ private:
     Person getNewPerson(string name, string gender, string nationality, string byear, string dyear);
     // Creates a new computer and returns it
     Computer getNewComputer(string name, string year, string type, string built);
+
 public:
     Person getPersonByID(int id){ return data.getPersonByID(id); }
     Computer getCompByID(int id){ return data.getCompByID(id); }
@@ -76,5 +77,6 @@ public:
     // Gets all links to the item with ID = id from table
     // Uses searchRelation() in dataLayer
     vector<string> getOneRelation(int id, string table);
+    vector<Computer> searchComputers(string input);
 
 };

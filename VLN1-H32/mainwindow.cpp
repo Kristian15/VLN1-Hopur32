@@ -28,6 +28,13 @@ void MainWindow::fillCompTable()
 {
     vector<Computer> computers;
     computers = service.sortComputers(1, 1);
+    fillCompTable(computers);
+}
+
+void MainWindow::fillCompTable(vector<Computer> computers)
+{
+   // vector<Computer> computers;
+   // computers = service.sortComputers(1, 1);
     ui->table_computers->setRowCount((int)computers.size());
 
     QString name, designed, type, built, id;
@@ -54,6 +61,13 @@ void MainWindow::fillSciTable()
 {
     vector<Person> persons;
     persons = service.sortPersons(1, 1);
+    fillSciTable(persons);
+}
+
+void MainWindow::fillSciTable(vector<Person> persons)
+{
+  //  vector<Person> persons;
+   // persons = service.sortPersons(1, 1);
     ui->table_scientists->setRowCount((int)persons.size());
 
     QString name, gender, nationality, birthYear, deathYear, id;
@@ -173,5 +187,7 @@ void MainWindow::on_button_deleteScientist_clicked()
 
 void MainWindow::on_input_computerFilter_textChanged(const QString &arg1)
 {
-
+    string input = ui->input_computerFilter->text().toStdString();
+    vector<Computer> computers = service.searchComputers(input);
+    fillCompTable(computers);
 }
