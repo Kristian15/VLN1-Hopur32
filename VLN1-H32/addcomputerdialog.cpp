@@ -6,9 +6,7 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
-    bool temp = servicelayer.openDatabase();
     displayAllComputers();
-    servicelayer.closeDatabase();
 }
 
 AddComputerDialog::~AddComputerDialog()
@@ -18,7 +16,7 @@ AddComputerDialog::~AddComputerDialog()
 
 void AddComputerDialog::on_button_ok_clicked()
 {
-    bool temp = servicelayer.openDatabase();
+
 
     displayAllComputers();
     ui->label_computerName_Error->setText("");
@@ -50,12 +48,12 @@ void AddComputerDialog::on_button_ok_clicked()
 
     if(validcomputerinput)
     {
-        bool temp = servicelayer.openDatabase();
+
 
         servicelayer.newComputer(name.toStdString(), year.toStdString(),
                              type.toStdString(), built.toStdString());
 
-        servicelayer.closeDatabase();
+
 
         displayAllComputers();
         ui->input_computerName->setText("");
@@ -68,7 +66,7 @@ void AddComputerDialog::on_button_ok_clicked()
         return;
     }
 
-    servicelayer.closeDatabase();
+
 
 }
 
@@ -79,12 +77,12 @@ void AddComputerDialog::on_button_cancel_clicked()
 
 void AddComputerDialog::displayAllComputers()
 {
-    bool temp = servicelayer.openDatabase();
+
 
     vector<Computer> computers = servicelayer.sortComputers(1,1);
     displayComputers(computers);
 
-    servicelayer.closeDatabase();
+
 }
 
 void AddComputerDialog::displayComputers(vector<Computer> computers)
