@@ -49,9 +49,9 @@ void AddComputerDialog::on_button_ok_clicked()
         ui->input_computerDesignYear->setText("");
         this->close();
     }
-    else
+    else if (!validcomputerinput && !name.isEmpty() && !type.isEmpty())
     {
-        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Check if year is less than current year</span>");
+        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Check if design year is less than current year</span>");
     }
 }
 

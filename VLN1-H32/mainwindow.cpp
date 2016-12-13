@@ -25,7 +25,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::fillCompTable()
 {
-
     vector<Computer> computers;
     computers = service.sortComputers(1, 1);
     ui->table_computers->setRowCount((int)computers.size());
@@ -48,6 +47,8 @@ void MainWindow::fillCompTable()
         ui->table_computers->setItem(i, 4, new QTableWidgetItem(id));
     }
     ui->table_computers->setColumnHidden(4, true);
+
+    currentlyDisplayedComputers = computers;
 }
 
 void MainWindow::fillSciTable()
@@ -107,3 +108,17 @@ void MainWindow::on_button_addLink_clicked()
 {
     addLink.show();
 }
+
+void MainWindow::on_table_computers_clicked(const QModelIndex &index)
+{
+    ui->button_deleteComputer->setEnabled(true);
+}
+
+void MainWindow::on_button_deleteComputer_clicked()
+{
+    int currentlySelectedComputerIndex = ui->table_computers->currentIndex().row();
+    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
+    service.deleteComputer(currentlySelectedComputer.getID());
+}
+
+

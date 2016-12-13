@@ -35,6 +35,10 @@ private slots:
 
     void on_button_addLink_clicked();
 
+    void on_button_deleteComputer_clicked();
+
+    void on_table_computers_clicked(const QModelIndex &index);
+
 private:
     void fillCompTable();
     void fillSciTable();
@@ -47,6 +51,7 @@ private:
     EditComputerDialog editComp;
     EditScientistDialog editSci;
     AddLinkDialog addLink;
+    vector<Computer> currentlyDisplayedComputers;
 };
 
 #endif // MAINWINDOW_H

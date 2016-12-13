@@ -40,7 +40,7 @@ void AddScientistDialog::on_button_ok_clicked()
     }
     if(dyear.isEmpty())
     {
-        ui->label_scientistDeathYear_Error->setText("<span style='color: #ED1C58'>Death year cannot be empty</span>");
+        dyear = "0";
     }
 
     bool validscientistinput = service.validateNewPerson(name.toStdString(), nationality.toStdString(), byear.toStdString(), dyear.toStdString());
@@ -54,9 +54,9 @@ void AddScientistDialog::on_button_ok_clicked()
         ui->input_scientistDeathYear->setText("");
         this->close();
     }
-    else
+    else if (!validscientistinput && !byear.isEmpty() && !name.isEmpty() && !nationality.isEmpty())
     {
-        ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Check if years are less than current year</span>");
+        ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Check if birth year is less than current year</span>");
     }
 
 }
