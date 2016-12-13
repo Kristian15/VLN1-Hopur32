@@ -8,6 +8,6 @@ int main(int argc, char *argv[])
     //userInterface ui;
     //ui.run();
     MainWindow mainwin;
-    mainwin.show();
+    mainwin.showMaximized();
     return a.exec();
 }
