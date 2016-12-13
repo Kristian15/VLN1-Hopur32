@@ -60,18 +60,6 @@ public:
     // Returns a vector of Computer with the sorted list
     // Uses getComputers()
     vector<Computer> getSortedComputers(string column, int ascDesc);
-    // Find scientists in the database where findMe matches the item in column
-    // Returns a vector with the scientists
-    // Uses getPersons()
-    vector<Person> findPersons(string column, string findMe);
-    // Find computers in the database where findMe matches the item in column
-    // Returns a vector with the computers
-    // Uses getComputers()
-    vector<Computer> findComputers(string column, string findMe);
-    // Used if the user wants to search by birth year or death year
-    vector<Person> searchPersonYears(string column, int from, int to);
-    // Used if the user want to search by design year
-    vector<Computer> searchComputerYears(int from, int to);
     // Return all related persons/computers
     // Returns a double vector where first element in every row is the name of the scientist/computer
     // the following elements are the scientists/computers that are linked to it

@@ -28,20 +28,6 @@ public:
     Computer getCompByID(int id){ return data.getCompByID(id); }
     bool openDatabase(){ return data.openDatabase(); }
     void closeDatabase() { data.closeDatabase(); }
-    // Calls findPersons() in dataLayer
-    // Returns a vector with the findings
-    vector<Person> searchPersons(string findMe, int by);
-    // Calls findComputers() in dataLayer
-    // Returns a vector with the findings
-    vector<Computer> searchComputers(string findMe, int by);
-    // When searching for birth year or death year
-    // Calls searchPersonYears in data layer
-    // Returns vector with the findings
-    vector<Person> searchPersonYears(string first, string second, int by);
-    // When searching for year of design
-    // Calls searchComputerYears in data layer
-    // Returns vector with the findings
-    vector<Computer> searchComputerYears(string first, string second);
     // Calls getSortedPersons() in dataLayer
     // Returns a vector with the sorted scientists
     vector<Person> sortPersons(int order, int ascOrDesc);

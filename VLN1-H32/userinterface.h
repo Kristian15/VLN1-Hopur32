@@ -11,7 +11,7 @@ using namespace std;
 class userInterface
 {
 private:
-    serviceLayer service;
+   /* serviceLayer service;
 
     // *** PRINT INSTRUCTIONS FUNCTIONS ***
     // Prints the main menu
@@ -120,5 +120,5 @@ private:
     bool doYouWantToQuit();
 public:
     // To run the program
-    void run();
+    void run();*/
 };

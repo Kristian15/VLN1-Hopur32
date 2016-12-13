@@ -3,10 +3,6 @@
 
 // **** Private ****
 
-/**
- * @brief dataLayer::addNewPerson
- * @param addMe
- */
 void dataLayer::addNewPerson(Person addMe)
 {
     QSqlQuery query;
@@ -29,10 +25,6 @@ void dataLayer::addNewPerson(Person addMe)
     query.exec();
 }
 
-/**
- * @brief dataLayer::addNewComputer
- * @param addMe
- */
 void dataLayer::addNewComputer(Computer addMe)
 {
     QSqlQuery query;
@@ -45,11 +37,6 @@ void dataLayer::addNewComputer(Computer addMe)
     query.exec();
 }
 
-/**
- * @brief dataLayer::createRelation
- * @param personID
- * @param computerID
- */
 void dataLayer::createRelation(int personID, int computerID)
 {
     QSqlQuery query;
@@ -80,11 +67,6 @@ void dataLayer::createComputerFact(int computerID, string fact)
     query.exec();
 }
 
-/**
- * @brief dataLayer::getPersons
- * @param queryString
- * @return vector<Person>
- */
 vector<Person> dataLayer::getPersons(QString queryString)
 {
     vector<Person> persons;
@@ -107,11 +89,6 @@ vector<Person> dataLayer::getPersons(QString queryString)
     return persons;
 }
 
-/**
- * @brief dataLayer::getComputers
- * @param queryString
- * @return vector<Computer>
- */
 vector<Computer> dataLayer::getComputers(QString queryString)
 {
     vector<Computer> computers;
@@ -133,11 +110,6 @@ vector<Computer> dataLayer::getComputers(QString queryString)
     return computers;
 }
 
-/**
- * @brief dataLayer::deleteRow
- * @param table
- * @param id
- */
 void dataLayer::deleteRow(string table, int id)
 {
     QString qTable = QString::fromStdString(table);
@@ -155,11 +127,6 @@ void dataLayer::deleteRow(string table, int id)
     query2.exec();
 }
 
-/**
- * @brief dataLayer::deleteRelation
- * @param personID
- * @param computerID
- */
 void dataLayer::deleteRelation(int personID, int computerID)
 {
     QString qPersID = QString::number(personID);
@@ -188,13 +155,6 @@ void dataLayer::deleteComputerFact(int factID)
     query.exec();
 }
 
-/**
- * @brief dataLayer::updateItem
- * @param id
- * @param table
- * @param column
- * @param updateME
- */
 void dataLayer::updateItem(int id, string table, string column, string updateME)
 {
     QString qTable = QString::fromStdString(table);
@@ -220,25 +180,15 @@ void dataLayer::updateItem(int id, string table, string column, string updateME)
 
 // **** Public ****
 
-/**
- * @brief dataLayer::dataLayer
- */
 dataLayer::dataLayer()
 {
 }
 
-/**
- * @brief dataLayer::~dataLayer
- */
 dataLayer::~dataLayer()
 {
     db.close();
 }
 
-/**
- * @brief dataLayer::openDatabase
- * @return bool
- */
 bool dataLayer::openDatabase()
 {
     db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
@@ -263,19 +213,11 @@ void dataLayer::closeDatabase()
     }
 }
 
-/**
- * @brief dataLayer::addPerson
- * @param person
- */
 void dataLayer::addPerson(Person person)
 {
     addNewPerson(person);
 }
 
-/**
- * @brief dataLayer::addComputer
- * @param computer
- */
 void dataLayer::addComputer(Computer computer)
 {
     addNewComputer(computer);
@@ -337,12 +279,6 @@ Computer dataLayer::getCompByID(int id)
     return computer;
 }
 
-/**
- * @brief dataLayer::getSortedPersons
- * @param column
- * @param ascDesc
- * @return vector<Person>
- */
 vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
 {
     QString queryString = "SELECT * FROM person ORDER BY person.";
@@ -361,12 +297,6 @@ vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)
     return getPersons(queryString);
 }
 
-/**
- * @brief dataLayer::getSortedComputers
- * @param column
- * @param ascDesc
- * @return vector<Computer>
- */
 vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
 {
     QString queryString = "SELECT * FROM computer ORDER BY computer.";
@@ -385,114 +315,6 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
     return getComputers(queryString);
 }
 
-/**
- * @brief dataLayer::findPersons
- * @param column
- * @param findMe
- * @return vector<Person>
- */
-vector<Person> dataLayer::findPersons(string column, string findMe)
-{
-    QString queryString = "SELECT * FROM Person WHERE ";
-    queryString.append(QString::fromStdString(column));
-    queryString.append(" LIKE '");
-
-    if(column != "Gender") // so female do not come up when searching for male
-    {
-        queryString.append("%");
-    }
-
-    queryString.append(QString::fromStdString(findMe));
-    queryString.append("%' COLLATE NOCASE");
-
-    return getPersons(queryString);
-}
-
-/**
- * @brief dataLayer::findComputers
- * @param column
- * @param findMe
- * @return vector<Person>
- */
-vector<Computer> dataLayer::findComputers(string column, string findMe)
-{
-    vector<Computer> computers;
-
-    QString queryString = "SELECT * FROM Computer WHERE ";
-    queryString.append(QString::fromStdString(column));
-    queryString.append(" LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
-    queryString.append("%' COLLATE NOCASE");
-
-    return getComputers(queryString);
-}
-
-/**
- * @brief dataLayer::searchPersonYears
- * @param column
- * @param from
- * @param to
- * @return vector<Person>
- */
-vector<Person> dataLayer::searchPersonYears(string column, int from, int to)
-{
-    vector<Person> persons;
-
-    QString qColumn = QString::fromStdString(column);
-    QSqlQuery query;
-    query.prepare("SELECT * FROM Person WHERE " + qColumn + " BETWEEN :from AND :to");
-    query.bindValue(":from", from);
-    query.bindValue(":to", to);
-    query.exec();
-
-    while(query.next())
-    {
-        Person person(
-                    query.value("ID").toUInt(),
-                    query.value("Name").toString().toStdString(),
-                    query.value("Gender").toString().toStdString(),
-                    query.value("Nationality").toString().toStdString(),
-                    query.value("BirthYear").toInt(),
-                    query.value("DeathYear").toInt());
-        persons.push_back(person);
-    }
-    return persons;
-}
-
-/**
- * @brief dataLayer::searchComputerYears
- * @param from
- * @param to
- * @return vector<Computer>
- */
-vector<Computer> dataLayer::searchComputerYears(int from, int to)
-{
-    vector<Computer> computers;
-
-    QSqlQuery query;
-    query.prepare("SELECT * FROM Computer WHERE BirthYear BETWEEN :from AND :to");
-    query.bindValue(":from", from);
-    query.bindValue(":to", to);
-    query.exec();
-
-    while(query.next())
-    {
-        Computer computer(
-                    query.value("ID").toInt(),
-                    query.value("Name").toString().toStdString(),
-                    query.value("Year").toInt(),
-                    query.value("Type").toString().toStdString(),
-                    query.value("Built").toBool());
-        computers.push_back(computer);
-    }
-    return computers;
-}
-
-/**
- * @brief dataLayer::getRelation
- * @param column
- * @return vector<vector<string>>
- */
 vector<vector<string>> dataLayer::getRelation(string column)
 {
     vector<vector<string>> resultMatrix;
@@ -546,12 +368,6 @@ vector<vector<string>> dataLayer::getRelation(string column)
     return resultMatrix;
 }
 
-/**
- * @brief dataLayer::searchRelation
- * @param id
- * @param table
- * @return vector<string>
- */
 vector<string> dataLayer::searchRelation(int id, string table)
 {
         vector<string> resultVector;
@@ -584,13 +400,6 @@ vector<string> dataLayer::searchRelation(int id, string table)
         return resultVector;
 }
 
-/**
- * @brief dataLayer::updateTable
- * @param id
- * @param table
- * @param column
- * @param updateME
- */
 void dataLayer::updateTable(int id, string table, string column, string updateME)
 {
     updateItem(id, table, column, updateME);
@@ -625,31 +434,16 @@ void dataLayer::updateComputer(Computer computer)
     query.exec();
 }
 
-/**
- * @brief dataLayer::deleteItem
- * @param table
- * @param id
- */
 void dataLayer::deleteItem(string table, int id)
 {
     deleteRow(table, id);
 }
 
-/**
- * @brief dataLayer::makeRelation
- * @param personID
- * @param computerID
- */
 void dataLayer::makeRelation(int personID, int computerID)
 {
     createRelation(personID, computerID);
 }
 
-/**
- * @brief dataLayer::unMakeRelation
- * @param personID
- * @param computerID
- */
 void dataLayer::unMakeRelation(int personID, int computerID)
 {
     deleteRelation(personID, computerID);

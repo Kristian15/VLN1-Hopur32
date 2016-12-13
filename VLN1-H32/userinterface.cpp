@@ -1,13 +1,10 @@
 #include "userinterface.h"
 
 //numeration for switch case in main menu
-enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Search_Scientist,
+/*enum inputcases { Display_Scientis = 1, Display_Computer, Display_Linked_Computers_and_Scientists, Search_Scientist,
                   Search_Computer, SearchCorS, Add_Scientis, Add_Computer, Update_Scientist, Update_Computer, Delete_Scientist,
                   Delete_Computer, Link_Scientist_and_Computer, Unlink_Scientist_and_Computer, Quit};
 
-/**
- * @brief userInterface::run
- */
 void userInterface::run()
 {
 
@@ -88,9 +85,7 @@ void userInterface::run()
 
 // *** PRIVATE ***
 
-/**
- * @brief userInterface::printMainMenu
- */
+
 void userInterface::printMainMenu()
 {
     cout << "Please enter one of the following commands:" << endl;
@@ -114,9 +109,7 @@ void userInterface::printMainMenu()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printDisplayPersonsOptions
- */
+
 void userInterface::printDisplayPersonsOptions()
 {
     cout << "Please enter one of the 5 following options to sort by:" << endl;
@@ -130,9 +123,7 @@ void userInterface::printDisplayPersonsOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printDisplayComputersOptions
- */
+
 void userInterface::printDisplayComputersOptions()
 {
     cout << "Please enter one of the following options to sort by: " << endl;
@@ -145,9 +136,7 @@ void userInterface::printDisplayComputersOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printSearchPersonsOptions
- */
+
 void userInterface::printSearchPersonsOptions()
 {
     cout << "Please enter one of the following options to search by:" << endl;
@@ -161,9 +150,7 @@ void userInterface::printSearchPersonsOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printUpdatePersonOptions
- */
+
 void userInterface::printUpdatePersonOptions()
 {
     cout << "Please enter what you want to change:" << endl;
@@ -177,9 +164,7 @@ void userInterface::printUpdatePersonOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printUpdateComputerOptions
- */
+
 void userInterface::printUpdateComputerOptions()
 {
     cout << "Please enter what you want to change:" << endl;
@@ -192,9 +177,7 @@ void userInterface::printUpdateComputerOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printSearchComputersOptions
- */
+
 void userInterface::printSearchComputersOptions()
 {
     cout << "Please enter one of the following optins to search by" << endl;
@@ -207,10 +190,7 @@ void userInterface::printSearchComputersOptions()
     cout << "Input: ";
 }
 
-/**
- * @brief userInterface::printSearchPersonsCommands
- * @param input
- */
+
 void userInterface::printSearchPersonsCommands(int input)
 {
     if(input == 1)
@@ -234,10 +214,7 @@ void userInterface::printSearchPersonsCommands(int input)
     }
 }
 
-/**
- * @brief userInterface::printSearchComputersCommands
- * @param input
- */
+
 void userInterface::printSearchComputersCommands(int input)
 {
     if(input == 1)
@@ -261,9 +238,7 @@ void userInterface::printSearchComputersCommands(int input)
     }
 }
 
-/**
- * @brief userInterface::printPersonsFromDisplay
- */
+
 void userInterface::printPersonsFromDisplay()
 {
     printDisplayPersonsOptions();
@@ -274,9 +249,7 @@ void userInterface::printPersonsFromDisplay()
     printPersons(sorted, "Here is your list sorted: " , "No scientist in the database!");
 }
 
-/**
- * @brief userInterface::printComputersFromDisplay
- */
+
 void userInterface::printComputersFromDisplay()
 {
     printDisplayComputersOptions();
@@ -287,9 +260,7 @@ void userInterface::printComputersFromDisplay()
     printComputers(sorted, "Here is your list sorted: " , "No computer in the database!");
 }
 
-/**
- * @brief userInterface::printLinkedComputersAndPersonsFromDisplay
- */
+
 void userInterface::printLinkedComputersAndPersonsFromDisplay()
 {
     cout << "Do you want the list sorted by name of scientists or by name of computers? (1/2)" << endl;
@@ -336,12 +307,10 @@ void userInterface::printLinkedComputersAndPersonsFromDisplay()
     }
 }
 
-/**
- * @brief userInterface::printPersonsFromSearch
- */
+
 void userInterface::printPersonsFromSearch()
 {
-    vector<Person> printMe;
+   vector<Person> printMe;
     printSearchPersonsOptions();
     int searchBy = getCorrectInt(5);
     printSearchPersonsCommands(searchBy);
@@ -365,9 +334,7 @@ void userInterface::printPersonsFromSearch()
     printPersons(printMe, "Search results: ", "No match!");
 }
 
-/**
- * @brief userInterface::printComputerFromSearch
- */
+
 void userInterface::printComputerFromSearch()
 {
     vector<Computer> printMe;
@@ -394,9 +361,6 @@ void userInterface::printComputerFromSearch()
     printComputers(printMe, "Search results: ", "No match!");
 }
 
-/**
- * @brief userInterface::printLinkedComputersAndPersonsFromSearch
- */
 void userInterface::printLinkedComputersAndPersonsFromSearch()
 {
     vector<string> printMe;
@@ -450,12 +414,6 @@ void userInterface::printLinkedComputersAndPersonsFromSearch()
     }
 }
 
-/**
- * @brief userInterface::printPersons
- * @param printMe
- * @param inMessage
- * @param outMessage
- */
 void userInterface::printPersons(vector<Person> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
@@ -503,12 +461,6 @@ void userInterface::printPersons(vector<Person> printMe, string inMessage, strin
     }
 }
 
-/**
- * @brief userInterface::printComputers
- * @param printMe
- * @param inMessage
- * @param outMessage
- */
 void userInterface::printComputers(vector<Computer> printMe, string inMessage, string outMessage)
 {
     const char seperator = ' ';
@@ -553,9 +505,6 @@ void userInterface::printComputers(vector<Computer> printMe, string inMessage, s
     }
 }
 
-/**
- * @brief userInterface::readPerson
- */
 void userInterface::readPerson()
 {
     string name, gender, nationality, byear, dyear, input;
@@ -592,9 +541,6 @@ void userInterface::readPerson()
     }
 }
 
-/**
- * @brief userInterface::readComputer
- */
 void userInterface::readComputer()
 {
     string name, year, type, built, input;
@@ -628,11 +574,6 @@ void userInterface::readComputer()
     }
 }
 
-/**
- * @brief userInterface::getCorrectInt
- * @param max
- * @return int
- */
 int userInterface::getCorrectInt(int max)
 {
     int input;
@@ -649,13 +590,6 @@ int userInterface::getCorrectInt(int max)
     return input;
 }
 
-/**
- * @brief userInterface::chooseWhich
- * @param vec
- * @param action
- * @param type
- * @return T
- */
 template <typename T>
 T userInterface::chooseWhich(vector<T> vec, string action, string type)
 {
@@ -704,11 +638,7 @@ T userInterface::chooseWhich(vector<T> vec, string action, string type)
     return item;
 }
 
-/**
- * @brief userInterface::getRightPerson
- * @param action
- * @return Person
- */
+
 Person userInterface::getRightPerson(string action)
 {
     cout << action << " the scientist with the following name" << endl;
@@ -720,11 +650,6 @@ Person userInterface::getRightPerson(string action)
     return chooseWhich(vec, action, "scientist");
 }
 
-/**
- * @brief userInterface::getRightComputer
- * @param action
- * @return Computer
- */
 Computer userInterface::getRightComputer(string action)
 {
     cout << action << " the computer with the following name" << endl;
@@ -736,12 +661,6 @@ Computer userInterface::getRightComputer(string action)
     return chooseWhich(vec, action, "computer");
 }
 
-/**
- * @brief userInterface::getSearchYears
- * @param oneOrRange
- * @param first
- * @param second
- */
 void userInterface::getSearchYears(int oneOrRange, string& first, string& second)
 {
     if(oneOrRange == 1)
@@ -762,9 +681,7 @@ void userInterface::getSearchYears(int oneOrRange, string& first, string& second
     }
 }
 
-/**
- * @brief userInterface::deletePerson
- */
+
 void userInterface::deletePerson()
 {
     Person person = getRightPerson("Delete");
@@ -777,9 +694,7 @@ void userInterface::deletePerson()
     }
 }
 
-/**
- * @brief userInterface::deleteComputer
- */
+
 void userInterface::deleteComputer()
 {
     Computer computer = getRightComputer("Delete");
@@ -792,9 +707,7 @@ void userInterface::deleteComputer()
     }
 }
 
-/**
- * @brief userInterface::updatePerson
- */
+
 void userInterface::updatePerson()
 {    
     Person person = getRightPerson("Update");
@@ -817,16 +730,14 @@ void userInterface::updatePerson()
         string changeString;
         getline(cin, changeString);
 
-        /*if(service.updatePerson(personID, input, changeString))
+        if(service.updatePerson(personID, input, changeString))
         {
             cout << "Update successful!" << endl;
-        }*/
+        }
     }
 }
 
-/**
- * @brief userInterface::updateComputer
- */
+
 void userInterface::updateComputer()
 {
     Computer computer = getRightComputer("Update");
@@ -842,16 +753,14 @@ void userInterface::updateComputer()
         string changeString;
         getline(cin, changeString);
 
-      /*  if(service.updateComputer(computerID, input, changeString))
+       if(service.updateComputer(computerID, input, changeString))
         {
             cout << "Update successful!" << endl;
-        }*/
+        }
     }
 }
 
-/**
- * @brief userInterface::linkPersonAndComputer
- */
+
 void userInterface::linkPersonAndComputer()
 {    
     Person person = getRightPerson("Link");
@@ -868,9 +777,7 @@ void userInterface::linkPersonAndComputer()
     }
 }
 
-/**
- * @brief userInterface::unlinkPersonAndComputer
- */
+
 void userInterface::unlinkPersonAndComputer()
 {
     Person person = getRightPerson("Unlink");
@@ -887,10 +794,7 @@ void userInterface::unlinkPersonAndComputer()
     }
 }
 
-/**
- * @brief userInterface::doYouWantToQuit
- * @return bool
- */
+
 bool userInterface::doYouWantToQuit()
 {
     cout << "Are you sure you want to quit? Y/N: ";
@@ -909,4 +813,4 @@ bool userInterface::doYouWantToQuit()
     }
 
     return false;
-}
+}*/
