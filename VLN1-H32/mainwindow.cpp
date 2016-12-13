@@ -80,6 +80,8 @@ void MainWindow::fillLinkTable()
 void MainWindow::on_button_addComputer_clicked()
 {
     addComp.show();
+    ui->table_computers->clearContents();
+    fillCompTable();
 }
 
 void MainWindow::on_button_addScientist_clicked()
