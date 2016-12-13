@@ -76,4 +76,5 @@ public:
     // Gets all links to the item with ID = id from table
     // Uses searchRelation() in dataLayer
     vector<string> getOneRelation(int id, string table);
+
 };

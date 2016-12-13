@@ -151,6 +151,7 @@ void MainWindow::on_button_deleteComputer_clicked()
     DeleteConfirmationDialog delornodel(id, "computer");
     delornodel.exec();
     fillCompTable();
+    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::on_table_scientists_itemSelectionChanged()
@@ -167,4 +168,10 @@ void MainWindow::on_button_deleteScientist_clicked()
     delornodel.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
+    ui->button_deleteScientist->setEnabled(false);
+}
+
+void MainWindow::on_input_computerFilter_textChanged(const QString &arg1)
+{
+
 }
