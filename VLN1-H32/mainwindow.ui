@@ -154,6 +154,9 @@
            <property name="text">
             <string>Was it Built</string>
            </property>
+           <property name="textAlignment">
+            <set>AlignCenter</set>
+           </property>
           </column>
          </widget>
         </item>
