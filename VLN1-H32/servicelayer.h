@@ -70,7 +70,7 @@ public:
     // the column the user wants to change and the change the user wants to make
     // returns true if updateMe is a valid input
     void updatePerson(Person person);
-    bool updateComputer(int id, int col, string updateMe);
+    bool updateComputer(Computer computer);
     // Gets all linked computers and persons by using getRelation() in dataLayer
     // Returns a double vector with the information
     vector<vector<string>> getRelation(string column);

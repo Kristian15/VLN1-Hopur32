@@ -700,3 +700,19 @@ vector<string> dataLayer::getFacts(string table, int id)
 
     return resultMatrix;
 }
+
+vector<Computer> dataLayer::searchComputers(string findMe)
+{
+    QString queryString = "SELECT * FROM Computer WHERE Name LIKE '%";
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE OR Gender LIKE '");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("' OR Nationality LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE OR BirthYear LIKE ");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append(" OR DeathYear LIKE ");
+    queryString.append(QString::fromStdString(findMe));
+
+    return getComputers(queryString);
+}

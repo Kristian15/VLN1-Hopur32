@@ -842,10 +842,10 @@ void userInterface::updateComputer()
         string changeString;
         getline(cin, changeString);
 
-        if(service.updateComputer(computerID, input, changeString))
+      /*  if(service.updateComputer(computerID, input, changeString))
         {
             cout << "Update successful!" << endl;
-        }
+        }*/
     }
 }
 

@@ -466,31 +466,9 @@ void serviceLayer::updatePerson(Person person)
  * @param updateMe
  * @return bool
  */
-bool serviceLayer::updateComputer(int id, int col, string updateMe)
+bool serviceLayer::updateComputer(Computer computer)
 {
-    bool isValid = false;
-    string column;
-
-    switch(col){
-        case 1:
-            isValid = (updateMe != ""); column = "Name";
-            break;
-        case 2:
-            isValid = validateYear(updateMe); column = "Year";
-            break;
-        case 3:
-            isValid = (updateMe != ""); column = "Type";
-            break;
-        default:
-            break;
-    }
-
-    if(isValid)
-    {
-        data.updateTable(id, "Computer", column, updateMe);
-    }
-
-    return isValid;
+    data.updateComputer(computer);
 }
 
 /**
@@ -516,6 +494,5 @@ vector<string> serviceLayer::getOneRelation(int id, string table)
 
 vector<Computer> serviceLayer::searchComputers(string input)
 {
-    vector<Computer> vec;
-    return vec;
+    return data.searchComputers(input);
 }
