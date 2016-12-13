@@ -48,8 +48,8 @@ private:
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
-    AddScientistDialog addSci;
     AddComputerDialog addComp;
+    AddScientistDialog addSci;
     EditComputerDialog editComp;
     EditScientistDialog editSci;
     AddLinkDialog addLink;

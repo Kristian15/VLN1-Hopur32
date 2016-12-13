@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -94,6 +95,8 @@ void MainWindow::on_button_addComputer_clicked()
 void MainWindow::on_button_addScientist_clicked()
 {
     addSci.show();
+    ui->table_scientists->clearContents();
+    fillCompTable();
 }
 
 void MainWindow::on_button_editComputer_clicked()
@@ -103,7 +106,10 @@ void MainWindow::on_button_editComputer_clicked()
 
 void MainWindow::on_button_editScientist_clicked()
 {
-    addSci.show();
+    int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
+    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
+
+    editSci.show();
 }
 
 void MainWindow::on_button_addLink_clicked()
