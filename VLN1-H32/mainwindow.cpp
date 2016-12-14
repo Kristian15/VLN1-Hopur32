@@ -55,6 +55,7 @@ void MainWindow::fillCompTable(vector<Computer> computers)
 
     ui->button_editComputer->setEnabled(false);
     ui->button_deleteComputer->setEnabled(false);
+    ui->pushButton->setEnabled(false);
 }
 
 void MainWindow::fillSciTable()
@@ -92,6 +93,7 @@ void MainWindow::fillSciTable(vector<Person> persons)
 
     ui->button_editScientist->setEnabled(false);
     ui->button_deleteScientist->setEnabled(false);
+    ui->pushButton_2->setEnabled(false);
 }
 
 void MainWindow::fillLinkTable()
