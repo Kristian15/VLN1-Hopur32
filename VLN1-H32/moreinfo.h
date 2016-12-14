@@ -1,6 +1,7 @@
 #ifndef MOREINFO_H
 #define MOREINFO_H
 
+#include "servicelayer.h"
 #include <QDialog>
 
 namespace Ui {
@@ -13,10 +14,14 @@ class MoreInfo : public QDialog
 
 public:
     explicit MoreInfo(QWidget *parent = 0);
+    explicit MoreInfo(Person person, QWidget *parent = 0);
     ~MoreInfo();
 
 private:
     Ui::MoreInfo *ui;
+    serviceLayer service;
+    vector<string> facts;
+    int index;
 };
 
 #endif // MOREINFO_H
