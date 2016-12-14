@@ -327,54 +327,11 @@ void serviceLayer::unLink(int personID, int computerID)
     data.unMakeRelation(personID, computerID);
 }
 
-/**
- * @brief serviceLayer::updatePerson
- * @param id
- * @param col
- * @param updateMe
- * @return bool
- */
 void serviceLayer::updatePerson(Person person)
 {
     data.updatePerson(person);
-    /*bool isValid = false;
-    string column;
-
-    switch(col){
-        case 1:
-            isValid = validateName(updateMe); column = "Name";
-            break;
-        case 2:
-            isValid = validateGender(updateMe); column = "Gender";
-            break;
-        case 3:
-            isValid = validateNationality(updateMe); column = "Nationality";
-            break;
-        case 4:
-            isValid = validateYear(updateMe); column = "BirthYear";
-            break;
-        case 5:
-            isValid = (validateYear(updateMe) || updateMe == "0"); column = "DeathYear";
-            break;
-        default:
-            break;
-    }
-
-    if(isValid)
-    {
-        data.updateTable(id, "Person", column, updateMe);
-    }
-
-    return isValid;*/
 }
 
-/**
- * @brief serviceLayer::updateComputer
- * @param id
- * @param col
- * @param updateMe
- * @return bool
- */
 void serviceLayer::updateComputer(Computer computer)
 {
     data.updateComputer(computer);

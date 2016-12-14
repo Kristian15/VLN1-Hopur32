@@ -155,29 +155,6 @@ void dataLayer::deleteComputerFact(int factID)
     query.exec();
 }
 
-void dataLayer::updateItem(int id, string table, string column, string updateME)
-{
-    QString qTable = QString::fromStdString(table);
-    QString qColumn = QString::fromStdString(column);
-    QString queryString = "UPDATE " + qTable + " SET " + qColumn + " = (:updateME) WHERE ID = (:id)";
-    QString qUpdateME = QString::fromStdString(updateME);
-
-    if(column == "Built" && updateME == "y")
-    {
-        qUpdateME = "1";
-    }
-    else if(column == "Built" && updateME == "n")
-    {
-        qUpdateME = "0";
-    }
-
-    QSqlQuery query;
-    query.prepare(queryString);
-    query.bindValue(":updateME", qUpdateME);
-    query.bindValue(":id", id);
-    query.exec();
-}
-
 // **** Public ****
 
 dataLayer::dataLayer()
@@ -428,11 +405,6 @@ vector<string> dataLayer::searchRelation(int id, string table)
         }
 
         return resultVector;
-}
-
-void dataLayer::updateTable(int id, string table, string column, string updateME)
-{
-    updateItem(id, table, column, updateME);
 }
 
 void dataLayer::updatePerson(Person person)

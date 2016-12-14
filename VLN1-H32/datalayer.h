@@ -34,8 +34,6 @@ private:
     void deleteRelation(int personID, int computerID);
     void deletePersonFact(int factID);
     void deleteComputerFact(int factID);
-    // Updates the column with ID = id from table to updateME
-    void updateItem(int id, string table, string column, string updateME);
 
 public:
     // Constructor
@@ -70,8 +68,6 @@ public:
     vector<vector<string>> getRelation(string column);
     // Return related persons/computers from the item with ID = id
     vector<string> searchRelation(int id, string table);
-    // Updates the item in column to updateMe from table
-    void updateTable(int id, string table, string column, string updateMe);
 
     void updatePerson(Person person);
     void updateComputer(Computer computer);
