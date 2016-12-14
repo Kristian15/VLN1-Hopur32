@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     addcomputerdialog.cpp \
     addlinkdialog.cpp \
     deleteconfirmationdialog.cpp \
-    moreinfo.cpp
+    moreinfo.cpp \
+    editscientistdialog.cpp
     deleteconfirmationdialog.cpp
 
 HEADERS += \
@@ -37,10 +38,103 @@ HEADERS += \
     addcomputerdialog.h \
     addlinkdialog.h \
     deleteconfirmationdialog.h \
-    moreinfo.h
+    moreinfo.h \
+    editcomputerdialog.h
     deleteconfirmationdialog.h
 
-DISTFILES +=
+DISTFILES += \
+    images/Scientists/Donald Knuth.gif \
+    images/Scientists/Edgar F. Codd.gif \
+    images/Scientists/Steve Wozniak.gif \
+    images/Scientists/Ada Lovelace.jpg \
+    images/Scientists/Adele Goldberg.jpg \
+    images/Scientists/Alan Kay.jpg \
+    images/Scientists/Alan Turing.jpg \
+    images/Scientists/Anita Borg.jpg \
+    images/Scientists/Barbara Liskov.jpg \
+    images/Scientists/Bill Gates.jpeg \
+    images/Scientists/Bjarne Stroustrup.jpg \
+    images/Scientists/Brian Kernighan.jpg \
+    images/Scientists/Charles Babbage.jpg \
+    images/Scientists/Claude Shannon.jpg \
+    images/Scientists/Dennis Ritchie.jpg \
+    images/Scientists/Douglas Crockford.jpg \
+    images/Scientists/Edsger W. Dijkstra.jpg \
+    images/Scientists/Frances Allen.jpg \
+    images/Scientists/George Boole.jpg \
+    images/Scientists/Grace Hopper.jpg \
+    images/Scientists/Guido van Rossum.jpg \
+    images/Scientists/James Gosling.jpg \
+    images/Scientists/Jean Bartik.jpg \
+    images/Scientists/Jean E. Sammet.jpg \
+    images/Scientists/John Backus.jpg \
+    images/Scientists/John Vincent Atanasoff.jpg \
+    images/Scientists/John Von Neumann.jpg \
+    images/Scientists/Ken Thompson.jpg \
+    images/Scientists/Larry Page.jpg \
+    images/Scientists/Leslie Lamport.jpg \
+    images/Scientists/Linus Torvalds.jpg \
+    images/Scientists/Lois Haibt.jpg \
+    images/Scientists/Lynn Conway.jpg \
+    images/Scientists/Margaret Hamilton.jpg \
+    images/Scientists/Marissa Mayer.jpg \
+    images/Scientists/Michael Widenius.jpg \
+    images/Scientists/Niklaus Wirth.jpg \
+    images/Scientists/Per Brinch Hansen.jpg \
+    images/Scientists/Radia Perlman.jpg \
+    images/Scientists/Richard Stallman.jpeg \
+    images/Scientists/Sergey Brin.jpg \
+    images/Scientists/Shafi Goldwasser.jpg \
+    images/Scientists/Sophie Wilson.jpg \
+    images/Scientists/Tim Berners.jpg \
+    images/noImage.jpg \
+    images/random.jpg \
+    images/Scientists/John McCarthy.png \
+    images/Scientists/Donald Knuth.gif \
+    images/Scientists/Edgar F. Codd.gif \
+    images/Scientists/Steve Wozniak.gif \
+    images/Scientists/Ada Lovelace.jpg \
+    images/Scientists/Adele Goldberg.jpg \
+    images/Scientists/Alan Kay.jpg \
+    images/Scientists/Alan Turing.jpg \
+    images/Scientists/Anita Borg.jpg \
+    images/Scientists/Barbara Liskov.jpg \
+    images/Scientists/Bill Gates.jpeg \
+    images/Scientists/Bjarne Stroustrup.jpg \
+    images/Scientists/Brian Kernighan.jpg \
+    images/Scientists/Charles Babbage.jpg \
+    images/Scientists/Claude Shannon.jpg \
+    images/Scientists/Dennis Ritchie.jpg \
+    images/Scientists/Douglas Crockford.jpg \
+    images/Scientists/Edsger W. Dijkstra.jpg \
+    images/Scientists/Frances Allen.jpg \
+    images/Scientists/George Boole.jpg \
+    images/Scientists/Grace Hopper.jpg \
+    images/Scientists/Guido van Rossum.jpg \
+    images/Scientists/James Gosling.jpg \
+    images/Scientists/Jean Bartik.jpg \
+    images/Scientists/Jean E. Sammet.jpg \
+    images/Scientists/John Backus.jpg \
+    images/Scientists/John Vincent Atanasoff.jpg \
+    images/Scientists/John Von Neumann.jpg \
+    images/Scientists/Ken Thompson.jpg \
+    images/Scientists/Larry Page.jpg \
+    images/Scientists/Leslie Lamport.jpg \
+    images/Scientists/Linus Torvalds.jpg \
+    images/Scientists/Lois Haibt.jpg \
+    images/Scientists/Lynn Conway.jpg \
+    images/Scientists/Margaret Hamilton.jpg \
+    images/Scientists/Marissa Mayer.jpg \
+    images/Scientists/Michael Widenius.jpg \
+    images/Scientists/Niklaus Wirth.jpg \
+    images/Scientists/Per Brinch Hansen.jpg \
+    images/Scientists/Radia Perlman.jpg \
+    images/Scientists/Richard Stallman.jpeg \
+    images/Scientists/Sergey Brin.jpg \
+    images/Scientists/Shafi Goldwasser.jpg \
+    images/Scientists/Sophie Wilson.jpg \
+    images/Scientists/Tim Berners.jpg \
+    images/Scientists/John McCarthy.png
 
 FORMS += \
     mainwindow.ui \
