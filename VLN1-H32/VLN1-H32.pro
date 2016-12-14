@@ -24,8 +24,7 @@ SOURCES += main.cpp \
     addlinkdialog.cpp \
     editscientistdialog.cpp \
     editcomputerdialog.cpp \
-    deleteconfirmationdialog.cpp \
-    getfacts.cpp
+    deleteconfirmationdialog.cpp
 
 HEADERS += \
     userinterface.h \
@@ -39,8 +38,7 @@ HEADERS += \
     addlinkdialog.h \
     editscientistdialog.h \
     editcomputerdialog.h \
-    deleteconfirmationdialog.h \
-    getfacts.h
+    deleteconfirmationdialog.h
 
 DISTFILES +=
 
@@ -51,5 +49,4 @@ FORMS += \
     addlinkdialog.ui \
     editscientistdialog.ui \
     editcomputerdialog.ui \
-    deleteconfirmationdialog.ui \
-    getfacts.ui
+    deleteconfirmationdialog.ui

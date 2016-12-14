@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>885</width>
-    <height>613</height>
+    <width>1646</width>
+    <height>919</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -54,11 +54,17 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>861</width>
-          <height>481</height>
+          <width>1611</width>
+          <height>781</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout3_1">
+         <property name="spacing">
+          <number>7</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout3_1">
            <item>
@@ -98,6 +104,11 @@
            </item>
            <item>
             <widget class="QPushButton" name="button_addComputer">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Add new computer</string>
              </property>
@@ -107,6 +118,11 @@
             <widget class="QPushButton" name="button_editComputer">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="text">
               <string>Edit computer</string>
@@ -118,18 +134,28 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Delete computer</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="button_computerFacts">
+            <widget class="QPushButton" name="pushButton">
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
-              <string>Facts</string>
+              <string>More Information</string>
              </property>
             </widget>
            </item>
@@ -150,6 +176,12 @@
          </item>
          <item>
           <widget class="QTableWidget" name="table_computers">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="font">
             <font>
              <family>Segoe UI</family>
@@ -163,6 +195,9 @@
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
            <property name="selectionMode">
             <enum>QAbstractItemView::SingleSelection</enum>
            </property>
@@ -175,11 +210,32 @@
            <property name="sortingEnabled">
             <bool>true</bool>
            </property>
-           <attribute name="horizontalHeaderStretchLastSection">
+           <attribute name="horizontalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>125</number>
+           </attribute>
+           <attribute name="horizontalHeaderHighlightSections">
             <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>false</bool>
            </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderHighlightSections">
+            <bool>true</bool>
            </attribute>
            <column>
             <property name="text">
@@ -223,8 +279,8 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>861</width>
-          <height>491</height>
+          <width>1611</width>
+          <height>781</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout2_1">
@@ -277,6 +333,11 @@
            </item>
            <item>
             <widget class="QPushButton" name="button_addScientist">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Add new scientist</string>
              </property>
@@ -286,6 +347,11 @@
             <widget class="QPushButton" name="button_editScientist">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="text">
               <string>Edit scientist</string>
@@ -297,18 +363,28 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Delete scientist</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="button_scientistFacts">
+            <widget class="QPushButton" name="pushButton_2">
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
-              <string>Facts</string>
+              <string>More Information</string>
              </property>
             </widget>
            </item>
@@ -468,6 +544,11 @@
              <property name="enabled">
               <bool>true</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Add new link</string>
              </property>
@@ -477,6 +558,11 @@
             <widget class="QPushButton" name="button_removeLink">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="text">
               <string>Remove link</string>
@@ -500,6 +586,9 @@
          </item>
          <item>
           <widget class="QTableWidget" name="table_links">
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
            <property name="sortingEnabled">
             <bool>true</bool>
            </property>
