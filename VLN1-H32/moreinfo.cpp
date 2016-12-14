@@ -66,13 +66,14 @@ void MoreInfo::setFirstFact()
 void MoreInfo::setPhoto()
 {
     QString path = ".\\images\\";
-    QFileInfo checkImage = path; // = database path
+    QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
     if(checkImage.exists() && checkImage.isFile())
     {
         QPixmap pixmap(".\\images\\random.jpg"); // todo fix path information using path from db
         ui->image->setPixmap(pixmap);
         ui->image->setMask(pixmap.mask());
         ui->button_deletePhoto->setEnabled(true);
+        ui->button_addPhoto->setEnabled(false);
     }
     else
     {
@@ -80,6 +81,7 @@ void MoreInfo::setPhoto()
         ui->image->setPixmap(pixmap);
         ui->image->setMask(pixmap.mask());
         ui->button_deletePhoto->setEnabled(false);
+        ui->button_addPhoto->setEnabled(true);
     }
 }
 

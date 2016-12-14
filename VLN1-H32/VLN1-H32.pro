@@ -23,8 +23,7 @@ SOURCES += main.cpp \
     addcomputerdialog.cpp \
     addlinkdialog.cpp \
     deleteconfirmationdialog.cpp \
-    moreinfo.cpp \
-    editscientistdialog.cpp
+    moreinfo.cpp
     deleteconfirmationdialog.cpp
 
 HEADERS += \
@@ -38,8 +37,7 @@ HEADERS += \
     addcomputerdialog.h \
     addlinkdialog.h \
     deleteconfirmationdialog.h \
-    moreinfo.h \
-    editcomputerdialog.h
+    moreinfo.h
     deleteconfirmationdialog.h
 
 DISTFILES += \

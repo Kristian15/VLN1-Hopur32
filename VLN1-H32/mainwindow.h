@@ -57,6 +57,10 @@ private slots:
 
     void on_button_removeLink_clicked();
 
+    void on_table_computers_doubleClicked(const QModelIndex &index);
+
+    void on_table_scientists_doubleClicked(const QModelIndex &index);
+
 private:
     void fillCompTable();
     void fillSciTable();

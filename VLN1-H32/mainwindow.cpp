@@ -260,3 +260,13 @@ void MainWindow::on_button_removeLink_clicked()
     ui->table_links->clearContents();
     fillLinkTable();
 }
+
+void MainWindow::on_table_computers_doubleClicked(const QModelIndex &index)
+{
+    ui->button_editComputer->clicked(true);
+}
+
+void MainWindow::on_table_scientists_doubleClicked(const QModelIndex &index)
+{
+    ui->button_editScientist->clicked(true);
+}
