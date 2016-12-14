@@ -33,8 +33,6 @@ void MainWindow::fillCompTable()
 
 void MainWindow::fillCompTable(vector<Computer> computers)
 {
-   // vector<Computer> computers;
-   // computers = service.sortComputers(1, 1);
     ui->table_computers->setRowCount((int)computers.size());
 
     QString name, designed, type, built, id;
@@ -55,6 +53,9 @@ void MainWindow::fillCompTable(vector<Computer> computers)
         ui->table_computers->setItem(i, 4, new QTableWidgetItem(id));
     }
     ui->table_computers->setColumnHidden(4, true);
+
+    ui->button_editComputer->setEnabled(false);
+    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::fillSciTable()
@@ -66,8 +67,6 @@ void MainWindow::fillSciTable()
 
 void MainWindow::fillSciTable(vector<Person> persons)
 {
-  //  vector<Person> persons;
-   // persons = service.sortPersons(1, 1);
     ui->table_scientists->setRowCount((int)persons.size());
 
     QString name, gender, nationality, birthYear, deathYear, id;
@@ -90,6 +89,10 @@ void MainWindow::fillSciTable(vector<Person> persons)
         ui->table_scientists->setItem(i, 5, new QTableWidgetItem(id));
     }
     ui->table_scientists->setColumnHidden(5, true);
+
+
+    ui->button_editScientist->setEnabled(false);
+    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::fillLinkTable()
@@ -104,8 +107,6 @@ void MainWindow::on_button_addComputer_clicked()
     addComp.exec();
     ui->table_computers->clearContents();
     fillCompTable();
-    ui->button_editComputer->setEnabled(false);
-    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::on_button_addScientist_clicked()
@@ -115,9 +116,6 @@ void MainWindow::on_button_addScientist_clicked()
     addSci.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
-
-    ui->button_editScientist->setEnabled(false);
-    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_editComputer_clicked()
@@ -140,11 +138,8 @@ void MainWindow::on_button_editScientist_clicked()
     AddScientistDialog addSci(service.getPersonByID(id));
 
     addSci.exec();
-
     ui->table_scientists->clearContents();
     fillSciTable();
-    ui->button_editScientist->setEnabled(false);
-    ui->button_deleteScientist->setEnabled(false);
 }
 
 void MainWindow::on_button_addLink_clicked()
@@ -165,7 +160,6 @@ void MainWindow::on_button_deleteComputer_clicked()
     DeleteConfirmationDialog delornodel(id, "computer");
     delornodel.exec();
     fillCompTable();
-    ui->button_deleteComputer->setEnabled(false);
 }
 
 void MainWindow::on_table_scientists_itemSelectionChanged()
@@ -182,19 +176,19 @@ void MainWindow::on_button_deleteScientist_clicked()
     delornodel.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
-    ui->button_deleteScientist->setEnabled(false);
+
 }
 
 void MainWindow::on_input_computerFilter_textChanged(const QString &arg1)
 {
-    string input = ui->input_computerFilter->text().toStdString();
+    string input = arg1.toStdString();
     vector<Computer> computers = service.searchComputers(input);
     fillCompTable(computers);
 }
 
 void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
 {
-    string input = ui->input_scientistFilter->text().toStdString();
+    string input = arg1.toStdString();
     vector<Person> persons = service.searchPersons(input);
     fillSciTable(persons);
 }
