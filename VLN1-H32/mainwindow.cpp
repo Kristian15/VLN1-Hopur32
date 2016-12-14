@@ -149,6 +149,7 @@ void MainWindow::on_table_computers_clicked(const QModelIndex &index)
 {
     ui->button_editComputer->setEnabled(true);
     ui->button_deleteComputer->setEnabled(true);
+    ui->pushButton->setEnabled(true);
 }
 
 void MainWindow::on_button_deleteComputer_clicked()
@@ -164,6 +165,7 @@ void MainWindow::on_table_scientists_itemSelectionChanged()
 {
     ui->button_editScientist->setEnabled(true);
     ui->button_deleteScientist->setEnabled(true);
+    ui->pushButton2->setEnabled(true);
 }
 
 void MainWindow::on_button_deleteScientist_clicked()
