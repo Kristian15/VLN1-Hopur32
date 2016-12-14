@@ -197,14 +197,18 @@ void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
-    // útfæra constructor í moreinfo til að senda inn upplýsingar
-    MoreInfo info;
-    info.exec();
+    int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
+    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
+
+    MoreInfo moreInf(service.getPersonByID(id));
+    moreInf.exec();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    // útfæra constructor í moreinfo til að senda inn upplýsingar
-    MoreInfo info;
-    info.exec();
+    int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
+    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
+
+    MoreInfo moreInf(service.getPersonByID(id));
+    moreInf.exec();
 }

@@ -1,4 +1,5 @@
 #include "servicelayer.h"
+#include <iostream>
 
 using namespace std;
 
@@ -364,5 +365,6 @@ vector<Person> serviceLayer::searchPersons(string input)
 
 vector<string> serviceLayer::getFacts(string table, int id)
 {
-    return data.getFacts(table, id);
+    vector<string> vec = data.getFacts(table, id);
+    return vec;
 }

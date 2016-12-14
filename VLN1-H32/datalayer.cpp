@@ -1,4 +1,5 @@
 #include "datalayer.h"
+#include <iostream>
 
 // **** Private ****
 
@@ -483,14 +484,14 @@ vector<string> dataLayer::getFacts(string table, int id)
     queryString.append("_Fact WHERE ");
     queryString.append(QString::fromStdString(table));
     queryString.append("ID = ");
-    queryString.append(id);
+    queryString.append(QString::number(id));
 
     QSqlQuery query;
     query.exec(queryString);
 
     while(query.next())
     {
-        resultMatrix.push_back(query.value("Fact").toString().toStdString());
+        resultMatrix.push_back(query.value(0).toString().toStdString());
     }
 
     return resultMatrix;

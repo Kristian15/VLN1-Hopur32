@@ -17,8 +17,12 @@ public:
     explicit MoreInfo(Person person, QWidget *parent = 0);
     ~MoreInfo();
 
+private slots:
+    void on_button_nextFact_clicked();
+
 private:
     Ui::MoreInfo *ui;
+    void setNext();
     serviceLayer service;
     vector<string> facts;
     int index;
