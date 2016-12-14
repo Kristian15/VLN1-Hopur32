@@ -322,54 +322,25 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
     return getComputers(queryString);
 }
 
-vector<vector<string>> dataLayer::getRelation(string column)
+vector<vector<string>> dataLayer::getRelation()
 {
     vector<vector<string>> resultMatrix;
 
-    QString queryString = "SELECT DISTINCT name FROM ";
-    queryString.append(QString::fromStdString(column));
-    queryString.append(" AS p JOIN Person_Computer AS pc ON p.id = pc.");
-    queryString.append(QString::fromStdString(column));
-    queryString.append("id");
-
     QSqlQuery query;
-    query.exec(queryString); // Get all Distinct names from Person_Computer table
-
-    while(query.next())
-    {
-        vector<string> item;
-        item.push_back(query.value("Name").toString().toStdString());
-        resultMatrix.push_back(item);
-    }
-
-    queryString = "SELECT p.name, c.name FROM person_computer AS pc JOIN person as p"
-            " ON p.ID = pc.personID JOIN computer AS c ON c.ID = pc.computerID";
+    QString queryString = "SELECT * FROM person_computer";
 
     query.exec(queryString);
 
     while(query.next())
     {
-        string a = query.value(0).toString().toStdString();
-        string b = query.value(1).toString().toStdString();
+        string personID = query.value(0).toString().toStdString();
+        string computerID = query.value(1).toString().toStdString();
 
-        if(column == "Computer")
-        {
-            string tmp = a;
-            a = b;
-            b = tmp;
-        }
+        vector<string> vec;
+        vec.push_back(personID);
+        vec.push_back(computerID);
 
-        unsigned int pos;
-
-        for(unsigned int i = 0; i < resultMatrix.size(); i++)
-        {
-            if(a == resultMatrix[i][0])
-            {
-                pos = i;
-            }
-        }
-
-        resultMatrix[pos].push_back(b);
+        resultMatrix.push_back(vec);
     }
 
     return resultMatrix;
