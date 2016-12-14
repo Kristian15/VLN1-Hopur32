@@ -55,6 +55,10 @@ public:
     // Uses getPersons()
     Person getPersonByID(int id);
     Computer getCompByID(int id);
+
+    vector<Person> getPers();
+    vector<Computer> getComps();
+
     vector<Person> getSortedPersons(string column, int ascDesc);
     // Gets all computers from the database sorted after column and ascDesc
     // Returns a vector of Computer with the sorted list

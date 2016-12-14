@@ -234,13 +234,6 @@ Person dataLayer::getPersonByID(int id)
 
     while(query.next())
     {
-       /* person(
-                query.value("ID").toInt(),
-                query.value("Name").toString().toStdString(),
-                query.value("Gender").toString().toStdString(),
-                query.value("Nationality").toString().toStdString(),
-                query.value("BirthYear").toInt(),
-                query.value("DeathYear").toInt());*/
         person.setID(query.value("ID").toInt());
         person.setName(query.value("Name").toString().toStdString());
         person.setGender(query.value("Gender").toString().toStdString());
@@ -263,12 +256,6 @@ Computer dataLayer::getCompByID(int id)
 
     while(query.next())
     {
-        /*Computer computer(
-                    query.value("ID").toInt(),
-                    query.value("Name").toString().toStdString(),
-                    query.value("Year").toInt(),
-                    query.value("Type").toString().toStdString(),
-                    query.value("Built").toBool());*/
         computer.setID(query.value("ID").toInt());
         computer.setName(query.value("Name").toString().toStdString());
         computer.setYear(query.value("Year").toInt());
@@ -277,6 +264,49 @@ Computer dataLayer::getCompByID(int id)
     }
 
     return computer;
+}
+
+vector<Person> dataLayer::getPers()
+{
+    vector<Person> persons;
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM Person ORDER BY Name");
+    query.exec();
+
+    while(query.next())
+    {
+        Person person(
+                    query.value("ID").toInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Gender").toString().toStdString(),
+                    query.value("Nationality").toString().toStdString(),
+                    query.value("BirthYear").toInt(),
+                    query.value("DeathYear").toInt());
+        persons.push_back(person);
+    }
+    return persons;
+}
+
+vector<Computer> dataLayer::getComps()
+{
+    vector<Computer> computers;
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM Computer ORDER BY Name");
+    query.exec();
+
+    while(query.next())
+    {
+        Computer computer(
+                    query.value("ID").toInt(),
+                    query.value("Name").toString().toStdString(),
+                    query.value("Year").toInt(),
+                    query.value("Type").toString().toStdString(),
+                    query.value("Built").toBool());
+        computers.push_back(computer);
+    }
+    return computers;
 }
 
 vector<Person> dataLayer::getSortedPersons(string column, int ascDesc)

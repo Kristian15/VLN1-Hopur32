@@ -26,6 +26,8 @@ private:
 public:
     Person getPersonByID(int id){ return data.getPersonByID(id); }
     Computer getCompByID(int id){ return data.getCompByID(id); }
+    vector<Person> getPersons() { return data.getPers(); }
+    vector<Computer> getComputers() { return data.getComps(); }
     bool openDatabase(){ return data.openDatabase(); }
     void closeDatabase() { data.closeDatabase(); }
     // Calls getSortedPersons() in dataLayer

@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::fillCompTable()
 {
     vector<Computer> computers;
-    computers = service.sortComputers(1, 1);
+    computers = service.getComputers();
     fillCompTable(computers);
 }
 
@@ -61,7 +61,7 @@ void MainWindow::fillCompTable(vector<Computer> computers)
 void MainWindow::fillSciTable()
 {
     vector<Person> persons;
-    persons = service.sortPersons(1, 1);
+    persons = service.getPersons();
     fillSciTable(persons);
 }
 
