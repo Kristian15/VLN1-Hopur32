@@ -135,7 +135,6 @@ void MainWindow::on_button_editScientist_clicked()
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
 
     AddScientistDialog addSci(service.getPersonByID(id));
-
     addSci.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
