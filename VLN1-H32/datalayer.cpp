@@ -1,5 +1,4 @@
 #include "datalayer.h"
-#include <iostream>
 
 // **** Private ****
 

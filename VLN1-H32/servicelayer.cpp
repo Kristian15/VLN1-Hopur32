@@ -106,12 +106,6 @@ bool serviceLayer::validateYear(string year)
 }
 
 /**
- * @brief serviceLayer::validateBuilt
- * @param built
- * @return bool
- */
-
-/**
  * @brief serviceLayer::getNewPerson
  * @param name
  * @param gender
