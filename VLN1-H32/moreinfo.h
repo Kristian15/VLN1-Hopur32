@@ -22,6 +22,8 @@ private slots:
 
     void on_button_addFact_clicked();
 
+    void on_button_addPhoto_clicked();
+
 private:
     Ui::MoreInfo *ui;
     void setNext();
