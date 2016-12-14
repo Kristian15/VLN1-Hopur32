@@ -191,3 +191,17 @@ void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
     vector<Person> persons = service.searchPersons(input);
     fillSciTable(persons);
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    // útfæra constructor í moreinfo til að senda inn upplýsingar
+    MoreInfo info;
+    info.show();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    // útfæra constructor í moreinfo til að senda inn upplýsingar
+    MoreInfo info;
+    info.show();
+}

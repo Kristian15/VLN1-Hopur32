@@ -9,6 +9,7 @@
 #include "addcomputerdialog.h"
 #include "addlinkdialog.h"
 #include "deleteconfirmationdialog.h"
+#include "moreinfo.h"
 
 
 namespace Ui {
@@ -46,6 +47,10 @@ private slots:
     void on_input_scientistFilter_textChanged(const QString &arg1);
     void fillCompTable(vector<Computer> computers);
     void fillSciTable(vector<Person> persons);
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     void fillCompTable();
