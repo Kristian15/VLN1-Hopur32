@@ -17,7 +17,7 @@ AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
     _edit = true;
 
     ui->setupUi(this);
-    this->setWindowTitle(QString::fromStdString(computer.getName()));
+    this->setWindowTitle("Edit computer");
     ui->label_computerHeader->setText(QString::fromStdString(computer.getName()));
 
     _computer = computer;
