@@ -98,19 +98,5 @@ void AddComputerDialog::on_button_cancel_clicked()
     this->close();
 }
 
-void AddComputerDialog::displayAllComputers()
-{
-    vector<Computer> computers = servicelayer.sortComputers(1,1);
-    displayComputers(computers);
-}
 
-void AddComputerDialog::displayComputers(vector<Computer> computers)
-{
-    ui ->listComputers->clear();
-    for (unsigned int i = 0; i < computers.size(); i++)
-    {
-        Computer currentcomputer = computers[i];
-        ui->listComputers->addItem(QString::fromStdString(currentcomputer.getName()));
-    }
-}
 
