@@ -8,8 +8,6 @@
 #include "addscientistdialog.h"
 #include "addcomputerdialog.h"
 #include "addlinkdialog.h"
-#include "editscientistdialog.h"
-#include "editcomputerdialog.h"
 #include "deleteconfirmationdialog.h"
 
 
@@ -56,8 +54,6 @@ private:
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;
-    EditComputerDialog editComp;
-    EditScientistDialog editSci;
     AddLinkDialog addLink;
 };
 
