@@ -53,6 +53,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_button_removeLink_clicked();
+
 private:
     void fillCompTable();
     void fillSciTable();

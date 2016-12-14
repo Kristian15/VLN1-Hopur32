@@ -244,3 +244,8 @@ void MainWindow::on_pushButton_2_clicked()
     MoreInfo moreInf(service.getPersonByID(id));
     moreInf.exec();
 }
+
+void MainWindow::on_button_removeLink_clicked()
+{
+
+}
