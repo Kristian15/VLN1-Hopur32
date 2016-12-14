@@ -56,7 +56,7 @@ void dataLayer::createPersonFact(int personID, string fact)
     query.exec();
 }
 
-void dataLayer::createComputerFact(int computerID, string fact)
+void dataLayer ::createComputerFact(int computerID, string fact)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Computer_Fact (ComputerID, Fact) "

@@ -361,3 +361,8 @@ vector<Person> serviceLayer::searchPersons(string input)
 {
     return data.searchPersons(input);
 }
+
+vector<string> serviceLayer::getFacts(string table, int id)
+{
+    return data.getFacts(table, id);
+}
