@@ -32,8 +32,7 @@ private:
     void deleteRow(string table, int id);
     // Delete the row from the relation table with personID and computerID
     void deleteRelation(int personID, int computerID);
-    void deletePersonFact(int factID);
-    void deleteComputerFact(int factID);
+    void deleteFact(QString queryString);
 
 public:
     // Constructor
@@ -80,7 +79,7 @@ public:
     // Uses deleteRelation()
     void unMakeRelation(int personID, int computerID);
     void createFact(string table, int id, string fact);
-    void deleteFact(string table, int factID);
+    void deleteFact(string table, int id, string fact);
     vector<string> getFacts(string table, int id);
     vector<Computer> searchComputers(string findMe);
     vector<Person> searchPersons(string findMe);

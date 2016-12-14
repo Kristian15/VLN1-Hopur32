@@ -15,6 +15,7 @@ class MoreInfo : public QDialog
 public:
     explicit MoreInfo(QWidget *parent = 0);
     explicit MoreInfo(Person person, QWidget *parent = 0);
+    explicit MoreInfo(Computer computer, QWidget *parent = 0);
     ~MoreInfo();
 
 private slots:
@@ -26,12 +27,18 @@ private slots:
 
     void on_button_deletePhoto_clicked();
 
+    void on_button_deleteFact_clicked();
+
 private:
     Ui::MoreInfo *ui;
     void setNext();
     serviceLayer service;
     vector<string> facts;
     int index;
+    int id;
+    string table;
+    void setPhoto();
+    void getNextFact();
 };
 
 #endif // MOREINFO_H

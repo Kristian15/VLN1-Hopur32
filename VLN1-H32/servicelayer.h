@@ -69,5 +69,6 @@ public:
     vector<Person> searchPersons(string input);
     vector<string> getFacts(string table, int id);
     void createFact(string table, int id, string fact);
+    void deleteFact(string table, int id, string fact);
 
 };

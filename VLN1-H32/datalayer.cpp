@@ -137,22 +137,10 @@ void dataLayer::deleteRelation(int personID, int computerID)
     query.exec();
 }
 
-void dataLayer::deletePersonFact(int factID)
+void dataLayer::deleteFact(QString queryString)
 {
-    QString qFactID = QString::number(factID);
     QSqlQuery query;
-    query.prepare("DELETE FROM Person_Fact WHERE FactID = " +
-                  qFactID);
-    query.exec();
-}
-
-void dataLayer::deleteComputerFact(int factID)
-{
-    QString qFactID = QString::number(factID);
-    QSqlQuery query;
-    query.prepare("DELETE FROM Computer_Fact WHERE FactID = " +
-                  qFactID);
-    query.exec();
+    query.exec(queryString);
 }
 
 // **** Public ****
@@ -434,16 +422,17 @@ void dataLayer::createFact(string table, int id, string fact)
     }
 }
 
-void dataLayer::deleteFact(string table, int factID)
+void dataLayer::deleteFact(string table, int id, string fact)
 {
-    if(table == "person")
-    {
-        deletePersonFact(factID);
-    }
-    else
-    {
-        deleteComputerFact(factID);
-    }
+    QString queryString = "DELETE FROM ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Fact WHERE personID LIKE ");
+    queryString.append(QString::number(id));
+    queryString.append(" AND Fact LIKE '");
+    queryString.append(QString::fromStdString(fact));
+    queryString.append("'");
+
+    deleteFact(queryString);
 }
 
 vector<string> dataLayer::getFacts(string table, int id)

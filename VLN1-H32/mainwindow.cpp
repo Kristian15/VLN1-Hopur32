@@ -234,10 +234,10 @@ void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
-    int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
-    int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
+    int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
+    int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
 
-    MoreInfo moreInf(service.getPersonByID(id));
+    MoreInfo moreInf(service.getCompByID(id));
     moreInf.exec();
 }
 

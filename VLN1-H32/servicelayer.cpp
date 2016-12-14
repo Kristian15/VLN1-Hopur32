@@ -373,3 +373,8 @@ void serviceLayer::createFact(string table, int id, string fact)
 {
     data.createFact(table, id, fact);
 }
+
+void serviceLayer::deleteFact(string table, int id, string fact)
+{
+    data.deleteFact(table, id, fact);
+}

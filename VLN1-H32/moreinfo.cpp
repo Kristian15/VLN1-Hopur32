@@ -22,6 +22,40 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("More information"));
     ui->label_name->setText(QString::fromStdString(person.getName()));
+    table = "person";
+
+    setPhoto();
+
+    index = 0;
+    id = person.getID();
+    facts = service.getFacts("person", id);
+    getNextFact();
+}
+
+MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::MoreInfo)
+{
+    ui->setupUi(this);
+    this->setWindowTitle(QString::fromStdString("More information"));
+    ui->label_name->setText(QString::fromStdString(computer.getName()));
+    table = "computer";
+
+    setPhoto();
+
+    index = 0;
+    id = computer.getID();
+    facts = service.getFacts("computer", id);
+    getNextFact();
+}
+
+MoreInfo::~MoreInfo()
+{
+    delete ui;
+}
+
+void MoreInfo::setPhoto()
+{
     QString path = ".\\images\\";
     QFileInfo checkImage = path; // = database path
     if(checkImage.exists() && checkImage.isFile())
@@ -38,50 +72,54 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
         ui->image->setMask(pixmap.mask());
         ui->button_deletePhoto->setEnabled(false);
     }
-
-    index = 0;
-    facts = service.getFacts("person", person.getID());
-    setNext();
-
-    if(facts.size() > 0)
-    {
-        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
-        index ++;
-    }
-
-    setNext();
-}
-
-MoreInfo::~MoreInfo()
-{
-    delete ui;
 }
 
 void MoreInfo::on_button_nextFact_clicked()
 {
     ui->textEdit_facts->clear();
+    ui->label_factAdded->clear();
+    getNextFact();
+}
 
+void MoreInfo::getNextFact()
+{
     if(facts.size() > index)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
-        index ++;
     }
 
+    index ++;
     setNext();
 }
 
 void MoreInfo::setNext()
 {
-    if(facts.size() <= index)
+    if(facts.size() < index)
     {
         ui->button_nextFact->setEnabled(false);
+        ui->button_deleteFact->setEnabled(false);
         ui->button_addFact->setEnabled(true);
+        ui->textEdit_facts->clear();
+        ui->textEdit_facts->setReadOnly(false);
     }
 }
 
 void MoreInfo::on_button_addFact_clicked()
 {
+    QString theFact = ui->textEdit_facts->toPlainText();
+    string stheFact = theFact.toStdString();
 
+    if(stheFact != "")
+    {
+        service.createFact(table, id, stheFact);
+
+        facts.push_back(stheFact);
+        ui->label_factAdded->setText("<span style='color: #009900'>Fact added !</span>");
+        ui->button_nextFact->setEnabled(true);
+        ui->button_addFact->setEnabled(false);
+        ui->textEdit_facts->setReadOnly(true);
+        setNext();
+    }
 }
 
 void MoreInfo::on_button_addPhoto_clicked()
@@ -100,4 +138,20 @@ void MoreInfo::on_button_deletePhoto_clicked()
     reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
                                   QMessageBox::Yes|QMessageBox::No);
     ui->button_deletePhoto->setEnabled(false);
+}
+
+void MoreInfo::on_button_deleteFact_clicked()
+{
+    ui->textEdit_facts->clear();
+
+    service.deleteFact(table, id, facts[index - 1]);
+    facts = service.getFacts(table, id);
+
+    index--;
+    ui->label_factAdded->setText("<span style='color: #009900'>Fact deleted !</span>");
+    ui->button_nextFact->setEnabled(true);
+    ui->button_addFact->setEnabled(false);
+    ui->textEdit_facts->setReadOnly(true);
+    //setNext();
+    getNextFact();
 }
