@@ -199,12 +199,12 @@ void MainWindow::on_pushButton_clicked()
 {
     // útfæra constructor í moreinfo til að senda inn upplýsingar
     MoreInfo info;
-    info.show();
+    info.exec();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     // útfæra constructor í moreinfo til að senda inn upplýsingar
     MoreInfo info;
-    info.show();
+    info.exec();
 }
