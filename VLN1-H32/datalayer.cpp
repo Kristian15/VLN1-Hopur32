@@ -147,6 +147,7 @@ void dataLayer::deleteFact(QString queryString)
 
 dataLayer::dataLayer()
 {
+
 }
 
 dataLayer::~dataLayer()

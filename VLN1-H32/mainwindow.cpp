@@ -33,6 +33,7 @@ void MainWindow::fillCompTable()
 
 void MainWindow::fillCompTable(vector<Computer> computers)
 {
+    ui->table_computers->clearContents();
     ui->table_computers->setRowCount((int)computers.size());
 
     QString name, designed, type, built, id;
@@ -68,6 +69,7 @@ void MainWindow::fillSciTable()
 
 void MainWindow::fillSciTable(vector<Person> persons)
 {
+    ui->table_scientists->clearContents();
     ui->table_scientists->setRowCount((int)persons.size());
 
     QString name, gender, nationality, birthYear, deathYear, id;
@@ -106,6 +108,7 @@ void MainWindow::fillLinkTable()
 
 void MainWindow::fillLinkTable(vector<vector<int>> ids)
 {
+    ui->table_links->clearContents();
     ui->table_links->setRowCount((int)ids.size());
 
     QString personID, computerID, personName, computerName;
@@ -135,7 +138,6 @@ void MainWindow::on_button_addComputer_clicked()
     AddComputerDialog addComp;
 
     addComp.exec();
-    ui->table_computers->clearContents();
     fillCompTable();
 }
 
@@ -144,7 +146,6 @@ void MainWindow::on_button_addScientist_clicked()
     AddScientistDialog addSci;
 
     addSci.exec();
-    ui->table_scientists->clearContents();
     fillSciTable();
 }
 
@@ -156,7 +157,6 @@ void MainWindow::on_button_editComputer_clicked()
     AddComputerDialog addComp(service.getCompByID(id));
 
     addComp.exec();
-    ui->table_computers->clearContents();
     fillCompTable();
 }
 
@@ -167,7 +167,6 @@ void MainWindow::on_button_editScientist_clicked()
 
     AddScientistDialog addSci(service.getPersonByID(id));
     addSci.exec();
-    ui->table_scientists->clearContents();
     fillSciTable();
 }
 
@@ -175,7 +174,6 @@ void MainWindow::on_button_addLink_clicked()
 {
     AddLinkDialog addLink;
     addLink.exec();
-    ui->table_links->clearContents();
     fillLinkTable();
 }
 
