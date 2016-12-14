@@ -186,11 +186,16 @@ void MainWindow::on_table_computers_clicked(const QModelIndex &index)
     ui->pushButton->setEnabled(true);
 }
 
+void MainWindow::on_table_links_itemSelectionChanged()
+{
+    ui->button_removeLink->setEnabled(true);
+}
+
 void MainWindow::on_button_deleteComputer_clicked()
 {
     int currentlySelectedComputerIndex = ui->table_computers->currentIndex().row();
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(currentlySelectedComputerIndex,4)).toInt();
-    DeleteConfirmationDialog delornodel(id, "computer");
+    DeleteConfirmationDialog delornodel(id, 0, "computer");
     delornodel.exec();
     fillCompTable();
 }
@@ -206,7 +211,7 @@ void MainWindow::on_button_deleteScientist_clicked()
 {
     int currentlySelectePersonIndex = ui->table_scientists->currentIndex().row();
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(currentlySelectePersonIndex,5)).toInt();
-    DeleteConfirmationDialog delornodel(id, "person");
+    DeleteConfirmationDialog delornodel(id, 0, "person");
     delornodel.exec();
     ui->table_scientists->clearContents();
     fillSciTable();
@@ -247,5 +252,11 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_button_removeLink_clicked()
 {
-
+    int currentlySelectedLinkIndex = ui->table_links->currentIndex().row();
+    int personid = ui->table_links->model()->data(ui->table_links->model()->index(currentlySelectedLinkIndex,0)).toInt();
+    int computerid = ui->table_links->model()->data(ui->table_links->model()->index(currentlySelectedLinkIndex,1)).toInt();
+    DeleteConfirmationDialog delornodel(personid, computerid, "link");
+    delornodel.exec();
+    ui->table_links->clearContents();
+    fillLinkTable();
 }

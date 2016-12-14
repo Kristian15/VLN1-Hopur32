@@ -22,7 +22,8 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("More information"));
     ui->label_name->setText(QString::fromStdString(person.getName()));
-    QFileInfo checkImage = ".\\images\\"; // = database path
+    QString path = ".\\images\\";
+    QFileInfo checkImage = path; // = database path
     if(checkImage.exists() && checkImage.isFile())
     {
         QPixmap pixmap(".\\images\\random.jpg"); // todo fix path information using path from db

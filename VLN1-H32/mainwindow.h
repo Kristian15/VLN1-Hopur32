@@ -41,6 +41,8 @@ private slots:
 
     void on_table_scientists_itemSelectionChanged();
 
+    void on_table_links_itemSelectionChanged();
+
     void on_button_deleteScientist_clicked();
 
     void on_input_computerFilter_textChanged(const QString &arg1);
