@@ -173,7 +173,10 @@ void MainWindow::on_button_editScientist_clicked()
 
 void MainWindow::on_button_addLink_clicked()
 {
-    addLink.show();
+    AddLinkDialog addLink;
+    addLink.exec();
+    ui->table_links->clearContents();
+    fillLinkTable();
 }
 
 void MainWindow::on_table_computers_clicked(const QModelIndex &index)

@@ -2,6 +2,7 @@
 #define ADDLINKDIALOG_H
 
 #include <QDialog>
+#include "servicelayer.h"
 
 namespace Ui {
 class AddLinkDialog;
@@ -14,9 +15,22 @@ class AddLinkDialog : public QDialog
 public:
     explicit AddLinkDialog(QWidget *parent = 0);
     ~AddLinkDialog();
+    void fillCompTable();
+    void fillCompTable(vector<Computer> computers);
+    void fillPersonTable();
+    void fillPersonTable(vector<Person> persons);
+
+private slots:
+    void on_table_addLinkComputer_clicked(const QModelIndex &index);
+    void on_table_addLinkScientist_clicked(const QModelIndex &index);
+    void on_pushButton_2_clicked();
+
+    void on_button_addLinkCancel_clicked();
 
 private:
+    bool a;
     Ui::AddLinkDialog *ui;
+    serviceLayer service;
 };
 
 #endif // ADDLINKDIALOG_H
