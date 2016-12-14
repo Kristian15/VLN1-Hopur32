@@ -24,6 +24,8 @@ private slots:
 
     void on_button_addPhoto_clicked();
 
+    void on_button_deletePhoto_clicked();
+
 private:
     Ui::MoreInfo *ui;
     void setNext();

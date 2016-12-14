@@ -4,6 +4,7 @@
 #include <QBitmap>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QMessageBox>
 
 MoreInfo::MoreInfo(QWidget *parent) :
     QDialog(parent),
@@ -27,12 +28,14 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
         QPixmap pixmap(".\\images\\random.jpg"); // todo fix path information using path from db
         ui->image->setPixmap(pixmap);
         ui->image->setMask(pixmap.mask());
+        ui->button_deletePhoto->setEnabled(true);
     }
     else
     {
         QPixmap pixmap (".\\images\\noImage.jpg");
         ui->image->setPixmap(pixmap);
         ui->image->setMask(pixmap.mask());
+        ui->button_deletePhoto->setEnabled(false);
     }
 
     index = 0;
@@ -88,4 +91,12 @@ void MoreInfo::on_button_addPhoto_clicked()
     QFile::copy(fileName, ".\\images\\test.jpg");
 
     // todo function that saves image ath to db using selected person's id
+}
+
+void MoreInfo::on_button_deletePhoto_clicked()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
+                                  QMessageBox::Yes|QMessageBox::No);
+    ui->button_deletePhoto->setEnabled(false);
 }
