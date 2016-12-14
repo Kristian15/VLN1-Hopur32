@@ -46,6 +46,16 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
+         <widget class="QPushButton" name="button_prevFact">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Previous Fact</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_nextFact">
           <property name="enabled">
            <bool>true</bool>

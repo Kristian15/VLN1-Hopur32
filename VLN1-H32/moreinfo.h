@@ -29,6 +29,8 @@ private slots:
 
     void on_button_deleteFact_clicked();
 
+    void on_button_prevFact_clicked();
+
 private:
     Ui::MoreInfo *ui;
     void setNext();
@@ -39,6 +41,8 @@ private:
     string table;
     void setPhoto();
     void getNextFact();
+    void getPrevFact();
+    void setFirstFact();
 };
 
 #endif // MOREINFO_H

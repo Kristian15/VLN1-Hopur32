@@ -12,7 +12,6 @@ MoreInfo::MoreInfo(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("..."));
-    //getFacts();
 }
 
 MoreInfo::MoreInfo(Person person, QWidget *parent) :
@@ -26,10 +25,10 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
 
     setPhoto();
 
-    index = 0;
     id = person.getID();
     facts = service.getFacts("person", id);
-    getNextFact();
+
+    setFirstFact();
 }
 
 MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
@@ -43,15 +42,25 @@ MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
 
     setPhoto();
 
-    index = 0;
     id = computer.getID();
     facts = service.getFacts("computer", id);
-    getNextFact();
+
+    setFirstFact();
 }
 
 MoreInfo::~MoreInfo()
 {
     delete ui;
+}
+
+void MoreInfo::setFirstFact()
+{
+    index = 0;
+
+    if(facts.size() > index)
+    {
+        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
+    }
 }
 
 void MoreInfo::setPhoto()
@@ -83,18 +92,20 @@ void MoreInfo::on_button_nextFact_clicked()
 
 void MoreInfo::getNextFact()
 {
-    if(facts.size() > index)
+    index++;
+
+    if((int)facts.size() > index)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
+        ui->button_prevFact->setEnabled(true);
     }
 
-    index ++;
     setNext();
 }
 
 void MoreInfo::setNext()
 {
-    if(facts.size() < index)
+    if((int)facts.size() <= index)
     {
         ui->button_nextFact->setEnabled(false);
         ui->button_deleteFact->setEnabled(false);
@@ -144,14 +155,36 @@ void MoreInfo::on_button_deleteFact_clicked()
 {
     ui->textEdit_facts->clear();
 
-    service.deleteFact(table, id, facts[index - 1]);
+    service.deleteFact(table, id, facts[index]);
     facts = service.getFacts(table, id);
 
-    index--;
     ui->label_factAdded->setText("<span style='color: #009900'>Fact deleted !</span>");
     ui->button_nextFact->setEnabled(true);
     ui->button_addFact->setEnabled(false);
     ui->textEdit_facts->setReadOnly(true);
-    //setNext();
+    index--;
     getNextFact();
+}
+
+void MoreInfo::on_button_prevFact_clicked()
+{
+    ui->textEdit_facts->clear();
+    ui->label_factAdded->clear();
+    getPrevFact();
+}
+
+void MoreInfo::getPrevFact()
+{
+    index --;
+
+    if(index >= 0)
+    {
+        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
+        ui->button_nextFact->setEnabled(true);
+        ui->button_deleteFact->setEnabled(true);
+    }
+    if(index == 0)
+    {
+        ui->button_prevFact->setEnabled(false);
+    }
 }
