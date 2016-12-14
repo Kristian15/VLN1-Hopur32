@@ -165,7 +165,7 @@ void MainWindow::on_table_scientists_itemSelectionChanged()
 {
     ui->button_editScientist->setEnabled(true);
     ui->button_deleteScientist->setEnabled(true);
-    ui->pushButton2->setEnabled(true);
+    ui->pushButton_2->setEnabled(true);
 }
 
 void MainWindow::on_button_deleteScientist_clicked()
