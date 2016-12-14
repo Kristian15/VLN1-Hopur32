@@ -68,5 +68,6 @@ public:
     vector<Computer> searchComputers(string input);
     vector<Person> searchPersons(string input);
     vector<string> getFacts(string table, int id);
+    void createFact(string table, int id, string fact);
 
 };

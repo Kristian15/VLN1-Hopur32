@@ -368,3 +368,8 @@ vector<string> serviceLayer::getFacts(string table, int id)
     vector<string> vec = data.getFacts(table, id);
     return vec;
 }
+
+void serviceLayer::createFact(string table, int id, string fact)
+{
+    data.createFact(table, id, fact);
+}

@@ -20,6 +20,8 @@ public:
 private slots:
     void on_button_nextFact_clicked();
 
+    void on_button_addFact_clicked();
+
 private:
     Ui::MoreInfo *ui;
     void setNext();

@@ -27,10 +27,8 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
         index ++;
     }
-    else
-    {
-        ui->textEdit_facts->insertPlainText("No facts!!");
-    }
+
+    setNext();
 }
 
 MoreInfo::~MoreInfo()
@@ -46,12 +44,9 @@ void MoreInfo::on_button_nextFact_clicked()
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
         index ++;
-        setNext();
     }
-    else
-    {
-        ui->textEdit_facts->insertPlainText("No facts!!");
-    }
+
+    setNext();
 }
 
 void MoreInfo::setNext()
@@ -59,5 +54,11 @@ void MoreInfo::setNext()
     if(facts.size() <= index)
     {
         ui->button_nextFact->setEnabled(false);
+        ui->button_addFact->setEnabled(true);
     }
+}
+
+void MoreInfo::on_button_addFact_clicked()
+{
+
 }
