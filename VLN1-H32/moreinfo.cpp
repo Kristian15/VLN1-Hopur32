@@ -22,7 +22,7 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
     facts = service.getFacts("person", person.getID());
     setNext();
 
-    if(facts.size() == 1)
+    if(facts.size() > 0)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
         index ++;
@@ -40,6 +40,8 @@ MoreInfo::~MoreInfo()
 
 void MoreInfo::on_button_nextFact_clicked()
 {
+    ui->textEdit_facts->clear();
+
     if(facts.size() > index)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
