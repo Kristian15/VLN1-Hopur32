@@ -65,7 +65,7 @@ public:
     // Return all related persons/computers
     // Returns a double vector where first element in every row is the name of the scientist/computer
     // the following elements are the scientists/computers that are linked to it
-    vector<vector<string>> getRelation();
+    vector<vector<int>> getRelation();
     // Return related persons/computers from the item with ID = id
     vector<string> searchRelation(int id, string table);
 

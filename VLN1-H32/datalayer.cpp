@@ -322,9 +322,9 @@ vector<Computer> dataLayer::getSortedComputers(string column, int ascDesc)
     return getComputers(queryString);
 }
 
-vector<vector<string>> dataLayer::getRelation()
+vector<vector<int>> dataLayer::getRelation()
 {
-    vector<vector<string>> resultMatrix;
+    vector<vector<int>> resultMatrix;
 
     QSqlQuery query;
     QString queryString = "SELECT * FROM person_computer";
@@ -333,10 +333,10 @@ vector<vector<string>> dataLayer::getRelation()
 
     while(query.next())
     {
-        string personID = query.value(0).toString().toStdString();
-        string computerID = query.value(1).toString().toStdString();
+        int personID = query.value(0).toInt();
+        int computerID = query.value(1).toInt();
 
-        vector<string> vec;
+        vector<int> vec;
         vec.push_back(personID);
         vec.push_back(computerID);
 

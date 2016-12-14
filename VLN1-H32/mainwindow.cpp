@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fillCompTable();
     fillSciTable();
-
+    fillLinkTable();
 }
 
 MainWindow::~MainWindow()
@@ -98,7 +99,35 @@ void MainWindow::fillSciTable(vector<Person> persons)
 
 void MainWindow::fillLinkTable()
 {
+    vector<vector<int>> vec;
+    vec = service.getRelation();
+    fillLinkTable(vec);
+}
 
+void MainWindow::fillLinkTable(vector<vector<int>> ids)
+{
+    ui->table_links->setRowCount((int)ids.size());
+
+    QString personID, computerID, personName, computerName;
+
+
+    for(int i = 0; i < (int)ids.size(); i++)
+    {
+        personID = QString::number(ids[i][0]);
+        computerID = QString::number(ids[i][1]);
+        personName = QString::fromStdString(service.getPersonByID(ids[i][0]).getName());
+        computerName = QString::fromStdString(service.getCompByID(ids[i][1]).getName());
+
+
+        ui->table_links->setItem(i, 0, new QTableWidgetItem(personID));
+        ui->table_links->setItem(i, 1, new QTableWidgetItem(computerID));
+        ui->table_links->setItem(i, 2, new QTableWidgetItem(personName));
+        ui->table_links->setItem(i, 3, new QTableWidgetItem(computerName));
+    }
+    ui->table_links->setColumnHidden(0, true);
+    ui->table_links->setColumnHidden(1, true);
+
+    ui->button_removeLink->setEnabled(false);
 }
 
 void MainWindow::on_button_addComputer_clicked()

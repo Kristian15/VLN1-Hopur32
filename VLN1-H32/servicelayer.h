@@ -61,7 +61,7 @@ public:
     void updateComputer(Computer computer);
     // Gets all linked computers and persons by using getRelation() in dataLayer
     // Returns a double vector with the information
-    vector<vector<string>> getRelation();
+    vector<vector<int>> getRelation();
     // Gets all links to the item with ID = id from table
     // Uses searchRelation() in dataLayer
     vector<string> getOneRelation(int id, string table);

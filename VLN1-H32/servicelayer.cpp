@@ -337,7 +337,7 @@ void serviceLayer::updateComputer(Computer computer)
  * @param column
  * @return vector<vector<string>>
  */
-vector<vector<string>> serviceLayer::getRelation()
+vector<vector<int>> serviceLayer::getRelation()
 {
     return data.getRelation();
 }
