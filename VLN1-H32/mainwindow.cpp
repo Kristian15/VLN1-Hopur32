@@ -13,6 +13,12 @@ MainWindow::MainWindow(QWidget *parent) :
     fillCompTable();
     fillSciTable();
     fillLinkTable();
+    QHeaderView* header = ui->table_scientists->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+    header = ui->table_computers->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+    header = ui->table_links->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
