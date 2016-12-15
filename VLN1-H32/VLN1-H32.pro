@@ -13,7 +13,6 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    userinterface.cpp \
     servicelayer.cpp \
     datalayer.cpp \
     person.cpp \
@@ -27,7 +26,6 @@ SOURCES += main.cpp \
     deleteconfirmationdialog.cpp
 
 HEADERS += \
-    userinterface.h \
     servicelayer.h \
     datalayer.h \
     person.h \
