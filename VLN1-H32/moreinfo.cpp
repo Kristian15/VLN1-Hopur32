@@ -56,7 +56,7 @@ void MoreInfo::setFirstFact()
 {
     index = 0;
 
-    if(facts.size() > index)
+    if((int)facts.size() > index)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
     }
@@ -64,10 +64,7 @@ void MoreInfo::setFirstFact()
 
 void MoreInfo::setPhoto()
 {
-    QString path = ".\\images\\";
-    cout << id << endl;
-    path.append(QString::fromStdString(service.getImage(table, id)));
-    cout << path.toStdString() << endl;
+    QString path = QString::fromStdString(service.getImage(table, id));
     QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
 
     if(checkImage.exists() && checkImage.isFile())
@@ -142,10 +139,17 @@ void MoreInfo::on_button_addPhoto_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Select image to add"), "/home/", tr("Image Files (*.png *.jpg *.bmp)"));
+    QString thePath = ".\\images\\";
+    thePath.append(QString::fromStdString(table));
+    thePath.append("\\");
+    thePath.append(QString::number(id));
+    thePath.append(".jpg");
 
-    QFile::copy(fileName, ".\\images\\test.jpg");
-
-    // todo function that saves image ath to db using selected person's id
+    QFile::copy(fileName, thePath);
+    service.updateImage(table, id, thePath.toStdString());
+    ui->button_addPhoto->setEnabled(false);
+    ui->button_deletePhoto->setEnabled(true);
+    setPhoto();
 }
 
 void MoreInfo::on_button_deletePhoto_clicked()
@@ -153,6 +157,9 @@ void MoreInfo::on_button_deletePhoto_clicked()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
                                   QMessageBox::Yes|QMessageBox::No);
+    service.deleteImage(table, id);
+    setPhoto();
+    ui->button_addPhoto->setEnabled(true);
     ui->button_deletePhoto->setEnabled(false);
 }
 
