@@ -89,4 +89,5 @@ public:
     void addNewImage(string table, int id);
     void deleteItemImage(string table, int itemID);
     string getImage(string table, int id);
+    vector<vector<int>> searchLinks(string findMe);
 };

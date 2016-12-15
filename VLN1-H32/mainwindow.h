@@ -47,6 +47,7 @@ private slots:
 
     void on_input_computerFilter_textChanged(const QString &arg1);
     void on_input_scientistFilter_textChanged(const QString &arg1);
+    void on_input_linksFilter_textChanged(const QString &arg1);
     void fillCompTable(vector<Computer> computers);
     void fillSciTable(vector<Person> persons);
     void fillLinkTable(vector<vector<int>>);

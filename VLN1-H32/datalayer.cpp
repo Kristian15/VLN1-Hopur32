@@ -502,6 +502,36 @@ vector<Person> dataLayer::searchPersons(string findMe)
     return getPersons(queryString);
 }
 
+vector<vector<int>> dataLayer::searchLinks(string findMe)
+{
+    QString queryString = "SELECT PersonID, ComputerID FROM Person_Computer AS pc JOIN "
+                          "Person AS p ON pc.personID = p.ID JOIN Computer as c ON "
+                          "pc.computerID = c.ID WHERE p.Name LIKE '%";
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE OR c.Name LIKE '%");
+    queryString.append(QString::fromStdString(findMe));
+    queryString.append("%' COLLATE NOCASE");
+
+    vector<vector<int>> resultMatrix;
+
+    QSqlQuery query;
+    query.exec(queryString);
+
+    while(query.next())
+    {
+        int personID = query.value("PersonID").toInt();
+        int computerID = query.value("ComputerID").toInt();
+
+        vector<int> vec;
+        vec.push_back(personID);
+        vec.push_back(computerID);
+
+        resultMatrix.push_back(vec);
+    }
+
+    return resultMatrix;
+}
+
 void dataLayer::updateImage(string table, int id, string path)
 {
     QString queryString = "UPDATE ";

@@ -409,3 +409,9 @@ string serviceLayer::getImage(string table, int id)
     string s = data.getImage(table, id);
     return s;
 }
+
+vector<vector<int>> serviceLayer::searchLinks(string findMe)
+{
+    vector<vector<int>> s = data.searchLinks(findMe);
+    return s;
+}

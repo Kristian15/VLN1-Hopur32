@@ -248,6 +248,13 @@ void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
     fillSciTable(persons);
 }
 
+void MainWindow::on_input_linksFilter_textChanged(const QString &arg1)
+{
+    string input = arg1.toStdString();
+    vector<vector<int>> vec = service.searchLinks(input);
+    fillLinkTable(vec);
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();

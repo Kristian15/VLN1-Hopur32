@@ -76,5 +76,6 @@ public:
     void deleteItemImage(string table, int itemID);
     void deleteItemFact(string table, int itemID);
     string getImage(string table, int id);
+    vector<vector<int>> searchLinks(string findMe);
 
 };
