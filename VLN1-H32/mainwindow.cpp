@@ -51,6 +51,16 @@ void MainWindow::fillCompTable(vector<Computer> computers)
         designed = QString::number(computers[i].getYear());
         type = QString::fromStdString(computers[i].getType());
         built = QString::number(computers[i].getBuilt());
+        {
+            if(built == "0")
+            {
+                built = "No";
+            }
+            else
+            {
+                built = "Yes";
+            }
+        }
         id = QString::number(computers[i].getID());
 
         ui->table_computers->setItem(i, 0, new QTableWidgetItem(name));
