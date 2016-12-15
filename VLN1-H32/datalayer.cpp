@@ -238,7 +238,7 @@ vector<Person> dataLayer::getPers()
     vector<Person> persons;
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM Person ORDER BY Name");
+    query.prepare("SELECT * FROM Person ORDER BY Name COLLATE NOCASE");
     query.exec();
 
     while(query.next())
@@ -260,7 +260,7 @@ vector<Computer> dataLayer::getComps()
     vector<Computer> computers;
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM Computer ORDER BY Name");
+    query.prepare("SELECT * FROM Computer ORDER BY Name COLLATE NOCASE");
     query.exec();
 
     while(query.next())
