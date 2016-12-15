@@ -59,7 +59,7 @@ void AddLinkDialog::on_pushButton_2_clicked()
 void AddLinkDialog::fillCompTable()
 {
     vector<Computer> computers;
-    computers = service.getComputers();
+    computers = service.getAllComputers();
     fillCompTable(computers);
 }
 
@@ -87,7 +87,7 @@ void AddLinkDialog::fillCompTable(vector<Computer> computers)
 void AddLinkDialog::fillPersonTable()
 {
     vector<Person> persons;
-    persons = service.getPersons();
+    persons = service.getAllPersons();
     fillPersonTable(persons);
 }
 

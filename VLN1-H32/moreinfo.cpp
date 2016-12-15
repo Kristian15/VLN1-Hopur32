@@ -122,7 +122,7 @@ void MoreInfo::on_button_addFact_clicked()
 
     if(stheFact != "")
     {
-        service.createFact(table, id, stheFact);
+        service.addFact(table, id, stheFact);
 
         facts.push_back(stheFact);
         ui->label_factAdded->setText("<span style='color: #009900'>Fact added !</span>");

@@ -25,57 +25,41 @@ private:
 
 public:
     Person getPersonByID(int id){ return data.getPersonByID(id); }
-    Computer getCompByID(int id){ return data.getCompByID(id); }
-    vector<Person> getPersons() { return data.getPers(); }
-    vector<Computer> getComputers() { return data.getComps(); }
-    bool openDatabase(){ return data.openDatabase(); }
+    Computer getComputerByID(int id){ return data.getComputerByID(id); }
+    //*********!!!!!!!!!!
+    vector<Person> getAllPersons() { return data.getAllPersons(); }
+    //*****************!!!!!!!!!!!!!!!!!!1
+    vector<Computer> getAllComputers() { return data.getAllComputers(); }
+    //************!!!!!!!!!!!!
+    vector<vector<int>> getAllLinks() { return data.getAllLinks(); }
+    //*********!!!!!!!!!
+    void openDatabase(){ data.openDatabase(); }
+    //*************!!!!!!!
     void closeDatabase() { data.closeDatabase(); }
-    // Calls getSortedPersons() in dataLayer
-    // Returns a vector with the sorted scientists
-    vector<Person> sortPersons(int order, int ascOrDesc);
-    // Calls getSortedComputers() in dataLayer
-    // Returns a vector with the sorted computers
-    vector<Computer> sortComputers(int order, int ascOrDesc);
-    // Calls the help function getPerson() that returns a Person
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
     // Calls the help function getComputer() that returns a Computer
     void newComputer(string name, string year, string type, string built);
-    // Vaidate functions that are used to validate input
-    // Uses the validate help functions
-    // Returns true if the input is valid and false otherwise
+
     bool validateNewPerson(string name, string nationality, string byear, string dyear);
     bool validateNewComputer(string name, string year, string type);
-    // The delete functions use deleteItem() in dataLayer to delete
-    // the idem with ID = id
-    void deletePerson(int id);
-    void deleteComputer(int id);
-    // Calls makeRelation() in dataLayer with personID and computerID
-    void link(int personID, int computerID);
-    // Calls unMakeRelation() in dataLayer with personID and computerID
-    void unLink(int personID, int computerID);
-    // The update functions calls updateTable() in dataLayer with the
-    // id of the item the user wants to change,
-    // the column the user wants to change and the change the user wants to make
-    // returns true if updateMe is a valid input
-    void updatePerson(Person person);
-    void updateComputer(Computer computer);
-    // Gets all linked computers and persons by using getRelation() in dataLayer
-    // Returns a double vector with the information
-    vector<vector<int>> getRelation();
-    // Gets all links to the item with ID = id from table
-    // Uses searchRelation() in dataLayer
-    vector<string> getOneRelation(int id, string table);
-    vector<Computer> searchComputers(string input);
-    vector<Person> searchPersons(string input);
-    vector<string> getFacts(string table, int id);
-    void createFact(string table, int id, string fact);
-    void deleteFact(string table, int id, string fact);
-    void updateImage(string table, int id, string path);
-    void deleteImage(string table, int id);
-    void addNewImage(string table, int id);
-    void deleteItemImage(string table, int itemID);
-    void deleteItemFact(string table, int itemID);
-    string getImage(string table, int id);
-    vector<vector<int>> searchLinks(string findMe);
+    void deletePerson(int id) { data.deletePerson(id); }
+    void deleteComputer(int id) {data.deleteComputer(id); }
+    void link(int personID, int computerID) { data.addLink(personID, computerID); }
+    void unLink(int personID, int computerID) { data.deleteLink(personID, computerID); }
+    void updatePerson(Person person) { data.updatePerson(person); }
+    void updateComputer(Computer computer) { data.updateComputer(computer); }
+
+    vector<Computer> searchComputers(string findMe) { return data.searchComputers(findMe); }
+    vector<Person> searchPersons(string findMe) { return data.searchPersons(findMe); }
+    vector<string> getFacts(string table, int id) { return data.getFacts(table, id); }
+    void addFact(string table, int id, string fact) { data.addFact(table, id, fact); }
+    void deleteFact(string table, int id, string fact) { data.deleteFact(table, id, fact); }
+    void updateImage(string table, int id, string path) { data.updateImage(table, id, path); }
+    void deleteImage(string table, int id) { data.deleteImage(table, id); }
+    void addImage(string table, int id) { data.addImage(table, id); }
+    string getImage(string table, int id) { return data.getImage(table, id); }
+    vector<vector<int>> searchLinks(string findMe) { return data.searchLinks(findMe); }
 
 };
+
+

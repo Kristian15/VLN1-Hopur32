@@ -6,19 +6,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    bool temp = service.openDatabase();
+    service.openDatabase();
 
     ui->setupUi(this);
 
     fillCompTable();
     fillSciTable();
     fillLinkTable();
-    QHeaderView* header = ui->table_scientists->horizontalHeader();
-    header->setSectionResizeMode(QHeaderView::Stretch);
-    header = ui->table_computers->horizontalHeader();
-    header->setSectionResizeMode(QHeaderView::Stretch);
-    header = ui->table_links->horizontalHeader();
-    header->setSectionResizeMode(QHeaderView::Stretch);
+    setTables();
 }
 
 MainWindow::~MainWindow()
@@ -30,10 +25,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setTables()
+{
+    QHeaderView* header = ui->table_scientists->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+    header = ui->table_computers->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+    header = ui->table_links->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+}
+
 void MainWindow::fillCompTable()
 {
     vector<Computer> computers;
-    computers = service.getComputers();
+    computers = service.getAllComputers();
     fillCompTable(computers);
 }
 
@@ -77,7 +82,7 @@ void MainWindow::fillCompTable(vector<Computer> computers)
 void MainWindow::fillSciTable()
 {
     vector<Person> persons;
-    persons = service.getPersons();
+    persons = service.getAllPersons();
     fillSciTable(persons);
 }
 
@@ -120,7 +125,7 @@ void MainWindow::fillSciTable(vector<Person> persons)
 void MainWindow::fillLinkTable()
 {
     vector<vector<int>> vec;
-    vec = service.getRelation();
+    vec = service.getAllLinks();
     fillLinkTable(vec);
 }
 
@@ -137,7 +142,7 @@ void MainWindow::fillLinkTable(vector<vector<int>> ids)
         personID = QString::number(ids[i][0]);
         computerID = QString::number(ids[i][1]);
         personName = QString::fromStdString(service.getPersonByID(ids[i][0]).getName());
-        computerName = QString::fromStdString(service.getCompByID(ids[i][1]).getName());
+        computerName = QString::fromStdString(service.getComputerByID(ids[i][1]).getName());
 
 
         ui->table_links->setItem(i, 0, new QTableWidgetItem(personID));
@@ -172,7 +177,7 @@ void MainWindow::on_button_editComputer_clicked()
     int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
 
-    AddComputerDialog addComp(service.getCompByID(id));
+    AddComputerDialog addComp(service.getComputerByID(id));
 
     addComp.exec();
     fillCompTable();
@@ -260,7 +265,7 @@ void MainWindow::on_pushButton_clicked()
     int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
 
-    MoreInfo moreInf(service.getCompByID(id));
+    MoreInfo moreInf(service.getComputerByID(id));
     moreInf.exec();
 }
 

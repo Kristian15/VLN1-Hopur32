@@ -66,6 +66,7 @@ private:
     void fillCompTable();
     void fillSciTable();
     void fillLinkTable();
+    void setTables();
     serviceLayer service;
     Computer computer;
     Ui::MainWindow *ui;

@@ -22,15 +22,11 @@ void DeleteConfirmationDialog::on_button_deleteYes_clicked()
     if(_comporpers == "computer")
     {
         service.deleteComputer(_id);
-        service.deleteItemImage("Computer", _id);
-        service.deleteItemFact("Computer", _id);
         this->close();
     }
     else if(_comporpers =="person")
     {
         service.deletePerson(_id);
-        service.deleteItemImage("Person", _id);
-        service.deleteItemFact("Person", _id);
         this->close();
     }
     else if(_comporpers == "link")

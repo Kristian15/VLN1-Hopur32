@@ -12,82 +12,71 @@ using namespace std;
 class dataLayer
 {
 private:
+    QSqlDatabase db;
     const QString DB_DRIVER_TYPE = "QSQLITE";
     const QString DB_NAME = "skil2.sqlite";
-    QSqlDatabase db;
 
-    // Adds a new Person to the database
+    // Add functions
     void addNewPerson(Person addMe);
-    // Adds a new Computer to the database
     void addNewComputer(Computer addMe);
-    // Creates a relation between the Person with personID and the Computer with computerID
-    void createRelation(int personID, int computerID);
-    void createPersonFact(int personID, string fact);
-    void createComputerFact(int computerID, string fact);
-    // Executes query using queryString and returns a vector of Persons
+    void addNewLink(int personID, int computerID);
+    void addNewFact(string table, int ID, string fact);
+    void addNewImage(string table, int id);
+    // get functions
+    // Executes query using queryString and return the findings
     vector<Person> getPersons(QString queryString);
-    // Executes query using queryString and returns a vector of Computers
     vector<Computer> getComputers(QString queryString);
-    // Delete the row from table where ID = id
-    void deleteRow(string table, int id);
-    // Delete the row from the relation table with personID and computerID
+    vector<vector<int>> getLinks(QString queryString) ;
+
+    // Delete functions
+    void deleteItem(string table, int id);
     void deleteRelation(int personID, int computerID);
-    void deleteFact(QString queryString);
+    void deleteFactPriv(string table, int id, string fact);
+    // Delete help functions for deleteItem
+    // Deletes all information about the item with ID = id from
+    // Links, Facts and Image tables
+    void deleteItemLinks(QString qTable, int id);
+    void deleteItemFacts(QString qTable, int id);
+    void deleteItemImage(QString qTable, int id);
 
 public:
     // Constructor
-    dataLayer();
+    dataLayer(){}
     // Destructor
-    ~dataLayer();
-    // Checks if the database exists or not and opens it if does exists
-    bool openDatabase();
-
+    ~dataLayer() { db.close(); }
+    // open / close database
+    void openDatabase();
     void closeDatabase();
-    // Uses addNewPerson()
-    void addPerson(Person person);
-    // Uses addNewComputer()
-    void addComputer(Computer computer);
-    // Gets all scientists from the database sorted after column and ascDesc
-    // Returns a vector of Persons with the sorted list
-    // Uses getPersons()
+
+    // functions to call private functions
+    void addPerson(Person person) { addNewPerson(person); }
+    void addComputer(Computer computer) {addNewComputer(computer); }
+    void addImage(string table, int id) { addNewImage(table, id); }
+    void addLink(int personID, int computerID) { addNewLink(personID, computerID); }
+    void addFact(string table, int id, string fact) { addNewFact(table, id, fact); }
+    void deletePerson(int id) { deleteItem("Person", id); }
+    void deleteComputer(int id) { deleteItem("Computer", id); }
+    void deleteLink(int personID, int computerID) { deleteRelation(personID, computerID); }
+    void deleteFact(string table, int id, string fact) {deleteFactPriv(table, id, fact); }
+    // functions to fill in to the tables in UI
+    vector<Person> getAllPersons();
+    vector<Computer> getAllComputers();
+    vector<vector<int>> getAllLinks();
+    // get Person with ID = id
     Person getPersonByID(int id);
-    Computer getCompByID(int id);
-
-    vector<Person> getPers();
-    vector<Computer> getComps();
-
-    vector<Person> getSortedPersons(string column, int ascDesc);
-    // Gets all computers from the database sorted after column and ascDesc
-    // Returns a vector of Computer with the sorted list
-    // Uses getComputers()
-    vector<Computer> getSortedComputers(string column, int ascDesc);
-    // Return all related persons/computers
-    // Returns a double vector where first element in every row is the name of the scientist/computer
-    // the following elements are the scientists/computers that are linked to it
-    vector<vector<int>> getRelation();
-    // Return related persons/computers from the item with ID = id
-    vector<string> searchRelation(int id, string table);
-
-    void updatePerson(Person person);
-    void updateComputer(Computer computer);
-    // Uses deleteRow() to delete
-    void deleteItem(string table, int id);
-    // Creates a relation between a computer and a scientist
-    // Uses createRelation()
-    void makeRelation(int personID, int computerID);
-    // Removes a relation between a computer and a scientist
-    // Uses deleteRelation()
-    void unMakeRelation(int personID, int computerID);
-    void createFact(string table, int id, string fact);
-    void deleteFact(string table, int id, string fact);
-    void deleteItemFact(string table, int itemID);
+    // get Computer with ID = id
+    Computer getComputerByID(int id);
+    // get all facts about item from table with ID = id
     vector<string> getFacts(string table, int id);
+    // get image of item from table with ID = id
+    string getImage(string table, int id);
+    // search functions for filters in tables in UI
     vector<Computer> searchComputers(string findMe);
     vector<Person> searchPersons(string findMe);
-    void updateImage(string table, int id, string path);
-    void deleteImage(string table, int id);
-    void addNewImage(string table, int id);
-    void deleteItemImage(string table, int itemID);
-    string getImage(string table, int id);
     vector<vector<int>> searchLinks(string findMe);
+    // update functions
+    void updatePerson(Person person);
+    void updateComputer(Computer computer);
+    void updateImage(string table, int id, string path);
+    void deleteImage(string table, int id) { updateImage(table, id, ""); }
 };
