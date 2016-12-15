@@ -40,7 +40,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_computers">
        <property name="enabled">
@@ -211,7 +211,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderVisible">
-            <bool>true</bool>
+            <bool>false</bool>
            </attribute>
            <attribute name="horizontalHeaderCascadingSectionResizes">
             <bool>false</bool>
@@ -241,20 +241,44 @@
             <property name="text">
              <string>Name</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>Type</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
            <column>
             <property name="text">
              <string>Design Year</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>Was it Built</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
             <property name="textAlignment">
              <set>AlignLeading|AlignVCenter</set>
@@ -263,6 +287,12 @@
            <column>
             <property name="text">
              <string>ID</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
           </widget>
@@ -439,30 +469,66 @@
             <property name="text">
              <string>Name</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>Gender</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
            <column>
             <property name="text">
              <string>Nationality</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>Birth Year</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
            <column>
             <property name="text">
              <string>Death Year</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>ID</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
           </widget>
@@ -605,20 +671,44 @@
             <property name="text">
              <string>ScientistID</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>ComputerID</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
            <column>
             <property name="text">
              <string>Scientist</string>
             </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
            </column>
            <column>
             <property name="text">
              <string>Computer</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
            </column>
           </widget>
