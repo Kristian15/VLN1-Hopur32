@@ -97,6 +97,10 @@ void MainWindow::fillSciTable(vector<Person> persons)
         nationality = QString::fromStdString(persons[i].getNationality());
         birthYear = QString::number(persons[i].getByear());
         deathYear = QString::number(persons[i].getDyear());
+            if(deathYear == "0")
+            {
+                deathYear = "-";
+            }
         id = QString::number(persons[i].getID());
 
 
