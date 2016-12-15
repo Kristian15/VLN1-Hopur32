@@ -23,9 +23,8 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
     ui->label_name->setText(QString::fromStdString(person.getName()));
     table = "person";
 
-    setPhoto();
-
     id = person.getID();
+    setPhoto();
     facts = service.getFacts("person", id);
 
     setFirstFact();
@@ -66,6 +65,7 @@ void MoreInfo::setFirstFact()
 void MoreInfo::setPhoto()
 {
     QString path = ".\\images\\";
+    cout << id << endl;
     path.append(QString::fromStdString(service.getImage(table, id)));
     cout << path.toStdString() << endl;
     QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
