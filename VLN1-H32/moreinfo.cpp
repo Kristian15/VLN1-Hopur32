@@ -65,7 +65,9 @@ void MoreInfo::setFirstFact()
 
 void MoreInfo::setPhoto()
 {
-    QString path = ".\\images\\" + QString::fromStdString(service.getImage(table, id));
+    QString path = ".\\images\\";
+    path.append(QString::fromStdString(service.getImage(table, id)));
+    cout << path.toStdString() << endl;
     QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
 
     if(checkImage.exists() && checkImage.isFile())
