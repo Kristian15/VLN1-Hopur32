@@ -40,7 +40,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_computers">
        <property name="enabled">
@@ -211,7 +211,7 @@
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderVisible">
-            <bool>false</bool>
+            <bool>true</bool>
            </attribute>
            <attribute name="horizontalHeaderCascadingSectionResizes">
             <bool>false</bool>
@@ -432,6 +432,9 @@
            <property name="cornerButtonEnabled">
             <bool>false</bool>
            </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
            <column>
             <property name="text">
              <string>Name</string>
@@ -595,6 +598,9 @@
            <property name="sortingEnabled">
             <bool>true</bool>
            </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
            <column>
             <property name="text">
              <string>ScientistID</string>
