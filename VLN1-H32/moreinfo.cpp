@@ -99,9 +99,9 @@ void MoreInfo::getNextFact()
     if((int)facts.size() > index)
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
-        ui->button_prevFact->setEnabled(true);
     }
 
+    ui->button_prevFact->setEnabled(true);
     setNext();
 }
 

@@ -23,6 +23,7 @@ void dataLayer::addNewPerson(Person addMe)
     }
 
     query.exec();
+
 }
 
 void dataLayer::addNewComputer(Computer addMe)
@@ -486,4 +487,38 @@ vector<Person> dataLayer::searchPersons(string findMe)
     queryString.append("%'");
 
     return getPersons(queryString);
+}
+
+void dataLayer::updateImage(string table, int id, string path)
+{
+    QString queryString = "UPDATE ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Image SET Image = '");
+    queryString.append(QString::fromStdString(path));
+    queryString.append("' WHERE ");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(QString::number(id));
+
+    QSqlQuery query;
+    query.exec(queryString);
+}
+
+void dataLayer::deleteImage(string table, int id)
+{
+    updateImage(table, id, "");
+}
+
+void dataLayer::addNewImage(string table, int id)
+{
+    QString queryString = "INSERT INTO";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Image (");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID, Image) VALUES (");
+    queryString.append(QString::number(id));
+    queryString.append(", '')");
+
+    QSqlQuery query;
+    query.exec(queryString);
 }

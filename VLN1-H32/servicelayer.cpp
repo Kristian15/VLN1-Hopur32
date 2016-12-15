@@ -378,3 +378,18 @@ void serviceLayer::deleteFact(string table, int id, string fact)
 {
     data.deleteFact(table, id, fact);
 }
+
+void serviceLayer::updateImage(string table, int id, string path)
+{
+    data.updateImage(table, id, path);
+}
+
+void serviceLayer::deleteImage(string table, int id)
+{
+    data.deleteImage(table, id);
+}
+
+void serviceLayer::addNewImage(string table, int id)
+{
+    data.addNewImage(table, id);
+}
