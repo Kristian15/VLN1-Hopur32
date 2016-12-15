@@ -279,10 +279,10 @@ void MainWindow::on_button_removeLink_clicked()
 
 void MainWindow::on_table_computers_doubleClicked(const QModelIndex &index)
 {
-    ui->button_editComputer->clicked(true);
+    ui->pushButton->clicked(true);
 }
 
 void MainWindow::on_table_scientists_doubleClicked(const QModelIndex &index)
 {
-    ui->button_editScientist->clicked(true);
+    ui->pushButton_2->clicked(true);
 }
