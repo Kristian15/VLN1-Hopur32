@@ -437,6 +437,19 @@ void dataLayer::deleteFact(string table, int id, string fact)
     deleteFact(queryString);
 }
 
+void dataLayer::deleteItemFact(string table, int itemID)
+{
+    QString queryString = "DELETE FROM ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Fact WHERE ");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(QString::number(itemID));
+
+    QSqlQuery query;
+    query.exec(queryString);
+}
+
 vector<string> dataLayer::getFacts(string table, int id)
 {
     vector<string> resultMatrix;
@@ -521,4 +534,38 @@ void dataLayer::addNewImage(string table, int id)
 
     QSqlQuery query;
     query.exec(queryString);
+}
+
+void dataLayer::deleteItemImage(string table, int itemID)
+{
+    QString queryString = "DELETE FROM ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Image WHERE ");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(QString::number(itemID));
+
+    QSqlQuery query;
+    query.exec(queryString);
+}
+
+string dataLayer::getImage(string table, int id)
+{
+    QString queryString = "SELECT Image FROM ";
+    queryString.append(QString::fromStdString(table));
+    queryString.append("_Image WHERE ");
+    queryString.append(QString::fromStdString(table));
+    queryString.append("ID = ");
+    queryString.append(QString::number(id));
+
+    QSqlQuery query;
+    query.exec(queryString);
+    string result;
+
+    while(query.next())
+    {
+        result = query.value(0).toString().toStdString();
+    }
+
+    return result;
 }

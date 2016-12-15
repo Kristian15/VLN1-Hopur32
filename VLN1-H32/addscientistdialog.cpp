@@ -10,6 +10,7 @@ AddScientistDialog::AddScientistDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Add scientist");
     ui->label_scientistHeader->setText("Add a new scientist");
+    service.addNewImage("Person", _person.getID());
 }
 
 AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :

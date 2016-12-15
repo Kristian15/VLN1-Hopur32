@@ -65,11 +65,12 @@ void MoreInfo::setFirstFact()
 
 void MoreInfo::setPhoto()
 {
-    QString path = ".\\images\\";
+    QString path = ".\\images\\" + QString::fromStdString(service.getImage(table, id));
     QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
+
     if(checkImage.exists() && checkImage.isFile())
     {
-        QPixmap pixmap(".\\images\\random.jpg"); // todo fix path information using path from db
+        QPixmap pixmap(path); // todo fix path information using path from db
         ui->image->setPixmap(pixmap);
         ui->image->setMask(pixmap.mask());
         ui->button_deletePhoto->setEnabled(true);

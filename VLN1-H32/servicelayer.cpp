@@ -393,3 +393,19 @@ void serviceLayer::addNewImage(string table, int id)
 {
     data.addNewImage(table, id);
 }
+
+void serviceLayer::deleteItemImage(string table, int itemID)
+{
+    data.deleteItemImage(table, itemID);
+}
+
+void serviceLayer::deleteItemFact(string table, int itemID)
+{
+    data.deleteItemFact(table, itemID);
+}
+
+string serviceLayer::getImage(string table, int id)
+{
+    string s = data.getImage(table, id);
+    return s;
+}

@@ -8,6 +8,7 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Add computer");
     ui->label_computerHeader->setText("Add a new computer");
+    servicelayer.addNewImage("Computer", _computer.getID());
 }
 
 AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :

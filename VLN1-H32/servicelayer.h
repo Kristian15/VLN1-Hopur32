@@ -73,5 +73,8 @@ public:
     void updateImage(string table, int id, string path);
     void deleteImage(string table, int id);
     void addNewImage(string table, int id);
+    void deleteItemImage(string table, int itemID);
+    void deleteItemFact(string table, int itemID);
+    string getImage(string table, int id);
 
 };
