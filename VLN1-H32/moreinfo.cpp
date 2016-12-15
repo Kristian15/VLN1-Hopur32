@@ -38,10 +38,8 @@ MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
     this->setWindowTitle(QString::fromStdString("More information"));
     ui->label_name->setText(QString::fromStdString(computer.getName()));
     table = "computer";
-
-    setPhoto();
-
     id = computer.getID();
+    setPhoto();
     facts = service.getFacts("computer", id);
 
     setFirstFact();
