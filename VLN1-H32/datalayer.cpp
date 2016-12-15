@@ -564,7 +564,7 @@ string dataLayer::getImage(string table, int id)
 
     while(query.next())
     {
-        result = query.value(0).toString().toStdString();
+        result = query.value("Image").toString().toStdString();
     }
 
     return result;
