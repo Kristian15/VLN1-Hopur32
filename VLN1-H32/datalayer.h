@@ -83,4 +83,7 @@ public:
     vector<string> getFacts(string table, int id);
     vector<Computer> searchComputers(string findMe);
     vector<Person> searchPersons(string findMe);
+    void updateImage(string table, int id, string path);
+    void deleteImage(string table, int id);
+    void addNewImage(string table, int id);
 };

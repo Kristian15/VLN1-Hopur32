@@ -70,5 +70,8 @@ public:
     vector<string> getFacts(string table, int id);
     void createFact(string table, int id, string fact);
     void deleteFact(string table, int id, string fact);
+    void updateImage(string table, int id, string path);
+    void deleteImage(string table, int id);
+    void addNewImage(string table, int id);
 
 };
