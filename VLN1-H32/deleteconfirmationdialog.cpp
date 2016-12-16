@@ -31,7 +31,7 @@ void DeleteConfirmationDialog::on_button_deleteYes_clicked()
     }
     else if(_comporpers == "link")
     {
-        service.unLink(_id, _idb);
+        service.deleteLink(_id, _idb);
         this->close();
     }
 }

@@ -1,10 +1,14 @@
 #include "servicelayer.h"
-#include <iostream>
 
 using namespace std;
 
 // **** PRIVATE*****
 
+/**
+ * @brief serviceLayer::validateName
+ * @param name
+ * @return bool
+ */
 bool serviceLayer::validateName(string name)
 {
     size_t wordLength = name.length();
@@ -12,7 +16,7 @@ bool serviceLayer::validateName(string name)
 
     for (unsigned int i = 0; i < wordLength; i++)
     {
-        if (!isdigit(name[i]) && (name != ""))
+        if (!isdigit(name[i]))
         {
             tmp ++;
         }
@@ -26,16 +30,11 @@ bool serviceLayer::validateName(string name)
     return false;
 }
 
-bool serviceLayer::validateGender(string gender)
-{
-    if ((gender == "male") || (gender == "female"))
-    {
-        return true;
-    }
-
-    return false;
-}
-
+/**
+ * @brief serviceLayer::validateNationality
+ * @param nationality
+ * @return bool
+ */
 bool serviceLayer::validateNationality(string nationality)
 {
     size_t wordLength = nationality.length();
@@ -59,6 +58,11 @@ bool serviceLayer::validateNationality(string nationality)
     return false;
 }
 
+/**
+ * @brief serviceLayer::validateYear
+ * @param year
+ * @return bool
+ */
 bool serviceLayer::validateYear(string year)
 {
     size_t wordLength = year.length();
@@ -86,7 +90,16 @@ bool serviceLayer::validateYear(string year)
     return false;
 }
 
-Person serviceLayer:: getNewPerson(string name, string gender, string nationality, string byear, string dyear)
+/**
+ * @brief serviceLayer::getNewPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return Person
+ */
+Person serviceLayer::getNewPerson(string name, string gender, string nationality, string byear, string dyear)
 {
     Person newP;
     int Byear = stoi(byear);
@@ -103,7 +116,15 @@ Person serviceLayer:: getNewPerson(string name, string gender, string nationalit
     return newP;
 }
 
-Computer serviceLayer:: getNewComputer(string name, string year, string type, string built)
+/**
+ * @brief serviceLayer::getNewComputer
+ * @param name
+ * @param year
+ * @param type
+ * @param built
+ * @return Computer
+ */
+Computer serviceLayer::getNewComputer(string name, string year, string type, string built)
 {
     bool builtBool = false;
 
@@ -117,16 +138,14 @@ Computer serviceLayer:: getNewComputer(string name, string year, string type, st
 
 //*****PUBLIC*****
 
-void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
-{
-    data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
-}
-
-void serviceLayer::newComputer(string name, string year, string type, string built)
-{
-    data.addComputer(getNewComputer(name, year, type, built));
-}
-
+/**
+ * @brief serviceLayer::validateNewPerson
+ * @param name
+ * @param nationality
+ * @param byear
+ * @param dyear
+ * @return bool
+ */
 bool serviceLayer::validateNewPerson(string name, string nationality, string byear, string dyear)
 {
     bool isValid = false;
@@ -149,6 +168,13 @@ bool serviceLayer::validateNewPerson(string name, string nationality, string bye
     return isValid;
 }
 
+/**
+ * @brief serviceLayer::validateNewComputer
+ * @param name
+ * @param year
+ * @param type
+ * @return bool
+ */
 bool serviceLayer::validateNewComputer(string name, string year, string type)
 {
     if((name != "") && validateYear(year) && (type != ""))
@@ -157,4 +183,29 @@ bool serviceLayer::validateNewComputer(string name, string year, string type)
     }
 
     return false;
+}
+
+/**
+ * @brief serviceLayer::newPerson
+ * @param name
+ * @param gender
+ * @param nationality
+ * @param byear
+ * @param dyear
+ */
+void serviceLayer::newPerson(string name, string gender, string nationality, string byear, string dyear)
+{
+    data.addPerson(getNewPerson(name, gender, nationality, byear, dyear));
+}
+
+/**
+ * @brief serviceLayer::newComputer
+ * @param name
+ * @param year
+ * @param type
+ * @param built
+ */
+void serviceLayer::newComputer(string name, string year, string type, string built)
+{
+    data.addComputer(getNewComputer(name, year, type, built));
 }

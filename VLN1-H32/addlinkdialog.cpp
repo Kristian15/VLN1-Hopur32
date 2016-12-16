@@ -47,7 +47,7 @@ void AddLinkDialog::on_pushButton_2_clicked()
     int personid = ui->table_addLinkScientist->model()->data(ui->table_addLinkScientist->model()->index(sRowIndex,0)).toInt();
     int cRowIndex = ui->table_addLinkComputer->selectionModel()->currentIndex().row();
     int computerid = ui->table_addLinkComputer->model()->data(ui->table_addLinkComputer->model()->index(cRowIndex,0)).toInt();
-    service.link(personid, computerid);
+    service.addLink(personid, computerid);
     fillCompTable();
     fillPersonTable();
     ui->table_addLinkComputer->clearSelection();
