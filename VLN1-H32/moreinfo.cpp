@@ -1,10 +1,5 @@
 #include "moreinfo.h"
 #include "ui_moreinfo.h"
-#include <QGraphicsItem>
-#include <QBitmap>
-#include <QFileDialog>
-#include <QFileInfo>
-#include <QMessageBox>
 
 MoreInfo::MoreInfo(QWidget *parent) :
     QDialog(parent),
