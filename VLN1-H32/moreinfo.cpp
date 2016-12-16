@@ -143,7 +143,7 @@ void MoreInfo::on_button_deleteFact_clicked()
         ui->button_nextFact->setEnabled(true);
         ui->button_addFact->setEnabled(false);
         ui->textEdit_facts->setReadOnly(true);
-        index = 0;
+        index--;
         getNextFact();
     }
 }
@@ -206,6 +206,13 @@ void MoreInfo::setFirstFact()
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
     }
+    else
+    {
+        ui->button_addFact->setEnabled(true);
+        ui->textEdit_facts->setReadOnly(false);
+        ui->button_nextFact->setEnabled(false);
+        ui->button_prevFact->setEnabled(false);
+    }
 }
 
 /**
@@ -234,8 +241,19 @@ void MoreInfo::getNextFact()
     {
         ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
     }
+    else if((int) facts.size() == 0)
+    {
+        ui->button_addFact->setEnabled(true);
+        ui->textEdit_facts->setReadOnly(false);
+        ui->button_nextFact->setEnabled(false);
+        ui->button_prevFact->setEnabled(false);
+    }
 
-    ui->button_prevFact->setEnabled(true);
+    if(!(index == 0))
+    {
+       ui->button_prevFact->setEnabled(true);
+    }
+
     setNext();
 }
 

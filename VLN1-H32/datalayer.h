@@ -20,7 +20,6 @@ private:
     void addNewComputer(Computer addMe);
     void addNewLink(int personID, int computerID);
     void addNewFact(string table, int id, string fact);
-    void addNewImage(string table, int id);
     // get functions
     // Executes query using queryString and return the findings
     vector<Person> getPersons(QString queryString);
@@ -53,7 +52,6 @@ public:
     // functions to call private functions
     void addPerson(Person person) { addNewPerson(person); }
     void addComputer(Computer computer) {addNewComputer(computer); }
-    void addImage(string table, int id) { addNewImage(table, id); }
     void addLink(int personID, int computerID) { addNewLink(personID, computerID); }
     void addFact(string table, int id, string fact) { addNewFact(table, id, fact); }
     void deletePerson(int id) { deleteItem("Person", id); }
@@ -68,6 +66,8 @@ public:
     Person getPersonByID(int id);
     // get Computer with ID = id
     Computer getComputerByID(int id);
+    vector<Person> getPersonsByName(string name);
+    vector<Computer> getComputersByName(string name);
     // get all facts about item from table with ID = id
     vector<string> getFacts(string table, int id);
     // get image of item from table with ID = id

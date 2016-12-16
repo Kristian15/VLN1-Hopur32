@@ -9,6 +9,7 @@ AddScientistDialog::AddScientistDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddScientistDialog)
 {
+    _edit = false;
     ui->setupUi(this);
     this->setWindowTitle("Add scientist");
     ui->label_scientistHeader->setText("Add a new scientist");
@@ -101,37 +102,39 @@ void AddScientistDialog::on_button_ok_clicked()
         dyear = "0";
     }
 
-    bool validScientistInput = service.validateNewPerson(name, nationality, byear, dyear);
 
-    if(validScientistInput && isValid)
+    if(isValid)
     {
-        if(_edit)
-        {
-            _person.setName(name);
-            _person.setNationality(nationality);
-            _person.setGender(gender);
-            _person.setByear(stoi(byear));
-            _person.setDyear(stoi(dyear));
+        bool validScientistInput = service.validateNewPerson(name, nationality, byear, dyear);
 
-            service.updatePerson(_person);
+        if(validScientistInput)
+        {
+            if(_edit)
+            {
+                _person.setName(name);
+                _person.setNationality(nationality);
+                _person.setGender(gender);
+                _person.setByear(qByear.toInt());
+                _person.setDyear(qDyear.toInt());
+
+                service.updatePerson(_person);
+            }
+            else
+            {
+                service.newPerson(name, gender, nationality, byear, dyear);
+            }
+
+            ui->input_scientistName->clear();
+            ui->input_scientistNationality->clear();
+            ui->input_scientistBirthYear->clear();
+            ui->input_scientistDeathYear->clear();
+            this->close();
         }
         else
         {
-            service.newPerson(name, gender, nationality, byear, dyear);
-            service.addImage("Person", _person.getID());
-
+            ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Invalid Input</span>");
         }
-
-        ui->input_scientistName->clear();
-        ui->input_scientistNationality->clear();
-        ui->input_scientistBirthYear->clear();
-        ui->input_scientistDeathYear->clear();
-        this->close();
-    }
-    else
-    {
-        ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Invalid Input</span>");
-    }
+   }
 
 }
 

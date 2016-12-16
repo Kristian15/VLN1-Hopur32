@@ -17,12 +17,16 @@ public:
     explicit AddLinkDialog(QWidget *parent = 0);
     // destructor
     ~AddLinkDialog();
+    void fillPersonTable();
+    void fillComputerTable();
 
 private slots:
     void on_table_addLinkComputer_itemSelectionChanged();
     void on_table_addLinkScientist_itemSelectionChanged();
     void on_button_addLinkLink_clicked();
     void on_button_addLinkCancel_clicked();
+    void on_input_filterScientists_textChanged(const QString &arg1);
+    void on_input_filterComputers_textChanged(const QString &arg1);
 
 private:
     // conn is true if user has chosen one scientist or computer
@@ -30,8 +34,8 @@ private:
     Ui::AddLinkDialog *ui;
     serviceLayer service;
     // fill the tables to choose from
-    void fillPersonTable();
-    void fillCompTable();
+    void fillPersonTable(vector<Person> persons);
+    void fillComputerTable(vector<Computer> computers);
 };
 
 #endif // ADDLINKDIALOG_H

@@ -27,6 +27,19 @@ void dataLayer::addNewPerson(Person addMe)
 
     query.exec();
 
+    QSqlQuery query2;
+    query2.prepare("SELECT ID FROM Person WHERE Name LIKE :name");
+    query2.bindValue(":name", QString::fromStdString(addMe.getName()));
+    query2.exec();
+
+    while(query2.next())
+    {
+        QSqlQuery query3;
+        query3.prepare("INSERT INTO Person_Image (ID, Image) VALUES (:id, '')");
+        query3.bindValue(":id", query2.value("ID"));
+        query3.exec();
+    }
+
 }
 
 /**
@@ -43,6 +56,19 @@ void dataLayer::addNewComputer(Computer addMe)
     query.bindValue(":type", QString::fromStdString(addMe.getType()));
     query.bindValue(":built",addMe.getBuilt());
     query.exec();
+
+    QSqlQuery query2;
+    query2.prepare("SELECT ID FROM Computer WHERE Name LIKE :name");
+    query2.bindValue(":name", QString::fromStdString(addMe.getName()));
+    query2.exec();
+
+    while(query2.next())
+    {
+        QSqlQuery query3;
+        query3.prepare("INSERT INTO Computer_Image (ID, Image) VALUES (:id, '')");
+        query3.bindValue(":id", query2.value("ID"));
+        query3.exec();
+    }
 }
 
 /**
@@ -74,21 +100,6 @@ void dataLayer::addNewFact(string table, int id, string fact)
     query.prepare("INSERT INTO " + qTable + " (ID, Fact) VALUES ( :id, :fact )");
     query.bindValue(":id", id);
     query.bindValue(":fact", QString::fromStdString(fact));
-    query.exec();
-}
-
-/**
- * @brief dataLayer::addNewImage
- * @param table
- * @param id
- */
-void dataLayer::addNewImage(string table, int id)
-{
-    QString qTable = QString::fromStdString(table);
-    qTable.append("_Image");
-    QSqlQuery query;
-    query.prepare("INSERT INTO " + qTable + " (ID, Image) VALUES ( :id, "" )");
-    query.bindValue(":id", QString::number(id));
     query.exec();
 }
 
@@ -373,6 +384,32 @@ Computer dataLayer::getComputerByID(int id)
     }
 
     return computer;
+}
+
+/**
+ * @brief dataLayer::getPersonsByName
+ * @param name
+ * @return vector<Person>
+ */
+vector<Person> dataLayer::getPersonsByName(string name)
+{
+    QString queryString = "SELECT * FROM Person WHERE name LIKE '%";
+    queryString.append(QString::fromStdString(name));
+    queryString.append("%' COLLATE NOCASE");
+    return getPersons(queryString);
+}
+
+/**
+ * @brief dataLayer::getComputerByName
+ * @param name
+ * @return vector<Computer>
+ */
+vector<Computer> dataLayer::getComputersByName(string name)
+{
+    QString queryString = "SELECT * FROM Computer WHERE name LIKE '%";
+    queryString.append(QString::fromStdString(name));
+    queryString.append("%' COLLATE NOCASE");
+    return getComputers(queryString);
 }
 
 /**

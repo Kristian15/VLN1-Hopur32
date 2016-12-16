@@ -11,7 +11,7 @@ AddLinkDialog::AddLinkDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     conn = false;
-    fillCompTable();
+    fillComputerTable();
     fillPersonTable();
 }
 
@@ -21,6 +21,20 @@ AddLinkDialog::AddLinkDialog(QWidget *parent) :
 AddLinkDialog::~AddLinkDialog()
 {
     delete ui;
+}
+
+void AddLinkDialog::fillPersonTable()
+{
+    vector<Person> persons;
+    persons = service.getAllPersons();
+    fillPersonTable(persons);
+}
+
+void AddLinkDialog::fillComputerTable()
+{
+    vector<Computer> computers;
+    computers = service.getAllComputers();
+    fillComputerTable(computers);
 }
 
 /**
@@ -90,12 +104,33 @@ void AddLinkDialog::on_button_addLinkCancel_clicked()
 }
 
 /**
+ * @brief AddLinkDialog::on_input_filterScientists_textChanged
+ * @param arg1
+ */
+void AddLinkDialog::on_input_filterScientists_textChanged(const QString &arg1)
+{
+    string input = arg1.toStdString();
+    vector<Person> persons = service.getPersonsByName(input);
+    fillPersonTable(persons);
+}
+
+/**
+ * @brief AddLinkDialog::on_input_filterComputers_textChanged
+ * @param arg1
+ */
+void AddLinkDialog::on_input_filterComputers_textChanged(const QString &arg1)
+{
+    string input = arg1.toStdString();
+    vector<Computer> computers = service.getComputersByName(input);
+    fillComputerTable(computers);
+}
+
+
+/**
  * @brief AddLinkDialog::fillPersonTable
  */
-void AddLinkDialog::fillPersonTable()
+void AddLinkDialog::fillPersonTable(vector<Person> persons)
 {
-    vector<Person> persons;
-    persons = service.getAllPersons();
     ui->table_addLinkScientist->setRowCount((int)persons.size());
 
     QString name, id;
@@ -113,12 +148,10 @@ void AddLinkDialog::fillPersonTable()
 }
 
 /**
- * @brief AddLinkDialog::fillCompTable
+ * @brief AddLinkDialog::fillComputerTable
  */
-void AddLinkDialog::fillCompTable()
+void AddLinkDialog::fillComputerTable(vector<Computer> computers)
 {
-    vector<Computer> computers;
-    computers = service.getAllComputers();
     ui->table_addLinkComputer->setRowCount((int)computers.size());
     QString name, id;
 

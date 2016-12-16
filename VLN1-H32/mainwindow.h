@@ -25,8 +25,8 @@ public:
     // destructor
     ~MainWindow();
     // fill tables
-    void fillCompTable();
-    void fillSciTable();
+    void fillComputerTable();
+    void fillPersonTable();
     void fillLinkTable();
 
 private slots:
@@ -53,8 +53,8 @@ private:
     serviceLayer service;
     Ui::MainWindow *ui;
     AddLinkDialog addLink;
-    void fillCompTable(vector<Computer> computers);
-    void fillSciTable(vector<Person> persons);
+    void fillComputerTable(vector<Computer> computers);
+    void fillPersonTable(vector<Person> persons);
     void fillLinkTable(vector<vector<int>>);
     // sets columns width in tables
     void setTables();

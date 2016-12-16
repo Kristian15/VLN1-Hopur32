@@ -108,7 +108,7 @@ Person serviceLayer::getNewPerson(string name, string gender, string nationality
     // if there is a death year
     if(dyear != "0")
     {
-        Dyear = stoi(dyear);   
+        Dyear = stoi(dyear);
     }
 
     newP = Person(name, gender, nationality, Byear, Dyear);
@@ -128,7 +128,7 @@ Computer serviceLayer::getNewComputer(string name, string year, string type, str
 {
     bool builtBool = false;
 
-    if((built == "y"))
+    if((built == "Yes"))
     {
        builtBool = true;
     }

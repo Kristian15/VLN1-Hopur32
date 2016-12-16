@@ -33,7 +33,6 @@ public:
     void openDatabase(){ data.openDatabase(); }
     void closeDatabase() { data.closeDatabase(); }
     void addLink(int personID, int computerID) { data.addLink(personID, computerID); }
-    void addImage(string table, int id) { data.addImage(table, id); }
     void addFact(string table, int id, string fact) { data.addFact(table, id, fact); }
     void updatePerson(Person person) { data.updatePerson(person); }
     void updateComputer(Computer computer) { data.updateComputer(computer); }
@@ -41,6 +40,8 @@ public:
     void updateComputerImage(int id, string path) { data.updateComputerImage(id, path); }
     Person getPersonByID(int id){ return data.getPersonByID(id); }
     Computer getComputerByID(int id){ return data.getComputerByID(id); }
+    vector<Computer> getComputersByName(string name) { return data.getComputersByName(name); }
+    vector<Person> getPersonsByName(string name) { return data.getPersonsByName(name); }
     vector<Person> getAllPersons() { return data.getAllPersons(); }
     vector<Computer> getAllComputers() { return data.getAllComputers(); }
     vector<vector<int>> getAllLinks() { return data.getAllLinks(); }

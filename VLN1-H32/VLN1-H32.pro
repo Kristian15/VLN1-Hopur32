@@ -22,8 +22,7 @@ SOURCES += main.cpp \
     addcomputerdialog.cpp \
     addlinkdialog.cpp \
     deleteconfirmationdialog.cpp \
-    moreinfo.cpp \
-    models.cpp
+    moreinfo.cpp
     deleteconfirmationdialog.cpp
 
 HEADERS += \

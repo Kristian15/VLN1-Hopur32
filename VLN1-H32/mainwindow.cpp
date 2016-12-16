@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     service.openDatabase();
-    fillCompTable();
-    fillSciTable();
+    fillComputerTable();
+    fillPersonTable();
     fillLinkTable();
     setTables();
 }
@@ -30,23 +30,23 @@ MainWindow::~MainWindow()
 }
 
 /**
- * @brief MainWindow::fillSciTable
+ * @brief MainWindow::fillPersonTable
  */
-void MainWindow::fillSciTable()
+void MainWindow::fillPersonTable()
 {
     vector<Person> persons;
     persons = service.getAllPersons();
-    fillSciTable(persons);
+    fillPersonTable(persons);
 }
 
 /**
- * @brief MainWindow::fillCompTable
+ * @brief MainWindow::fillComputerTable
  */
-void MainWindow::fillCompTable()
+void MainWindow::fillComputerTable()
 {
     vector<Computer> computers;
     computers = service.getAllComputers();
-    fillCompTable(computers);
+    fillComputerTable(computers);
 }
 
 /**
@@ -66,7 +66,7 @@ void MainWindow::on_button_addScientist_clicked()
 {
     AddScientistDialog addSci;
     addSci.exec();
-    fillSciTable();
+    fillPersonTable();
 }
 
 /**
@@ -76,7 +76,7 @@ void MainWindow::on_button_addComputer_clicked()
 {
     AddComputerDialog addComp;
     addComp.exec();
-    fillCompTable();
+    fillComputerTable();
 }
 
 /**
@@ -98,7 +98,7 @@ void MainWindow::on_button_editScientist_clicked()
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
     AddScientistDialog addSci(service.getPersonByID(id));
     addSci.exec();
-    fillSciTable();
+    fillPersonTable();
 }
 
 /**
@@ -110,7 +110,7 @@ void MainWindow::on_button_editComputer_clicked()
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
     AddComputerDialog addComp(service.getComputerByID(id));
     addComp.exec();
-    fillCompTable();
+    fillComputerTable();
 }
 
 /**
@@ -123,7 +123,7 @@ void MainWindow::on_button_deleteScientist_clicked()
     DeleteConfirmationDialog delornodel(id, 0, "person");
     delornodel.exec();
     ui->table_scientists->clearContents();
-    fillSciTable();
+    fillPersonTable();
 }
 
 /**
@@ -135,7 +135,7 @@ void MainWindow::on_button_deleteComputer_clicked()
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(currentlySelectedComputerIndex,4)).toInt();
     DeleteConfirmationDialog delornodel(id, 0, "computer");
     delornodel.exec();
-    fillCompTable();
+    fillComputerTable();
 }
 
 /**
@@ -229,7 +229,7 @@ void MainWindow::on_input_scientistFilter_textChanged(const QString &arg1)
 {
     string input = arg1.toStdString();
     vector<Person> persons = service.searchPersons(input);
-    fillSciTable(persons);
+    fillPersonTable(persons);
 }
 
 /**
@@ -240,7 +240,7 @@ void MainWindow::on_input_computerFilter_textChanged(const QString &arg1)
 {
     string input = arg1.toStdString();
     vector<Computer> computers = service.searchComputers(input);
-    fillCompTable(computers);
+    fillComputerTable(computers);
 }
 
 /**
@@ -255,10 +255,10 @@ void MainWindow::on_input_linksFilter_textChanged(const QString &arg1)
 }
 
 /**
- * @brief MainWindow::fillSciTable
+ * @brief MainWindow::fillPersonTable
  * @param persons
  */
-void MainWindow::fillSciTable(vector<Person> persons)
+void MainWindow::fillPersonTable(vector<Person> persons)
 {
     ui->table_scientists->clearContents();
     ui->table_scientists->setRowCount((int)persons.size());
@@ -293,10 +293,10 @@ void MainWindow::fillSciTable(vector<Person> persons)
 }
 
 /**
- * @brief MainWindow::fillCompTable
+ * @brief MainWindow::fillComputerTable
  * @param computers
  */
-void MainWindow::fillCompTable(vector<Computer> computers)
+void MainWindow::fillComputerTable(vector<Computer> computers)
 {
     ui->table_computers->clearContents();
     ui->table_computers->setRowCount((int)computers.size());
