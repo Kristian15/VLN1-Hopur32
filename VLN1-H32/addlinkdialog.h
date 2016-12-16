@@ -23,12 +23,12 @@ public:
 private slots:
     void on_table_addLinkComputer_clicked(const QModelIndex &index);
     void on_table_addLinkScientist_clicked(const QModelIndex &index);
-    void on_pushButton_2_clicked();
+    void on_button_addLinkLink_clicked();
 
     void on_button_addLinkCancel_clicked();
 
 private:
-    bool a;
+    bool conn;
     Ui::AddLinkDialog *ui;
     serviceLayer service;
 };

@@ -19,7 +19,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_addLinkHeader">
          <property name="font">
           <font>
            <pointsize>9</pointsize>
@@ -90,7 +90,7 @@ selection-color: rgb(255, 255, 255);</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="button_addLinkLink">
          <property name="enabled">
           <bool>false</bool>
          </property>

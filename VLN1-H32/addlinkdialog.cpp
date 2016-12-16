@@ -6,7 +6,7 @@ AddLinkDialog::AddLinkDialog(QWidget *parent) :
     ui(new Ui::AddLinkDialog)
 {
     ui->setupUi(this);
-    a = false;
+    conn = false;
     fillCompTable();
     fillPersonTable();
 }
@@ -18,30 +18,30 @@ AddLinkDialog::~AddLinkDialog()
 
 void AddLinkDialog::on_table_addLinkScientist_clicked(const QModelIndex &index)
 {
-    if(a)
+    if(conn)
     {
-        ui->pushButton_2->setEnabled(true);
+        ui->button_addLinkLink->setEnabled(true);
     }
     else
     {
         ui->label_linked->clear();
-        a = true;
+        conn = true;
     }
 }
 
 void AddLinkDialog::on_table_addLinkComputer_clicked(const QModelIndex &index)
 {
-    if(a)
+    if(conn)
     {
-        ui->pushButton_2->setEnabled(true);
+        ui->button_addLinkLink->setEnabled(true);
     }
     else
     {
-        a = true;
+        conn = true;
     }
 }
 
-void AddLinkDialog::on_pushButton_2_clicked()
+void AddLinkDialog::on_button_addLinkLink_clicked()
 {
     int sRowIndex = ui->table_addLinkScientist->selectionModel()->currentIndex().row();
     int personid = ui->table_addLinkScientist->model()->data(ui->table_addLinkScientist->model()->index(sRowIndex,0)).toInt();
@@ -52,7 +52,7 @@ void AddLinkDialog::on_pushButton_2_clicked()
     fillPersonTable();
     ui->table_addLinkComputer->clearSelection();
     ui->table_addLinkScientist->clearSelection();
-    ui->pushButton_2->setEnabled(false);
+    ui->button_addLinkLink->setEnabled(false);
     ui->label_linked->setText("<span style='color: #009900'>Linked has been made !</span>");
 }
 
@@ -81,7 +81,7 @@ void AddLinkDialog::fillCompTable(vector<Computer> computers)
 
     ui->table_addLinkComputer->setColumnHidden(0, true);
 
-    a = false;
+    conn = false;
 }
 
 void AddLinkDialog::fillPersonTable()
