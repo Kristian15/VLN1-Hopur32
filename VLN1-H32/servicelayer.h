@@ -37,7 +37,8 @@ public:
     void addFact(string table, int id, string fact) { data.addFact(table, id, fact); }
     void updatePerson(Person person) { data.updatePerson(person); }
     void updateComputer(Computer computer) { data.updateComputer(computer); }
-    void updateImage(string table, int id, string path) { data.updateImage(table, id, path); }
+    void updatePersonImage(int id, string path) { data.updatePersonImage(id, path); }
+    void updateComputerImage(int id, string path) { data.updateComputerImage(id, path); }
     Person getPersonByID(int id){ return data.getPersonByID(id); }
     Computer getComputerByID(int id){ return data.getComputerByID(id); }
     vector<Person> getAllPersons() { return data.getAllPersons(); }
@@ -53,6 +54,5 @@ public:
     vector<Computer> searchComputers(string findMe) { return data.searchComputers(findMe); }
     vector<Person> searchPersons(string findMe) { return data.searchPersons(findMe); }
     vector<vector<int>> searchLinks(string findMe) { return data.searchLinks(findMe); }
-    bool ifItem(string table, string name) { return data.ifItem(table, name); }
     bool ifLinked(int personID, int computerID) { return data.ifLinked(personID, computerID); }
 };

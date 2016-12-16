@@ -79,8 +79,10 @@ public:
     // update functions
     void updatePerson(Person person);
     void updateComputer(Computer computer);
-    void updateImage(string table, int id, string path);
-    void deleteImage(string table, int id) { updateImage(table, id, " "); }
-    bool ifItem(string table, string name);
+    void updatePersonImage(int id, string path);
+    void updateComputerImage(int id, string path);
+    // delete image from person_image or computer_images tables
+    void deleteImage(string table, int id);
+    // returns true if personID and computerID are already linked
     bool ifLinked(int personID, int computerID);
 };

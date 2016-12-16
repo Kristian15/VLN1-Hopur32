@@ -152,7 +152,7 @@ bool serviceLayer::validateNewPerson(string name, string nationality, string bye
 
     if(validateName(name) && validateNationality(nationality) && validateYear(byear))
     {
-        if(dyear != "-")
+        if(dyear != "0")
         {
             if(validateYear(dyear) && (dyear > byear))
             {

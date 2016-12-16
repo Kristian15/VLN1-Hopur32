@@ -98,9 +98,8 @@ void AddComputerDialog::on_button_ok_clicked()
         {
             _computer.setName(name);
             _computer.setType(type);
-            _computer.setYear(stoi(year));
-            _computer.setBuilt(stoi(built));
-
+            _computer.setYear(qYear.toInt());
+            _computer.setBuilt(qBuilt.toInt());
             service.updateComputer(_computer);
         }
         else

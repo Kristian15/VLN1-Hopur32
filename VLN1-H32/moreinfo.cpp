@@ -1,6 +1,10 @@
 #include "moreinfo.h"
 #include "ui_moreinfo.h"
 
+/**
+ * @brief MoreInfo::MoreInfo
+ * @param parent
+ */
 MoreInfo::MoreInfo(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MoreInfo)
@@ -9,6 +13,11 @@ MoreInfo::MoreInfo(QWidget *parent) :
     this->setWindowTitle(QString::fromStdString("..."));
 }
 
+/**
+ * @brief MoreInfo::MoreInfo
+ * @param person
+ * @param parent
+ */
 MoreInfo::MoreInfo(Person person, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MoreInfo)
@@ -25,6 +34,11 @@ MoreInfo::MoreInfo(Person person, QWidget *parent) :
     setFirstFact();
 }
 
+/**
+ * @brief MoreInfo::MoreInfo
+ * @param computer
+ * @param parent
+ */
 MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MoreInfo)
@@ -40,76 +54,17 @@ MoreInfo::MoreInfo(Computer computer, QWidget *parent) :
     setFirstFact();
 }
 
+/**
+ * @brief MoreInfo::~MoreInfo
+ */
 MoreInfo::~MoreInfo()
 {
     delete ui;
 }
 
-void MoreInfo::setFirstFact()
-{
-    index = 0;
-
-    if((int)facts.size() > index)
-    {
-        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
-    }
-}
-
-void MoreInfo::setPhoto()
-{
-    QString path = QString::fromStdString(service.getImage(table, id));
-    QFileInfo checkImage = path; // = database path could probably use db to tell us if image exists or not
-
-    if(checkImage.exists() && checkImage.isFile())
-    {
-        QPixmap pixmap(path); // todo fix path information using path from db
-        ui->image->setPixmap(pixmap);
-        ui->image->setMask(pixmap.mask());
-        ui->button_deletePhoto->setEnabled(true);
-        ui->button_addPhoto->setEnabled(false);
-    }
-    else
-    {
-        QPixmap pixmap (".\\images\\noImage.jpg");
-        ui->image->setPixmap(pixmap);
-        ui->image->setMask(pixmap.mask());
-        ui->button_deletePhoto->setEnabled(false);
-        ui->button_addPhoto->setEnabled(true);
-    }
-}
-
-void MoreInfo::on_button_nextFact_clicked()
-{
-    ui->textEdit_facts->clear();
-    ui->label_factAdded->clear();
-    getNextFact();
-}
-
-void MoreInfo::getNextFact()
-{
-    index++;
-
-    if((int)facts.size() > index)
-    {
-        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
-    }
-
-    ui->button_prevFact->setEnabled(true);
-    setNext();
-}
-
-void MoreInfo::setNext()
-{
-    if((int)facts.size() <= index)
-    {
-        ui->button_nextFact->setEnabled(false);
-        ui->button_deleteFact->setEnabled(false);
-        ui->button_addFact->setEnabled(true);
-        ui->textEdit_facts->clear();
-        ui->textEdit_facts->setReadOnly(false);
-    }
-}
-
+/**
+ * @brief MoreInfo::on_button_addFact_clicked
+ */
 void MoreInfo::on_button_addFact_clicked()
 {
     QString theFact = ui->textEdit_facts->toPlainText();
@@ -128,23 +83,31 @@ void MoreInfo::on_button_addFact_clicked()
     }
 }
 
+/**
+ * @brief MoreInfo::on_button_addPhoto_clicked
+ */
 void MoreInfo::on_button_addPhoto_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Select image to add"), "/home/", tr("Image Files (*.png *.jpg *.bmp)"));
-    QString thePath = ".\\images\\";
-    thePath.append(QString::fromStdString(table));
-    thePath.append("\\");
-    thePath.append(QString::number(id));
-    thePath.append(".jpg");
 
-    QFile::copy(fileName, thePath);
-    service.updateImage(table, id, thePath.toStdString());
+    if(table == "person")
+    {
+        service.updatePersonImage(id, fileName.toStdString());
+    }
+    else
+    {
+        service.updateComputerImage(id, fileName.toStdString());
+    }
+
     ui->button_addPhoto->setEnabled(false);
     ui->button_deletePhoto->setEnabled(true);
     setPhoto();
 }
 
+/**
+ * @brief MoreInfo::on_button_deletePhoto_clicked
+ */
 void MoreInfo::on_button_deletePhoto_clicked()
 {
     QMessageBox::StandardButton reply;
@@ -153,9 +116,6 @@ void MoreInfo::on_button_deletePhoto_clicked()
 
     if(reply == QMessageBox::Yes)
     {
-        QString delPath = QString::fromStdString(service.getImage(table, id));
-        QFile file = delPath;
-        file.remove();
         service.deleteImage(table, id);
         setPhoto();
         ui->button_addPhoto->setEnabled(true);
@@ -163,6 +123,9 @@ void MoreInfo::on_button_deletePhoto_clicked()
     }
 }
 
+/**
+ * @brief MoreInfo::on_button_deleteFact_clicked
+ */
 void MoreInfo::on_button_deleteFact_clicked()
 {
     QMessageBox::StandardButton reply;
@@ -185,13 +148,100 @@ void MoreInfo::on_button_deleteFact_clicked()
     }
 }
 
+/**
+ * @brief MoreInfo::on_button_nextFact_clicked
+ */
+void MoreInfo::on_button_nextFact_clicked()
+{
+    ui->textEdit_facts->clear();
+    ui->label_factAdded->clear();
+    getNextFact();
+}
+
+/**
+ * @brief MoreInfo::on_button_prevFact_clicked
+ */
 void MoreInfo::on_button_prevFact_clicked()
 {
     ui->textEdit_facts->clear();
     ui->label_factAdded->clear();
+    ui->button_addFact->setEnabled(false);
     getPrevFact();
 }
 
+/**
+ * @brief MoreInfo::setPhoto
+ */
+void MoreInfo::setPhoto()
+{
+    QString path = QString::fromStdString(service.getImage(table, id));
+    QFileInfo checkImage = path;
+
+    if(checkImage.exists() && checkImage.isFile())
+    {
+        QPixmap pixmap(path);
+        ui->image->setPixmap(pixmap);
+        ui->image->setMask(pixmap.mask());
+        ui->button_deletePhoto->setEnabled(true);
+        ui->button_addPhoto->setEnabled(false);
+    }
+    else
+    {
+        QPixmap pixmap (".\\images\\noImage.jpg");
+        ui->image->setPixmap(pixmap);
+        ui->image->setMask(pixmap.mask());
+        ui->button_deletePhoto->setEnabled(false);
+        ui->button_addPhoto->setEnabled(true);
+    }
+}
+
+/**
+ * @brief MoreInfo::setFirstFact
+ */
+void MoreInfo::setFirstFact()
+{
+    index = 0;
+
+    if((int)facts.size() > index)
+    {
+        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
+    }
+}
+
+/**
+ * @brief MoreInfo::setNext
+ */
+void MoreInfo::setNext()
+{
+    if((int)facts.size() <= index)
+    {
+        ui->button_nextFact->setEnabled(false);
+        ui->button_deleteFact->setEnabled(false);
+        ui->button_addFact->setEnabled(true);
+        ui->textEdit_facts->clear();
+        ui->textEdit_facts->setReadOnly(false);
+    }
+}
+
+/**
+ * @brief MoreInfo::getNextFact
+ */
+void MoreInfo::getNextFact()
+{
+    index++;
+
+    if((int)facts.size() > index)
+    {
+        ui->textEdit_facts->insertPlainText(QString::fromStdString(facts[index]));
+    }
+
+    ui->button_prevFact->setEnabled(true);
+    setNext();
+}
+
+/**
+ * @brief MoreInfo::getPrevFact
+ */
 void MoreInfo::getPrevFact()
 {
     index --;
@@ -207,4 +257,3 @@ void MoreInfo::getPrevFact()
         ui->button_prevFact->setEnabled(false);
     }
 }
-

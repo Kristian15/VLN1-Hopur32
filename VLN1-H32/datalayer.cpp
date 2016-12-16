@@ -87,7 +87,7 @@ void dataLayer::addNewImage(string table, int id)
     QString qTable = QString::fromStdString(table);
     qTable.append("_Image");
     QSqlQuery query;
-    query.prepare("INSERT INTO " + qTable + " (ID, Image) VALUES ( :id, '' )");
+    query.prepare("INSERT INTO " + qTable + " (ID, Image) VALUES ( :id, "" )");
     query.bindValue(":id", QString::number(id));
     query.exec();
 }
@@ -527,35 +527,34 @@ void dataLayer::updateComputer(Computer computer)
  * @param id
  * @param path
  */
-void dataLayer::updateImage(string table, int id, string path)
+void dataLayer::updatePersonImage(int id, string path)
 {
-    QString qTable = QString::fromStdString(table);
-    table.append("_Image");
-
     QSqlQuery query;
-    query.prepare("UPDATE " + qTable + " SET Image = :path WHERE ID = :id");
+    query.prepare("UPDATE Person_Image SET Image = :path WHERE ID = :id");
     query.bindValue(":path", QString::fromStdString(path));
     query.bindValue(":id", QString::number(id));
     query.exec();
 }
 
-bool dataLayer::ifItem(string table, string name)
+void dataLayer::updateComputerImage(int id, string path)
 {
     QSqlQuery query;
-    query.prepare("SELECT EXISTS(SELECT 1 FROM :table WHERE Name = :name "
-                  " COLLATE NOCASE LIMIT 1)");
-    query.bindValue(":table", QString::fromStdString(table));
-    query.bindValue(":name", QString::fromStdString(name));
+    query.prepare("UPDATE Computer_Image SET Image = :path WHERE ID = :id");
+    query.bindValue(":path", QString::fromStdString(path));
+    query.bindValue(":id", QString::number(id));
     query.exec();
+}
 
-    int result;
-
-    while(query.next())
+void dataLayer::deleteImage(string table, int id)
+{
+    if(table == "person")
     {
-        result = query.value(0).toInt();
+        updatePersonImage(id, "");
     }
-
-    return result;
+    else
+    {
+        updateComputerImage(id, "");
+    }
 }
 
 bool dataLayer::ifLinked(int personID, int computerID)
@@ -567,7 +566,7 @@ bool dataLayer::ifLinked(int personID, int computerID)
     query.bindValue(":cID", computerID);
     query.exec();
 
-    int result;
+    int result = 0;
 
     while(query.next())
     {

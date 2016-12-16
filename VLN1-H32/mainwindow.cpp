@@ -9,9 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
-
     service.openDatabase();
     fillCompTable();
     fillSciTable();
@@ -161,7 +159,6 @@ void MainWindow::on_button_scientistMoreInfo_clicked()
 {
     int rowIndex = ui->table_scientists->selectionModel()->currentIndex().row();
     int id = ui->table_scientists->model()->data(ui->table_scientists->model()->index(rowIndex,5)).toInt();
-
     MoreInfo moreInf(service.getPersonByID(id));
     moreInf.exec();
 }
@@ -173,7 +170,6 @@ void MainWindow::on_button_computersMoreInfo_clicked()
 {
     int rowIndex = ui->table_computers->selectionModel()->currentIndex().row();
     int id = ui->table_computers->model()->data(ui->table_computers->model()->index(rowIndex,4)).toInt();
-
     MoreInfo moreInf(service.getComputerByID(id));
     moreInf.exec();
 }
