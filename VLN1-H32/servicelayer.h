@@ -23,7 +23,7 @@ private:
 
 public:
     bool validateNewPerson(string name, string nationality, string byear, string dyear);
-    bool validateNewComputer(string name, string year, string type);
+    bool validateNewComputer(string year);
     // Calls getNewPerson()
     void newPerson(string name, string gender, string nationality, string byear, string dyear);
     // Calls getNewComputer()

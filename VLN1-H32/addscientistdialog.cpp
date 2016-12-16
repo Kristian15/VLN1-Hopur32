@@ -45,62 +45,74 @@ AddScientistDialog::~AddScientistDialog()
 
 void AddScientistDialog::on_button_ok_clicked()
 {
-    ui->label_scientistName_Error->setText("");
-    ui->label_scientistNationality_Error->setText("");
-    ui->label_scientistBirthYear_Error->setText("");
-    ui->label_scientistDeathYear_Error->setText("");
+    bool isValid = true;
 
-    QString name = ui -> input_scientistName -> text();
-    QString nationality = ui-> input_scientistNationality->text();
-    QString gender = ui->dropDown_scientistGender->currentText();
-    QString byear = ui -> input_scientistBirthYear -> text();
-    QString dyear = ui -> input_scientistDeathYear -> text();
+    ui->label_scientistName_Error->clear();
+    ui->label_scientistNationality_Error->clear();
+    ui->label_scientistBirthYear_Error->clear();
+    ui->label_scientistDeathYear_Error->clear();
 
-    if(name.isEmpty())
+    QString qName = ui -> input_scientistName -> text();
+    QString qNationality = ui-> input_scientistNationality->text();
+    QString qGender = ui->dropDown_scientistGender->currentText();
+    QString qByear = ui -> input_scientistBirthYear -> text();
+    QString qDyear = ui -> input_scientistDeathYear -> text();
+
+    string name = qName.toStdString();
+    string nationality = qNationality.toStdString();
+    string gender = qGender.toStdString();
+    string byear = qByear.toStdString();
+    string dyear = qDyear.toStdString();
+
+    if(qName.isEmpty())
     {
         ui->label_scientistName_Error->setText("<span style='color: #ED1C58'>Name cannot be empty</span>");
+        isValid = false;
     }
-    if(nationality.isEmpty())
+    if(qNationality.isEmpty())
     {
         ui->label_scientistNationality_Error->setText("<span style='color: #ED1C58'>Nationality cannot be empty</span>");
+        isValid = false;
     }
-    if(byear.isEmpty())
+    if(qByear.isEmpty())
     {
         ui->label_scientistBirthYear_Error->setText("<span style='color: #ED1C58'>Birth year cannot be empty</span>");
+        isValid = false;
     }
-    if(dyear.isEmpty())
+    if(qDyear.isEmpty())
     {
-        dyear = "0";
+        dyear = "-";
     }
 
-    bool validscientistinput = service.validateNewPerson(name.toStdString(), nationality.toStdString(), byear.toStdString(), dyear.toStdString());
+    bool validScientistInput = service.validateNewPerson(name, nationality, byear, dyear);
 
-    if(validscientistinput)
+    if(validScientistInput && isValid)
     {
         if(_edit)
         {
-            _person.setName(name.toStdString());
-            _person.setNationality(nationality.toStdString());
-            _person.setGender(gender.toStdString());
-            _person.setByear(byear.toInt());
-            _person.setDyear(dyear.toInt());
+            _person.setName(name);
+            _person.setNationality(nationality);
+            _person.setGender(gender);
+            _person.setByear(stoi(byear));
+            _person.setDyear(stoi(dyear));
 
             service.updatePerson(_person);
         }
         else
         {
-            service.newPerson(name.toStdString(), gender.toStdString(), nationality.toStdString(), byear.toStdString(), dyear.toStdString());
+            service.newPerson(name, gender, nationality, byear, dyear);
 
         }
-        ui->input_scientistName->setText("");
-        ui->input_scientistNationality->setText("");
-        ui->input_scientistBirthYear->setText("");
-        ui->input_scientistDeathYear->setText("");
+
+        ui->input_scientistName->clear();
+        ui->input_scientistNationality->clear();
+        ui->input_scientistBirthYear->clear();
+        ui->input_scientistDeathYear->clear();
         this->close();
     }
-    else if (!validscientistinput && !byear.isEmpty() && !name.isEmpty() && !nationality.isEmpty())
+    else
     {
-        ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Check if birth year is less than current year</span>");
+        ui->label_scientistInput_Error->setText("<span style='color: #ED1C58'>Invalid Input</span>");
     }
 
 }

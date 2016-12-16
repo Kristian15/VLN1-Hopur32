@@ -1,6 +1,10 @@
 #include "addcomputerdialog.h"
 #include "ui_addcomputerdialog.h"
 
+/**
+ * @brief AddComputerDialog::AddComputerDialog
+ * @param parent
+ */
 AddComputerDialog::AddComputerDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddComputerDialog)
@@ -11,6 +15,11 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     servicelayer.addImage("Computer", _computer.getID());
 }
 
+/**
+ * @brief AddComputerDialog::AddComputerDialog
+ * @param computer
+ * @param parent
+ */
 AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddComputerDialog)
@@ -36,68 +45,85 @@ AddComputerDialog::AddComputerDialog(Computer computer, QWidget *parent) :
     }
 }
 
+/**
+ * @brief AddComputerDialog::~AddComputerDialog
+ */
 AddComputerDialog::~AddComputerDialog()
 {
     delete ui;
 }
 
+/**
+ * @brief AddComputerDialog::on_button_ok_clicked
+ */
 void AddComputerDialog::on_button_ok_clicked()
 {
-    ui->label_computerName_Error->setText("");
-    ui->label_computerType_Error->setText("");
-    ui->label_computerDesignYear_Error->setText("");
-    ui->label_computerInput_Error->setText("");
+    bool isValid = true;
 
-    QString name = ui->input_computerName->text();
-    QString type = ui->input_computerType->text();
-    QString year = ui->input_computerDesignYear->text();
-    QString built = ui->dropDown_computerBuilt->currentText();
+    ui->label_computerName_Error->clear();
+    ui->label_computerType_Error->clear();
+    ui->label_computerDesignYear_Error->clear();
+    ui->label_computerInput_Error->clear();
 
-    if(name.isEmpty())
+    QString qName = ui->input_computerName->text();
+    QString qType = ui->input_computerType->text();
+    QString qYear = ui->input_computerDesignYear->text();
+    QString qBuilt = ui->dropDown_computerBuilt->currentText();
+
+    string name = qName.toStdString();
+    string type = qType.toStdString();
+    string year = qYear.toStdString();
+    string built = qBuilt.toStdString();
+
+    if(qName.isEmpty())
     {
         ui->label_computerName_Error->setText("<span style='color: #ED1C58'>Name cannot be empty</span>");
+        isValid = false;
     }
-    if(type.isEmpty())
+    if(qType.isEmpty())
     {
         ui->label_computerType_Error->setText("<span style='color: #ED1C58'>Type cannot be empty</span>");
+        isValid = false;
     }
-    if(year.isEmpty())
+    if(qYear.isEmpty())
     {
         ui->label_computerDesignYear_Error->setText("<span style='color: #ED1C58'>Year cannot be empty</span>");
+        isValid = false;
     }
 
-    bool validcomputerinput = servicelayer.validateNewComputer(name.toStdString(), year.toStdString(), type.toStdString());
+    bool validComputerInput = servicelayer.validateNewComputer(year);
 
-    if(validcomputerinput)
+    if(validComputerInput && isValid)
     {
         if(_edit)
         {
-            _computer.setName(name.toStdString());
-            _computer.setType(type.toStdString());
-            _computer.setYear(year.toInt());
-            _computer.setBuilt(built.toInt());
+            _computer.setName(name);
+            _computer.setType(type);
+            _computer.setYear(stoi(year));
+            _computer.setBuilt(stoi(built));
 
             servicelayer.updateComputer(_computer);
         }
         else
         {
-        servicelayer.newComputer(name.toStdString(), year.toStdString(), type.toStdString(), built.toStdString());
+            servicelayer.newComputer(name, year, type, built);
         }
-        ui->input_computerName->setText("");
-        ui->input_computerType->setText("");
-        ui->input_computerDesignYear->setText("");
+
+        ui->input_computerName->clear();
+        ui->input_computerType->clear();
+        ui->input_computerDesignYear->clear();
         this->close();
     }
-    else if (!validcomputerinput && !name.isEmpty() && !type.isEmpty())
+    else
     {
-        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Check if design year is less than current year</span>");
+        ui->label_computerInput_Error->setText("<span style='color: #ED1C58'>Invalid input</span>");
     }
 }
 
+/**
+ * @brief AddComputerDialog::on_button_cancel_clicked
+ */
 void AddComputerDialog::on_button_cancel_clicked()
 {
     this->close();
 }
-
-
-

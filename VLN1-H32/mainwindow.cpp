@@ -218,10 +218,10 @@ void MainWindow::fillSciTable(vector<Person> persons)
         deathYear = QString::number(persons[i].getDyear());
         id = QString::number(persons[i].getID());
 
-        if(deathYear == "0")
+       /* if(deathYear == "0")
         {
             deathYear = "-";
-        }
+        }*/
 
         ui->table_scientists->setItem(i, 0, new QTableWidgetItem(name));
         ui->table_scientists->setItem(i, 1, new QTableWidgetItem(gender));

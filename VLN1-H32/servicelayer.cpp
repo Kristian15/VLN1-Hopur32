@@ -22,7 +22,7 @@ bool serviceLayer::validateName(string name)
         }
     }
 
-    if ((tmp == wordLength) && (name != ""))
+    if (tmp == wordLength)
     {
         return true;
     }
@@ -152,7 +152,7 @@ bool serviceLayer::validateNewPerson(string name, string nationality, string bye
 
     if(validateName(name) && validateNationality(nationality) && validateYear(byear))
     {
-        if(dyear != "0")
+        if(dyear != "-")
         {
             if(validateYear(dyear) && (dyear > byear))
             {
@@ -175,9 +175,9 @@ bool serviceLayer::validateNewPerson(string name, string nationality, string bye
  * @param type
  * @return bool
  */
-bool serviceLayer::validateNewComputer(string name, string year, string type)
+bool serviceLayer::validateNewComputer(string year)
 {
-    if((name != "") && validateYear(year) && (type != ""))
+    if(validateYear(year))
     {
             return true;
     }

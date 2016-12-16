@@ -5,6 +5,7 @@
 #include "servicelayer.h"
 #include <vector>
 
+// This class is used to add and edit a computer
 namespace Ui {
 class AddComputerDialog;
 }
@@ -20,10 +21,7 @@ public:
 
 private slots:
     void on_button_ok_clicked();
-
     void on_button_cancel_clicked();
-
-
 
 private:
     bool _edit;
