@@ -2,6 +2,10 @@
 
 // **** Private ****
 
+/**
+ * @brief dataLayer::addNewPerson
+ * @param addMe
+ */
 void dataLayer::addNewPerson(Person addMe)
 {
     QSqlQuery query;
@@ -25,6 +29,10 @@ void dataLayer::addNewPerson(Person addMe)
 
 }
 
+/**
+ * @brief dataLayer::addNewComputer
+ * @param addMe
+ */
 void dataLayer::addNewComputer(Computer addMe)
 {
     QSqlQuery query;
@@ -37,6 +45,11 @@ void dataLayer::addNewComputer(Computer addMe)
     query.exec();
 }
 
+/**
+ * @brief dataLayer::addNewLink
+ * @param personID
+ * @param computerID
+ */
 void dataLayer::addNewLink(int personID, int computerID)
 {
     QSqlQuery query;
@@ -47,36 +60,46 @@ void dataLayer::addNewLink(int personID, int computerID)
     query.exec();
 }
 
-void dataLayer::addNewFact(string table, int ID, string fact)
+/**
+ * @brief dataLayer::addNewFact
+ * @param table
+ * @param id
+ * @param fact
+ */
+void dataLayer::addNewFact(string table, int id, string fact)
 {
-    QString queryString = "INSERT INTO ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Fact (ID, Fact) VALUES (");
-    queryString.append(QString::number(ID));
-    queryString.append(", ");
-    queryString.append(QString::fromStdString(fact));
-    queryString.append(")");
-
+    QString qTable = QString::fromStdString(table);
+    qTable.append("_Fact");
     QSqlQuery query;
-    query.exec(queryString);
+    query.prepare("INSERT INTO " + qTable + " (ID, Fact) VALUES ( :id, :fact )");
+    query.bindValue(":id", id);
+    query.bindValue(":fact", QString::fromStdString(fact));
+    query.exec();
 }
 
+/**
+ * @brief dataLayer::addNewImage
+ * @param table
+ * @param id
+ */
 void dataLayer::addNewImage(string table, int id)
 {
-    QString queryString = "INSERT INTO";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Image (ID, Image) VALUES (");
-    queryString.append(QString::number(id));
-    queryString.append(", '')");
-
+    QString qTable = QString::fromStdString(table);
+    qTable.append("_Image");
     QSqlQuery query;
-    query.exec(queryString);
+    query.prepare("INSERT INTO " + qTable + " (ID, Image) VALUES ( :id, '' )");
+    query.bindValue(":id", id);
+    query.exec();
 }
 
+/**
+ * @brief dataLayer::getPersons
+ * @param queryString
+ * @return vector<Person>
+ */
 vector<Person> dataLayer::getPersons(QString queryString)
 {
     vector<Person> persons;
-
     QSqlQuery query;
     query.exec(queryString);
 
@@ -95,10 +118,14 @@ vector<Person> dataLayer::getPersons(QString queryString)
     return persons;
 }
 
+/**
+ * @brief dataLayer::getComputers
+ * @param queryString
+ * @return vector<Computer>
+ */
 vector<Computer> dataLayer::getComputers(QString queryString)
 {
     vector<Computer> computers;
-
     QSqlQuery query;
     query.exec(queryString);
 
@@ -116,6 +143,11 @@ vector<Computer> dataLayer::getComputers(QString queryString)
     return computers;
 }
 
+/**
+ * @brief dataLayer::getLinks
+ * @param queryString
+ * @return vector<vector<int>>
+ */
 vector<vector<int>> dataLayer::getLinks(QString queryString)
 {
     vector<vector<int>> resultMatrix;
@@ -138,6 +170,11 @@ vector<vector<int>> dataLayer::getLinks(QString queryString)
     return resultMatrix;
 }
 
+/**
+ * @brief dataLayer::deleteItem
+ * @param table
+ * @param id
+ */
 void dataLayer::deleteItem(string table, int id)
 {
     QString qTable = QString::fromStdString(table);
@@ -152,6 +189,11 @@ void dataLayer::deleteItem(string table, int id)
     deleteItemImage(qTable, id);
 }
 
+/**
+ * @brief dataLayer::deleteRelation
+ * @param personID
+ * @param computerID
+ */
 void dataLayer::deleteRelation(int personID, int computerID)
 {
     QString qPersID = QString::number(personID);
@@ -162,44 +204,59 @@ void dataLayer::deleteRelation(int personID, int computerID)
     query.exec();
 }
 
+/**
+ * @brief dataLayer::deleteFactPriv
+ * @param table
+ * @param id
+ * @param fact
+ */
 void dataLayer::deleteFactPriv(string table, int id, string fact)
 {
-    QString queryString = "DELETE FROM ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Fact WHERE ID LIKE ");
-    queryString.append(QString::number(id));
-    queryString.append(" AND Fact LIKE '");
-    queryString.append(QString::fromStdString(fact));
-    queryString.append("'");
-
+    QString qTable = QString::fromStdString(table);
+    qTable.append("_Fact");
     QSqlQuery query;
-    query.exec(queryString);
+    query.prepare("DELETE FROM " + qTable + " WHERE ID LIKE :id AND Fact LIKE :fact");
+    query.bindValue(":id", id);
+    query.bindValue(":fact", QString::fromStdString(fact));
+    query.exec();
 }
 
+/**
+ * @brief dataLayer::deleteItemLinks
+ * @param qTable
+ * @param id
+ */
 void dataLayer:: deleteItemLinks(QString qTable, int id)
 {
     qTable.append("ID");
-
     QSqlQuery query;
     query.prepare("DELETE FROM Person_Computer WHERE " + qTable + " = :id");
     query.bindValue(":id", id);
     query.exec();
 }
 
+/**
+ * @brief dataLayer::deleteItemFacts
+ * @param qTable
+ * @param id
+ */
 void dataLayer:: deleteItemFacts(QString qTable, int id)
 {
     qTable.append("_Fact");
-
     QSqlQuery query;
     query.prepare("DELETE FROM " + qTable + " WHERE ID = :id");
     query.bindValue(":id", id);
     query.exec();
 }
 
+/**
+ * @brief dataLayer::deleteItemImage
+ * @param qTable
+ * @param id
+ */
 void dataLayer:: deleteItemImage(QString qTable, int id)
 {
     qTable.append("_Image");
-
     QSqlQuery query;
     query.prepare("DELETE FROM " + qTable + " WHERE ID = :id");
     query.bindValue(":id", id);
@@ -208,17 +265,24 @@ void dataLayer:: deleteItemImage(QString qTable, int id)
 
 // **** Public ****
 
+/**
+ * @brief dataLayer::openDatabase
+ */
 void dataLayer::openDatabase()
 {
     db = QSqlDatabase::addDatabase(DB_DRIVER_TYPE);
     db.setDatabaseName(DB_NAME);
     QFileInfo checkFile(DB_NAME);
+
     if(checkFile.exists() && checkFile.isFile())
     {
         db.open();
     }
 }
 
+/**
+ * @brief dataLayer::closeDatabase
+ */
 void dataLayer::closeDatabase()
 {
     if(db.open())
@@ -227,18 +291,30 @@ void dataLayer::closeDatabase()
     }
 }
 
+/**
+ * @brief dataLayer::getAllPersons
+ * @return vector<Person>
+ */
 vector<Person> dataLayer::getAllPersons()
 {
     QString queryString = "Select * FROM Person ORDER BY Name ";
     return getPersons(queryString);
 }
 
+/**
+ * @brief dataLayer::getAllComputers
+ * @return vector<Computer>
+ */
 vector<Computer> dataLayer::getAllComputers()
 {
     QString queryString = "Select * FROM Computer ORDER BY Name ";
     return getComputers(queryString);
 }
 
+/**
+ * @brief dataLayer::getAllLinks
+ * @return vector<vector<int>>
+ */
 vector<vector<int>> dataLayer::getAllLinks()
 {
     vector<vector<int>> resultMatrix;
@@ -246,6 +322,11 @@ vector<vector<int>> dataLayer::getAllLinks()
     return getLinks(queryString);
 }
 
+/**
+ * @brief dataLayer::getPersonByID
+ * @param id
+ * @return Person
+ */
 Person dataLayer::getPersonByID(int id)
 {
     QSqlQuery query;
@@ -268,6 +349,11 @@ Person dataLayer::getPersonByID(int id)
     return person;
 }
 
+/**
+ * @brief dataLayer::getComputerByID
+ * @param id
+ * @return Computer
+ */
 Computer dataLayer::getComputerByID(int id)
 {
     QSqlQuery query;
@@ -289,17 +375,21 @@ Computer dataLayer::getComputerByID(int id)
     return computer;
 }
 
+/**
+ * @brief dataLayer::getFacts
+ * @param table
+ * @param id
+ * @return vector<string>
+ */
 vector<string> dataLayer::getFacts(string table, int id)
 {
     vector<string> resultMatrix;
-
-    QString queryString = "SELECT Fact FROM ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Fact WHERE ID = ");
-    queryString.append(QString::number(id));
-
+    QString qTable = QString::fromStdString(table);
+    qTable.append("_Fact");
     QSqlQuery query;
-    query.exec(queryString);
+    query.prepare("SELECT Fact FROM " + qTable + " WHERE ID = :id");
+    query.bindValue(":id", id);
+    query.exec();
 
     while(query.next())
     {
@@ -309,16 +399,21 @@ vector<string> dataLayer::getFacts(string table, int id)
     return resultMatrix;
 }
 
+/**
+ * @brief dataLayer::getImage
+ * @param table
+ * @param id
+ * @return string
+ */
 string dataLayer::getImage(string table, int id)
 {
-    QString queryString = "SELECT Image FROM ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Image WHERE ID = ");
-    queryString.append(QString::number(id));
-
-    QSqlQuery query;
-    query.exec(queryString);
     string result;
+    QString qTable = QString::fromStdString(table);
+    qTable.append("_Image");
+    QSqlQuery query;
+    query.prepare("SELECT Image FROM " + qTable + " WHERE ID = :id");
+    query.bindValue(":id", id);
+    query.exec();
 
     while(query.next())
     {
@@ -328,49 +423,71 @@ string dataLayer::getImage(string table, int id)
     return result;
 }
 
+/**
+ * @brief dataLayer::searchComputers
+ * @param findMe
+ * @return vector<Computer>
+ */
 vector<Computer> dataLayer::searchComputers(string findMe)
 {
+    QString qFindMe = QString::fromStdString(findMe);
     QString queryString = "SELECT * FROM Computer WHERE Name LIKE '%";
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE OR Year LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' OR Type LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE");
 
     return getComputers(queryString);
 }
 
+/**
+ * @brief dataLayer::searchPersons
+ * @param findMe
+ * @return vector<Person>
+ */
 vector<Person> dataLayer::searchPersons(string findMe)
 {
+    QString qFindMe = QString::fromStdString(findMe);
     QString queryString = "SELECT * FROM Person WHERE Name LIKE '%";
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE OR Gender LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE OR Nationality LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE OR BirthYear LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' OR DeathYear LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%'");
 
     return getPersons(queryString);
 }
 
+/**
+ * @brief dataLayer::searchLinks
+ * @param findMe
+ * @return vector<vector<int>>
+ */
 vector<vector<int>> dataLayer::searchLinks(string findMe)
 {
+    QString qFindMe = QString::fromStdString(findMe);
     QString queryString = "SELECT PersonID, ComputerID FROM Person_Computer AS pc JOIN "
                           "Person AS p ON pc.personID = p.ID JOIN Computer as c ON "
                           "pc.computerID = c.ID WHERE p.Name LIKE '%";
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE OR c.Name LIKE '%");
-    queryString.append(QString::fromStdString(findMe));
+    queryString.append(qFindMe);
     queryString.append("%' COLLATE NOCASE");
 
     return getLinks(queryString);
 }
 
+/**
+ * @brief dataLayer::updatePerson
+ * @param person
+ */
 void dataLayer::updatePerson(Person person)
 {
     QSqlQuery query;
@@ -386,6 +503,10 @@ void dataLayer::updatePerson(Person person)
     query.exec();
 }
 
+/**
+ * @brief dataLayer::updateComputer
+ * @param computer
+ */
 void dataLayer::updateComputer(Computer computer)
 {
     QSqlQuery query;
@@ -400,15 +521,19 @@ void dataLayer::updateComputer(Computer computer)
     query.exec();
 }
 
+/**
+ * @brief dataLayer::updateImage
+ * @param table
+ * @param id
+ * @param path
+ */
 void dataLayer::updateImage(string table, int id, string path)
 {
-    QString queryString = "UPDATE ";
-    queryString.append(QString::fromStdString(table));
-    queryString.append("_Image SET Image = '");
-    queryString.append(QString::fromStdString(path));
-    queryString.append("' WHERE ID = ");
-    queryString.append(QString::number(id));
-
+    QString qTable = QString::fromStdString(table);
+    table.append("_Image");
     QSqlQuery query;
-    query.exec(queryString);
+    query.prepare("UPDATE " + qTable + " SET Image = :path WHERE ID = :id");
+    query.bindValue(":path", QString::fromStdString(path));
+    query.bindValue(":id", id);
+    query.exec();
 }

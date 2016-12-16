@@ -20,15 +20,18 @@ private:
     void addNewPerson(Person addMe);
     void addNewComputer(Computer addMe);
     void addNewLink(int personID, int computerID);
-    void addNewFact(string table, int ID, string fact);
+    void addNewFact(string table, int id, string fact);
     void addNewImage(string table, int id);
     // get functions
     // Executes query using queryString and return the findings
     vector<Person> getPersons(QString queryString);
     vector<Computer> getComputers(QString queryString);
+    // Linked computer and scientist are added to the same vector
+    // returns a vector of vectors with the ID numbers
     vector<vector<int>> getLinks(QString queryString) ;
 
     // Delete functions
+    // deleteItem uses deleteItemLinks(), deleteItemFacts() and deleteItemImage()
     void deleteItem(string table, int id);
     void deleteRelation(int personID, int computerID);
     void deleteFactPriv(string table, int id, string fact);
