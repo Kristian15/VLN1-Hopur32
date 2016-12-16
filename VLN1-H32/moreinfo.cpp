@@ -1,10 +1,5 @@
 #include "moreinfo.h"
 #include "ui_moreinfo.h"
-#include <QGraphicsItem>
-#include <QBitmap>
-#include <QFileDialog>
-#include <QFileInfo>
-#include <QMessageBox>
 
 MoreInfo::MoreInfo(QWidget *parent) :
     QDialog(parent),
@@ -155,11 +150,19 @@ void MoreInfo::on_button_deletePhoto_clicked()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
                                   QMessageBox::Yes|QMessageBox::No);
+<<<<<<< HEAD
     service.deleteImage(table, id);
     setPhoto();
 
     if (reply == QMessageBox::Yes)
     {
+=======
+
+    if(reply == QMessageBox::Yes)
+    {
+        service.deleteImage(table, id);
+        setPhoto();
+>>>>>>> 26c9ddadcbefddf35957514ae37bf2fb2d3a2270
         ui->button_addPhoto->setEnabled(true);
         ui->button_deletePhoto->setEnabled(false);
     }
@@ -167,17 +170,24 @@ void MoreInfo::on_button_deletePhoto_clicked()
 
 void MoreInfo::on_button_deleteFact_clicked()
 {
-    ui->textEdit_facts->clear();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
+                                  QMessageBox::Yes|QMessageBox::No);
 
-    service.deleteFact(table, id, facts[index]);
-    facts = service.getFacts(table, id);
+    if(reply == QMessageBox::Yes)
+    {
+        ui->textEdit_facts->clear();
 
-    ui->label_factAdded->setText("<span style='color: #009900'>Fact deleted !</span>");
-    ui->button_nextFact->setEnabled(true);
-    ui->button_addFact->setEnabled(false);
-    ui->textEdit_facts->setReadOnly(true);
-    index--;
-    getNextFact();
+        service.deleteFact(table, id, facts[index]);
+        facts = service.getFacts(table, id);
+
+        ui->label_factAdded->setText("<span style='color: #009900'>Fact deleted !</span>");
+        ui->button_nextFact->setEnabled(true);
+        ui->button_addFact->setEnabled(false);
+        ui->textEdit_facts->setReadOnly(true);
+        index = 0;
+        getNextFact();
+    }
 }
 
 void MoreInfo::on_button_prevFact_clicked()
@@ -202,3 +212,4 @@ void MoreInfo::getPrevFact()
         ui->button_prevFact->setEnabled(false);
     }
 }
+

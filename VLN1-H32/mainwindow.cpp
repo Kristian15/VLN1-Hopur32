@@ -9,10 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    service.openDatabase();
 
     ui->setupUi(this);
 
+    service.openDatabase();
     fillCompTable();
     fillSciTable();
     fillLinkTable();

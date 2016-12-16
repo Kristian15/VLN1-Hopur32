@@ -3,6 +3,11 @@
 
 #include "servicelayer.h"
 #include <QDialog>
+#include <QGraphicsItem>
+#include <QBitmap>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QMessageBox>
 
 namespace Ui {
 class MoreInfo;
