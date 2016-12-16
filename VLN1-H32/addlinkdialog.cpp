@@ -1,6 +1,10 @@
 #include "addlinkdialog.h"
 #include "ui_addlinkdialog.h"
 
+/**
+ * @brief AddLinkDialog::AddLinkDialog
+ * @param parent
+ */
 AddLinkDialog::AddLinkDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddLinkDialog)
@@ -11,12 +15,18 @@ AddLinkDialog::AddLinkDialog(QWidget *parent) :
     fillPersonTable();
 }
 
+/**
+ * @brief AddLinkDialog::~AddLinkDialog
+ */
 AddLinkDialog::~AddLinkDialog()
 {
     delete ui;
 }
 
-void AddLinkDialog::on_table_addLinkScientist_clicked(const QModelIndex &index)
+/**
+ * @brief AddLinkDialog::on_table_addLinkScientist_itemSelectionChanged
+ */
+void AddLinkDialog::on_table_addLinkScientist_itemSelectionChanged()
 {
     if(conn)
     {
@@ -24,12 +34,15 @@ void AddLinkDialog::on_table_addLinkScientist_clicked(const QModelIndex &index)
     }
     else
     {
+        conn = true;
         ui->label_linked->clear();
-        conn = true;
     }
 }
 
-void AddLinkDialog::on_table_addLinkComputer_clicked(const QModelIndex &index)
+/**
+ * @brief AddLinkDialog::on_table_addLinkComputer_itemSelectionChanged
+ */
+void AddLinkDialog::on_table_addLinkComputer_itemSelectionChanged()
 {
     if(conn)
     {
@@ -38,61 +51,50 @@ void AddLinkDialog::on_table_addLinkComputer_clicked(const QModelIndex &index)
     else
     {
         conn = true;
+        ui->label_linked->clear();
     }
 }
 
+/**
+ * @brief AddLinkDialog::on_button_addLinkLink_clicked
+ */
 void AddLinkDialog::on_button_addLinkLink_clicked()
 {
     int sRowIndex = ui->table_addLinkScientist->selectionModel()->currentIndex().row();
-    int personid = ui->table_addLinkScientist->model()->data(ui->table_addLinkScientist->model()->index(sRowIndex,0)).toInt();
+    int personID = ui->table_addLinkScientist->model()->data(ui->table_addLinkScientist->model()->index(sRowIndex,0)).toInt();
     int cRowIndex = ui->table_addLinkComputer->selectionModel()->currentIndex().row();
-    int computerid = ui->table_addLinkComputer->model()->data(ui->table_addLinkComputer->model()->index(cRowIndex,0)).toInt();
-    service.addLink(personid, computerid);
-    fillCompTable();
-    fillPersonTable();
-    ui->table_addLinkComputer->clearSelection();
-    ui->table_addLinkScientist->clearSelection();
-    ui->button_addLinkLink->setEnabled(false);
-    ui->label_linked->setText("<span style='color: #009900'>Linked has been made !</span>");
-}
+    int computerID = ui->table_addLinkComputer->model()->data(ui->table_addLinkComputer->model()->index(cRowIndex,0)).toInt();
 
-void AddLinkDialog::fillCompTable()
-{
-    vector<Computer> computers;
-    computers = service.getAllComputers();
-    fillCompTable(computers);
-}
-
-void AddLinkDialog::fillCompTable(vector<Computer> computers)
-{
-    ui->table_addLinkComputer->setRowCount((int)computers.size());
-
-    QString name, id;
-
-
-    for(int i = 0; i < (int)computers.size(); i++)
+    if(service.ifLinked(personID, computerID))
     {
-        name = QString::fromStdString(computers[i].getName());
-        id = QString::number(computers[i].getID());
-
-        ui->table_addLinkComputer->setItem(i, 0, new QTableWidgetItem(id));
-        ui->table_addLinkComputer->setItem(i, 1, new QTableWidgetItem(name));
+        ui->label_linked->setText("<span style='color: #ED1C58'>Link already exists</span>");
+        ui->table_addLinkComputer->clearSelection();
+        ui->table_addLinkScientist->clearSelection();
+        conn = false;
     }
-
-    ui->table_addLinkComputer->setColumnHidden(0, true);
-
-    conn = false;
+    else
+    {
+        service.addLink(personID, computerID);
+        this->close();
+    }
+    ui->button_addLinkLink->setEnabled(false);
 }
 
+/**
+ * @brief AddLinkDialog::on_button_addLinkCancel_clicked
+ */
+void AddLinkDialog::on_button_addLinkCancel_clicked()
+{
+    this->close();
+}
+
+/**
+ * @brief AddLinkDialog::fillPersonTable
+ */
 void AddLinkDialog::fillPersonTable()
 {
     vector<Person> persons;
     persons = service.getAllPersons();
-    fillPersonTable(persons);
-}
-
-void AddLinkDialog::fillPersonTable(vector<Person> persons)
-{
     ui->table_addLinkScientist->setRowCount((int)persons.size());
 
     QString name, id;
@@ -109,7 +111,24 @@ void AddLinkDialog::fillPersonTable(vector<Person> persons)
     ui->table_addLinkScientist->setColumnHidden(0, true);
 }
 
-void AddLinkDialog::on_button_addLinkCancel_clicked()
+/**
+ * @brief AddLinkDialog::fillCompTable
+ */
+void AddLinkDialog::fillCompTable()
 {
-    this->close();
+    vector<Computer> computers;
+    computers = service.getAllComputers();
+    ui->table_addLinkComputer->setRowCount((int)computers.size());
+    QString name, id;
+
+    for(int i = 0; i < (int)computers.size(); i++)
+    {
+        name = QString::fromStdString(computers[i].getName());
+        id = QString::number(computers[i].getID());
+
+        ui->table_addLinkComputer->setItem(i, 0, new QTableWidgetItem(id));
+        ui->table_addLinkComputer->setItem(i, 1, new QTableWidgetItem(name));
+    }
+
+    ui->table_addLinkComputer->setColumnHidden(0, true);
 }

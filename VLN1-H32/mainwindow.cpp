@@ -182,7 +182,7 @@ void MainWindow::on_button_computersMoreInfo_clicked()
  * @brief MainWindow::on_table_computers_clicked
  * @param index
  */
-void MainWindow::on_table_computers_clicked(const QModelIndex &index)
+void MainWindow::on_table_computers_itemSelectionChanged()
 {
     ui->button_editComputer->setEnabled(true);
     ui->button_deleteComputer->setEnabled(true);

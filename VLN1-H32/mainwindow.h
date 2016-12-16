@@ -40,7 +40,7 @@ private slots:
     void on_button_removeLink_clicked();
     void on_button_scientistMoreInfo_clicked();
     void on_button_computersMoreInfo_clicked();
-    void on_table_computers_clicked(const QModelIndex &index);
+    void on_table_computers_itemSelectionChanged();
     void on_table_scientists_itemSelectionChanged();
     void on_table_links_itemSelectionChanged();
     void on_table_scientists_doubleClicked(const QModelIndex &index);

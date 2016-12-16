@@ -537,3 +537,22 @@ void dataLayer::updateImage(string table, int id, string path)
     query.bindValue(":id", id);
     query.exec();
 }
+
+bool dataLayer::ifLinked(int personID, int computerID)
+{
+    QSqlQuery query;
+    query.prepare("SELECT EXISTS(SELECT 1 FROM Person_Computer WHERE PersonID = :pID "
+                  "AND ComputerID = :cID LIMIT 1)");
+    query.bindValue(":pID", personID);
+    query.bindValue(":cID", computerID);
+    query.exec();
+
+    int result;
+
+    while(query.next())
+    {
+        result = query.value(0).toInt();
+    }
+
+    return result;
+}
