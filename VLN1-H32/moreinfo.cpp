@@ -150,11 +150,12 @@ void MoreInfo::on_button_deletePhoto_clicked()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirmation window", "Are you sure you want to delete?",
                                   QMessageBox::Yes|QMessageBox::No);
-    service.deleteImage(table, id);
-    setPhoto();
 
     if(reply == QMessageBox::Yes)
     {
+        QString delPath = QString::fromStdString(service.getImage(table, id));
+        QFile file = delPath;
+        file.remove();
         service.deleteImage(table, id);
         setPhoto();
         ui->button_addPhoto->setEnabled(true);
