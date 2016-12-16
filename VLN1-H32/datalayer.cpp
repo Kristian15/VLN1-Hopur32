@@ -88,7 +88,7 @@ void dataLayer::addNewImage(string table, int id)
     qTable.append("_Image");
     QSqlQuery query;
     query.prepare("INSERT INTO " + qTable + " (ID, Image) VALUES ( :id, '' )");
-    query.bindValue(":id", id);
+    query.bindValue(":id", QString::number(id));
     query.exec();
 }
 
@@ -259,7 +259,7 @@ void dataLayer:: deleteItemImage(QString qTable, int id)
     qTable.append("_Image");
     QSqlQuery query;
     query.prepare("DELETE FROM " + qTable + " WHERE ID = :id");
-    query.bindValue(":id", id);
+    query.bindValue(":id", QString::number(id));
     query.exec();
 }
 
@@ -535,7 +535,7 @@ void dataLayer::updateImage(string table, int id, string path)
     QSqlQuery query;
     query.prepare("UPDATE " + qTable + " SET Image = :path WHERE ID = :id");
     query.bindValue(":path", QString::fromStdString(path));
-    query.bindValue(":id", id);
+    query.bindValue(":id", QString::number(id));
     query.exec();
 }
 
