@@ -531,11 +531,31 @@ void dataLayer::updateImage(string table, int id, string path)
 {
     QString qTable = QString::fromStdString(table);
     table.append("_Image");
+
     QSqlQuery query;
     query.prepare("UPDATE " + qTable + " SET Image = :path WHERE ID = :id");
     query.bindValue(":path", QString::fromStdString(path));
     query.bindValue(":id", id);
     query.exec();
+}
+
+bool dataLayer::ifItem(string table, string name)
+{
+    QSqlQuery query;
+    query.prepare("SELECT EXISTS(SELECT 1 FROM :table WHERE Name = :name "
+                  " COLLATE NOCASE LIMIT 1)");
+    query.bindValue(":table", QString::fromStdString(table));
+    query.bindValue(":name", QString::fromStdString(name));
+    query.exec();
+
+    int result;
+
+    while(query.next())
+    {
+        result = query.value(0).toInt();
+    }
+
+    return result;
 }
 
 bool dataLayer::ifLinked(int personID, int computerID)
@@ -556,3 +576,4 @@ bool dataLayer::ifLinked(int personID, int computerID)
 
     return result;
 }
+

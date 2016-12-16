@@ -157,8 +157,12 @@ void MoreInfo::on_button_deletePhoto_clicked()
                                   QMessageBox::Yes|QMessageBox::No);
     service.deleteImage(table, id);
     setPhoto();
-    ui->button_addPhoto->setEnabled(true);
-    ui->button_deletePhoto->setEnabled(false);
+
+    if (reply == QMessageBox::Yes)
+    {
+        ui->button_addPhoto->setEnabled(true);
+        ui->button_deletePhoto->setEnabled(false);
+    }
 }
 
 void MoreInfo::on_button_deleteFact_clicked()

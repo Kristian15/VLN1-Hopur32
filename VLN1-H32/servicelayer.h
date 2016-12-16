@@ -53,5 +53,6 @@ public:
     vector<Computer> searchComputers(string findMe) { return data.searchComputers(findMe); }
     vector<Person> searchPersons(string findMe) { return data.searchPersons(findMe); }
     vector<vector<int>> searchLinks(string findMe) { return data.searchLinks(findMe); }
+    bool ifItem(string table, string name) { return data.ifItem(table, name); }
     bool ifLinked(int personID, int computerID) { return data.ifLinked(personID, computerID); }
 };

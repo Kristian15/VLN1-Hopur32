@@ -82,5 +82,6 @@ public:
     void updateComputer(Computer computer);
     void updateImage(string table, int id, string path);
     void deleteImage(string table, int id) { updateImage(table, id, ""); }
+    bool ifItem(string table, string name);
     bool ifLinked(int personID, int computerID);
 };

@@ -77,6 +77,7 @@ void AddLinkDialog::on_button_addLinkLink_clicked()
         service.addLink(personID, computerID);
         this->close();
     }
+
     ui->button_addLinkLink->setEnabled(false);
 }
 
