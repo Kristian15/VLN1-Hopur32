@@ -5,7 +5,7 @@
 #include "servicelayer.h"
 #include <vector>
 
-// This class is used to add and edit a computer
+// This Ui class is used to add and edit a computer
 namespace Ui {
 class AddComputerDialog;
 }
@@ -15,8 +15,11 @@ class AddComputerDialog : public QDialog
     Q_OBJECT
 
 public:
+    // constructor for add
     explicit AddComputerDialog(QWidget *parent = 0);
+    // constructor for editi
     explicit AddComputerDialog(Computer computer, QWidget *parent = 0);
+    // destructor
     ~AddComputerDialog();
 
 private slots:
@@ -24,12 +27,12 @@ private slots:
     void on_button_cancel_clicked();
 
 private:
-    bool _edit;
-    Computer _computer;
-    serviceLayer servicelayer;
-    void displayAllComputers();
-    void displayComputers(vector<Computer> computers);
     Ui::AddComputerDialog *ui;
+    serviceLayer service;
+    Computer _computer;
+    // _edit is false if the function is being used to add a new computer
+    // _edit is true otherwise
+    bool _edit;
 };
 
 #endif // ADDCOMPUTERDIALOG_H

@@ -1,18 +1,24 @@
 #include "addscientistdialog.h"
 #include "ui_addscientistdialog.h"
 
+/**
+ * @brief AddScientistDialog::AddScientistDialog
+ * @param parent
+ */
 AddScientistDialog::AddScientistDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddScientistDialog)
 {
-    _edit = false;
-
     ui->setupUi(this);
     this->setWindowTitle("Add scientist");
     ui->label_scientistHeader->setText("Add a new scientist");
-    service.addImage("Person", _person.getID());
 }
 
+/**
+ * @brief AddScientistDialog::AddScientistDialog
+ * @param person
+ * @param parent
+ */
 AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddScientistDialog)
@@ -26,6 +32,7 @@ AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     _person = person;
     ui->input_scientistName->setText(QString::fromStdString(_person.getName()));
     ui->input_scientistNationality->setText(QString::fromStdString(_person.getNationality()));
+
     if(person.getGender() == "female")
     {
         ui->dropDown_scientistGender->setCurrentIndex(0);
@@ -34,15 +41,22 @@ AddScientistDialog::AddScientistDialog(Person person, QWidget *parent) :
     {
         ui->dropDown_scientistGender->setCurrentIndex(1);
     }
+
     ui->input_scientistBirthYear->setText(QString::number(_person.getByear()));
     ui->input_scientistDeathYear->setText(QString::number(_person.getDyear()));
 }
 
+/**
+ * @brief AddScientistDialog::~AddScientistDialog
+ */
 AddScientistDialog::~AddScientistDialog()
 {
     delete ui;
 }
 
+/**
+ * @brief AddScientistDialog::on_button_ok_clicked
+ */
 void AddScientistDialog::on_button_ok_clicked()
 {
     bool isValid = true;
@@ -69,19 +83,22 @@ void AddScientistDialog::on_button_ok_clicked()
         ui->label_scientistName_Error->setText("<span style='color: #ED1C58'>Name cannot be empty</span>");
         isValid = false;
     }
+
     if(qNationality.isEmpty())
     {
         ui->label_scientistNationality_Error->setText("<span style='color: #ED1C58'>Nationality cannot be empty</span>");
         isValid = false;
     }
+
     if(qByear.isEmpty())
     {
         ui->label_scientistBirthYear_Error->setText("<span style='color: #ED1C58'>Birth year cannot be empty</span>");
         isValid = false;
     }
+
     if(qDyear.isEmpty())
     {
-        dyear = "-";
+        dyear = "0";
     }
 
     bool validScientistInput = service.validateNewPerson(name, nationality, byear, dyear);
@@ -101,6 +118,7 @@ void AddScientistDialog::on_button_ok_clicked()
         else
         {
             service.newPerson(name, gender, nationality, byear, dyear);
+            service.addImage("Person", _person.getID());
 
         }
 
@@ -117,6 +135,9 @@ void AddScientistDialog::on_button_ok_clicked()
 
 }
 
+/**
+ * @brief AddScientistDialog::on_button_cancel_clicked
+ */
 void AddScientistDialog::on_button_cancel_clicked()
 {
     this->close();

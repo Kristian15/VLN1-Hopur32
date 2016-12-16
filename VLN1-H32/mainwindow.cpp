@@ -2,6 +2,66 @@
 #include "ui_mainwindow.h"
 
 /**
+ * @brief MainWindow::MainWindow
+ * @param parent
+ */
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    service.openDatabase();
+
+    ui->setupUi(this);
+
+    fillCompTable();
+    fillSciTable();
+    fillLinkTable();
+    setTables();
+}
+
+/**
+ * @brief MainWindow::~MainWindow
+ */
+MainWindow::~MainWindow()
+{
+    service.closeDatabase();
+    ui->table_computers->clearContents();
+    ui->table_links->clearContents();
+    ui->table_scientists->clearContents();
+    delete ui;
+}
+
+/**
+ * @brief MainWindow::fillSciTable
+ */
+void MainWindow::fillSciTable()
+{
+    vector<Person> persons;
+    persons = service.getAllPersons();
+    fillSciTable(persons);
+}
+
+/**
+ * @brief MainWindow::fillCompTable
+ */
+void MainWindow::fillCompTable()
+{
+    vector<Computer> computers;
+    computers = service.getAllComputers();
+    fillCompTable(computers);
+}
+
+/**
+ * @brief MainWindow::fillLinkTable
+ */
+void MainWindow::fillLinkTable()
+{
+    vector<vector<int>> vec;
+    vec = service.getAllLinks();
+    fillLinkTable(vec);
+}
+
+/**
  * @brief MainWindow::on_button_addScientist_clicked
  */
 void MainWindow::on_button_addScientist_clicked()
@@ -218,10 +278,10 @@ void MainWindow::fillSciTable(vector<Person> persons)
         deathYear = QString::number(persons[i].getDyear());
         id = QString::number(persons[i].getID());
 
-       /* if(deathYear == "0")
+        if(deathYear == "0")
         {
             deathYear = "-";
-        }*/
+        }
 
         ui->table_scientists->setItem(i, 0, new QTableWidgetItem(name));
         ui->table_scientists->setItem(i, 1, new QTableWidgetItem(gender));
@@ -317,64 +377,4 @@ void MainWindow::setTables()
     header->setSectionResizeMode(QHeaderView::Stretch);
     header = ui->table_links->horizontalHeader();
     header->setSectionResizeMode(QHeaderView::Stretch);
-}
-
-/**
- * @brief MainWindow::MainWindow
- * @param parent
- */
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
-    service.openDatabase();
-
-    ui->setupUi(this);
-
-    fillCompTable();
-    fillSciTable();
-    fillLinkTable();
-    setTables();
-}
-
-/**
- * @brief MainWindow::~MainWindow
- */
-MainWindow::~MainWindow()
-{
-    service.closeDatabase();
-    ui->table_computers->clearContents();
-    ui->table_links->clearContents();
-    ui->table_scientists->clearContents();
-    delete ui;
-}
-
-/**
- * @brief MainWindow::fillSciTable
- */
-void MainWindow::fillSciTable()
-{
-    vector<Person> persons;
-    persons = service.getAllPersons();
-    fillSciTable(persons);
-}
-
-/**
- * @brief MainWindow::fillCompTable
- */
-void MainWindow::fillCompTable()
-{
-    vector<Computer> computers;
-    computers = service.getAllComputers();
-    fillCompTable(computers);
-}
-
-/**
- * @brief MainWindow::fillLinkTable
- */
-void MainWindow::fillLinkTable()
-{
-    vector<vector<int>> vec;
-    vec = service.getAllLinks();
-    fillLinkTable(vec);
 }

@@ -12,7 +12,6 @@ AddComputerDialog::AddComputerDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Add computer");
     ui->label_computerHeader->setText("Add a new computer");
-    servicelayer.addImage("Computer", _computer.getID());
 }
 
 /**
@@ -91,7 +90,7 @@ void AddComputerDialog::on_button_ok_clicked()
         isValid = false;
     }
 
-    bool validComputerInput = servicelayer.validateNewComputer(year);
+    bool validComputerInput = service.validateNewComputer(year);
 
     if(validComputerInput && isValid)
     {
@@ -102,11 +101,12 @@ void AddComputerDialog::on_button_ok_clicked()
             _computer.setYear(stoi(year));
             _computer.setBuilt(stoi(built));
 
-            servicelayer.updateComputer(_computer);
+            service.updateComputer(_computer);
         }
         else
         {
-            servicelayer.newComputer(name, year, type, built);
+            service.newComputer(name, year, type, built);
+            service.addImage("Computer", _computer.getID());
         }
 
         ui->input_computerName->clear();

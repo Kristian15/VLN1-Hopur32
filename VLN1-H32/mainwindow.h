@@ -19,6 +19,15 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+public:
+    // constructor
+    explicit MainWindow(QWidget *parent = 0);
+    // destructor
+    ~MainWindow();
+    // fill tables
+    void fillCompTable();
+    void fillSciTable();
+    void fillLinkTable();
 
 private slots:
     void on_button_addScientist_clicked();
@@ -49,16 +58,6 @@ private:
     void fillLinkTable(vector<vector<int>>);
     // sets columns width in tables
     void setTables();
-
-public:
-    // constructor
-    explicit MainWindow(QWidget *parent = 0);
-    // destructor
-    ~MainWindow();
-    // fill tables
-    void fillCompTable();
-    void fillSciTable();
-    void fillLinkTable();
 };
 
 #endif // MAINWINDOW_H
